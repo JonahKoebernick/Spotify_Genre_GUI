@@ -28,7 +28,8 @@ Navigate to web-api-auth-examples-master/authorization_code
 
 Run "Node app.js"
 
-******************************************* Development *******************************************
+******************************************* Development ******************************************
+
 TO discuss thing about the development that isn't covered in issues or pull requests
 
 Possible library to implement the circles 
