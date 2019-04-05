@@ -1,6 +1,8 @@
 # Spotify_Genre_GUI
 A web application GUI that communicates with the Spotify API
 
+The figma mock-up can be found at https://www.figma.com/file/cPUeVzT3Fews4zMjybUbUNKz/Spotify-Table-GUI?node-id=1%3A2
+
 The Following is a GUI that displays an array of circles on a screen, 
 each representing a different music genre. The user or in the preferred use case users 
 can increase/decrease the size of the circles to affect their chances of playing 
