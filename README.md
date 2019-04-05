@@ -18,7 +18,7 @@ Current Version- Test code for the server No GUI implemented yet, Strictly back 
 Current Implemented- Spotify Authorization, All spotify server calls needed, simple algorithm to decide which song to play next, 
 constant authorization( Refresh access token as per the spotify API), time left in current playing song, ability to put in percentages 
 
-**************** To run *********************
+********************************************* To run ***********************************************
 
 Requirements:
 
@@ -28,7 +28,7 @@ Navigate to web-api-auth-examples-master/authorization_code
 
 Run "Node app.js"
 
-*************Development*********************
+******************************************* Development *******************************************
 TO discuss thing about the development that isn't covered in issues or pull requests
 
 Possible library to implement the circles 
