@@ -76,13 +76,25 @@ app.get('/track_length', function(req, res) {
           console.log(body);
           var time = body.progress_ms;
           var totaltime = body.item.duration_ms;
+          var image = body.item.album.images[0].url;
+          var name = body.item.name;
+          var artist = body.item.album.artists[0].name;
+          var album = body.item.album.name;
           console.log('Progress : ' + time);
           
           console.log(body.item.duration_ms);
           console.log(totaltime);
+          console.log("Image url : "+ body.item.album.images[0].url);
+          console.log("Name : " + name);
+          console.log("Artist :" + artist);
           res.send({
          'duration_ms': totaltime,
-         'progress_ms': time
+         'progress_ms': time,
+         'image': image,
+         'name' : name,
+         'artist' : artist,
+         'album' : album
+         
         });
         }
       });
@@ -220,6 +232,7 @@ app.get('/progress_ms', function(req, res) {
           
           console.log(body.item.duration_ms);
           console.log(totaltime);
+          console.log("Image url : "+ body.item.images[0]);
           res.send({
          'progress_ms': time
         });

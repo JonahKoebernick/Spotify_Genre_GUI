@@ -16,7 +16,7 @@
     </style>
   </head>
 
-  <body>
+  <body style="background-color:#1F1C1C">
     <div class="container">
       <div id="login">
         <h1>This is an example of the Authorization Code flow</h1>
@@ -29,24 +29,31 @@
         </div>
         <dl class="dl-horizontal">
          
-         <dt>Pop:</dt><dd><input type="number" name="quantity" id="pop_value" min="1" max="100"></dd>
+         <dt ><font color="white">Pop: </font></dt><dd><input type="number" name="quantity" id="pop_value" min="1" max="100"></dd>
          
-         <dt>Queen:</dt><dd><input type="number" name="quantity"  id="queen_value"min="1" max="100"></dd>
+         <dt><font color="white">Queen: </font></dt><dd><input type="number" name="quantity"  id="queen_value"min="1" max="100"></dd>
          
-         <dt>Throw backs:</dt><dd><input type="number" name="quantity"  id="tb_value" min="1" max="100"></dd>
+         <dt><font color="white">Throw backs: </font></dt><dd><input type="number" name="quantity"  id="tb_value" min="1" max="100"></dd>
          
-         <dt>Country:</dt><dd><input type="number" name="quantity"  id="country_value" min="1" max="100"></dd>
+         <dt><font color="white">Country: </font></dt><dd><input type="number" name="quantity"  id="country_value" min="1" max="100"></dd>
          
-         <dt>Rock:</dt><dd><input type="number" name="quantity"  id="rock_value" min="1" max="100"></dd>
+         <dt><font color="white">Rock: </font></dt><dd><input type="number" name="quantity"  id="rock_value" min="1" max="100"></dd>
          
-         <dt>Hip-Hop</dt><dd><input type="number" name="quantity"  id="hiphop_value" min="1" max="100"></dd>
+         <dt><font color="white">Hip-Hop: </font></dt><dd><input type="number" name="quantity"  id="hiphop_value" min="1" max="100"></dd>
          
-         <dt>EDM</dt><dd><input type="number" name="quantity"  id="edm_value" min="1" max="100"></dd>
+         <dt><font color="white">EDM: </font></dt><dd><input type="number" name="quantity"  id="edm_value" min="1" max="100"></dd>
          
-         <dt>Top Hits</dt><dd><input type="number" name="quantity"  id="tophits_value" min="1" max="100"></dd>
+         <dt><font color="white">Top Hits </font></dt><dd><input type="number" name="quantity"  id="tophits_value" min="1" max="100"></dd>
          
-         <dt>Time left:</dt><dd> <p id="length"></p></dd>
+
         </dl>
+        </div>
+        <div id="curr">
+        </div>
+        <div>
+        <h2><font color="white">Time left: <p id="length"></p> </font>  <h2>
+        </div>
+
 
        
       </div>
@@ -79,6 +86,17 @@
         <dt>Refresh token</dt><dd class="text-overflow">{{refresh_token}}</dd>
       </dl>
     </script>
+    
+      <script id="curr-template" type="text/x-handlebars-template">
+      <h2><font color="white"><dd class="text-overflow">{{song_name}}</dd></font></h2>
+      <h2><font color="white"><dd class="text-overflow">{{artist}}--{{album}}</dd></font></h2>
+        <div class="media">
+        <div class="pull-left">
+          <img class="media-object" width="350" src="{{image_url}}" />
+        </div>
+         
+    </script>
+
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
@@ -87,22 +105,49 @@
 var timeleft = 1000;
 var song_length = 1000;
 var flag = 3;
+var counter = 20;
+var duration_ms = 100;
+var progress_ms = 10;
+
+var currSource = document.getElementById('curr-template').innerHTML,
+            currTemplate = Handlebars.compile(currSource),
+            currPlaceholder = document.getElementById('curr');
 
 // Update the count down every 1 second
 var x = setInterval(function() {
-
+    if(counter > 10 || timeleft < 25){
+    counter = 0;
     $.ajax({
               url: '/track_length'
               
             }).done(function(data) {
-              var duration_ms = data.duration_ms;
+              var image = data.image;
+              var name = data.name;
+              var artist = data.artist;
+              var album = data.album;
+              duration_ms = data.duration_ms;
               duration_ms = Math.floor(duration_ms/1000);
               
-              var progress_ms = data.progress_ms;
+              progress_ms = data.progress_ms;
               progress_ms = Math.floor(progress_ms/1000);
               
               timeleft = duration_ms - progress_ms;
+              
+                currPlaceholder.innerHTML = currTemplate({
+                image_url: image,
+                song_name: name,
+                artist : artist,
+                album : album
+              });
              });
+             
+
+             
+     }else{
+     counter = counter+1;
+     progress_ms = progress_ms +1;
+     timeleft = duration_ms - progress_ms;
+     }
   
   // Time calculations for days, hours, minutes and seconds
   var minutes = Math.floor(timeleft / 60);
@@ -120,6 +165,7 @@ var x = setInterval(function() {
     
   // If the count down is over, write some text 
   if (timeleft < 9 && flag >1) {
+  counter =15;
   
   var pop_value = document.getElementById("pop_value").value;
   var queen_value = document.getElementById("queen_value").value;
@@ -165,6 +211,7 @@ var x = setInterval(function() {
             "position": rand5
             }
             })
+            
           });
          
 
