@@ -59,9 +59,7 @@ app.get('/login', function(req, res) {
 });
 
 
-//app.put('/pause', function(req, res) {
-//    
-//});
+
 
 
 app.get('/track_length', function(req, res) {
@@ -239,6 +237,18 @@ app.get('/progress_ms', function(req, res) {
 
    
 });
+
+
+//app.put('/pause', function(req, res) {
+//    var options = {
+//        url: 'https://api.spotify.com/v1/me/player/pause',
+//        headers: { 'Authorization': 'Bearer ' + access_token2},
+//        json: true
+//    }
+//    request.put(options);
+//});
+
+
 
 app.get('/callback', function(req, res) {
 
