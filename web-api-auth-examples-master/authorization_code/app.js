@@ -13,10 +13,10 @@ var cors = require('cors');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 
-var client_id = '6a1dee40c53c44bc878500598823ddf1'; // Your client id
-var client_secret = '5f979a0e0f314a26b251c45680e84b65'; // Your secret
+var client_id = 'd695391f77b04e53bd13d418be938a7d'; // Your client id
+var client_secret = '2e8918fcc2e74c9ab3e6b875597cccb0'; // Your secret
 var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
-var access_token2 = "";
+var access_token2 = "BQDcJkb01zJJCibG48YL-1n9mxppy3O7fipeVfXFtjC3Wd-hN3vvRZvqreWSZ7VdegcA19B7MAy1s7UsPLAj0Nbe4qdtVbGGkGqdl9pN3iRxnbRzsh9ZOFHAVA2nW_qICRVBdvMtCaPbUKFk5HaXmav0T8J6FPNafr_RQMqH1qp_1HY";
 
 /**
  * Generates a random string containing numbers and letters
@@ -57,6 +57,11 @@ app.get('/login', function(req, res) {
       state: state
     }));
 });
+
+
+//app.put('/pause', function(req, res) {
+//    
+//});
 
 
 app.get('/track_length', function(req, res) {
@@ -192,14 +197,7 @@ app.get('/next_song', function(req, res) {
       'access_token' : access_token2
        });
     
-    
-    
-    
-    
-    
-    
-    
-    
+
   }
   
   
