@@ -79,6 +79,20 @@
         height:20px;
       }
       
+      #myProgress {
+        width: 50%;
+        background-color: #535456;
+        border-radius: 25px;
+        height: 20px;
+      }
+
+      #myBar {
+        width: 1%;
+        height: 20px;
+        background-color: #e3e4e8;
+        border-radius: 25px;
+      }
+      
     </style>
   </head>
 
@@ -118,6 +132,9 @@
         </div>
         <div>
         <h2><font color="white">Time left: <p id="length"></p> </font>  <h2>
+        </div>
+        <div id="myProgress">
+            <div id="myBar"></div>
         </div>
 
 
@@ -202,6 +219,8 @@ var flag = 3;
 var counter = 20;
 var duration_ms = 100;
 var progress_ms = 10;
+var width = 10;
+var elem = document.getElementById("myBar");
 
 var currSource = document.getElementById('curr-template').innerHTML,
             currTemplate = Handlebars.compile(currSource),
@@ -242,6 +261,17 @@ var x = setInterval(function() {
      progress_ms = progress_ms +1;
      timeleft = duration_ms - progress_ms;
      }
+     
+     
+     
+    if (width >= 100) {
+      width =0;
+      elem.style.width = 1 + '%'; 
+    } else {
+      width= (progress_ms/duration_ms); 
+      width = width*100;
+      elem.style.width = width + '%'; 
+    }
   
   // Time calculations for days, hours, minutes and seconds
   var minutes = Math.floor(timeleft / 60);
