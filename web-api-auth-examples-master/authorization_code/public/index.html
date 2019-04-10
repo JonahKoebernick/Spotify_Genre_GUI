@@ -193,12 +193,12 @@
 <script>
     function pause() {
         $.ajax({
-        url: '/is_paused',
+        url: '/is_playing',
 
         }).done(function(data) {
             var access_token = data.access_token;
-            var is_paused = data.is_paused;
-            alert(is_paused);
+            var is_playing = data.is_playing;
+            alert(is_playing);
 
          
             $.ajax({
