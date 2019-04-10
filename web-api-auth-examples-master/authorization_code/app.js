@@ -114,6 +114,32 @@ app.get('/access_token', function(req, res) {
   
 });
 
+
+app.get('/is_paused', function(req, res) {
+  
+var options = {
+      url: 'https://api.spotify.com/v1/me/player/currently-playing',
+      headers: { 'Authorization': 'Bearer ' + access_token2 },
+      json: true
+      };
+    
+      request.get(options, function(error, response, body) {
+          if(!error && response.statusCode == 200){
+          console.log(body);
+          var is_paused = body.is_playing;
+         
+          res.send({
+          'is_paused' : is_paused,
+          'access_token' : access_token2
+         
+        });
+        }
+      });
+
+   
+});
+
+
 app.get('/next_song', function(req, res) {
   console.log("NEXT SONG");
   
