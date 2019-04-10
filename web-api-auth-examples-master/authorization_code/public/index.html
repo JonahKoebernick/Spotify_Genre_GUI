@@ -233,7 +233,68 @@
             
           });
     }
+<<<<<<< HEAD
+</script>
+
+
+
+<script>
+    function next_song() {
+  var pop_value = document.getElementById("pop_value").value;
+  var queen_value = document.getElementById("queen_value").value;
+  var tb_value = document.getElementById("tb_value").value;
+  
+  var country_value = document.getElementById("country_value").value;
+  var hiphop_value = document.getElementById("hiphop_value").value;
+  var rock_value = document.getElementById("rock_value").value;
+  var edm_value = document.getElementById("edm_value").value;
+  var tophits_value = document.getElementById("tophits_value").value;
+  /* Treat this information as suspicious and check the values for 1-100, if <1 x=1, if x>100 x=100 */
+  
+  $.ajax({
+        url: '/next_song',
+        data : {
+        
+               'pop_value' : pop_value,
+               'queen_value' : queen_value,
+               'tb_value' : tb_value,
+               'country_value' :  country_value,
+               'hiphop_value' : hiphop_value,
+               'rock_value'  : rock_value,
+               'edm_value' : edm_value,
+               'tophits_value' : tophits_value
+            
+         }
+        }).done(function(data) {
+         var ulr = data.ulr;
+         var amt = data.amt;
+         var access_token = data.access_token;
+         var rand5 = Math.floor(Math.random() * amt);
+         $.ajax({
+            url: 'https://api.spotify.com/v1/me/player/play',
+            type: 'PUT',
+            headers: {
+              'Authorization': 'Bearer ' + access_token
+            },
+            dataType: "json",
+            contentType: "application/json",
+            data : JSON.stringify({
+             "context_uri": "spotify:playlist:"+ulr,
+             "offset": {
+            "position": rand5
+            }
+            })
+            
+          });
+         
+
+        });
+    }
+</script>         
+        
+=======
 </script>   
+>>>>>>> refs/remotes/origin/master
         
 <script>
 var timeleft = 1000;
@@ -311,61 +372,10 @@ var x = setInterval(function() {
   document.getElementById("length").innerHTML = minutes + ":" + zerofill + seconds;
     
   // If the count down is over, write some text 
-  if (timeleft < 9 && flag >1) {
-  counter =15;
-  
-  var pop_value = document.getElementById("pop_value").value;
-  var queen_value = document.getElementById("queen_value").value;
-  var tb_value = document.getElementById("tb_value").value;
-  
-  var country_value = document.getElementById("country_value").value;
-  var hiphop_value = document.getElementById("hiphop_value").value;
-  var rock_value = document.getElementById("rock_value").value;
-  var edm_value = document.getElementById("edm_value").value;
-  var tophits_value = document.getElementById("tophits_value").value;
-  /* Treat this information as suspicious and check the values for 1-100, if <1 x=1, if x>100 x=100 */
-  
-  $.ajax({
-        url: '/next_song',
-        data : {
-        
-               'pop_value' : pop_value,
-               'queen_value' : queen_value,
-               'tb_value' : tb_value,
-               'country_value' :  country_value,
-               'hiphop_value' : hiphop_value,
-               'rock_value'  : rock_value,
-               'edm_value' : edm_value,
-               'tophits_value' : tophits_value
-            
-         }
-        }).done(function(data) {
-         var ulr = data.ulr;
-         var amt = data.amt;
-         var access_token = data.access_token;
-         var rand5 = Math.floor(Math.random() * amt);
-         $.ajax({
-            url: 'https://api.spotify.com/v1/me/player/play',
-            type: 'PUT',
-            headers: {
-              'Authorization': 'Bearer ' + access_token
-            },
-            dataType: "json",
-            contentType: "application/json",
-            data : JSON.stringify({
-             "context_uri": "spotify:playlist:"+ulr,
-             "offset": {
-            "position": rand5
-            }
-            })
-            
-          });
-         
-
-        });
-        
-       
-    flag =0;         
+  if (timeleft < 3 && flag >1) {
+    counter =15;
+    flag =0;    
+    next_song();
   }
   flag = flag+1;
   
