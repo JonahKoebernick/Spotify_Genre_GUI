@@ -229,7 +229,7 @@ app.get('/progress_ms', function(req, res) {
           console.log(body.item.duration_ms);
           console.log(totaltime);
           console.log("Image url : "+ body.item.images[0]);
-          res.send({
+          res.send({ 
          'progress_ms': time
         });
         }
