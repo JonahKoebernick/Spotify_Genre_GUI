@@ -175,21 +175,24 @@
 
 <script>
     function pause() {
-//        alert("PAUSE");
-          $.ajax({
+        $.ajax({
+        url: '/access_token',
+
+        }).done(function(data) {
+            var access_token = data.access_token;
+
+         
+            $.ajax({
             url: 'https://api.spotify.com/v1/me/player/pause',
             type: 'PUT',
             headers: {
               'Authorization': 'Bearer ' + access_token
-            },
-            dataType: "json",
-            contentType: "application/json",
-            data: JSON.stringify({
-            "uris" : [ 'spotify:track:1YrC8s6yZWw23QxW6rfM9f']
-            })
+            }
+                     
+          });
           });
     }
-</script>       
+</script>          
         
         
 <script>
