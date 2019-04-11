@@ -191,7 +191,7 @@
             <div class="gap-20"></div>
             
           <button class=button1 onclick="myScript"><img src="images/btn-prev.png"/></button>
-          <button class=button2 onclick="pause()"><img src="images/btn-pause.png"/></button>
+          <button class=button2 onclick="pause()"><img id="image" src="images/btn-pause.png"/></button>
           <button class=button3 onclick="next_song()"><img src="images/btn-next.png"/></button>
             
         </div>
@@ -220,6 +220,10 @@
                     }
 
                 });
+                
+                var img = document.getElementById("image");
+                img.src="images/btn-play.png";
+                return false;
             } else {
                 $.ajax({
                     url: 'https://api.spotify.com/v1/me/player/play',
@@ -229,6 +233,10 @@
                     }
 
                 });
+                
+                var img = document.getElementById("image");
+                img.src="images/btn-pause.png";
+                return false;
             }
             
           });
