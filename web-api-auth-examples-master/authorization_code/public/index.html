@@ -192,7 +192,7 @@
             
           <button class=button1 onclick="myScript"><img src="images/btn-prev.png"/></button>
           <button class=button2 onclick="pause()"><img src="images/btn-pause.png"/></button>
-          <button class=button3 onclick="myScript"><img src="images/btn-next.png"/></button>
+          <button class=button3 onclick="next_song()"><img src="images/btn-next.png"/></button>
             
         </div>
          
@@ -233,9 +233,19 @@
             
           });
     }
-<<<<<<< HEAD
+//<<<<<<< HEAD
 </script>
 
+<script>
+    function pausebutton() {
+        var is_playing = data.is_playing;
+        if (is_playing) {
+            return "images/btn-pause.png";
+        } else {
+            return "images/btn-play.png";
+        }
+    }
+</script>
 
 
 <script>
