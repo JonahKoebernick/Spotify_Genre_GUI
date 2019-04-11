@@ -84,7 +84,15 @@
         height:20px;
       }
         .player{
-            
+            width: 50%;
+            height: auto;
+            position: block;
+            padding-top: 15px;
+        }
+        
+        .player img {
+            height: 100%;
+            width: 100%;
         }
         
       #myProgress {
@@ -111,6 +119,11 @@
         <a href="/login" class="btn btn-primary">Log in with Spotify</a>
       </div>
       <div id="loggedin">
+          
+        <div style="float: right;" class="player">
+            <img src="images/player_template.png" style="border:10px solid #2f2f2f;"/>
+        </div>
+          
         <div id="user-profile">
         </div>
         <div id="oauth">
@@ -199,9 +212,7 @@
         
         <div class="gap-20"></div>
         
-        <div class="player">
-            <img src="images/player_template.png" style="border:10px solid #2f2f2f; display: block;margin-left: auto;margin-right: auto;"/>
-        </div>
+        
         
         
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
