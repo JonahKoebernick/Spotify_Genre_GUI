@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+    <style type="text/css">
+        .player{
+            width: 25%;
+            height: auto;
+            position: relative;
+            padding-top: 2.5%;
+            padding-left: 2.5%;
+        }  
+        
+        .player img {
+            height: 100%;
+            width: 100%;
+        }
+        
+        .player img2 {
+            width: 18.2%;
+            height: auto;
+        }
+    </style>
+    
+    <body style="background-color:#1F1C1C;">
+        <div class="player">
+            
+            <img src="images/player_template.png"/>
+            
+                <script id="curr-template" type="text/x-handlebars-template">
+                    <img style="position: relative; left:13%; width:74%; transform: translate(0%,-203%);" src="{{image_url}}" />
+                </script>
+            
+            <div id="curr"></div>
+            
+        </div>
+        
+        
+        
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    
+        <script>
+            function pause() {
+                $.ajax({
+                url: '/is_playing',
+
+                }).done(function(data) {
+                    var access_token = data.access_token;
+                    var is_playing = data.is_playing;
+
+                    if (is_playing) {
+                        $.ajax({
+                            url: 'https://api.spotify.com/v1/me/player/pause',
+                            type: 'PUT',
+                            headers: {
+                              'Authorization': 'Bearer ' + access_token
+                            }
+                        });
+
+                        var img = document.getElementById("image");
+                        img.src="images/btn-play.png";
+                        return false;
+                    } else {
+                        $.ajax({
+                            url: 'https://api.spotify.com/v1/me/player/play',
+                            type: 'PUT',
+                            headers: {
+                              'Authorization': 'Bearer ' + access_token
+                            }
+                        });
+
+                        var img = document.getElementById("image");
+                        img.src="images/btn-pause.png";
+                        return false;
+                    }
+                  });
+            }
+
+        </script>
+
+        <script>
+            function restart() {
+                $.ajax({
+
+                }).done(function(data) {
+                    var access_token = data.access_token;
+                    var is_playing = data.is_playing;
+
+                    $.ajax({
+                        url: 'https://api.spotify.com/v1/me/player/seek',
+                        type: 'PUT',
+                        headers: {
+                          'Authorization': 'Bearer ' + access_token
+                        },
+                        data: {
+                          'position_ms': 0
+                        }
+
+                    });
+                  });
+            }
+        </script>        
+        
+        <script>
+            function pausebutton() {
+                var is_playing = data.is_playing;
+                if (is_playing) {
+                    var img = document.getElementById("image");
+                    img.src="images/btn-pause.png";
+                    return false;
+                } else {
+                    var img = document.getElementById("image");
+                    img.src="images/btn-play.png";
+                    return false;
+                }
+            }
+        </script>
+               
+        <script>
+            function next_song() {
+                var pop_value = document.getElementById("pop_value").value;
+                var queen_value = document.getElementById("queen_value").value;
+                var tb_value = document.getElementById("tb_value").value;
+
+                var country_value = document.getElementById("country_value").value;
+                var hiphop_value = document.getElementById("hiphop_value").value;
+                var rock_value = document.getElementById("rock_value").value;
+                var edm_value = document.getElementById("edm_value").value;
+                var tophits_value = document.getElementById("tophits_value").value;
+                /* Treat this information as suspicious and check the values for 1-100, if <1 x=1, if x>100 x=100 */
+
+                $.ajax({
+                    url: '/next_song',
+                    data : {
+                        'pop_value' : pop_value,
+                        'queen_value' : queen_value,
+                        'tb_value' : tb_value,
+                        'country_value' :  country_value,
+                        'hiphop_value' : hiphop_value,
+                        'rock_value'  : rock_value,
+                        'edm_value' : edm_value,
+                        'tophits_value' : tophits_value
+                    }
+                }).done(function(data) {
+                    var ulr = data.ulr;
+                    var amt = data.amt;
+                    var access_token = data.access_token;
+                    var rand5 = Math.floor(Math.random() * amt);
+                    $.ajax({
+                        url: 'https://api.spotify.com/v1/me/player/play',
+                        type: 'PUT',
+                        headers: {
+                            'Authorization': 'Bearer ' + access_token
+                        },
+                        dataType: "json",
+                        contentType: "application/json",
+                        data : JSON.stringify({
+                            "context_uri": "spotify:playlist:"+ulr,
+                            "offset": {
+                                "position": rand5
+                            }
+                        })
+                    });
+                });
+            }
+        </script>         
+                
+        <script>
+            var timeleft = 1000;
+            var song_length = 1000;
+            var flag = 3;
+            var counter = 20;
+            var duration_ms = 100;
+            var progress_ms = 10;
+            var width = 10;
+            var elem = document.getElementById("myBar");
+
+            var currSource = document.getElementById('curr-template').innerHTML,
+            currTemplate = Handlebars.compile(currSource),
+            currPlaceholder = document.getElementById('curr');
+
+            // Update the count down every 1 second
+            var x = setInterval(function() {
+                if(counter > 10 || timeleft < 25){
+                    counter = 0;
+                    $.ajax({
+                        url: '/track_length'
+                        
+                    }).done(function(data) {
+                        var image = data.image;
+                        var name = data.name;
+                        var artist = data.artist;
+                        var album = data.album;
+                        
+                        duration_ms = data.duration_ms;
+                        duration_ms = Math.floor(duration_ms/1000);
+                        
+                        progress_ms = data.progress_ms;
+                        progress_ms = Math.floor(progress_ms/1000);
+                        
+                        timeleft = duration_ms - progress_ms;
+
+                        currPlaceholder.innerHTML = currTemplate({
+                            image_url: image,
+                            song_name: name,
+                            artist : artist,
+                            album : album
+                        });
+                    });
+
+                }else{
+                    
+                    counter = counter+1;
+                    progress_ms = progress_ms +1;
+                    timeleft = duration_ms - progress_ms;
+                }
+
+                if (width >= 100) {
+                    width =0;
+                    elem.style.width = 1 + '%'; 
+                } else {
+                    width= (progress_ms/duration_ms); 
+                    width = width*100;
+                    elem.style.width = width + '%'; 
+                }
+
+                // Time calculations for days, hours, minutes and seconds
+                var minutes = Math.floor(timeleft / 60);
+                var seconds = timeleft - minutes * 60;
+
+                // Output the result in an element with id="demo"
+                var zerofill ="";
+                if(seconds <10){
+                    zerofill = "0";
+                }else{
+                    zerofill = "";
+                }
+                
+                document.getElementById("length").innerHTML = minutes + ":" + zerofill + seconds;
+
+                // If the count down is over, write some text 
+                if (timeleft < 3 && flag >1) {
+                    counter =15;
+                    flag =0;    
+                    next_song();
+                }
+                
+                flag = flag+1;
+            }, 1000);
+        </script>
+
+        <script>
+            var y = setInterval(function() {
+                $.ajax({
+                    url: '/refresh_token',
+                    data: {
+                        'refresh_token': refresh_token
+                    }
+                }).done(function(data) {
+                    access_token = data.access_token;
+                    oauthPlaceholder.innerHTML = oauthTemplate({
+                        access_token: access_token,
+                        refresh_token: refresh_token
+                    });
+                });
+            }, 10000);
+        </script>
+    
+        <script>
+            (function() {
+                /**
+                * Obtains parameters from the hash of the URL
+                * @return Object
+                */
+                function getHashParams() {
+                    var hashParams = {};
+                    var e, r = /([^&;=]+)=?([^&;]*)/g,
+                        
+                    q = window.location.hash.substring(1);
+                    
+                    while ( e = r.exec(q)) {
+                        hashParams[e[1]] = decodeURIComponent(e[2]);
+                    }
+                    return hashParams;
+                }
+
+                var userProfileSource = document.getElementById('user-profile-template').innerHTML,
+                userProfileTemplate = Handlebars.compile(userProfileSource),
+                userProfilePlaceholder = document.getElementById('user-profile');
+
+                var oauthSource = document.getElementById('oauth-template').innerHTML,
+                oauthTemplate = Handlebars.compile(oauthSource),
+                oauthPlaceholder = document.getElementById('oauth');
+
+                var params = getHashParams();
+
+                var access_token = params.access_token,
+                refresh_token = params.refresh_token,
+                error = params.error;
+
+                if (error) {
+                    alert('There was an error during the authentication');
+                    
+                } else {
+                    
+                    if (access_token) {
+                        // render oauth info
+                        oauthPlaceholder.innerHTML = oauthTemplate({
+                            access_token: access_token,
+                            refresh_token: refresh_token
+                        });
+
+                        $.ajax({
+                            url: 'https://api.spotify.com/v1/me',
+                            headers: {
+                                'Authorization': 'Bearer ' + access_token
+                            },
+                            success: function(response) {
+                                userProfilePlaceholder.innerHTML = userProfileTemplate(response);
+
+                                $('#login').hide();
+                                $('#loggedin').show();
+                            }
+                        });
+                    } else {
+                    // render initial screen
+                        $('#login').show();
+                        $('#loggedin').hide();
+                    }
+
+                    document.getElementById('obtain-new-token').addEventListener('click', function() {
+                    
+                        $.ajax({
+                            url: '/refresh_token',
+                            data: {
+                                'refresh_token': refresh_token
+                            }
+                        }).done(function(data) {
+                            access_token = data.access_token;
+                            oauthPlaceholder.innerHTML = oauthTemplate({
+                                access_token: access_token,
+                                refresh_token: refresh_token
+                            });
+                        });
+                    }, false);
+                }
+            })();
+        </script>
+    
+    </body>
+</html>

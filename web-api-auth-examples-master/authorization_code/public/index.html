@@ -56,10 +56,12 @@
         .player{
             width: 25%;
             height: auto;
-            position: block;
-            padding-top: 15px;
-            padding-left: 25px;
-        }
+            position: relative;
+            padding-top: 2.5%;
+            padding-left: 2.5%;
+            float: left;
+            margin-right: 60px;
+        }  
         
         .player img {
             height: 100%;
@@ -94,7 +96,23 @@
       </div>
       <div id="loggedin">
           
-        <div style="float: left; margin-right: 60px;" class="player">
+<!--        <div style="float: left; margin-right: 60px;" class="player">-->
+            
+            <div class="player">
+            
+                <img src="images/player_template.png"/>
+
+                    <script id="curr-template" type="text/x-handlebars-template">
+                        <img style="position: relative; left:13%; width:74%; transform: translate(0%,-203%);" src="{{image_url}}" />
+                    </script>
+
+                <div id="curr"></div>
+            
+            </div>
+            
+            
+            
+<!--
             <img src="images/player-temp-bg.png" style="border:10px solid #2f2f2f;"/>
             
             <script id="curr-template" type="text/x-handlebars-template">
@@ -115,8 +133,9 @@
             <button style="left:105px;" class=button1 onclick="pause()"><img id="image" src="images/btn-pause.png"/></button>
             <button style="left:108px;" class=button1 onclick="next_song()"><img src="images/btn-next.png"/></button>
             <button style="left:83px; top:-446px;" class=button1 onclick=""><img src="images/btn-save.png"/></button>
+-->
             
-        </div>
+<!--        </div>-->
           
         <div id="user-profile">
         </div>
@@ -175,7 +194,7 @@
     
     <script id="oauth-template" type="text/x-handlebars-template">
       <div class="gap"></div>
-      <h2><font face="verdana" size="4" color="#e3e4e8">Auth info</font></h2>
+      <h2><font face="verdana" size="4" color="#e3e4e8">oAuth info</font></h2>
       <dl style="display: block; line-height: 22px;">
           <dt><font style="float:left; padding-right: 16px;" face="verdana" size="3" color="#e3e4e8">Access token: </font></dt><dd class="text-overflow"><font face="verdana" size="2.5" color="#535456">{{access_token}}</font></dd>
           <dt><font style="float:left; padding-right: 10px;" face="verdana" size="3" color="#e3e4e8">Refresh token: </font></dt><dd class="text-overflow"><font face="verdana" size="2.5" color="#535456">{{refresh_token}}</font></dd>
@@ -197,6 +216,9 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 
+    <a href="/player.html">Player</a>
+    
+    
 <script>
     function pause() {
         $.ajax({
