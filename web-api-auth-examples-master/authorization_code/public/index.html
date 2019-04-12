@@ -98,9 +98,9 @@
             <img src="images/player-temp-bg.png" style="border:10px solid #2f2f2f;"/>
             
             <script id="curr-template" type="text/x-handlebars-template">
-                <h2 style="position: relative; left:-450px; top:-474px;"><font face="verdana" size="5" color="white"><dd class="text-overflow-player">{{artist}}</dd></font></h2>
-                <img style="position: relative; left:-507px; top:-434px;" width="18.2%" src="{{image_url}}" />
-                <h2 style="position: relative; left:-535px; top:-425px;"><font face="verdana" size="6" color="white"><dd class="text-overflow-player">{{song_name}}</dd></font></h2>
+                <h2 style="position: relative; left:-450px; top:-480px;"><font face="verdana" size="5" color="white"><dd class="text-overflow-player">{{artist}}</dd></font></h2>
+                <img style="position: relative; left:-507px; top:-441px;" width="18.2%" src="{{image_url}}" />
+                <h2 style="position: relative; left:-535px; top:-431px;"><font face="verdana" size="6" color="white"><dd class="text-overflow-player">{{song_name}}</dd></font></h2>
             </script>
             
             <div id="myProgress">
@@ -160,14 +160,14 @@
           <img width="150" src="{{images.0.url}}" />
         </div>
         <div class="media-body">
-          <dl class="dl-horizontal">
-            <dt><font style="float:left; padding-left: 10px; padding-right: 10px;" face="verdana" size="3" color="#e3e4e8">Display name: </font></dt><dd><font face="verdana" size="2.5" color="#535456">{{display_name}}</font></dd>
-            <dt><font style="float:left; padding-left: 10px; padding-right: 10px;" face="verdana" size="3" color="#e3e4e8">Id: </font></dt><dd><font face="verdana" size="2.5" color="#535456">{{id}}</font></dd>
-            <dt><font style="float:left; padding-left: 10px; padding-right: 10px;" face="verdana" size="3" color="#e3e4e8">Email: </font></dt><dd><font face="verdana" size="2.5" color="#535456">{{email}}</font></dd>
-            <dt><font style="float:left; padding-left: 10px; padding-right: 10px;" face="verdana" size="3" color="#e3e4e8">Spotify URI: </font></dt><dd><a href="{{external_urls.spotify}}"><font face="verdana" size="2.5">{{external_urls.spotify}}</font></a></dd>
-            <dt><font style="float:left; padding-left: 10px; padding-right: 10px;" face="verdana" size="3" color="#e3e4e8">Link: </font></dt><dd><a href="{{href}}"><font face="verdana" size="2.5">{{href}}</font></a></dd>
-            <dt><font style="float:left; padding-left: 10px; padding-right: 10px;" face="verdana" size="3" color="#e3e4e8">Profile Image: </font></dt><dd class="clearfix"><a href="{{images.0.url}}"><font face="verdana" size="2.5">{{images.0.url}}</font></a></dd>
-            <dt><font style="float:left; padding-left: 10px; padding-right: 10px;" face="verdana" size="3" color="#e3e4e8">Country: </font></dt><dd><font face="verdana" size="2.5" color="#535456">{{country}}</font></dd>
+          <dl style="display: block; line-height: 22px;">
+            <dt><font style="float:left; padding-left: 10px; padding-right: 8px;" face="verdana" size="3" color="#e3e4e8">Display name: </font></dt><dd><font face="verdana" size="2.5" color="#535456">{{display_name}}</font></dd>
+            <dt><font style="float:left; padding-left: 102px; padding-right: 8px;" face="verdana" size="3" color="#e3e4e8">Id: </font></dt><dd><font face="verdana" size="2.5" color="#535456">{{id}}</font></dd>
+            <dt><font style="float:left; padding-left: 75px; padding-right: 8px;" face="verdana" size="3" color="#e3e4e8">Email: </font></dt><dd><font face="verdana" size="2.5" color="#535456">{{email}}</font></dd>
+            <dt><font style="float:left; padding-left: 28px; padding-right: 8px;" face="verdana" size="3" color="#e3e4e8">Spotify URI: </font></dt><dd><a href="{{external_urls.spotify}}"><font face="verdana" size="2.5">{{external_urls.spotify}}</font></a></dd>
+            <dt><font style="float:left; padding-left: 87px; padding-right: 8px;" face="verdana" size="3" color="#e3e4e8">Link: </font></dt><dd><a href="{{href}}"><font face="verdana" size="2.5">{{href}}</font></a></dd>
+            <dt><font style="float:left; padding-left: 13px; padding-right: 8px;" face="verdana" size="3" color="#e3e4e8">Profile Image: </font></dt><dd class="clearfix"><a href="{{images.0.url}}"><font face="verdana" size="2.5">{{images.0.url}}</font></a></dd>
+            <dt><font style="float:left; padding-left: 57px; padding-right: 8px;" face="verdana" size="3" color="#e3e4e8">Country: </font></dt><dd><font face="verdana" size="2.5" color="#535456">{{country}}</font></dd>
           </dl>
         </div>
       </div>
@@ -176,8 +176,8 @@
     <script id="oauth-template" type="text/x-handlebars-template">
       <div class="gap"></div>
       <h2><font face="verdana" size="4" color="#e3e4e8">Auth info</font></h2>
-      <dl style="display: block; line-height: 25px;">
-          <dt><font style="float:left; padding-right: 10px;" face="verdana" size="3" color="#e3e4e8">Access token: </font></dt><dd class="text-overflow"><font face="verdana" size="2.5" color="#535456">{{access_token}}</font></dd>
+      <dl style="display: block; line-height: 22px;">
+          <dt><font style="float:left; padding-right: 16px;" face="verdana" size="3" color="#e3e4e8">Access token: </font></dt><dd class="text-overflow"><font face="verdana" size="2.5" color="#535456">{{access_token}}</font></dd>
           <dt><font style="float:left; padding-right: 10px;" face="verdana" size="3" color="#e3e4e8">Refresh token: </font></dt><dd class="text-overflow"><font face="verdana" size="2.5" color="#535456">{{refresh_token}}</font></dd>
       </dl>
     </script>    
