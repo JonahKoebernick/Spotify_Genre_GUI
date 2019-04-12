@@ -28,24 +28,24 @@
         
       .button1 {
         border-radius: 8px;
-/*        background-color: #1d1c16;*/
+        background-color: #0f0b08;
         border: 1px #1d1c1c;
         color: whitesmoke;
         padding: 5px 10px;
         position: relative;
         width: 110px;
-        top:-244px;
+        top:-296px;
       }
       .button1:hover {
         border-radius: 8px;
-/*        background-color: #1d1c1c;*/
+        background-color: #0f0b08;
         border: 1px #1d1c1c;
         color: whitesmoke;
         padding: 5px 10px;
         position: relative;
         width: 110px;
         outline:none;
-        top:-244px;
+        top:-296px;
       }
 
       .gap-20{
@@ -98,7 +98,7 @@
             <img src="images/player-temp-bg.png" style="border:10px solid #2f2f2f;"/>
             
             <script id="curr-template" type="text/x-handlebars-template">
-                <h2 style="position: relative; left:-360px; top:-741px;"><font face="verdana" size="5" color="white"><dd class="text-overflow-player">{{artist}}</dd></font></h2>
+                <h2 style="position: relative; left:-450px; top:-741px;"><font face="verdana" size="5" color="white"><dd class="text-overflow-player">{{artist}}</dd></font></h2>
                 <img style="position: relative; left:-513px; top:-701px;" width="18.2%" src="{{image_url}}" />
                 <h2 style="position: relative; left:38px; top:-693px;"><font face="verdana" size="6" color="white"><dd class="text-overflow-player">{{song_name}}</dd></font></h2>
             </script>
@@ -107,9 +107,14 @@
                 <div id="myBar"></div>
             </div>
             
-            <button style="left:103px; background-color: #1b1a14" class=button1 onclick="restart()"><img src="images/btn-prev.png"/></button>
-            <button style="left:105px; background-color: #12120f" class=button1 onclick="pause()"><img id="image" src="images/btn-pause.png"/></button>
-            <button style="left:108px; background-color: #1b1a14" class=button1 onclick="next_song()"><img src="images/btn-next.png"/></button>
+            <div style="position: relative; left: 460px; top:-276px;">
+                <font face="verdana" size="3" color="#e3e4e8"><p id="length"></p></font>
+            </div>
+            
+            <button style="left:103px;" class=button1 onclick="restart()"><img src="images/btn-prev.png"/></button>
+            <button style="left:105px;" class=button1 onclick="pause()"><img id="image" src="images/btn-pause.png"/></button>
+            <button style="left:108px;" class=button1 onclick="next_song()"><img src="images/btn-next.png"/></button>
+            <button style="left:83px; top:-446px;" class=button1 onclick=""><img src="images/btn-save.png"/></button>
             
         </div>
           
@@ -141,7 +146,7 @@
         <div id="curr">
         </div>
         <div>
-        <h2><font color="white">Time left: <p id="length"></p> </font>  <h2>
+<!--            <h2><font face="verdana" size="2" color="#535456"><p id="length"></p></font></h2>-->
         </div>
 <!--
         <div id="myProgress">
