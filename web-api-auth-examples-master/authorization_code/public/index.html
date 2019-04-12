@@ -48,9 +48,9 @@
         top:-296px;
       }
 
-      .gap-20{
+      .gap{
         width:100%;
-        height:20px;
+        height:5px;
       }
         
         .player{
@@ -98,9 +98,9 @@
             <img src="images/player-temp-bg.png" style="border:10px solid #2f2f2f;"/>
             
             <script id="curr-template" type="text/x-handlebars-template">
-                <h2 style="position: relative; left:-450px; top:-741px;"><font face="verdana" size="5" color="white"><dd class="text-overflow-player">{{artist}}</dd></font></h2>
-                <img style="position: relative; left:-513px; top:-701px;" width="18.2%" src="{{image_url}}" />
-                <h2 style="position: relative; left:38px; top:-693px;"><font face="verdana" size="6" color="white"><dd class="text-overflow-player">{{song_name}}</dd></font></h2>
+                <h2 style="position: relative; left:-450px; top:-474px;"><font face="verdana" size="5" color="white"><dd class="text-overflow-player">{{artist}}</dd></font></h2>
+                <img style="position: relative; left:-507px; top:-434px;" width="18.2%" src="{{image_url}}" />
+                <h2 style="position: relative; left:-535px; top:-425px;"><font face="verdana" size="6" color="white"><dd class="text-overflow-player">{{song_name}}</dd></font></h2>
             </script>
             
             <div id="myProgress">
@@ -122,23 +122,16 @@
         </div>
         <div id="oauth">
         </div>
-        <dl class="dl-horizontal">
+        <dl style="display: block; line-height: 25px;">
          
-         <dt><font style="position: relative; float: left;" color="white">Pop: </font></dt><dd><input type="number" name="quantity" id="pop_value" min="1" max="100"></dd>
-         
-         <dt><font style="position: relative; float: left;" color="white">Queen: </font></dt><dd><input type="number" name="quantity"  id="queen_value"min="1" max="100"></dd>
-         
-         <dt><font style="position: relative; float: left;" color="white">Throw backs: </font></dt><dd><input type="number" name="quantity"  id="tb_value" min="1" max="100"></dd>
-         
-         <dt><font style="position: relative; float: left;" color="white">Country: </font></dt><dd><input type="number" name="quantity"  id="country_value" min="1" max="100"></dd>
-         
-         <dt><font style="position: relative; float: left;" color="white">Rock: </font></dt><dd><input type="number" name="quantity"  id="rock_value" min="1" max="100"></dd>
-         
-         <dt><font style="position: relative; float: left;" color="white">Hip-Hop: </font></dt><dd><input type="number" name="quantity"  id="hiphop_value" min="1" max="100"></dd>
-         
-         <dt><font style="position: relative; float: left;" color="white">EDM: </font></dt><dd><input type="number" name="quantity"  id="edm_value" min="1" max="100"></dd>
-         
-         <dt><font style="position: relative; float: left;" color="white">Top Hits </font></dt><dd><input type="number" name="quantity"  id="tophits_value" min="1" max="100"></dd>
+         <dt><font face="verdana" size="3" style="position: relative; float: left; padding-right: 81px;" color="#e3e4e8">Pop: </font></dt><dd><input type="number" name="quantity" id="pop_value" min="1" max="100"></dd>
+         <dt><font face="verdana" size="3" style="position: relative; float: left; padding-right: 59px;" color="#e3e4e8">Queen: </font></dt><dd><input type="number" name="quantity"  id="queen_value"min="1" max="100"></dd>
+         <dt><font face="verdana" size="3" style="position: relative; float: left; padding-right: 9px;" color="#e3e4e8">Throw backs: </font></dt><dd><input type="number" name="quantity"  id="tb_value" min="1" max="100"></dd>
+         <dt><font face="verdana" size="3" style="position: relative; float: left; padding-right: 47px;" color="#e3e4e8">Country: </font></dt><dd><input type="number" name="quantity"  id="country_value" min="1" max="100"></dd>
+         <dt><font face="verdana" size="3" style="position: relative; float: left; padding-right: 72px;" color="#e3e4e8">Rock: </font></dt><dd><input type="number" name="quantity"  id="rock_value" min="1" max="100"></dd>
+         <dt><font face="verdana" size="3" style="position: relative; float: left; padding-right: 45px;" color="#e3e4e8">Hip-Hop: </font></dt><dd><input type="number" name="quantity"  id="hiphop_value" min="1" max="100"></dd>
+         <dt><font face="verdana" size="3" style="position: relative; float: left; padding-right: 75px;" color="#e3e4e8">EDM: </font></dt><dd><input type="number" name="quantity"  id="edm_value" min="1" max="100"></dd>
+         <dt><font face="verdana" size="3" style="position: relative; float: left; padding-right: 44px;" color="#e3e4e8">Top Hits: </font></dt><dd><input type="number" name="quantity"  id="tophits_value" min="1" max="100"></dd>
          
             <script>pausebutton();</script>
             
@@ -161,34 +154,33 @@
     </div>
 
     <script id="user-profile-template" type="text/x-handlebars-template">
-      <h1>Logged in as {{display_name}}</h1>
+    <h1><font face="verdana" size="5" color="#e3e4e8">Logged in as {{display_name}}</font></h1>
       <div class="media">
-        <div class="pull-left">
+        <div style="float: left;">
           <img width="150" src="{{images.0.url}}" />
         </div>
         <div class="media-body">
           <dl class="dl-horizontal">
-            <dt>Display name</dt><dd class="clearfix">{{display_name}}</dd>
-            <dt>Id</dt><dd>{{id}}</dd>
-            <dt>Email</dt><dd>{{email}}</dd>
-            <dt>Spotify URI</dt><dd><a href="{{external_urls.spotify}}">{{external_urls.spotify}}</a></dd>
-            <dt>Link</dt><dd><a href="{{href}}">{{href}}</a></dd>
-            <dt>Profile Image</dt><dd class="clearfix"><a href="{{images.0.url}}">{{images.0.url}}</a></dd>
-            <dt>Country</dt><dd>{{country}}</dd>
+            <dt><font style="float:left; padding-left: 10px; padding-right: 10px;" face="verdana" size="3" color="#e3e4e8">Display name: </font></dt><dd><font face="verdana" size="2.5" color="#535456">{{display_name}}</font></dd>
+            <dt><font style="float:left; padding-left: 10px; padding-right: 10px;" face="verdana" size="3" color="#e3e4e8">Id: </font></dt><dd><font face="verdana" size="2.5" color="#535456">{{id}}</font></dd>
+            <dt><font style="float:left; padding-left: 10px; padding-right: 10px;" face="verdana" size="3" color="#e3e4e8">Email: </font></dt><dd><font face="verdana" size="2.5" color="#535456">{{email}}</font></dd>
+            <dt><font style="float:left; padding-left: 10px; padding-right: 10px;" face="verdana" size="3" color="#e3e4e8">Spotify URI: </font></dt><dd><a href="{{external_urls.spotify}}"><font face="verdana" size="2.5">{{external_urls.spotify}}</font></a></dd>
+            <dt><font style="float:left; padding-left: 10px; padding-right: 10px;" face="verdana" size="3" color="#e3e4e8">Link: </font></dt><dd><a href="{{href}}"><font face="verdana" size="2.5">{{href}}</font></a></dd>
+            <dt><font style="float:left; padding-left: 10px; padding-right: 10px;" face="verdana" size="3" color="#e3e4e8">Profile Image: </font></dt><dd class="clearfix"><a href="{{images.0.url}}"><font face="verdana" size="2.5">{{images.0.url}}</font></a></dd>
+            <dt><font style="float:left; padding-left: 10px; padding-right: 10px;" face="verdana" size="3" color="#e3e4e8">Country: </font></dt><dd><font face="verdana" size="2.5" color="#535456">{{country}}</font></dd>
           </dl>
         </div>
       </div>
     </script>
-
+    
     <script id="oauth-template" type="text/x-handlebars-template">
-      <h2>oAuth info</h2>
-      <dl class="dl-horizontal">
-        <dt>Access token</dt><dd class="text-overflow">{{access_token}}</dd>
-        <dt>Refresh token</dt><dd class="text-overflow">{{refresh_token}}</dd>
+      <div class="gap"></div>
+      <h2><font face="verdana" size="4" color="#e3e4e8">Auth info</font></h2>
+      <dl style="display: block; line-height: 25px;">
+          <dt><font style="float:left; padding-right: 10px;" face="verdana" size="3" color="#e3e4e8">Access token: </font></dt><dd class="text-overflow"><font face="verdana" size="2.5" color="#535456">{{access_token}}</font></dd>
+          <dt><font style="float:left; padding-right: 10px;" face="verdana" size="3" color="#e3e4e8">Refresh token: </font></dt><dd class="text-overflow"><font face="verdana" size="2.5" color="#535456">{{refresh_token}}</font></dd>
       </dl>
-    </script>
-        
-    <div class="gap-20"></div>    
+    </script>    
             
 <!--
         <script id="curr-template" type="text/x-handlebars-template">
