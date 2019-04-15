@@ -14,10 +14,38 @@
             width: 100%;
         }
         
-        .player img2 {
-            width: 18.2%;
-            height: auto;
+        .player button {
+            background-color: transparent;
+            border: none;
+/*            color: whitesmoke;*/
+            position: relative;
         }
+        .button1:hover {
+/*            background-color: #0f0b08;*/
+            border: none;
+/*            color: whitesmoke;*/
+            position: relative;
+            outline:none;
+        }
+        
+        #myProgress {
+            position: block;
+            left: 7.5%;
+            width: 85%;
+            background-color: #535456;
+            border-radius: 25px;
+            height: 5px;
+            
+            transform: translate(0%, -500%);
+        }
+
+        #myBar {
+            width: 1%;
+            height: 100%;
+            background-color: #e3e4e8;
+            border-radius: 25px;
+        }
+        
     </style>
     
     <body style="background-color:#1F1C1C;">
@@ -25,9 +53,21 @@
             
             <img src="images/player_template.png"/>
             
-                <script id="curr-template" type="text/x-handlebars-template">
-                    <img style="position: relative; left:13%; width:74%; transform: translate(0%,-203%);" src="{{image_url}}" />
-                </script>
+            <script id="curr-template" type="text/x-handlebars-template">
+                <img style="position: relative; left:13%; width:74%; transform: translate(0%,-228.5%);" src="{{image_url}}" />
+            </script>
+
+<!--
+            <div id="myProgress">
+                <div style="position: relative; height: 100%;" id="myBar"></div>
+            </div>
+-->
+            <div style="position: inherit">
+                <button style="position:relative; left: 22%; width:12%; transform: translate(0%,-494%);" class=button onclick="restart()"><img src="images/btn-prev1.png"/></button>
+                <button style="position:relative; left: 26.3%; width:21%; transform: translate(0%,-229%);" class=button onclick="pause()"><img id="play" src="images/btn-pause1.png"/></button>
+                <button style="position:relative; left: 30.9%; width:12%; transform: translate(0%,-494%);" class=button onclick="next_song()"><img src="images/btn-next1.png"/></button>
+                <button style="position:relative; left: 35.43%; width:10%; transform: translate(0%,-1044%);" class=button onclick="save()"><img id="save" src="images/btn-sav1.png"/></button>
+            </div>
             
             <div id="curr"></div>
             
@@ -57,8 +97,8 @@
                             }
                         });
 
-                        var img = document.getElementById("image");
-                        img.src="images/btn-play.png";
+                        var img = document.getElementById("play");
+                        img.src="images/btn-play1.png";
                         return false;
                     } else {
                         $.ajax({
@@ -69,8 +109,8 @@
                             }
                         });
 
-                        var img = document.getElementById("image");
-                        img.src="images/btn-pause.png";
+                        var img = document.getElementById("play");
+                        img.src="images/btn-pause1.png";
                         return false;
                     }
                   });
@@ -105,14 +145,22 @@
             function pausebutton() {
                 var is_playing = data.is_playing;
                 if (is_playing) {
-                    var img = document.getElementById("image");
-                    img.src="images/btn-pause.png";
+                    var img = document.getElementById("play");
+                    img.src="images/btn-pause1.png";
                     return false;
                 } else {
-                    var img = document.getElementById("image");
-                    img.src="images/btn-play.png";
+                    var img = document.getElementById("play");
+                    img.src="images/btn-play1.png";
                     return false;
                 }
+            }
+        </script>
+        
+        <script>
+            function save() {
+                var img = document.getElementById("save");
+                img.src="images/btn-saved1.png";
+                return false;
             }
         </script>
                
