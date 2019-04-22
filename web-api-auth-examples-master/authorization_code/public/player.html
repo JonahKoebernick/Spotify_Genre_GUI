@@ -63,10 +63,12 @@
             </div>
 -->
             <div style="position: inherit">
-                <button style="position:relative; left: 22%; width:12%; transform: translate(0%,-494%);" class=button onclick="restart()"><img src="images/btn-prev1.png"/></button>
-                <button style="position:relative; left: 26.3%; width:21%; transform: translate(0%,-229%);" class=button onclick="pause()"><img id="play" src="images/btn-pause1.png"/></button>
-                <button style="position:relative; left: 30.9%; width:12%; transform: translate(0%,-494%);" class=button onclick="next_song()"><img src="images/btn-next1.png"/></button>
-                <button style="position:relative; left: 35.43%; width:10%; transform: translate(0%,-1044%);" class=button onclick="save()"><img id="save" src="images/btn-sav1.png"/></button>
+                <button style="position:relative; left: 83.8%; width:10%; transform: translate(0%,-1044%);" class=button onclick="save()"><img id="save" src="images/btn-sav1.png"/></button>
+                <button style="position:relative; left: -4.131%; width:8.7%; transform: translate(0%,-432.6%);" class=button onclick="shuffle()"><img id="shuffle" src="images/btn-shuffle-off.png"/></button>
+                <button style="position:relative; left: 1%; width:12%; transform: translate(0%,-494%);" class=button onclick="restart()"><img src="images/btn-prev1.png"/></button>
+                <button style="position:relative; left: 5.53%; width:21%; transform: translate(0%,-227.5%);" class=button onclick="pause()"><img id="play" src="images/btn-pause1.png"/></button>
+                <button style="position:relative; left: 10%; width:12%; transform: translate(0%,-494%);" class=button onclick="next_song()"><img src="images/btn-next1.png"/></button>
+                <button style="position:relative; left: 14.95%; width:9.1%; transform: translate(0%,-411.5%);" class=button onclick="repeat()"><img id="repeat" src="images/btn-repeat-off.png"/></button>
             </div>
             
             <div id="curr"></div>
@@ -154,6 +156,7 @@
                     return false;
                 }
             }
+            
         </script>
         
         <script>
@@ -162,8 +165,20 @@
                 img.src="images/btn-saved1.png";
                 return false;
             }
+            
+            function shuffle() {
+                var img = document.getElementById("shuffle");
+                img.src="images/btn-shuffle-on.png";
+                return false;
+            }
+            
+            function repeat() {
+                var img = document.getElementById("repeat");
+                img.src="images/btn-repeat-on.png";
+                return false;
+            }
         </script>
-               
+          
         <script>
             function next_song() {
                 var pop_value = document.getElementById("pop_value").value;
