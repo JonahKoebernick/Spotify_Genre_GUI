@@ -54,21 +54,32 @@
             <img src="images/player_template.png"/>
             
             <script id="curr-template" type="text/x-handlebars-template">
-                <img style="position: relative; left:13%; width:74%; transform: translate(0%,-228.2%);" src="{{image_url}}" />
+                <h2 style="position: relative; transform: translate(25%,-3560%);"><font face="verdana" size="3.5" color="white"><dd class="text-overflow-player">{{artist}}</dd></font></h2>
+<!--                <img style="position: relative; left:13%; width:74%; transform: translate(0%,-228.2%);" src="{{image_url}}"/>-->
+                <img style="position: relative; left:13%; width:74%; transform: translate(0%,-249.4%);" src="{{image_url}}"/>-->
+                <h2 style="position: relative; transform: translate(-3%,-3020%);"><font face="verdana" size="4.5" color="white"><dd class="text-overflow-player">{{song_name}}</dd></font></h2>
+                <h1 style="position: relative; transform: translate(-3%,-3550%);"><font face="verdana" size="3.5" color="grey"><dd class="text-overflow-player">{{artist}}</dd></font></h1>
             </script>
 
-<!--
-            <div id="myProgress">
+            <div style="transform: translate(10%,-3500%);" id="myProgress">
                 <div style="position: relative; height: 100%;" id="myBar"></div>
             </div>
--->
-            <div style="position: inherit">
+
+            <div style="position: inherit">                
                 <button style="position:relative; left: 84.45%; width:8.5%; height: auto; transform: translate(0%,-1114%);" class=button onclick="save()"><img id="save" src="images/btn-sav1.png"/></button>
                 <button style="position:relative; left: -1.9%; width:7.5%; transform: translate(0%,-430%);" class=button onclick="shuffle()"><img id="shuffle" src="images/btn-shuffle-off.png"/></button>
                 <button style="position:relative; left: 4.7%; width:10.7%; transform: translate(0%,-506%);" class=button onclick="restart()"><img src="images/btn-prev1.png"/></button>
                 <button style="position:relative; left: 10.53%; width:20%; transform: translate(0%,-227.5%);" class=button onclick="pause()"><img id="play" src="images/btn-pause1.png"/></button>
                 <button style="position:relative; left: 16.6%; width:10.7%; transform: translate(0%,-506%);" class=button onclick="next_song()"><img src="images/btn-next1.png"/></button>
                 <button style="position:relative; left: 23.2%; width:7.7%; transform: translate(0%,-425%);" class=button onclick="repeat()"><img id="repeat" src="images/btn-repeat-off.png"/></button>
+            </div>
+            
+            <div style="position: relative; transform: translate(0%,-1540%);">
+                <font face="verdana" size="2" color="#e3e4e8"><p id="length_in"></p></font>
+            </div>
+            
+            <div style="position: relative; transform: translate(83%,-1710%);">
+                <font face="verdana" size="2" color="#e3e4e8"><p id="length"></p></font>
             </div>
             
             <div id="curr"></div>
@@ -165,13 +176,17 @@
                 img.src="images/btn-saved1.png";
                 return false;
             }
-            
+        </script>
+        
+        <script>
             function shuffle() {
                 var img = document.getElementById("shuffle");
                 img.src="images/btn-shuffle-on.png";
                 return false;
             }
-            
+        </script>
+        
+        <script>
             function repeat() {
                 var img = document.getElementById("repeat");
                 img.src="images/btn-repeat-on.png";
@@ -290,6 +305,9 @@
                 // Time calculations for days, hours, minutes and seconds
                 var minutes = Math.floor(timeleft / 60);
                 var seconds = timeleft - minutes * 60;
+                
+                var minutes_in = Math.floor(progress_ms / 60);
+                var seconds_in = progress_ms - minutes_in * 60;
 
                 // Output the result in an element with id="demo"
                 var zerofill ="";
@@ -299,7 +317,15 @@
                     zerofill = "";
                 }
                 
-                document.getElementById("length").innerHTML = minutes + ":" + zerofill + seconds;
+                var zerofill_in ="";
+                if(seconds_in <10){
+                    zerofill_in = "0";
+                }else{
+                    zerofill_in = "";
+                }
+                
+                document.getElementById("length").innerHTML = "-" + minutes + ":" + zerofill + seconds;
+                document.getElementById("length_in").innerHTML = minutes_in + ":" + zerofill_in + seconds_in;
 
                 // If the count down is over, write some text 
                 if (timeleft < 3 && flag >1) {
