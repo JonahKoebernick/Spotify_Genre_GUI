@@ -45,6 +45,38 @@
             background-color: #e3e4e8;
             border-radius: 25px;
         }
+
+        #container {
+            width: 73%;
+            position: relative;
+/*            background: yellow;*/
+        }
+        
+        #song {
+            display: inline-block;
+            position: relative;
+            white-space: nowrap;
+/*            background: red;*/
+/*            overflow: hidden;*/
+        }
+        
+        #info {
+            display: inline-block;
+            position: relative;
+            white-space: nowrap;
+/*            background: red;*/
+/*            overflow: hidden;*/
+        }
+        
+        #coverUp {
+            position: absolute;
+            height: 28px;
+            width: 50%;
+/*            background: #1F1C1C;*/
+            background-color: blue;
+            z-index:50;
+        }
+        
         
     </style>
     
@@ -56,9 +88,23 @@
             <script id="curr-template" type="text/x-handlebars-template">
                 <h2 style="position: relative; transform: translate(25%,-3560%);"><font face="verdana" size="3.5" color="white"><dd class="text-overflow-player">{{artist}}</dd></font></h2>
 <!--                <img style="position: relative; left:13%; width:74%; transform: translate(0%,-228.2%);" src="{{image_url}}"/>-->
-                <img style="position: relative; left:13%; width:74%; transform: translate(0%,-249.4%);" src="{{image_url}}"/>-->
-                <h2 style="position: relative; transform: translate(-3%,-3020%);"><font face="verdana" size="4.5" color="white"><dd class="text-overflow-player">{{song_name}}</dd></font></h2>
-                <h1 style="position: relative; transform: translate(-3%,-3550%);"><font face="verdana" size="3.5" color="grey"><dd class="text-overflow-player">{{artist}}</dd></font></h1>
+                <img style="position: relative; left:13%; width:74%; transform: translate(0%,-249.4%);" src="{{image_url}}"/>
+
+                <div id="coverUp" style="transform: translate(-86.5%,-2519%);"></div>
+                <div id="container" style="transform: translate(10%,-2590%);">
+                    <h2 style="position: relative;"><font face="verdana" size="4.5" color="white"><div id="song">{{song_name}}</div></font></h2>
+                </div>
+                <div id="coverUp" style="width: 150%; transform: translate(48.5%,-2762%);"></div>
+
+                
+                <div id="coverUp" style="height: 20px; transform: translate(-86.5%,-3700%);"></div>
+                <div id="container" style="transform: translate(10%,-3700%);">
+                    <font face="verdana" size="3.5" color="grey"><div id="info" style="position: relative;">{{artist}}, {{album}}</div></font>
+                </div>
+                <div id="coverUp" style="height: 20px; width: 150%; transform: translate(48.5%,-3800%);"></div>
+
+<!--                <h2 style="position: relative; transform: translate(7%,-3020%);"><font face="verdana" size="4.5" color="white"><div id="song">{{song_name}}</div></font></h2>-->
+<!--                <h1 style="position: relative; transform: translate(-3%,-3550%);"><font face="verdana" size="3.5" color="grey"><dd class="text-overflow-player">{{artist}}, {{album}}</dd></font></h1>-->
             </script>
 
             <div style="transform: translate(10%,-3500%);" id="myProgress">
@@ -66,7 +112,7 @@
             </div>
 
             <div style="position: inherit">                
-                <button style="position:relative; left: 84.45%; width:8.5%; height: auto; transform: translate(0%,-1114%);" class=button onclick="save()"><img id="save" src="images/btn-sav1.png"/></button>
+                <button style="position:absolute; z-index: 100; left: 84.45%; width:8.5%; height: auto; transform: translate(0%,-1120%);" class=button onclick="save()"><img id="save" style="z-index:150;" src="images/btn-sav1.png"/></button>
                 <button style="position:relative; left: -1.9%; width:7.5%; transform: translate(0%,-430%);" class=button onclick="shuffle()"><img id="shuffle" src="images/btn-shuffle-off.png"/></button>
                 <button style="position:relative; left: 4.7%; width:10.7%; transform: translate(0%,-506%);" class=button onclick="restart()"><img src="images/btn-prev1.png"/></button>
                 <button style="position:relative; left: 10.53%; width:20%; transform: translate(0%,-227.5%);" class=button onclick="pause()"><img id="play" src="images/btn-pause1.png"/></button>
@@ -74,7 +120,7 @@
                 <button style="position:relative; left: 23.2%; width:7.7%; transform: translate(0%,-425%);" class=button onclick="repeat()"><img id="repeat" src="images/btn-repeat-off.png"/></button>
             </div>
             
-            <div style="position: relative; transform: translate(0%,-1540%);">
+            <div style="position: relative; transform: translate(7%,-1540%);">
                 <font face="verdana" size="2" color="#e3e4e8"><p id="length_in"></p></font>
             </div>
             
@@ -87,11 +133,72 @@
         </div>
         
         
+<!--        <p><button onclick="infoScroll()">Song Scroll</button></p> -->
         
-        
+
         <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     
+        <script>
+            function songScroll() {
+//                alert("Running");
+                if (document.getElementById("song").clientWidth > document.getElementById("container").clientWidth) {
+                    var elem = document.getElementById("song");   
+                    var pos = 0;
+                    var dir = 0;
+                    var id = setInterval(function(){
+                        if (dir == 0 && pos > (document.getElementById("container").clientWidth - elem.clientWidth)-5) {
+                            pos--;
+                            song.style.left = pos + "px"; 
+                        } else if (pos == (document.getElementById("container").clientWidth - elem.clientWidth)-5) {
+                            dir = 1;
+                            pos++;
+                            song.style.left = pos + "px"; 
+                        } else if (dir == 1 && (document.getElementById("container").clientWidth - elem.clientWidth)-5 < pos && pos < 5) {
+                            pos++;
+                            song.style.left = pos + "px"; 
+                        } else if (pos == 5) {
+                            dir = 0;
+                            pos--;
+                            song.style.left = pos + "px"; 
+                        } else if (pos == 10) {
+                            clearInterval(id);
+                        }
+                    }, 40);
+                }   
+            }
+        </script>
+        
+        <script>
+            function infoScroll() {
+//                alert("Running");
+                if (document.getElementById("info").clientWidth > document.getElementById("container").clientWidth) {
+                    var elem = document.getElementById("info");   
+                    var pos = 0;
+                    var dir = 0;
+                    var id = setInterval(function(){
+                        if (dir == 0 && pos > (document.getElementById("container").clientWidth - elem.clientWidth)-5) {
+                            pos--;
+                            info.style.left = pos + "px"; 
+                        } else if (pos == (document.getElementById("container").clientWidth - elem.clientWidth)-5) {
+                            dir = 1;
+                            pos++;
+                            info.style.left = pos + "px"; 
+                        } else if (dir == 1 && (document.getElementById("container").clientWidth - elem.clientWidth)-5 < pos && pos < 5) {
+                            pos++;
+                            info.style.left = pos + "px"; 
+                        } else if (pos == 5) {
+                            dir = 0;
+                            pos--;
+                            info.style.left = pos + "px"; 
+                        } else if (pos == 10) {
+                            clearInterval(id);
+                        }
+                    }, 40);
+                }   
+            }
+        </script>
+        
         <script>
             function pause() {
                 $.ajax({
@@ -269,7 +376,8 @@
                         var name = data.name;
                         var artist = data.artist;
                         var album = data.album;
-                        
+                        var info = artist + " • " + album;
+//                        alert(info);
                         duration_ms = data.duration_ms;
                         duration_ms = Math.floor(duration_ms/1000);
                         
@@ -435,6 +543,7 @@
                 }
             })();
         </script>
-    
+        <div><script>setTimeout(songScroll, 2500);</script></div>
+        <div><script>setTimeout(infoScroll, 2500);</script></div>
     </body>
 </html>

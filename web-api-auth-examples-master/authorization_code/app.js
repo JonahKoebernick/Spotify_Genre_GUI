@@ -18,6 +18,8 @@ var client_secret = '2e8918fcc2e74c9ab3e6b875597cccb0'; // Your secret
 var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
 var access_token2 = "BQDcJkb01zJJCibG48YL-1n9mxppy3O7fipeVfXFtjC3Wd-hN3vvRZvqreWSZ7VdegcA19B7MAy1s7UsPLAj0Nbe4qdtVbGGkGqdl9pN3iRxnbRzsh9ZOFHAVA2nW_qICRVBdvMtCaPbUKFk5HaXmav0T8J6FPNafr_RQMqH1qp_1HY";
 
+var shuff = 0;
+
 /**
  * Generates a random string containing numbers and letters
  * @param  {number} length The length of the string
@@ -83,6 +85,7 @@ app.get('/track_length', function(req, res) {
           var name = body.item.name;
           var artist = body.item.album.artists[0].name;
           var album = body.item.album.name;
+          var info = artist + " • " + album;
           console.log('Progress : ' + time);
           
           console.log(body.item.duration_ms);
@@ -368,6 +371,7 @@ app.get('/refresh_token', function(req, res) {
     }
   });
 });
+
 
 console.log('Listening on 8888');
 app.listen(8888);
