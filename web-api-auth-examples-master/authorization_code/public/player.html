@@ -72,8 +72,8 @@
             position: absolute;
             height: 28px;
             width: 50%;
-/*            background: #1F1C1C;*/
-            background-color: blue;
+            background: #1F1C1C;
+/*            background-color: blue;*/
             z-index:50;
         }
         
@@ -83,12 +83,12 @@
     <body style="background-color:#1F1C1C;">
         <div class="player">
             
-            <img src="images/player_template.png"/>
+            <img src="images/player-temp-bg.png"/>
             
             <script id="curr-template" type="text/x-handlebars-template">
-                <h2 style="position: relative; transform: translate(25%,-3560%);"><font face="verdana" size="3.5" color="white"><dd class="text-overflow-player">{{artist}}</dd></font></h2>
+                <h2 style="position: relative; transform: translate(0%,-3900%);"><font face="verdana" size="3.5" color="white"><dd class="text-overflow-player">{{artist}}</dd></font></h2>
 <!--                <img style="position: relative; left:13%; width:74%; transform: translate(0%,-228.2%);" src="{{image_url}}"/>-->
-                <img style="position: relative; left:13%; width:74%; transform: translate(0%,-249.4%);" src="{{image_url}}"/>
+                <img style="position: relative; left:13%; width:74%; transform: translate(0%,-275%);" src="{{image_url}}"/>
 
                 <div id="coverUp" style="transform: translate(-86.5%,-2519%);"></div>
                 <div id="container" style="transform: translate(10%,-2590%);">
@@ -114,10 +114,11 @@
             <div style="position: inherit">                
                 <button style="position:absolute; z-index: 100; left: 84.45%; width:8.5%; height: auto; transform: translate(0%,-1120%);" class=button onclick="save()"><img id="save" style="z-index:150;" src="images/btn-sav1.png"/></button>
                 <button style="position:relative; left: -1.9%; width:7.5%; transform: translate(0%,-430%);" class=button onclick="shuffle()"><img id="shuffle" src="images/btn-shuffle-off.png"/></button>
-                <button style="position:relative; left: 4.7%; width:10.7%; transform: translate(0%,-506%);" class=button onclick="restart()"><img src="images/btn-prev1.png"/></button>
+                <button style="position:relative; left: 4.7%; width:10.7%; transform: translate(0%,-506%);" class=button onclick="prev_btn()"><img src="images/btn-prev1.png"/></button>
                 <button style="position:relative; left: 10.53%; width:20%; transform: translate(0%,-227.5%);" class=button onclick="pause()"><img id="play" src="images/btn-pause1.png"/></button>
-                <button style="position:relative; left: 16.6%; width:10.7%; transform: translate(0%,-506%);" class=button onclick="next_song()"><img src="images/btn-next1.png"/></button>
+                <button style="position:relative; left: 16.6%; width:10.7%; transform: translate(0%,-506%);" class=button onclick="skip()"><img src="images/btn-next1.png"/></button>
                 <button style="position:relative; left: 23.2%; width:7.7%; transform: translate(0%,-425%);" class=button onclick="repeat()"><img id="repeat" src="images/btn-repeat-off.png"/></button>
+                <font face="verdana" size="2" color="#55ba55"><div id="device_inner" style="position: relative; transform: translate(14%,-860%);">device</div></font>
             </div>
             
             <div style="position: relative; transform: translate(7%,-1540%);">
@@ -128,17 +129,82 @@
                 <font face="verdana" size="2" color="#e3e4e8"><p id="length"></p></font>
             </div>
             
+            
+            
+            
+            
+            
             <div id="curr"></div>
             
         </div>
         
         
-<!--        <p><button onclick="infoScroll()">Song Scroll</button></p> -->
+        <p>
+            <button onclick="history();">History</button>
+        </p> 
         
 
         <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     
+        <script>
+            function get_at() {
+                $.ajax({
+                url: '/access_token',
+
+                }).done(function(data) {
+                    var at = data.access_token;
+                    
+                    alert("Access Token: " + at);
+                });
+            }
+        </script>
+        
+        <script>
+            function dev_info() {
+                $.ajax({
+                url: '/devices',
+
+                }).done(function(data) {
+                    var num = data.num;
+                    var curr = data.current;
+                    var dev_name = curr.name;
+                    var type = curr.type;
+                    var vol = curr.volume_percent;
+                    var dev_list = data.all
+                    device_inner.innerHTML = dev_name;
+                    
+//                    alert("Name: " + dev_name + "\nType: " + type + "\nVolume: " + vol);
+//                    alert("id: " + curr.id +
+//                          "\nis_active: " + curr.is_active +
+//                          "\nis_private_session: " + curr.is_private_session +
+//                          "\nis_restricted: " + curr.is_restricted);
+                  });
+            }
+        </script>
+        
+        <script>
+            function history() {
+                $.ajax({
+                url: '/recent',
+
+                }).done(function(data) {
+                    var recent_tracks = data.ten_recent;
+                    alert("Recently Played:\n" + 
+                                   recent_tracks[0].artists[0].name + " -- " + recent_tracks[0].name
+                          + "\n" + recent_tracks[1].artists[0].name + " -- " + recent_tracks[1].name
+                          + "\n" + recent_tracks[2].artists[0].name + " -- " + recent_tracks[2].name
+                          + "\n" + recent_tracks[3].artists[0].name + " -- " + recent_tracks[3].name
+                          + "\n" + recent_tracks[4].artists[0].name + " -- " + recent_tracks[4].name
+                          + "\n" + recent_tracks[5].artists[0].name + " -- " + recent_tracks[5].name
+                          + "\n" + recent_tracks[6].artists[0].name + " -- " + recent_tracks[6].name
+                          + "\n" + recent_tracks[7].artists[0].name + " -- " + recent_tracks[7].name
+                          + "\n" + recent_tracks[8].artists[0].name + " -- " + recent_tracks[8].name
+                          + "\n" + recent_tracks[9].artists[0].name + " -- " + recent_tracks[9].name);
+                });
+            }
+        </script> 
+        
         <script>
             function songScroll() {
 //                alert("Running");
@@ -235,31 +301,66 @@
                     }
                   });
             }
-
         </script>
 
         <script>
-            function restart() {
+            function prev_btn() {
                 $.ajax({
+                    url: '/time',
 
                 }).done(function(data) {
-                    var access_token = data.access_token;
-                    var is_playing = data.is_playing;
+                    var time = data.progress_ms;
+//                    alert(time);
+                    if (time > 10000) {
+                        restart();
+                    } else {
+                        prev();
+                    }
+                    
+                });
+            }
+        </script>
+        
+        <script>
+            function prev() {
+                $.ajax({
+                    url: '/access_token',
 
+                }).done(function(data) {
+                    var at = data.access_token;
+                    
                     $.ajax({
-                        url: 'https://api.spotify.com/v1/me/player/seek',
-                        type: 'PUT',
+                        url: 'https://api.spotify.com/v1/me/player/previous',
+                        type: 'POST',
                         headers: {
-                          'Authorization': 'Bearer ' + access_token
-                        },
-                        data: {
-                          'position_ms': 0
-                        }
+                            'Authorization': 'Bearer ' + at },
+                        dataType: "json",
 
                     });
-                  });
+                });
+                
             }
         </script>        
+        
+        <script>
+            function restart() {
+                $.ajax({
+                    url: '/access_token',
+
+                }).done(function(data) {
+                    var at = data.access_token;
+                    
+                    $.ajax({
+                        url: 'https://api.spotify.com/v1/me/player/seek?position_ms=0',
+                        type: 'PUT',
+                        headers: {
+                            'Authorization': 'Bearer ' + at,
+                        },
+                        dataType: "json",
+                    });
+                });
+            }
+        </script>
         
         <script>
             function pausebutton() {
@@ -273,8 +374,7 @@
                     img.src="images/btn-play1.png";
                     return false;
                 }
-            }
-            
+            }    
         </script>
         
         <script>
@@ -348,7 +448,27 @@
                     });
                 });
             }
-        </script>         
+        </script>   
+        
+        <script>
+            function skip() {
+                $.ajax({
+                    url: '/access_token',
+
+                }).done(function(data) {
+                    var at = data.access_token;
+                    
+                    $.ajax({
+                        url: 'https://api.spotify.com/v1/me/player/next',
+                        type: 'POST',
+                        headers: {
+                            'Authorization': 'Bearer ' + at },
+                        dataType: "json",
+
+                    });
+                });   
+            }
+        </script> 
                 
         <script>
             var timeleft = 1000;
@@ -543,7 +663,9 @@
                 }
             })();
         </script>
+        
         <div><script>setTimeout(songScroll, 2500);</script></div>
         <div><script>setTimeout(infoScroll, 2500);</script></div>
+        <div><script>setTimeout(dev_info, 0);</script></div>
     </body>
 </html>

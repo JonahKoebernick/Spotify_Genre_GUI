@@ -16,7 +16,7 @@ var cookieParser = require('cookie-parser');
 var client_id = 'd695391f77b04e53bd13d418be938a7d'; // Your client id
 var client_secret = '2e8918fcc2e74c9ab3e6b875597cccb0'; // Your secret
 var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
-var access_token2 = "BQDcJkb01zJJCibG48YL-1n9mxppy3O7fipeVfXFtjC3Wd-hN3vvRZvqreWSZ7VdegcA19B7MAy1s7UsPLAj0Nbe4qdtVbGGkGqdl9pN3iRxnbRzsh9ZOFHAVA2nW_qICRVBdvMtCaPbUKFk5HaXmav0T8J6FPNafr_RQMqH1qp_1HY";
+var access_token2 = "BQApRK0reKS091K4BFxqpS8IzTb003yYgJiNwBwdenjyaCCf0V3g3cC8AkgZ4pExcMkK-GfwKdd9r9pvYxYeiYKe1SuPvPly3fLdYi3_QRxnsM3FXFZ2P97uMF3xQrTWGk4g3tpyeUAwxvP-AS5kAHBbJ84byls020NA32GfcBS-j52Vhw";
 
 var shuff = 0;
 
@@ -49,7 +49,7 @@ app.get('/login', function(req, res) {
   res.cookie(stateKey, state);
 
   // your application requests authorization
-  var scope = 'user-read-private user-read-email user-modify-playback-state user-read-currently-playing user-read-playback-state';
+  var scope = 'user-read-private user-read-email user-modify-playback-state user-read-currently-playing user-read-playback-state user-read-recently-played';
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
@@ -59,10 +59,6 @@ app.get('/login', function(req, res) {
       state: state
     }));
 });
-
-
-
-
 
 app.get('/track_length', function(req, res) {
 
@@ -107,16 +103,78 @@ app.get('/track_length', function(req, res) {
 
    
 });
+
+app.get('/devices', function(req, res) {
+    console.log("Checking Devices");
+    console.log(access_token2);
+
+    var options = {
+        url: 'https://api.spotify.com/v1/me/player/devices',
+        headers: { 'Authorization': 'Bearer ' + access_token2 },
+        json: true
+    };
+
+    request.get(options, function(error, response, body) {
+        if(!error && response.statusCode == 200 ){
+            var devs = body.devices;
+            var num = body.devices.length;
+            console.log("NUMBER OF DEVICES: " + num);
+            
+            
+            for (i = 0; i < num; i++) {
+                if (devs[i].is_active == true) {
+                    var current = devs[i];
+                    
+                    console.log(current);
+                } 
+            }
+            
+            res.send({
+                'num' : num,
+                'current' : current,
+                'all' : devs
+            });
+        }
+    });
+});
+
+app.get('/recent', function(req, res) {
+    console.log("Getting History");
+//    console.log(access_token2);
+
+    var options = {
+        url: 'https://api.spotify.com/v1/me/player/recently-played',
+        headers: { 'Authorization': 'Bearer ' + access_token2 },
+        json: true
+    };
+
+    request.get(options, function(error, response, body) {
+        if(!error && response.statusCode == 200 ) {
+            console.log("Worked");
+            var tracks = body.items;
+            
+            var recent_tracks = [tracks[0].track, tracks[1].track, tracks[2].track, tracks[3].track, tracks[4].track, tracks[5].track, tracks[6].track, tracks[7].track, tracks[8].track, tracks[9].track];
+            
+//            for (i = 0; i < 10; i++) {
+//                console.log(i + recent_tracks[i].name);
+//            }
+            
+            res.send({
+                'ten_recent' : recent_tracks,
+            });
+        } else {
+            console.log("ERROR: " + response.statusCode);
+        }
+    });
+});
+
 app.get('/access_token', function(req, res) {
   res.send({
   'access_token' : access_token2
   
   });
   console.log("SENNNNNNTTTTTTTTTTTTTTTT");
-  
-  
 });
-
 
 app.get('/is_playing', function(req, res) {
   
@@ -138,11 +196,7 @@ var options = {
         });
         }
       });
-
-   
 });
-
-
 
 app.get('/next_song', function(req, res) {
   console.log("NEXT SONG");
@@ -237,6 +291,29 @@ app.get('/next_song', function(req, res) {
   
 });
 
+app.get('/time', function(req, res) {
+        console.log("TIME!");
+
+      var options = {
+        url: 'https://api.spotify.com/v1/me/player/currently-playing',
+        headers: { 'Authorization': 'Bearer ' + access_token2 },
+        json: true
+      };
+    
+      request.get(options, function(error, response, body) {
+          if(!error && response.statusCode == 200){
+                var time = body.progress_ms;
+                console.log('Progress : ' + time);
+
+                res.send({ 
+                    'progress_ms': time
+                });
+          }
+      });
+
+   
+});
+
 app.get('/progress_ms', function(req, res) {
 
 
@@ -267,18 +344,6 @@ app.get('/progress_ms', function(req, res) {
 
    
 });
-
-
-//app.put('/pause', function(req, res) {
-//    var options = {
-//        url: 'https://api.spotify.com/v1/me/player/pause',
-//        headers: { 'Authorization': 'Bearer ' + access_token2},
-//        json: true
-//    }
-//    request.put(options);
-//});
-
-
 
 app.get('/callback', function(req, res) {
 
