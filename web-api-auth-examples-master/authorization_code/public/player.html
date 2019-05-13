@@ -95,7 +95,6 @@
             z-index:50;
         }
         
-        
     </style>
     
     <body style="background-color:#1F1C1C;">
@@ -106,7 +105,7 @@
             <script id="curr-template" type="text/x-handlebars-template">
                 <h2 style="position: relative; transform: translate(0%,-3900%);"><font face="verdana" size="3.5" color="white"><dd class="text-overflow-player">{{artist}}</dd></font></h2>
 <!--                <img style="position: relative; left:13%; width:74%; transform: translate(0%,-228.2%);" src="{{image_url}}"/>-->
-                <img style="position: relative; left:13%; width:74%; transform: translate(0%,-275%);" src="{{image_url}}"/>
+                <img style="position: relative; left:13%; width:74%; transform: translate(0%,-280%);" src="{{image_url}}"/>
 
 
                 <div id="coverUp2" style="width: 12%; transform: translate(-98%,-2519%);"></div>
@@ -135,13 +134,14 @@
 
             <div style="position: inherit">
                 <button style="position:absolute; z-index: 100; left: 84.45%; width:10%; height: auto; transform: translate(-7%,-2250%);" class=button onclick="history()"><img id="history" src="images/btn-history-off.png"/></button>
-                <button style="position:absolute; z-index: 100; left: 84.45%; width:8.5%; height: auto; transform: translate(0%,-1120%);" class=button onclick="save()"><img id="save" style="z-index:150;" src="images/btn-sav1.png"/></button>
+                <button style="position:absolute; z-index: 100; left: 84.45%; width:8.5%; height: auto; transform: translate(0%,-1120%);" class=button onclick="heart()"><img id="save" style="z-index:150;" src="images/btn-sav1.png"/></button>
                 <button style="position:relative; left: -1.9%; width:7.5%; transform: translate(0%,-430%);" class=button onclick="shuffle()"><img id="shuffle" src="images/btn-shuffle-off.png"/></button>
                 <button style="position:relative; left: 4.7%; width:10.7%; transform: translate(0%,-506%);" class=button onclick="prev_btn()"><img src="images/btn-prev1.png"/></button>
                 <button style="position:relative; left: 10.53%; width:20%; transform: translate(0%,-227.5%);" class=button onclick="pause()"><img id="play" src="images/btn-pause1.png"/></button>
                 <button style="position:relative; left: 16.6%; width:10.7%; transform: translate(0%,-506%);" class=button onclick="skip()"><img src="images/btn-next1.png"/></button>
                 <button style="position:relative; left: 23.2%; width:7.7%; transform: translate(0%,-425%);" class=button onclick="repeat()"><img id="repeat" src="images/btn-repeat-off.png"/></button>
                 <font face="verdana" size="2" color="#55ba55"><div id="device_inner" style="position: relative; transform: translate(14%,-860%);">device</div></font>
+                
             </div>
             
             <div style="position: relative; transform: translate(7%,-1540%);">
@@ -152,25 +152,100 @@
                 <font face="verdana" size="2" color="#e3e4e8"><p id="length"></p></font>
             </div>
             
-            
-            
-            
-            
-            
             <div id="curr"></div>
+            
+            <div  id="table" style="width: 150%; font-family: verdana;display: table; position: relative; float: left; transform: translate(70%,-350%); background-color: #0e0b08; visibility: hidden">
+                <table style="color: grey;">
+                    <tr>
+                        <td id="a0">artist0</td>
+                        <td id="t0">track0</td>
+                        <td><button style="border-radius: 4px; background: grey; color: white" onclick="save(0)">Save</button></td>
+                    </tr>
+                    <tr>
+                        <td id="a1">artist1</td>
+                        <td id="t1">track1</td>
+                        <td><button style="border-radius: 4px; background: grey; color: white" onclick="save(1)">Save</button></td>
+                    </tr>
+                    <tr>
+                        <td id="a2">artist2</td>
+                        <td id="t2">track2</td>
+                        <td><button style="border-radius: 4px; background: grey; color: white"onclick="save(2)">Save</button></td>
+                    </tr>
+                    <tr>
+                        <td id="a3">artist3</td>
+                        <td id="t3">track3</td>
+                        <td><button style="border-radius: 4px; background: grey; color: white"onclick="save(3)">Save</button></td>
+                    </tr>
+                    <tr>
+                        <td id="a4">artist4</td>
+                        <td id="t4">track4</td>
+                        <td><button style="border-radius: 4px; background: grey; color: white"onclick="save(4)">Save</button></td>
+                    </tr>
+                    <tr>
+                        <td id="a5">artist5</td>
+                        <td id="t5">track5</td>
+                        <td><button style="border-radius: 4px; background: grey; color: white"onclick="save(5)">Save</button></td>
+                    </tr>
+                    <tr>
+                        <td id="a6">artist6</td>
+                        <td id="t6">track6</td>
+                        <td><button style="border-radius: 4px; background: grey; color: white"onclick="save(6)">Save</button></td>
+                    </tr>
+                    <tr>
+                        <td id="a7">artist7</td>
+                        <td id="t7">track7</td>
+                        <td><button style="border-radius: 4px; background: grey; color: white"onclick="save(7)">Save</button></td>
+                    </tr>
+                    <tr>
+                        <td id="a8">artist8</td>
+                        <td id="t8">track8</td>
+                        <td><button style="border-radius: 4px; background: grey; color: white"onclick="save(8)">Save</button></td>
+                    </tr>
+                    <tr>
+                        <td id="a9">artist9</td>
+                        <td id="t9">track9</td>
+                        <td><button style="border-radius: 4px; background: grey; color: white"onclick="save(9)">Save</button></td>
+                    </tr>
+                </table>
+            </div>      
             
         </div>
         
-        
+
         <p>
             <button onclick="test();">Test</button>
             <button onclick="history();">History</button>
         </p> 
         
+       
+        
 
         <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     
+        
+        <script>
+            function save(num) {
+                $.ajax({
+                url: '/check_playlist',
+
+                }).done(function(data) {
+                    var has_gui = data.has_gui;
+                    alert(has_gui);
+                    
+                    if (has_gui) {
+                        var playlist_id = data.playlist_id;
+                        
+                        
+                        
+                    } else {
+                        alert("Please Create Playlist \"GUI\"");
+                    }
+                });
+                
+            }
+        </script>
+        
         <script>
             function shuffle() {
                 $.ajax({
@@ -231,7 +306,7 @@
         
         <script>
             function history() {
-                var img = document.getElementById("history");
+                /*var img = document.getElementById("history");
                 img.src="images/btn-history-on.png";
                 
                 $.ajax({
@@ -250,9 +325,59 @@
                           + "\n" + recent_tracks[7].artists[0].name + " -- " + recent_tracks[7].name
                           + "\n" + recent_tracks[8].artists[0].name + " -- " + recent_tracks[8].name
                           + "\n" + recent_tracks[9].artists[0].name + " -- " + recent_tracks[9].name);
-                    
+
                     var img = document.getElementById("history");
                     img.src="images/btn-history-off.png";
+                });*/
+                
+                var table = document.getElementById("table");
+                
+                if (table.style.visibility == "hidden") {
+                    var img = document.getElementById("history");
+                    img.src="images/btn-history-on.png";
+                    table.style.visibility = "visible";
+                } else {
+                    table.style.visibility = "hidden";
+                    var img = document.getElementById("history");
+                    img.src="images/btn-history-off.png";
+                }
+            }
+        </script> 
+        
+        <script>
+            function history_update() {
+//                var img = document.getElementById("history");
+//                img.src="images/btn-history-on.png";
+                
+                $.ajax({
+                url: '/recent',
+
+                }).done(function(data) {
+                    var recent_tracks = data.ten_recent;
+//                    alert("Recently Played:\n" + 
+//                                   recent_tracks[0].artists[0].name + " -- " + recent_tracks[0].name
+//                          + "\n" + recent_tracks[1].artists[0].name + " -- " + recent_tracks[1].name
+//                          + "\n" + recent_tracks[2].artists[0].name + " -- " + recent_tracks[2].name
+//                          + "\n" + recent_tracks[3].artists[0].name + " -- " + recent_tracks[3].name
+//                          + "\n" + recent_tracks[4].artists[0].name + " -- " + recent_tracks[4].name
+//                          + "\n" + recent_tracks[5].artists[0].name + " -- " + recent_tracks[5].name
+//                          + "\n" + recent_tracks[6].artists[0].name + " -- " + recent_tracks[6].name
+//                          + "\n" + recent_tracks[7].artists[0].name + " -- " + recent_tracks[7].name
+//                          + "\n" + recent_tracks[8].artists[0].name + " -- " + recent_tracks[8].name
+//                          + "\n" + recent_tracks[9].artists[0].name + " -- " + recent_tracks[9].name);
+                    
+                    for (i = 0; i < 10; i++) {
+                        var id = "a" + i;
+                        var a0 = document.getElementById(id);
+                        a0.innerHTML = recent_tracks[i].artists[0].name;
+                        
+                        id = "t" + i;
+                        var t0 = document.getElementById(id);
+                        t0.innerHTML = recent_tracks[i].name;
+                    }
+                    
+//                    var img = document.getElementById("history");
+//                    img.src="images/btn-history-off.png";
                 });
                 
                 
@@ -432,7 +557,7 @@
         </script>
         
         <script>
-            function save() {
+            function heart() {
                 var img = document.getElementById("save");
                 img.src="images/btn-saved1.png";
                 return false;
@@ -727,6 +852,8 @@
         
         <div><script>setTimeout(songScroll, 2500);</script></div>
         <div><script>setTimeout(infoScroll, 2500);</script></div>
-        <div><script>setTimeout(dev_info, 0);</script></div>
+        <div><script>dev_info();</script></div>
+        <div><script>history_update();</script></div>
+        
     </body>
 </html>

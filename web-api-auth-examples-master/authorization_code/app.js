@@ -50,7 +50,7 @@ app.get('/login', function(req, res) {
   res.cookie(stateKey, state);
 
   // your application requests authorization
-  var scope = 'user-read-private user-read-email user-modify-playback-state user-read-currently-playing user-read-playback-state user-read-recently-played';
+  var scope = 'user-read-private user-read-email user-modify-playback-state user-read-currently-playing user-read-playback-state user-read-recently-played playlist-read-private';
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
@@ -135,6 +135,49 @@ app.get('/devices', function(req, res) {
                 'current' : current,
                 'all' : devs
             });
+        }
+    });
+});
+
+app.get('/check_playlist', function(req, res) {
+    console.log("Checking Devices");
+    console.log(access_token2);
+
+    var options = {
+        url: 'https://api.spotify.com/v1/me/playlists',
+        headers: { 'Authorization': 'Bearer ' + access_token2 },
+        json: true
+    };
+
+    request.get(options, function(error, response, body) {
+        var has_gui = false;
+        var playlist_id;
+        
+        if(!error && response.statusCode == 200 ){
+            
+            console.log("SUCCESS")
+            
+            for (i = 0; i < body.items.length; i++) {
+//                 console.log(body.items[i].name);
+                if (body.items[i].name == "GUI") {
+                    has_gui = true;
+                    console.log(body.items[i]);
+                    id = body.items[i].id;
+                }
+            }
+            console.log(has_gui + " id: " + id);
+            
+            if (has_gui) {
+                res.send({
+                'has_gui' : has_gui,
+                'playlist_id' : playlist_id,
+                });
+            } else {
+                res.send({
+                'has_gui' : has_gui,
+                });
+            }
+            
         }
     });
 });
