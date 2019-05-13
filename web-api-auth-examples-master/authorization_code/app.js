@@ -19,6 +19,7 @@ var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
 var access_token2 = "BQApRK0reKS091K4BFxqpS8IzTb003yYgJiNwBwdenjyaCCf0V3g3cC8AkgZ4pExcMkK-GfwKdd9r9pvYxYeiYKe1SuPvPly3fLdYi3_QRxnsM3FXFZ2P97uMF3xQrTWGk4g3tpyeUAwxvP-AS5kAHBbJ84byls020NA32GfcBS-j52Vhw";
 
 var shuff = 0;
+var rep = 0;
 
 /**
  * Generates a random string containing numbers and letters
@@ -437,6 +438,23 @@ app.get('/refresh_token', function(req, res) {
   });
 });
 
+app.get('/shuff', function(req, res) {
+    shuff++;
+    shuff = shuff % 3;
+    
+    res.send({
+          'test' : shuff,
+    });
+});
+
+app.get('/repeat', function(req, res) {
+    rep++;
+    rep = rep % 2;
+    
+    res.send({
+          'test' : rep,
+    });
+});
 
 console.log('Listening on 8888');
 app.listen(8888);

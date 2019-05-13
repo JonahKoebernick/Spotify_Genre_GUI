@@ -72,8 +72,26 @@
             position: absolute;
             height: 28px;
             width: 50%;
-            background: #1F1C1C;
+            background: #332e23;
 /*            background-color: blue;*/
+            z-index:50;
+        }
+        
+        #coverUp3 {
+            position: absolute;
+            height: 28px;
+            width: 50%;
+            background: #1d1b16;
+/*            background-color: blue;*/
+            z-index:50;
+        }
+        
+        #coverUp2 {
+            position: absolute;
+            height: 28px;
+            width: 50%;
+            background: #1F1C1C;
+/*            background-color: red;*/
             z-index:50;
         }
         
@@ -83,25 +101,29 @@
     <body style="background-color:#1F1C1C;">
         <div class="player">
             
-            <img src="images/player-temp-bg.png"/>
+            <img src="images/player_template.png"/>
             
             <script id="curr-template" type="text/x-handlebars-template">
                 <h2 style="position: relative; transform: translate(0%,-3900%);"><font face="verdana" size="3.5" color="white"><dd class="text-overflow-player">{{artist}}</dd></font></h2>
 <!--                <img style="position: relative; left:13%; width:74%; transform: translate(0%,-228.2%);" src="{{image_url}}"/>-->
                 <img style="position: relative; left:13%; width:74%; transform: translate(0%,-275%);" src="{{image_url}}"/>
 
-                <div id="coverUp" style="transform: translate(-86.5%,-2519%);"></div>
+
+                <div id="coverUp2" style="width: 12%; transform: translate(-98%,-2519%);"></div>
+                <div id="coverUp" style="width: 6.7%; transform: translate(0%,-2519%);"></div>
                 <div id="container" style="transform: translate(10%,-2590%);">
                     <h2 style="position: relative;"><font face="verdana" size="4.5" color="white"><div id="song">{{song_name}}</div></font></h2>
                 </div>
-                <div id="coverUp" style="width: 150%; transform: translate(48.5%,-2762%);"></div>
-
+                <div id="coverUp3" style="width: 18.2%; transform: translate(400%,-2762%);"></div>
+                <div id="coverUp2" style="width: 100%; transform: translate(90.9%,-2762%);"></div>
                 
-                <div id="coverUp" style="height: 20px; transform: translate(-86.5%,-3700%);"></div>
+                <div id="coverUp2" style="height: 20px; width: 12%; transform: translate(-98%,-3700%);"></div>
+                <div id="coverUp" style="height: 20px; width: 6.7%; transform: translate(0%,-3700%);"></div>
                 <div id="container" style="transform: translate(10%,-3700%);">
                     <font face="verdana" size="3.5" color="grey"><div id="info" style="position: relative;">{{artist}}, {{album}}</div></font>
                 </div>
-                <div id="coverUp" style="height: 20px; width: 150%; transform: translate(48.5%,-3800%);"></div>
+                <div id="coverUp3" style="height: 20px; width: 18.2%; transform: translate(400%,-3800%);"></div>
+                <div id="coverUp2" style="height: 20px; width: 100%; transform: translate(90.9%,-3800%);"></div>
 
 <!--                <h2 style="position: relative; transform: translate(7%,-3020%);"><font face="verdana" size="4.5" color="white"><div id="song">{{song_name}}</div></font></h2>-->
 <!--                <h1 style="position: relative; transform: translate(-3%,-3550%);"><font face="verdana" size="3.5" color="grey"><dd class="text-overflow-player">{{artist}}, {{album}}</dd></font></h1>-->
@@ -111,7 +133,8 @@
                 <div style="position: relative; height: 100%;" id="myBar"></div>
             </div>
 
-            <div style="position: inherit">                
+            <div style="position: inherit">
+                <button style="position:absolute; z-index: 100; left: 84.45%; width:10%; height: auto; transform: translate(-7%,-2250%);" class=button onclick="history()"><img id="history" src="images/btn-history-off.png"/></button>
                 <button style="position:absolute; z-index: 100; left: 84.45%; width:8.5%; height: auto; transform: translate(0%,-1120%);" class=button onclick="save()"><img id="save" style="z-index:150;" src="images/btn-sav1.png"/></button>
                 <button style="position:relative; left: -1.9%; width:7.5%; transform: translate(0%,-430%);" class=button onclick="shuffle()"><img id="shuffle" src="images/btn-shuffle-off.png"/></button>
                 <button style="position:relative; left: 4.7%; width:10.7%; transform: translate(0%,-506%);" class=button onclick="prev_btn()"><img src="images/btn-prev1.png"/></button>
@@ -140,6 +163,7 @@
         
         
         <p>
+            <button onclick="test();">Test</button>
             <button onclick="history();">History</button>
         </p> 
         
@@ -147,6 +171,28 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     
+        <script>
+            function shuffle() {
+                $.ajax({
+                    url: '/shuff',
+
+                }).done(function(data) {
+                    var shuff = data.test;
+                    
+                    if (shuff == 0) {
+                        var img = document.getElementById("shuffle");
+                        img.src="images/btn-shuffle-off.png";
+                    } else if (shuff == 1) {
+                        var img = document.getElementById("shuffle");
+                        img.src="images/btn-shuffle-on.png";
+                    } else if (shuff == 2) {
+                        var img = document.getElementById("shuffle");
+                        img.src="images/btn-percent.png";
+                    }
+                });
+            }
+        </script>
+        
         <script>
             function get_at() {
                 $.ajax({
@@ -185,6 +231,9 @@
         
         <script>
             function history() {
+                var img = document.getElementById("history");
+                img.src="images/btn-history-on.png";
+                
                 $.ajax({
                 url: '/recent',
 
@@ -201,7 +250,12 @@
                           + "\n" + recent_tracks[7].artists[0].name + " -- " + recent_tracks[7].name
                           + "\n" + recent_tracks[8].artists[0].name + " -- " + recent_tracks[8].name
                           + "\n" + recent_tracks[9].artists[0].name + " -- " + recent_tracks[9].name);
+                    
+                    var img = document.getElementById("history");
+                    img.src="images/btn-history-off.png";
                 });
+                
+                
             }
         </script> 
         
@@ -386,15 +440,22 @@
         </script>
         
         <script>
-            function shuffle() {
-                var img = document.getElementById("shuffle");
-                img.src="images/btn-shuffle-on.png";
-                return false;
-            }
-        </script>
-        
-        <script>
             function repeat() {
+                $.ajax({
+                    url: '/repeat',
+
+                }).done(function(data) {
+                    var rep = data.test;
+                    
+                    if (rep == 0) {
+                        var img = document.getElementById("repeat");
+                        img.src="images/btn-repeat-off.png";
+                    } else if (rep == 1) {
+                        var img = document.getElementById("repeat");
+                        img.src="images/btn-repeat-on.png";
+                    }
+                });
+                
                 var img = document.getElementById("repeat");
                 img.src="images/btn-repeat-on.png";
                 return false;
