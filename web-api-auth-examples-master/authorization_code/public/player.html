@@ -72,7 +72,8 @@
             position: absolute;
             height: 28px;
             width: 50%;
-            background: #332e23;
+            background: #0e0b08;
+/*            background: #332e23;*/
 /*            background-color: blue;*/
             z-index:50;
         }
@@ -81,7 +82,8 @@
             position: absolute;
             height: 28px;
             width: 50%;
-            background: #1d1b16;
+            background: #0e0b08;
+/*            background: #1d1b16;*/
 /*            background-color: blue;*/
             z-index:50;
         }
@@ -90,6 +92,7 @@
             position: absolute;
             height: 28px;
             width: 50%;
+/*            background: #0e0b08;*/
             background: #1F1C1C;
 /*            background-color: red;*/
             z-index:50;
@@ -98,124 +101,129 @@
     </style>
     
     <body style="background-color:#1F1C1C;">
-        <div class="player">
+        <div style="float: left" id="player" class="player">
             
-            <img src="images/player_template.png"/>
+            <img src="images/player-temp-bg.png"/>
             
             <script id="curr-template" type="text/x-handlebars-template">
-                <h2 style="position: relative; transform: translate(0%,-3900%);"><font face="verdana" size="3.5" color="white"><dd class="text-overflow-player">{{artist}}</dd></font></h2>
+                <div  id="title"><h2 style="text-align: center; position: relative; transform: translate(-5.5%,-3985%);"><font face="verdana" size="3.5" color="white"><dd class="text-overflow-player">{{artist}}</dd></font></h2></div>
 <!--                <img style="position: relative; left:13%; width:74%; transform: translate(0%,-228.2%);" src="{{image_url}}"/>-->
-                <img style="position: relative; left:13%; width:74%; transform: translate(0%,-280%);" src="{{image_url}}"/>
+                <img style="position: relative; width:74%; transform: translate(17.7%,-280.6%);" src="{{image_url}}"/>
 
 
-                <div id="coverUp2" style="width: 12%; transform: translate(-98%,-2519%);"></div>
-                <div id="coverUp" style="width: 6.7%; transform: translate(0%,-2519%);"></div>
-                <div id="container" style="transform: translate(10%,-2590%);">
+                <div id="coverUp2" style="width: 12%; transform: translate(-98%,-2589%);"></div>
+                <div id="coverUp" style="width: 6.7%; transform: translate(0%,-2589%);"></div>
+                <div id="container" style="transform: translate(10%,-2660%);">
                     <h2 style="position: relative;"><font face="verdana" size="4.5" color="white"><div id="song">{{song_name}}</div></font></h2>
                 </div>
-                <div id="coverUp3" style="width: 18.2%; transform: translate(400%,-2762%);"></div>
-                <div id="coverUp2" style="width: 100%; transform: translate(90.9%,-2762%);"></div>
+                <div id="coverUp3" style="width: 18.2%; transform: translate(400%,-2832%);"></div>
+                <div id="coverUp2" style="width: 100%; transform: translate(90.9%,-2832%);"></div>
                 
-                <div id="coverUp2" style="height: 20px; width: 12%; transform: translate(-98%,-3700%);"></div>
-                <div id="coverUp" style="height: 20px; width: 6.7%; transform: translate(0%,-3700%);"></div>
-                <div id="container" style="transform: translate(10%,-3700%);">
+                <div id="coverUp2" style="height: 20px; width: 12%; transform: translate(-98%,-3784%);"></div>
+                <div id="coverUp" style="height: 20px; width: 6.7%; transform: translate(0%,-3784%);"></div>
+                <div id="container" style="transform: translate(10%,-3783%);">
                     <font face="verdana" size="3.5" color="grey"><div id="info" style="position: relative;">{{artist}}, {{album}}</div></font>
                 </div>
-                <div id="coverUp3" style="height: 20px; width: 18.2%; transform: translate(400%,-3800%);"></div>
-                <div id="coverUp2" style="height: 20px; width: 100%; transform: translate(90.9%,-3800%);"></div>
+                <div id="coverUp3" style="height: 20px; width: 18.2%; transform: translate(400%,-3884%);"></div>
+                <div id="coverUp2" style="height: 20px; width: 100%; transform: translate(90.9%,-3884%);"></div>
 
 <!--                <h2 style="position: relative; transform: translate(7%,-3020%);"><font face="verdana" size="4.5" color="white"><div id="song">{{song_name}}</div></font></h2>-->
 <!--                <h1 style="position: relative; transform: translate(-3%,-3550%);"><font face="verdana" size="3.5" color="grey"><dd class="text-overflow-player">{{artist}}, {{album}}</dd></font></h1>-->
             </script>
 
-            <div style="transform: translate(10%,-3500%);" id="myProgress">
+            <div style="transform: translate(9%,-3500%);" id="myProgress">
                 <div style="position: relative; height: 100%;" id="myBar"></div>
             </div>
 
             <div style="position: inherit">
                 <button style="position:absolute; z-index: 100; left: 84.45%; width:10%; height: auto; transform: translate(-7%,-2250%);" class=button onclick="history()"><img id="history" src="images/btn-history-off.png"/></button>
-                <button style="position:absolute; z-index: 100; left: 84.45%; width:8.5%; height: auto; transform: translate(0%,-1120%);" class=button onclick="heart()"><img id="save" style="z-index:150;" src="images/btn-sav1.png"/></button>
-                <button style="position:relative; left: -1.9%; width:7.5%; transform: translate(0%,-430%);" class=button onclick="shuffle()"><img id="shuffle" src="images/btn-shuffle-off.png"/></button>
-                <button style="position:relative; left: 4.7%; width:10.7%; transform: translate(0%,-506%);" class=button onclick="prev_btn()"><img src="images/btn-prev1.png"/></button>
-                <button style="position:relative; left: 10.53%; width:20%; transform: translate(0%,-227.5%);" class=button onclick="pause()"><img id="play" src="images/btn-pause1.png"/></button>
-                <button style="position:relative; left: 16.6%; width:10.7%; transform: translate(0%,-506%);" class=button onclick="skip()"><img src="images/btn-next1.png"/></button>
-                <button style="position:relative; left: 23.2%; width:7.7%; transform: translate(0%,-425%);" class=button onclick="repeat()"><img id="repeat" src="images/btn-repeat-off.png"/></button>
-                <font face="verdana" size="2" color="#55ba55"><div id="device_inner" style="position: relative; transform: translate(14%,-860%);">device</div></font>
+                <button style="position:absolute; z-index: 100; left: 84.45%; width:9.7%; height: auto; transform: translate(-5%,-950%);" class=button onclick="heart()"><img id="save" style="z-index:150;" src="images/btn-sav1.png"/></button>
+                <button style="position:relative; left: -1.9%; width:9%; transform: translate(96%,-419.5%);" class=button onclick="shuffle()"><img id="shuffle" src="images/btn-shuffle-off.png"/></button>
+                <button style="position:relative; left: 4.7%; width:12%; transform: translate(59.5%,-508.5%);" class=button onclick="prev_btn()"><img src="images/btn-prev1.png"/></button>
+                <button style="position:relative; left: 10.53%; width:21%; transform: translate(27.3%,-235%);" class=button onclick="pause()"><img id="play" src="images/btn-pause1.png"/></button>
+                <button style="position:relative; left: 16.6%; width:12%; transform: translate(34.5%,-508.5%);" class=button onclick="skip()"><img src="images/btn-next1.png"/></button>
+                <button style="position:relative; left: 23.2%; width:9%; transform: translate(30.5%,-434%);" class=button onclick="repeat()"><img id="repeat" src="images/btn-repeat-off.png"/></button>
+                <button style="position:relative; left: 23.2%; width:10%; transform: translate(-863.5%,-442.5%);" class=button onclick=""><img id="dev" src="images/devices.png"/></button>
+                <font face="verdana" size="2" color="#55ba55"><div id="device_inner" style="position: relative; transform: translate(15%,-875%);">device</div></font>
                 
             </div>
             
-            <div style="position: relative; transform: translate(7%,-1540%);">
+            <div style="position: relative; transform: translate(7%,-1655%);">
                 <font face="verdana" size="2" color="#e3e4e8"><p id="length_in"></p></font>
             </div>
             
-            <div style="position: relative; transform: translate(83%,-1710%);">
+            <div style="position: relative; transform: translate(83%,-1835%);">
                 <font face="verdana" size="2" color="#e3e4e8"><p id="length"></p></font>
             </div>
             
             <div id="curr"></div>
             
-            <div  id="table" style="width: 150%; font-family: verdana;display: table; position: relative; float: left; transform: translate(70%,-350%); background-color: #0e0b08; visibility: hidden">
-                <table style="color: grey;">
-                    <tr>
-                        <td id="a0">artist0</td>
-                        <td id="t0">track0</td>
-                        <td><button style="border-radius: 4px; background: grey; color: white" onclick="save(0)">Save</button></td>
-                    </tr>
-                    <tr>
-                        <td id="a1">artist1</td>
-                        <td id="t1">track1</td>
-                        <td><button style="border-radius: 4px; background: grey; color: white" onclick="save(1)">Save</button></td>
-                    </tr>
-                    <tr>
-                        <td id="a2">artist2</td>
-                        <td id="t2">track2</td>
-                        <td><button style="border-radius: 4px; background: grey; color: white"onclick="save(2)">Save</button></td>
-                    </tr>
-                    <tr>
-                        <td id="a3">artist3</td>
-                        <td id="t3">track3</td>
-                        <td><button style="border-radius: 4px; background: grey; color: white"onclick="save(3)">Save</button></td>
-                    </tr>
-                    <tr>
-                        <td id="a4">artist4</td>
-                        <td id="t4">track4</td>
-                        <td><button style="border-radius: 4px; background: grey; color: white"onclick="save(4)">Save</button></td>
-                    </tr>
-                    <tr>
-                        <td id="a5">artist5</td>
-                        <td id="t5">track5</td>
-                        <td><button style="border-radius: 4px; background: grey; color: white"onclick="save(5)">Save</button></td>
-                    </tr>
-                    <tr>
-                        <td id="a6">artist6</td>
-                        <td id="t6">track6</td>
-                        <td><button style="border-radius: 4px; background: grey; color: white"onclick="save(6)">Save</button></td>
-                    </tr>
-                    <tr>
-                        <td id="a7">artist7</td>
-                        <td id="t7">track7</td>
-                        <td><button style="border-radius: 4px; background: grey; color: white"onclick="save(7)">Save</button></td>
-                    </tr>
-                    <tr>
-                        <td id="a8">artist8</td>
-                        <td id="t8">track8</td>
-                        <td><button style="border-radius: 4px; background: grey; color: white"onclick="save(8)">Save</button></td>
-                    </tr>
-                    <tr>
-                        <td id="a9">artist9</td>
-                        <td id="t9">track9</td>
-                        <td><button style="border-radius: 4px; background: grey; color: white"onclick="save(9)">Save</button></td>
-                    </tr>
-                </table>
-            </div>      
-            
         </div>
         
+        <div  id="table" style="z-index:150; font-family: verdana;display: table; position: relative; float: left; visibility: hidden; padding-top: 2.5%; padding-left: 2.5%;">
+            <table style="color: grey; background-color: #0e0b08;">
+                <tr>
+                    <td id="a0">artist0</td>
+                    <td id="t0">track0</td>
+                    <td><button style="border: none; border-radius: 4px; background: grey; color: white" onclick="save(0)">Save</button></td>
+                </tr>
+                <tr>
+                    <td id="a1">artist1</td>
+                    <td id="t1">track1</td>
+                    <td><button style="border: none; border-radius: 4px; background: grey; color: white" onclick="save(1)">Save</button></td>
+                </tr>
+                <tr>
+                    <td id="a2">artist2</td>
+                    <td id="t2">track2</td>
+                    <td><button style="border: none; border-radius: 4px; background: grey; color: white"onclick="save(2)">Save</button></td>
+                </tr>
+                <tr>
+                    <td id="a3">artist3</td>
+                    <td id="t3">track3</td>
+                    <td><button style="border: none; border-radius: 4px; background: grey; color: white"onclick="save(3)">Save</button></td>
+                </tr>
+                <tr>
+                    <td id="a4">artist4</td>
+                    <td id="t4">track4</td>
+                    <td><button style="border: none; border-radius: 4px; background: grey; color: white"onclick="save(4)">Save</button></td>
+                </tr>
+                <tr>
+                    <td id="a5">artist5</td>
+                    <td id="t5">track5</td>
+                    <td><button style="border: none; border-radius: 4px; background: grey; color: white"onclick="save(5)">Save</button></td>
+                </tr>
+                <tr>
+                    <td id="a6">artist6</td>
+                    <td id="t6">track6</td>
+                    <td><button style="border: none; border-radius: 4px; background: grey; color: white"onclick="save(6)">Save</button></td>
+                </tr>
+                <tr>
+                    <td id="a7">artist7</td>
+                    <td id="t7">track7</td>
+                    <td><button style="border: none; border-radius: 4px; background: grey; color: white"onclick="save(7)">Save</button></td>
+                </tr>
+                <tr>
+                    <td id="a8">artist8</td>
+                    <td id="t8">track8</td>
+                    <td><button style="border: none; border-radius: 4px; background: grey; color: white"onclick="save(8)">Save</button></td>
+                </tr>
+                <tr>
+                    <td id="a9">artist9</td>
+                    <td id="t9">track9</td>
+                    <td><button style="border: none; border-radius: 4px; background: grey; color: white"onclick="save(9)">Save</button></td>
+                </tr>
+            </table>
+        </div>      
+            
+        
+        
 
-        <p>
+<!--
+        <div>
             <button onclick="test();">Test</button>
             <button onclick="history();">History</button>
-        </p> 
+        </div> 
+-->
         
        
         
@@ -224,6 +232,7 @@
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     
         
+        
         <script>
             function save(num) {
                 $.ajax({
@@ -231,12 +240,49 @@
 
                 }).done(function(data) {
                     var has_gui = data.has_gui;
-                    alert(has_gui);
-                    
+//                    alert(has_gui);
+                
                     if (has_gui) {
                         var playlist_id = data.playlist_id;
                         
                         
+                        $.ajax({
+                            url: '/recent',
+
+                        }).done(function(data) {
+                            var rec = data.ten_recent;
+                            var song_uri = rec[num].uri;
+                            var tmp = 'https://api.spotify.com/v1/playlists/' + playlist_id + '/tracks?uris=' + song_uri;
+                            
+                            $.ajax({
+                                url: '/access_token',
+
+                            }).done(function(data) {
+                                var access_token = data.access_token;
+                                
+                                alert(has_gui + " " + playlist_id + " " + tmp + " " + song_uri + " " + access_token);
+
+                                $.ajax({
+                                    url: tmp,
+                                    type: 'POST',
+                                    headers: {
+                                        'Authorization': 'Bearer ' + access_token,
+                                        json: true
+                                    }
+                                });
+                                
+                                request.get(options, function(error, response, body) {
+                                    if(!error && response.statusCode == 200 ){
+                                        alert("SUCCESS");
+                                    } else {
+                                        alert("ERROR " + response.statusCode);
+                                    }
+                                });
+
+                            });
+                        });
+                            
+                            
                         
                     } else {
                         alert("Please Create Playlist \"GUI\"");
@@ -277,6 +323,7 @@
                     var at = data.access_token;
                     
                     alert("Access Token: " + at);
+                    return at;
                 });
             }
         </script>

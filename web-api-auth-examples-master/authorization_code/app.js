@@ -151,7 +151,7 @@ app.get('/check_playlist', function(req, res) {
 
     request.get(options, function(error, response, body) {
         var has_gui = false;
-        var playlist_id;
+        var id;
         
         if(!error && response.statusCode == 200 ){
             
@@ -170,7 +170,7 @@ app.get('/check_playlist', function(req, res) {
             if (has_gui) {
                 res.send({
                 'has_gui' : has_gui,
-                'playlist_id' : playlist_id,
+                'playlist_id' : id,
                 });
             } else {
                 res.send({
