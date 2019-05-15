@@ -70,7 +70,7 @@
         
         #coverUp {
             position: absolute;
-            height: 28px;
+            height: 30px;
             width: 50%;
             background: #0e0b08;
 /*            background: #332e23;*/
@@ -80,52 +80,53 @@
         
         #coverUp3 {
             position: absolute;
-            height: 28px;
+            height: 30px;
             width: 50%;
-            background: #0e0b08;
-/*            background: #1d1b16;*/
+/*            background: #0e0b08;*/
+            background: #1d1b16;
 /*            background-color: blue;*/
             z-index:50;
         }
         
         #coverUp2 {
             position: absolute;
-            height: 28px;
+            height: 30px;
             width: 50%;
-/*            background: #0e0b08;*/
-            background: #1F1C1C;
+            background: #0e0b08;
+/*            background: #1F1C1C;*/
 /*            background-color: red;*/
-            z-index:50;
+            z-index:100;
         }
         
     </style>
     
     <body style="background-color:#1F1C1C;">
+<!--    <body style="background-color:green;">-->
         <div style="float: left" id="player" class="player">
             
-            <img src="images/player-temp-bg.png"/>
+            <img src="images/player_template.png"/>
             
             <script id="curr-template" type="text/x-handlebars-template">
-                <div  id="title"><h2 style="text-align: center; position: relative; transform: translate(-5.5%,-3985%);"><font face="verdana" size="3.5" color="white"><dd class="text-overflow-player">{{artist}}</dd></font></h2></div>
-<!--                <img style="position: relative; left:13%; width:74%; transform: translate(0%,-228.2%);" src="{{image_url}}"/>-->
-                <img style="position: relative; width:74%; transform: translate(17.7%,-280.6%);" src="{{image_url}}"/>
+                <div  id="title"><h2 style="text-align: center; position: relative; transform: translate(-4.4%,-5110%);"><font face="verdana" size="3.5" color="white"><dd class="text-overflow-player">{{artist}}</dd></font></h2></div>
+                <img style="position: relative; width:74%; transform: translate(17.7%,-268.8%);" src="{{image_url}}"/>
+<!--                <img style="position: relative; width:74%; transform: translate(17.7%,-280.6%);" src="{{image_url}}"/>-->
 
 
-                <div id="coverUp2" style="width: 12%; transform: translate(-98%,-2589%);"></div>
-                <div id="coverUp" style="width: 6.7%; transform: translate(0%,-2589%);"></div>
-                <div id="container" style="transform: translate(10%,-2660%);">
-                    <h2 style="position: relative;"><font face="verdana" size="4.5" color="white"><div id="song">{{song_name}}</div></font></h2>
+                <div id="coverUp2" style="width: 12%; transform: translate(-99.5%,-3038.5%);"></div>
+                <div id="coverUp" style="width: 6.65%; transform: translate(-1.5%,-3038.5%);"></div>
+                <div id="container" style="transform: translate(10%,-3105%);">
+                    <h2 style="position: relative;"><font face="verdana" size="5.5" color="white"><div id="song">{{song_name}}</div></font></h2>
                 </div>
-                <div id="coverUp3" style="width: 18.2%; transform: translate(400%,-2832%);"></div>
-                <div id="coverUp2" style="width: 100%; transform: translate(90.9%,-2832%);"></div>
+                <div id="coverUp3" style="width: 17.8%; transform: translate(412%,-3271.6%);"></div>
+                <div id="coverUp2" style="width: 100%; transform: translate(90.97%,-3271.6%);"></div>
                 
-                <div id="coverUp2" style="height: 20px; width: 12%; transform: translate(-98%,-3784%);"></div>
-                <div id="coverUp" style="height: 20px; width: 6.7%; transform: translate(0%,-3784%);"></div>
-                <div id="container" style="transform: translate(10%,-3783%);">
+                <div id="coverUp2" style="height: 20px; width: 12%; transform: translate(-99.5%,-4684%);"></div>
+                <div id="coverUp" style="height: 20px; width: 6.65%; transform: translate(-1.5%,-4684%);"></div>
+                <div id="container" style="transform: translate(10%,-4683%);">
                     <font face="verdana" size="3.5" color="grey"><div id="info" style="position: relative;">{{artist}}, {{album}}</div></font>
                 </div>
-                <div id="coverUp3" style="height: 20px; width: 18.2%; transform: translate(400%,-3884%);"></div>
-                <div id="coverUp2" style="height: 20px; width: 100%; transform: translate(90.9%,-3884%);"></div>
+                <div id="coverUp3" style="height: 20px; width: 17.8%; transform: translate(410.6%,-4783%);"></div>
+                <div id="coverUp2" style="height: 20px; width: 100%; transform: translate(90.97%,-4783%);"></div>
 
 <!--                <h2 style="position: relative; transform: translate(7%,-3020%);"><font face="verdana" size="4.5" color="white"><div id="song">{{song_name}}</div></font></h2>-->
 <!--                <h1 style="position: relative; transform: translate(-3%,-3550%);"><font face="verdana" size="3.5" color="grey"><dd class="text-overflow-player">{{artist}}, {{album}}</dd></font></h1>-->
