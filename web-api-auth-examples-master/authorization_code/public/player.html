@@ -219,20 +219,64 @@
         
         
 
-<!--
         <div>
             <button onclick="test();">Test</button>
-            <button onclick="history();">History</button>
         </div> 
--->
         
-       
-        
-
         <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    
         
+        <script>
+            function in_library() {
+                $.ajax({
+                    url: '/in_library',
+
+                }).done(function(data) {
+                    var in_lib = data.in_library;
+                    
+//                    alert(in_lib);
+                    var img = document.getElementById("save");
+                    
+                    if (in_lib) {
+                        img.src="images/btn-saved1.png";
+                    } else {
+                        var heart = Document.getElementById("save");
+                        img.src="images/btn-sav1.png";
+                    }
+                });
+            }
+        </script>
+        
+        <script>
+            function buttons_update() {
+                $.ajax({
+                    url: '/is_shuffled',
+
+                }).done(function(data) {
+                    var shuffled = data.shuffled;
+                    var looped = data.looped;
+                    
+//                    alert("Shuffle: " + shuffled + " Looped: " + looped);
+                    
+                    var img = document.getElementById("shuffle");
+                    if (shuffled == true) {
+                        img.src="images/btn-shuffle-on.png";
+                    } else {
+                        img.src="images/btn-shuffle-off.png";
+                    }
+                    
+                    var img = document.getElementById("repeat");
+                    if (looped == "off") {
+                        img.src="images/btn-repeat-off.png";
+                    } else if (looped == "context") {
+                        img.src="images/btn-repeat-on.png";
+                    } else if (looped == "track") {
+                        img.src="images/btn-repeat-song.png";
+                    }
+                    
+                });
+            }
+        </script>
         
         <script>
             function save(num) {
@@ -261,30 +305,30 @@
                             }).done(function(data) {
                                 var access_token = data.access_token;
                                 
-                                alert(has_gui + " " + playlist_id + " " + tmp + " " + song_uri + " " + access_token);
-
+                                alert(tmp);
+                                
                                 $.ajax({
-                                    url: tmp,
+                                    url: '' + tmp,
                                     type: 'POST',
                                     headers: {
                                         'Authorization': 'Bearer ' + access_token,
                                         json: true
                                     }
-                                });
-                                
-                                request.get(options, function(error, response, body) {
-                                    if(!error && response.statusCode == 200 ){
-                                        alert("SUCCESS");
-                                    } else {
-                                        alert("ERROR " + response.statusCode);
-                                    }
-                                });
+                                }).done(function(data) {
+                                    alert("HERE");
+                                    request.get(options, function(error, response, body) {
+                                        if(!error && response.statusCode == 200 ){
+                                            alert("SUCCESS");
+                                        } else {
+                                            alert("ERROR " + response.statusCode);
+                                        }
 
+                                    });
+                                    
+                                });
                             });
                         });
                             
-                            
-                        
                     } else {
                         alert("Please Create Playlist \"GUI\"");
                     }
@@ -436,10 +480,18 @@
             function songScroll() {
 //                alert("Running");
                 if (document.getElementById("song").clientWidth > document.getElementById("container").clientWidth) {
+                    
                     var elem = document.getElementById("song");   
                     var pos = 0;
                     var dir = 0;
+                    
                     var id = setInterval(function(){
+                        
+//                        if (num % 10 == 0 && num < 200) {
+//                            alert(num);
+//                        }
+//                        num++;
+                        
                         if (dir == 0 && pos > (document.getElementById("container").clientWidth - elem.clientWidth)-5) {
                             pos--;
                             song.style.left = pos + "px"; 
@@ -591,16 +643,22 @@
         
         <script>
             function pausebutton() {
-                var is_playing = data.is_playing;
-                if (is_playing) {
-                    var img = document.getElementById("play");
-                    img.src="images/btn-pause1.png";
-                    return false;
-                } else {
-                    var img = document.getElementById("play");
-                    img.src="images/btn-play1.png";
-                    return false;
-                }
+                $.ajax({
+                url: '/is_playing',
+
+                }).done(function(data) {
+                    var is_playing = data.is_playing;
+                    if (is_playing) {
+                        var img = document.getElementById("play");
+                        img.src="images/btn-pause1.png";
+                        return false;
+                    } else {
+                        var img = document.getElementById("play");
+                        img.src="images/btn-play1.png";
+                        return false;
+                    }
+                });
+                
             }    
         </script>
         
@@ -626,6 +684,9 @@
                     } else if (rep == 1) {
                         var img = document.getElementById("repeat");
                         img.src="images/btn-repeat-on.png";
+                    } else if (rep == 2) {
+                        var img = document.getElementById("repeat");
+                        img.src="images/btn-repeat-song.png";
                     }
                 });
                 
@@ -902,6 +963,9 @@
         <div><script>setTimeout(infoScroll, 2500);</script></div>
         <div><script>dev_info();</script></div>
         <div><script>history_update();</script></div>
+        <div><script>in_library();</script></div>
+        <div><script>buttons_update();</script></div>
+        <div><script>pausebutton();</script></div>
         
     </body>
 </html>

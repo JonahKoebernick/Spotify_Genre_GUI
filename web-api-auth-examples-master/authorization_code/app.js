@@ -50,7 +50,7 @@ app.get('/login', function(req, res) {
   res.cookie(stateKey, state);
 
   // your application requests authorization
-  var scope = 'user-read-private user-read-email user-modify-playback-state user-read-currently-playing user-read-playback-state user-read-recently-played playlist-read-private';
+  var scope = 'user-read-private user-read-email user-modify-playback-state user-read-currently-playing user-read-playback-state user-read-recently-played playlist-read-private user-library-read playlist-modify-public playlist-modify-private user-modify-playback-state';
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
@@ -59,6 +59,45 @@ app.get('/login', function(req, res) {
       redirect_uri: redirect_uri,
       state: state
     }));
+});
+
+app.get('/in_library', function(req, res) {
+    var options = {
+        url: 'https://api.spotify.com/v1/me/player/currently-playing',
+        headers: { 'Authorization': 'Bearer ' + access_token2 },
+        json: true
+    };
+
+    request.get(options, function(error, response, body) {
+        if(!error && response.statusCode == 200){
+            var song_id = body.item.id;
+            
+            console.log("Song ID: " + song_id);
+            
+            var temp = 'https://api.spotify.com/v1/me/tracks/contains?ids=' + song_id;
+            
+            var options = {
+                url: temp,
+                headers: { 'Authorization': 'Bearer ' + access_token2 },
+                json: true
+            };
+
+            request.get(options, function(error, response, body) {
+                if(!error && response.statusCode == 200) {
+                  console.log("SUCCESS: " + body);
+
+
+                  res.send({
+                        'in_library' : body,
+                  });
+                } else {
+                    console.log("ERROR: " + response.statusCode);
+                }
+            });
+            
+        }
+    });
+
 });
 
 app.get('/track_length', function(req, res) {
@@ -481,9 +520,67 @@ app.get('/refresh_token', function(req, res) {
   });
 });
 
+app.get('/is_shuffled', function(req, res) {
+  
+    var options = {
+        url: 'https://api.spotify.com/v1/me/player',
+        headers: { 'Authorization': 'Bearer ' + access_token2 },
+        json: true
+    };
+    
+    request.get(options, function(error, response, body) {
+        if(!error && response.statusCode == 200){
+            
+            var is_shuffled = body.shuffle_state;
+            var is_looped = body.repeat_state;
+            console.log("Shuffle: " + is_shuffled + " Looped: " + is_looped);
+            
+            if (is_shuffled) {
+                shuff = 1;
+            } else {
+                shuff = 0;
+            }
+            
+            if (is_looped == "off") {
+                rep = 0;
+            } else if (is_looped == "track") {
+                rep = 2;
+            } else if (is_looped == "context") {
+                rep = 3;
+            }
+            
+            res.send({
+                'shuffled' : is_shuffled,
+                'looped' : is_looped
+
+            });
+        }
+    });
+});
+
 app.get('/shuff', function(req, res) {
     shuff++;
     shuff = shuff % 3;
+    
+    if (shuff == 1) {
+        var options = {
+            url: 'https://api.spotify.com/v1/me/player/shuffle?state=true',
+            headers: { 
+                'Authorization': 'Bearer ' + access_token2 
+            },
+        };
+
+        request.get(options, function(error, response, body) {
+            if(!error && response.statusCode == 200) {
+
+                console.log("Shuffle On");
+
+            } else {
+                console.log("ERROR: " + response.statusCode);
+            }
+        });
+
+    }
     
     res.send({
           'test' : shuff,
@@ -492,12 +589,17 @@ app.get('/shuff', function(req, res) {
 
 app.get('/repeat', function(req, res) {
     rep++;
-    rep = rep % 2;
+    rep = rep % 3;
     
     res.send({
           'test' : rep,
     });
 });
+
+function test(string) {
+    console.log(string);
+}
+
 
 console.log('Listening on 8888');
 app.listen(8888);
