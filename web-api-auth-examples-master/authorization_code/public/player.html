@@ -216,57 +216,57 @@
             <div class="gap"></div>
         </div>
         
-        <div  id="table" style="overflow: hidden max-width: 34.5%; z-index:150; font-family: verdana; display: none; position: relative; float: left; visibility: visible; padding-top: 1.5%; padding-left: 1.5%;">
+        <div  id="table" style="overflow: hidden; max-width: 34.5%; z-index:150; font-family: verdana; display: none; position: relative; float: left; visibility: visible; padding-top: 1.5%; padding-left: 1.5%;">
             <table style="color: grey; background-color: #0e0b08; text-overflow: ellipsis;">
                 <tr>
                     <td id="a0">artist0</td>
                     <td id="t0">track0</td>
-                    <td><button style="border: none; border-radius: 4px; background: grey; color: white" onclick="save(0)">Save</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="save(0)">Save</button></td>
                 </tr>
                 <tr>
                     <td id="a1">artist1</td>
                     <td id="t1">track1</td>
-                    <td><button style="border: none; border-radius: 4px; background: grey; color: white" onclick="save(1)">Save</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="save(1)">Save</button></td>
                 </tr>
                 <tr>
                     <td id="a2">artist2</td>
                     <td id="t2">track2</td>
-                    <td><button style="border: none; border-radius: 4px; background: grey; color: white"onclick="save(2)">Save</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="save(2)">Save</button></td>
                 </tr>
                 <tr>
                     <td id="a3">artist3</td>
                     <td id="t3">track3</td>
-                    <td><button style="border: none; border-radius: 4px; background: grey; color: white"onclick="save(3)">Save</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="save(3)">Save</button></td>
                 </tr>
                 <tr>
                     <td id="a4">artist4</td>
                     <td id="t4">track4</td>
-                    <td><button style="border: none; border-radius: 4px; background: grey; color: white"onclick="save(4)">Save</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="save(4)">Save</button></td>
                 </tr>
                 <tr>
                     <td id="a5">artist5</td>
                     <td id="t5">track5</td>
-                    <td><button style="border: none; border-radius: 4px; background: grey; color: white"onclick="save(5)">Save</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="save(5)">Save</button></td>
                 </tr>
                 <tr>
                     <td id="a6">artist6</td>
                     <td id="t6">track6</td>
-                    <td><button style="border: none; border-radius: 4px; background: grey; color: white"onclick="save(6)">Save</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="save(6)">Save</button></td>
                 </tr>
                 <tr>
                     <td id="a7">artist7</td>
                     <td id="t7">track7</td>
-                    <td><button style="border: none; border-radius: 4px; background: grey; color: white"onclick="save(7)">Save</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="save(7)">Save</button></td>
                 </tr>
                 <tr>
                     <td id="a8">artist8</td>
                     <td id="t8">track8</td>
-                    <td><button style="border: none; border-radius: 4px; background: grey; color: white"onclick="save(8)">Save</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="save(8)">Save</button></td>
                 </tr>
                 <tr>
                     <td id="a9">artist9</td>
                     <td id="t9">track9</td>
-                    <td><button style="border: none; border-radius: 4px; background: grey; color: white"onclick="save(9)">Save</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="save(9)">Save</button></td>
                 </tr>
             </table>
         </div> 
@@ -688,9 +688,7 @@
                     }
                 });
             }
-        </script>
         
-        <script>
             function playlists() {
                 $.ajax({
                     url: '/playlists',
@@ -700,9 +698,7 @@
                     
                 });
             }
-        </script>
         
-        <script>            
             function genres_display(arr) {
                 for (i = 0; i < num_blocks; i++) {
                     var name = "block" + i;
@@ -730,9 +726,7 @@
                     }
                 }
             }
-        </script>
         
-        <script>
             function user_info() {
                 $.ajax({
                 url: '/user_data',
@@ -745,9 +739,7 @@
                     account.innerHTML = data.account + " spotify user";
                 });
             }
-        </script>
         
-        <script>
             function in_library() {
                 $.ajax({
                     url: '/in_library',
@@ -766,9 +758,7 @@
                     }
                 });
             }
-        </script>
         
-        <script>
             function buttons_update() {
                 $.ajax({
                     url: '/is_shuffled',
@@ -797,9 +787,7 @@
                     
                 });
             }
-        </script>
         
-        <script>
             function save(num) {
                 $.ajax({
                 url: '/check_playlist',
@@ -856,9 +844,7 @@
                 });
                 
             }
-        </script>
         
-        <script>
             function shuffle() {
                 $.ajax({
                     url: '/shuff',
@@ -878,9 +864,7 @@
                     }
                 });
             }
-        </script>
         
-        <script>
             function get_at() {
                 $.ajax({
                 url: '/access_token',
@@ -892,9 +876,7 @@
                     return at;
                 });
             }
-        </script>
         
-        <script>
             function dev_info() {
                 $.ajax({
                 url: '/devices',
@@ -915,9 +897,7 @@
 //                          "\nis_restricted: " + curr.is_restricted);
                   });
             }
-        </script>
         
-        <script>
             function history() {
                 /*var img = document.getElementById("history");
                 img.src="images/btn-history-on.png";
@@ -955,9 +935,7 @@
                     img.src="images/btn-history-off.png";
                 }
             }
-        </script> 
         
-        <script>
             function history_update() {
 //                var img = document.getElementById("history");
 //                img.src="images/btn-history-on.png";
@@ -995,9 +973,7 @@
                 
                 
             }
-        </script> 
         
-        <script>
             function songScroll() {
 //                alert("Running");
                 if (document.getElementById("song").clientWidth > document.getElementById("container").clientWidth) {
@@ -1033,9 +1009,7 @@
                     }, 40);
                 }   
             }
-        </script>
         
-        <script>
             function infoScroll() {
 //                alert("Running");
                 if (document.getElementById("info").clientWidth > document.getElementById("container").clientWidth) {
@@ -1063,9 +1037,7 @@
                     }, 40);
                 }   
             }
-        </script>
         
-        <script>
             function pause() {
                 $.ajax({
                 url: '/is_playing',
@@ -1101,9 +1073,7 @@
                     }
                   });
             }
-        </script>
 
-        <script>
             function prev_btn() {
                 $.ajax({
                     url: '/time',
@@ -1119,9 +1089,7 @@
                     
                 });
             }
-        </script>
         
-        <script>
             function prev() {
                 $.ajax({
                     url: '/access_token',
@@ -1140,9 +1108,7 @@
                 });
                 
             }
-        </script>        
         
-        <script>
             function restart() {
                 $.ajax({
                     url: '/access_token',
@@ -1160,9 +1126,7 @@
                     });
                 });
             }
-        </script>
         
-        <script>
             function pausebutton() {
                 $.ajax({
                 url: '/is_playing',
@@ -1181,17 +1145,13 @@
                 });
                 
             }    
-        </script>
         
-        <script>
             function heart() {
                 var img = document.getElementById("save");
                 img.src="images/btn-saved1.png";
                 return false;
             }
-        </script>
         
-        <script>
             function repeat() {
                 $.ajax({
                     url: '/repeat',
@@ -1215,9 +1175,7 @@
                 img.src="images/btn-repeat-on.png";
                 return false;
             }
-        </script>
           
-        <script>
             function next_song() {
                 var pop_value = document.getElementById("pop_value").value;
                 var queen_value = document.getElementById("queen_value").value;
@@ -1264,9 +1222,7 @@
                     });
                 });
             }
-        </script>   
         
-        <script>
             function skip() {
                 $.ajax({
                     url: '/access_token',
@@ -1480,16 +1436,20 @@
             })();
         </script>
         
-        <div><script>user_info();</script></div>
-        <div><script>pausebutton();</script></div>
-        <div><script>buttons_update();</script></div>
-        <div><script>in_library();</script></div>
-        <div><script>dev_info();</script></div>
-        <div><script>history_update();</script></div>
-        <div><script>playlists();</script></div>
-        
-        <div><script>setTimeout(songScroll, 2500);</script></div>
-        <div><script>setTimeout(infoScroll, 2500);</script></div>
-    
+        <div>
+            <script>
+                user_info();
+                pausebutton();
+                buttons_update();
+                in_library();
+                dev_info();
+                history_update();
+                playlists();
+                
+                setTimeout(songScroll, 2500);
+                setTimeout(infoScroll, 2500);
+            </script>
+        </div>
+ 
     </body>
 </html>
