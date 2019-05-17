@@ -596,10 +596,76 @@ app.get('/repeat', function(req, res) {
     });
 });
 
-function test(string) {
-    console.log(string);
-}
+app.get('/user_data', function(req, res) {
+    console.log("Getting User");
+    console.log(access_token2);
 
+    var options = {
+        url: 'https://api.spotify.com/v1/me',
+        headers: { 'Authorization': 'Bearer ' + access_token2 },
+        json: true
+    };
+
+    request.get(options, function(error, response, body) {
+        if(!error && response.statusCode == 200 ){
+            console.log("Success");
+            
+            res.send({
+                'img' : body.images[0],
+                'user' : body.id,
+                'name' :body.display_name,
+                'account' : body.product,
+                'email' : body.email,
+            });
+        } else {
+            console.log("Error " + response.statusCode);
+        }
+    });
+});
+
+app.get('/playlists', function(req, res) {
+    console.log("Getting Playlists");
+    console.log(access_token2);
+
+    var user_playlists = [];
+    
+    var options = {
+        url: "https://api.spotify.com/v1/me/playlists",
+        headers: { 'Authorization': 'Bearer ' + access_token2 },
+        json: true
+    };
+    
+    request.get(options, function(error, response, body) {
+        if(!error && response.statusCode == 200 ){
+
+            console.log("Success: " + body + " Number: " + body.items.length);
+
+            for (i = 0; i < body.items.length; i++) {
+                var pl = {
+                    genre_url: body.items[i].id,
+                    number_songs: body.items[i].tracks.total,
+                    genre_name: body.items[i].name,
+//                    img: body.items[i].images[0].url,
+                };
+                if (body.items[i].images.length > 0) {
+                    pl.img = body.items[i].images[0].url;
+                }
+                
+                user_playlists[i] = pl;
+            }
+            
+            console.log(user_playlists);
+            
+            res.send({
+                'playlists' : user_playlists,
+            });
+        } else {
+            console.log("Error " + response.statusCode);
+        }
+        
+        
+    }); 
+});
 
 console.log('Listening on 8888');
 app.listen(8888);

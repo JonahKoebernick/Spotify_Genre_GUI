@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html>
+    <script>
+        var num_blocks = 21;
+
+    </script>
+        
     <style type="text/css">
         .player{
             width: 25%;
             height: auto;
             position: relative;
-            padding-top: 2.5%;
-            padding-left: 2.5%;
+            padding-top: 1.5%;
+            padding-left: 1.5%;
         }  
         
         .player img {
@@ -98,10 +103,58 @@
             z-index:100;
         }
         
+        .login {
+            padding-top: 1.5%;
+            padding-left: 1.5%;
+            float: left;
+            width: 35%;
+/*            min-width: 33%;*/
+            height: auto;
+            position: relative;
+            z-index: 200;
+        }
+        
+        .login_inner {
+            float: left;
+            width: 100%;
+            height: 242px;
+            position: relative;
+            background-color: black;
+        } 
+        
+        .heads{
+            padding-top: 1.5%;
+            padding-left: 1.5%;
+            float: left;
+            width: 20%;
+            height: auto;
+            position: relative;
+/*            background-color: red;*/
+            z-index: 200;
+            display: inherit;
+        }  
+        
+        .heads_inner{
+            float: left;
+            width: 100%;
+            height: 173px;
+            position: relative;
+            background-color: black;
+            display: inherit;
+            overflow: hidden;
+        }  
+        
+        .ps {
+            transform: translate(2%, -97%);
+        }
+        
+        .gap {
+            height:500px;
+        }
+        
     </style>
     
     <body style="background-color:#1F1C1C;">
-<!--    <body style="background-color:green;">-->
         <div style="float: left" id="player" class="player">
             
             <img src="images/player-temp-bg.png"/>
@@ -112,21 +165,21 @@
 <!--                <img style="position: relative; width:74%; transform: translate(17.7%,-280.6%);" src="{{image_url}}"/>-->
 
 
-                <div id="coverUp2" style="width: 12%; transform: translate(-100%,-2410%);"></div>
-                <div id="coverUp" style="width: 6.67%; transform: translate(0%,-2410%);"></div>
+                <div id="coverUp2" style="width: 12%; transform: translate(-100%,-2420%);"></div>
+                <div id="coverUp" style="width: 6.67%; transform: translate(0%,-2420%);"></div>
                 <div id="container" style="transform: translate(10%,-2485%);">
                     <h2 style="position: relative;"><font face="verdana" size="5.5" color="white"><div id="song">{{song_name}}</div></font></h2>
                 </div>
-                <div id="coverUp3" style="width: 17.8%; transform: translate(411.6%,-2643%);"></div>
-                <div id="coverUp2" style="width: 100%; transform: translate(90.8%,-2643%);"></div>
+                <div id="coverUp3" style="width: 18.5%; transform: translate(409.5%,-2653%);"></div>
+                <div id="coverUp2" style="width: 100%; transform: translate(94.1%,-2653%);"></div>
                 
                 <div id="coverUp2" style="height: 20px; width: 12%; transform: translate(-100%,-3790%);"></div>
                 <div id="coverUp" style="height: 20px; width: 6.65%; transform: translate(0%,-3790%);"></div>
                 <div id="container" style="transform: translate(10%,-3793%);">
                     <font face="verdana" size="3.5" color="grey"><div id="info" style="position: relative;">{{artist}}, {{album}}</div></font>
                 </div>
-                <div id="coverUp3" style="height: 20px; width: 17.8%; transform: translate(411.6%,-3890%);"></div>
-                <div id="coverUp2" style="height: 20px; width: 100%; transform: translate(90.8%,-3890%);"></div>
+                <div id="coverUp3" style="height: 20px; width: 18.5%; transform: translate(409.5%,-3890%);"></div>
+                <div id="coverUp2" style="height: 20px; width: 100%; transform: translate(94.1%,-3890%);"></div>
 
 <!--                <h2 style="position: relative; transform: translate(7%,-3020%);"><font face="verdana" size="4.5" color="white"><div id="song">{{song_name}}</div></font></h2>-->
 <!--                <h1 style="position: relative; transform: translate(-3%,-3550%);"><font face="verdana" size="3.5" color="grey"><dd class="text-overflow-player">{{artist}}, {{album}}</dd></font></h1>-->
@@ -159,10 +212,11 @@
             
             <div id="curr"></div>
             
+            <div class="gap"></div>
         </div>
         
-        <div  id="table" style="z-index:150; font-family: verdana;display: table; position: relative; float: left; visibility: hidden; padding-top: 2.5%; padding-left: 2.5%;">
-            <table style="color: grey; background-color: #0e0b08;">
+        <div  id="table" style="max-width: 34.5%; z-index:150; font-family: verdana; display: none; position: relative; float: left; visibility: visible; padding-top: 1.5%; padding-left: 1.5%;">
+            <table style="color: grey; background-color: #0e0b08; text-overflow: ellipsis;">
                 <tr>
                     <td id="a0">artist0</td>
                     <td id="t0">track0</td>
@@ -214,17 +268,289 @@
                     <td><button style="border: none; border-radius: 4px; background: grey; color: white"onclick="save(9)">Save</button></td>
                 </tr>
             </table>
-        </div>      
-            
-        
-        
-
-        <div>
-            <button onclick="test();">Test</button>
         </div> 
+        
+        <div class="login">
+            <div class="login_inner">
+                <div style="float: left;">
+                    <img style="float: left; transform: translate(10%,11%);" id="usr_img" src="{{images.0.url}}" />
+                    <div style="float: left">
+                        <font face="verdana" size="3" color="white">
+                            <div id="full_name" style="transform: translate(18.5%, 345%);">full_name</div>
+                            <div id="username" style="transform: translate(18.5%, 365%);">user_name</div>
+                            <div id="email" style="transform: translate(18.5%, 390%);">email</div>
+                            <div id="account" style="transform: translate(18.5%, 415%);">account_type</div>
+                        </font>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div style="float: left; height: 1%; width: 70%; background-color: yellow">
+        </div>
+        
+         <font face="verdana" size="3" color="#55ba55">
+             
+             <a class="gens" onclick="genre_click(0);">
+                 <div id="BLOCK0" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_0" src="images/blank.png" />
+                        <p class="ps" style="" id="block0">Block 0</p>
+                    </div>
+                </div>
+             </a>
+             
+            <a class="gens" onclick="genre_click(1);">
+                <div id="BLOCK1" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_1" src="{{images.0.url}}" />
+                        <p class="ps" style="" id ="block1">Block 1</p>
+                    </div>
+                </div>
+             </a>
+             
+            <a class="gens" onclick="genre_click(2)">
+                <div id="BLOCK2" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_2" src="{{images.0.url}}" />
+                        <p class="ps" style="" id ="block2">Block 2</p>
+                    </div>
+                </div>
+             </a>
+             
+            <a class="gens" onclick="genre_click(3)">
+                <div id="BLOCK3" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_3" src="{{images.0.url}}" />
+                        <p class="ps" style="" id ="block3">Block 3</p>
+                    </div>
+                </div>
+             </a>
+
+            <a class="gens" onclick="genre_click(4)">
+                <div id="BLOCK4" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_4" src="{{images.0.url}}" />
+                        <p class="ps" style="" id ="block4">Block 4</p>
+                    </div>
+                </div>
+             </a>
+
+             <a class="gens" onclick="genre_click(5)">
+                <div id="BLOCK5" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_5" src="{{images.0.url}}" />
+                        <p class="ps" style="" id ="block5">Block 5</p>
+                    </div>
+                </div>
+             </a>
+
+             <a class="gens" onclick="genre_click(6)">
+                <div id="BLOCK6" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_6" src="{{images.0.url}}" />
+                        <p class="ps" style="" id ="block6">Block 6</p>
+                    </div>
+                </div>
+             </a>
+
+             <a class="gens" onclick="genre_click(7)">
+                <div id="BLOCK7" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_7" src="{{images.0.url}}" />
+                        <p class="ps" style="" id ="block7">Block 7</p>
+                    </div>
+                </div>
+             </a>
+
+             <a class="gens" onclick="genre_click(8)">
+                <div id="BLOCK8" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_8" src="{{images.0.url}}" />
+                        <p class="ps" style="" id="block8">Block 8</p>
+                    </div>
+                </div>
+             </a>
+
+             <a class="gens" onclick="genre_click(9)">
+                <div id="BLOCK9" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_9" src="{{images.0.url}}" />
+                        <p class="ps" style="" id="block9">Block 9</p>
+                    </div>
+                </div>
+             </a>
+
+             <a class="gens" onclick="genre_click(10)">
+                <div id="BLOCK10" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_10" src="images/blank.png" />
+                        <p class="ps" style="" id="block10">Block 10</p>
+                    </div>
+                </div>
+             </a>
+
+             <a class="gens" onclick="genre_click(11)">
+                <div id="BLOCK11" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_11" src="images/blank.png" />
+                        <p class="ps" style="" id="block11">Block 11</p>
+                    </div>
+                </div>   
+             </a>
+             
+             <a class="gens" onclick="genre_click(12)">
+                <div id="BLOCK12" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_12" src="images/blank.png" />
+                        <p class="ps" style="" id="block12">Block 12</p>
+                    </div>
+                </div>  
+             </a>
+             
+             <a class="gens" onclick="genre_click(13)">
+                <div id="BLOCK13" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_13" src="images/blank.png" />
+                        <p class="ps" style="" id="block13">Block 13</p>
+                    </div>
+                </div>  
+             </a>
+             
+             <a class="gens" onclick="genre_click(14)">
+                <div id="BLOCK14" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_14" src="images/blank.png" />
+                        <p class="ps" style="" id="block14">Block 14</p>
+                    </div>
+                </div>  
+             </a>
+             
+             <a class="gens" onclick="genre_click(15)">
+                <div id="BLOCK15" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_15" src="{{images.0.url}}" />
+                        <p class="ps" style="" id="block15">Block 15</p>
+                    </div>
+                </div>  
+             </a>
+             
+             <a class="gens" onclick="genre_click(16)">
+                <div id="BLOCK16" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_16" src="{{images.0.url}}" />
+                        <p class="ps" style="" id="block16">Block 16</p>
+                    </div>
+                </div>  
+             </a>
+             
+             <a class="gens" onclick="genre_click(17)">
+                <div id="BLOCK17" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_17" src="{{images.0.url}}" />
+                        <p class="ps" style="" id="block17">Block 17</p>
+                    </div>
+                </div>  
+             </a>
+             
+             <a class="gens" onclick="genre_click(18)">
+                <div id="BLOCK18" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_18" src="{{images.0.url}}" />
+                        <p class="ps" style="" id="block18">Block 18</p>
+                    </div>
+                </div>  
+             </a>
+             
+             <a class="gens" onclick="genre_click(19)">
+                <div id="BLOCK19" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_19" src="{{images.0.url}}" />
+                        <p class="ps" style="" id="block19">Block 19</p>
+                    </div>
+                </div>  
+             </a>
+             
+             <a class="gens" onclick="genre_click(20)">
+                <div id="BLOCK20" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_20" src="{{images.0.url}}" />
+                        <p class="ps" style="" id="block20">Block 20</p>
+                    </div>
+                </div>
+             </a>
+
+        </font>
+
+<!--
+        <div>
+            <button onclick="playlists();">Test</button>
+        </div> 
+-->
         
         <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        
+        <script>
+            function genre_click(num) {
+                $.ajax({
+                    url: '/playlists',
+                    
+                }).done(function(data) {
+                   alert("Playlist name: " + data.playlists[num].genre_name + "\nPlaylist ID: " + data.playlists[num].genre_url + "\nNumber of songs: " + data.playlists[num].number_songs + "\nImage URL: " + data.playlists[num].img);  
+                });
+            }
+        </script>
+        
+        <script>
+            function playlists() {
+                $.ajax({
+                    url: '/playlists',
+                    
+                }).done(function(data) {
+                   genres_display(data.playlists);
+                    
+                });
+            }
+        </script>
+        
+        <script>            
+            function genres_display(arr) {
+                for (i = 0; i < num_blocks; i++) {
+                    var name = "block" + i;
+                    var pl = "pl_" + i;
+                    
+                    if (i < arr.length) {
+                        document.getElementById(name).innerHTML = arr[i].genre_name;
+                        if (arr[i].img != null) {
+                            document.getElementById(pl).src = arr[i].img;
+                        } else {
+                            document.getElementById(pl).src = "images/blank.png";
+                        }
+                        
+                    } else {
+                        name = "BLOCK" + i;
+                        document.getElementById(name).style.display = 'none';
+                    }
+                }
+            }
+        </script>
+        
+        <script>
+            function user_info() {
+                $.ajax({
+                url: '/user_data',
+
+                }).done(function(data) {
+                    document.getElementById("usr_img").src = data.img.url;
+                    username.innerHTML = data.user;
+                    full_name.innerHTML = data.name;
+                    email.innerHTML = data.email;
+                    account.innerHTML = data.account + " spotify user";
+                });
+            }
+        </script>
         
         <script>
             function in_library() {
@@ -424,12 +750,12 @@
                 
                 var table = document.getElementById("table");
                 
-                if (table.style.visibility == "hidden") {
+                if (table.style.display == "none") {
                     var img = document.getElementById("history");
                     img.src="images/btn-history-on.png";
-                    table.style.visibility = "visible";
+                    table.style.display = "block";
                 } else {
-                    table.style.visibility = "hidden";
+                    table.style.display = "none";
                     var img = document.getElementById("history");
                     img.src="images/btn-history-off.png";
                 }
@@ -959,13 +1285,16 @@
             })();
         </script>
         
-        <div><script>setTimeout(songScroll, 2500);</script></div>
-        <div><script>setTimeout(infoScroll, 2500);</script></div>
+        <div><script>user_info();</script></div>
+        <div><script>pausebutton();</script></div>
+        <div><script>buttons_update();</script></div>
+        <div><script>in_library();</script></div>
         <div><script>dev_info();</script></div>
         <div><script>history_update();</script></div>
-        <div><script>in_library();</script></div>
-        <div><script>buttons_update();</script></div>
-        <div><script>pausebutton();</script></div>
+        <div><script>playlists();</script></div>
         
+        <div><script>setTimeout(songScroll, 2500);</script></div>
+        <div><script>setTimeout(infoScroll, 2500);</script></div>
+    
     </body>
 </html>
