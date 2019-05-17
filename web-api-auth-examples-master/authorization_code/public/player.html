@@ -6,13 +6,17 @@
     </script>
         
     <style type="text/css">
+       
+        
         .player{
             width: 25%;
             height: auto;
             position: relative;
             padding-top: 1.5%;
             padding-left: 1.5%;
-            margin-bottom: -50%;
+/*            margin-bottom: -50%;*/
+/*            margin-bottom: 50%;*/
+
         }  
         
         .player img {
@@ -138,7 +142,7 @@
         .heads_inner{
             float: left;
             width: 100%;
-            height: 173px;
+            height: 190px;
             position: relative;
             background-color: #1F1C1C;
             display: inherit;
@@ -215,7 +219,7 @@
             
             <div class="gap"></div>
         </div>
-        
+            
         <div  id="table" style="overflow: hidden; max-width: 34.5%; z-index:150; font-family: verdana; display: none; position: relative; float: left; visibility: visible; padding-top: 1.5%; padding-left: 1.5%;">
             <table style="color: grey; background-color: #0e0b08; text-overflow: ellipsis;">
                 <tr>
@@ -291,7 +295,7 @@
         <div style="float: left; height: 1%; width: 70%; background-color: yellow">
         </div>
         
-        <div style="transform: translate(-2500%, 70%); position: relative; float: left; height: 600px; width: 1%; background-color: #1F1C1C; margin-right: -25.1%; margin-bottom: 30%"><p></p></div>
+        <div style="transform: translate(-2500%, 100%); position: relative; float: left; height: 800px; width: 1%; background-color: #1F1C1C; margin-right: -25.1%; margin-bottom: 40%"><p></p></div>
         
          <font face="verdana" size="3" color="#55ba55">
              
@@ -665,6 +669,12 @@
              </a>
 
         </font>
+        
+        <div style="display: inherit; float: left; transform: translate(-156.1%, -132.4%);" id="playlist_disp" class="player">
+            <img style="float: left;" src="images/player-temp-bg.png"/>
+        </div>
+        
+        
 
 <!--
         <div>
@@ -719,7 +729,7 @@
 //                        document.getElementById(pl).style.float = 'left';
 //                        document.getElementById(pl).style.position = 'relative';
                         document.getElementById(pl).style.paddingTop = '21%';
-                        document.getElementById(big).style.width = '173px';
+                        document.getElementById(big).style.width = '190px';
                     } else {
                         name = "BLOCK" + i;
                         document.getElementById(name).style.display = 'none';
