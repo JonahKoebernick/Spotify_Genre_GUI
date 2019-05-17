@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <script>
-        var num_blocks = 21;
+        var num_blocks = 41;
 
     </script>
         
@@ -12,6 +12,7 @@
             position: relative;
             padding-top: 1.5%;
             padding-left: 1.5%;
+            margin-bottom: -50%;
         }  
         
         .player img {
@@ -126,7 +127,7 @@
             padding-top: 1.5%;
             padding-left: 1.5%;
             float: left;
-            width: 20%;
+            width: 22.6%;
             height: auto;
             position: relative;
 /*            background-color: red;*/
@@ -139,17 +140,17 @@
             width: 100%;
             height: 173px;
             position: relative;
-            background-color: black;
+            background-color: #1F1C1C;
             display: inherit;
             overflow: hidden;
         }  
         
         .ps {
-            transform: translate(2%, -97%);
+            transform: translate(2%, -90%);
         }
         
         .gap {
-            height:500px;
+/*            height:500px;*/
         }
         
     </style>
@@ -215,7 +216,7 @@
             <div class="gap"></div>
         </div>
         
-        <div  id="table" style="max-width: 34.5%; z-index:150; font-family: verdana; display: none; position: relative; float: left; visibility: visible; padding-top: 1.5%; padding-left: 1.5%;">
+        <div  id="table" style="overflow: hidden max-width: 34.5%; z-index:150; font-family: verdana; display: none; position: relative; float: left; visibility: visible; padding-top: 1.5%; padding-left: 1.5%;">
             <table style="color: grey; background-color: #0e0b08; text-overflow: ellipsis;">
                 <tr>
                     <td id="a0">artist0</td>
@@ -273,7 +274,7 @@
         <div class="login">
             <div class="login_inner">
                 <div style="float: left;">
-                    <img style="float: left; transform: translate(10%,11%);" id="usr_img" src="{{images.0.url}}" />
+                    <img style="float: left; width: inherit; transform: translate(10%,11%);" id="usr_img" src="{{images.0.url}}" />
                     <div style="float: left">
                         <font face="verdana" size="3" color="white">
                             <div id="full_name" style="transform: translate(18.5%, 345%);">full_name</div>
@@ -289,6 +290,8 @@
         
         <div style="float: left; height: 1%; width: 70%; background-color: yellow">
         </div>
+        
+        <div style="transform: translate(-2500%, 70%); position: relative; float: left; height: 600px; width: 1%; background-color: #1F1C1C; margin-right: -25.1%; margin-bottom: 30%"><p></p></div>
         
          <font face="verdana" size="3" color="#55ba55">
              
@@ -480,6 +483,186 @@
                     </div>
                 </div>
              </a>
+             
+             <a class="gens" onclick="genre_click(21);">
+                <div id="BLOCK21" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_21" src="{{images.0.url}}" />
+                        <p class="ps" style="" id ="block21">Block 21</p>
+                    </div>
+                </div>
+             </a>
+             
+            <a class="gens" onclick="genre_click(22)">
+                <div id="BLOCK22" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_22" src="{{images.0.url}}" />
+                        <p class="ps" style="" id ="block22">Block 22</p>
+                    </div>
+                </div>
+             </a>
+             
+            <a class="gens" onclick="genre_click(23)">
+                <div id="BLOCK23" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_23" src="{{images.0.url}}" />
+                        <p class="ps" style="" id ="block23">Block 23</p>
+                    </div>
+                </div>
+             </a>
+
+            <a class="gens" onclick="genre_click(24)">
+                <div id="BLOCK24" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_24" src="{{images.0.url}}" />
+                        <p class="ps" style="" id ="block24">Block 24</p>
+                    </div>
+                </div>
+             </a>
+
+             <a class="gens" onclick="genre_click(25)">
+                <div id="BLOCK25" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_25" src="{{images.0.url}}" />
+                        <p class="ps" style="" id ="block25">Block 25</p>
+                    </div>
+                </div>
+             </a>
+
+             <a class="gens" onclick="genre_click(26)">
+                <div id="BLOCK26" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_26" src="{{images.0.url}}" />
+                        <p class="ps" style="" id ="block26">Block 26</p>
+                    </div>
+                </div>
+             </a>
+
+             <a class="gens" onclick="genre_click(27)">
+                <div id="BLOCK27" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_27" src="{{images.0.url}}" />
+                        <p class="ps" style="" id ="block27">Block 27</p>
+                    </div>
+                </div>
+             </a>
+
+             <a class="gens" onclick="genre_click(28)">
+                <div id="BLOCK28" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_28" src="{{images.0.url}}" />
+                        <p class="ps" style="" id="block28">Block 28</p>
+                    </div>
+                </div>
+             </a>
+
+             <a class="gens" onclick="genre_click(29)">
+                <div id="BLOCK29" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_29" src="{{images.0.url}}" />
+                        <p class="ps" style="" id="block29">Block 29</p>
+                    </div>
+                </div>
+             </a>
+
+             <a class="gens" onclick="genre_click(30)">
+                <div id="BLOCK30" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_30" src="images/blank.png" />
+                        <p class="ps" style="" id="block30">Block 30</p>
+                    </div>
+                </div>
+             </a>
+
+             <a class="gens" onclick="genre_click(31)">
+                <div id="BLOCK31" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_31" src="images/blank.png" />
+                        <p class="ps" style="" id="block31">Block 31</p>
+                    </div>
+                </div>   
+             </a>
+             
+             <a class="gens" onclick="genre_click(32)">
+                <div id="BLOCK32" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_32" src="images/blank.png" />
+                        <p class="ps" style="" id="block32">Block 32</p>
+                    </div>
+                </div>  
+             </a>
+             
+             <a class="gens" onclick="genre_click(33)">
+                <div id="BLOCK33" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_33" src="images/blank.png" />
+                        <p class="ps" style="" id="block33">Block 33</p>
+                    </div>
+                </div>  
+             </a>
+             
+             <a class="gens" onclick="genre_click(34)">
+                <div id="BLOCK34" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_34" src="images/blank.png" />
+                        <p class="ps" style="" id="block34">Block 34</p>
+                    </div>
+                </div>  
+             </a>
+             
+             <a class="gens" onclick="genre_click(35)">
+                <div id="BLOCK35" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_35" src="{{images.0.url}}" />
+                        <p class="ps" style="" id="block35">Block 35</p>
+                    </div>
+                </div>  
+             </a>
+             
+             <a class="gens" onclick="genre_click(36)">
+                <div id="BLOCK36" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_36" src="{{images.0.url}}" />
+                        <p class="ps" style="" id="block36">Block 36</p>
+                    </div>
+                </div>  
+             </a>
+             
+             <a class="gens" onclick="genre_click(37)">
+                <div id="BLOCK37" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_37" src="{{images.0.url}}" />
+                        <p class="ps" style="" id="block37">Block 37</p>
+                    </div>
+                </div>  
+             </a>
+             
+             <a class="gens" onclick="genre_click(38)">
+                <div id="BLOCK38" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_38" src="{{images.0.url}}" />
+                        <p class="ps" style="" id="block38">Block 38</p>
+                    </div>
+                </div>  
+             </a>
+             
+             <a class="gens" onclick="genre_click(39)">
+                <div id="BLOCK39" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_39" src="{{images.0.url}}" />
+                        <p class="ps" style="" id="block39">Block 39</p>
+                    </div>
+                </div>  
+             </a>
+             
+             <a class="gens" onclick="genre_click(40)">
+                <div id="BLOCK40" class="heads">
+                    <div class="heads_inner">
+                        <img style="width: 100%; float: left;" id="pl_40" src="{{images.0.url}}" />
+                        <p class="ps" style="" id="block40">Block 40</p>
+                    </div>
+                </div>
+             </a>
 
         </font>
 
@@ -498,7 +681,11 @@
                     url: '/playlists',
                     
                 }).done(function(data) {
-                   alert("Playlist name: " + data.playlists[num].genre_name + "\nPlaylist ID: " + data.playlists[num].genre_url + "\nNumber of songs: " + data.playlists[num].number_songs + "\nImage URL: " + data.playlists[num].img);  
+                    if (num < data.playlists.length) {
+                        alert("Playlist name: " + data.playlists[num].genre_name + "\nPlaylist ID: " + data.playlists[num].genre_url + "\nNumber of songs: " + data.playlists[num].number_songs + "\nImage URL: " + data.playlists[num].img);  
+                    } else if (num == data.playlists.length) {
+                        alert("add");
+                    }
                 });
             }
         </script>
@@ -519,6 +706,7 @@
             function genres_display(arr) {
                 for (i = 0; i < num_blocks; i++) {
                     var name = "block" + i;
+                    var big = "BLOCK" + i;
                     var pl = "pl_" + i;
                     
                     if (i < arr.length) {
@@ -526,9 +714,16 @@
                         if (arr[i].img != null) {
                             document.getElementById(pl).src = arr[i].img;
                         } else {
-                            document.getElementById(pl).src = "images/blank.png";
-                        }
-                        
+                            document.getElementById(pl).src = "images/temp-album.jpeg";
+                        }   
+                    } else if (i == arr.length) {
+                        document.getElementById(pl).src = "images/btn-add.png";
+                        document.getElementById(name).innerHTML = "";
+                        document.getElementById(pl).style.width = '100px';
+//                        document.getElementById(pl).style.float = 'left';
+//                        document.getElementById(pl).style.position = 'relative';
+                        document.getElementById(pl).style.paddingTop = '21%';
+                        document.getElementById(big).style.width = '173px';
                     } else {
                         name = "BLOCK" + i;
                         document.getElementById(name).style.display = 'none';
