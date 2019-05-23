@@ -6,6 +6,9 @@
  * For more information, read
  * https://developer.spotify.com/web-api/authorization-guide/#authorization_code_flow
  */
+var track_hrefs = new Array();
+var num_lists = 0;
+var progress = 0;
 
 var express = require('express'); // Express web server framework
 var request = require('request'); // "Request" library
@@ -628,6 +631,7 @@ app.get('/playlists', function(req, res) {
     console.log(access_token2);
 
     var user_playlists = [];
+    var tracks = [];
     
     var options = {
         url: "https://api.spotify.com/v1/me/playlists",
@@ -639,22 +643,34 @@ app.get('/playlists', function(req, res) {
         if(!error && response.statusCode == 200 ){
 
             console.log("Success: " + body + " Number: " + body.items.length);
-
+            
             for (i = 0; i < body.items.length; i++) {
                 var pl = {
                     genre_url: body.items[i].id,
                     number_songs: body.items[i].tracks.total,
                     genre_name: body.items[i].name,
+                    tlist: body.items[i].tracks.href,
+//                    tracks: playlist_tracks,
 //                    img: body.items[i].images[0].url,
                 };
                 if (body.items[i].images.length > 0) {
                     pl.img = body.items[i].images[0].url;
                 }
                 
+                track_hrefs[i] = pl.tlist;
+                
                 user_playlists[i] = pl;
             }
             
             console.log(user_playlists);
+            
+            for(y=0; y < track_hrefs.length; y++) {
+                console.log("href[" + y + "]: " + track_hrefs[y]);
+            }
+            
+            num_lists = track_hrefs.length;
+            
+            console.log("NUMBER OF PLAYLISTS: " + num_lists);
             
             res.send({
                 'playlists' : user_playlists,
@@ -665,6 +681,42 @@ app.get('/playlists', function(req, res) {
         
         
     }); 
+});
+
+app.get('/tracks/:theValue', function(req, res) {
+//    res.send(req.params.theValue.toUpperCase());
+    
+    console.log("GETTING TRACKS");
+    var tmp = 'https://api.spotify.com/v1/playlists/' + req.params.theValue + '/tracks';
+    console.log(tmp);
+    
+    var options = {
+        url: tmp,
+        headers: { 'Authorization': 'Bearer ' + access_token2 },
+        json: true
+    };
+
+    request.get(options, function(error, response, body) {
+        if(!error && response.statusCode == 200 ){
+            console.log("SUCCESS");
+            var curr = new Array();
+            
+            for (gk = 0; gk < body.items.length; gk++) {
+                curr[gk] = body.items[gk].track;
+            }
+            
+            for (gk = 0; gk < body.items.length; gk++) {
+                console.log(curr[gk]);
+            }
+            
+            res.send({
+                'tracks': curr,
+            });
+        } else {
+            console.log("FAIL: " + response.statusCode);
+        }
+    });
+
 });
 
 console.log('Listening on 8888');
