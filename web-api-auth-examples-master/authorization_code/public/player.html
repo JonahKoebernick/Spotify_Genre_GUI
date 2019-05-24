@@ -2,20 +2,18 @@
 <html>
     <script>
         var num_blocks = 41;
-        var offset = 0;
         
     </script>
         
     <style type="text/css">
        
-        
         .player{
             width: 25%;
             height: auto;
             position: relative;
             padding-top: 1.5%;
             padding-left: 1.5%;
-/*            margin-bottom: -50%;*/
+            margin-bottom: -50%;
 /*            margin-bottom: 50%;*/
 
         }  
@@ -30,6 +28,7 @@
             border: none;
 /*            color: whitesmoke;*/
             position: relative;
+            outline: none;
         }
         
         .pl_disp{
@@ -39,14 +38,30 @@
             overflow-y: scroll;
 
         } 
-
-        
+    
         .pl_disp tr {
             height: 25px;
         }
-
         
-        .button1:hover {
+        .pl_disp button {
+            background-color: transparent;
+            border: none;
+/*            color: whitesmoke;*/
+            position: relative;
+/*            outline: none;*/
+            
+        }
+        
+        .pl_disp button:hover {
+            background-color: transparent;
+            border: none;
+/*            color: whitesmoke;*/
+            position: relative;
+/*            outline: none;*/
+            
+        }
+    
+        .button:hover {
 /*            background-color: #0f0b08;*/
             border: none;
 /*            color: whitesmoke;*/
@@ -158,7 +173,8 @@
         .heads_inner{
             float: left;
             width: 100%;
-            height: 190px;
+/*            height: 190px;*/
+            height: 173.3px;
             position: relative;
             background-color: #1F1C1C;
             display: inherit;
@@ -172,6 +188,40 @@
         .gap {
 /*            height:500px;*/
         }
+        
+        #playlist {
+            font-family: "verdana";
+            table-layout: fixed;
+            border-collapse: collapse;
+            width: 100%;
+            text-overflow: ellipsis;
+            background-color: #0e0b08;
+            color: grey;
+/*            display: table;*/
+        }
+
+        #playlist td, #playlist th {
+/*            border: 1px solid #ddd;*/
+            text-overflow: ellipsis;
+            overflow: hidden;
+            text-align: center;
+/*            display: table;*/
+/*            padding: .5%;*/
+        }
+        
+        #playlist tr {
+            display: block;
+        }
+
+/*        #playlist tr:nth-child(even){background-color: gray;}*/
+
+/*        #playlist tr:hover {background-color: #ddd;}*/
+        
+        #playlist td:nth-child(1){width: 35%;}
+        #playlist td:nth-child(2){width: 100%;}
+        #playlist td:nth-child(3){width: 100%;}
+        
+    
         
     </style>
     
@@ -313,7 +363,7 @@
         
         <div style="transform: translate(-2500%, 100%); position: relative; float: left; height: 800px; width: 1%; background-color: #1F1C1C; margin-right: -25.1%; margin-bottom: 40%"><p></p></div>
         
-         <font face="verdana" size="3" color="#55ba55">
+        <font face="verdana" size="3" color="#55ba55">
              
              <a class="gens" onclick="genre_click(0);">
                  <div id="BLOCK0" class="heads">
@@ -685,10 +735,14 @@
              </a>
 
         </font>
+                
+<!--        <div style="height: 640px; background-color: #0e0b08; display: none; float: left; transform: translate(-159.55%, -133.15%);" id="playlist_disp" class="pl_disp">-->
         
-        <div style="height: 640px; background-color: aqua; display: inherit; float: left; transform: translate(-159.55%, -133.15%);" id="playlist_disp" class="pl_disp">
-            <h1 style="color: white;">Playlist</h1>
-            <table class="pl_disp" style="width: 100%; table-layout: fixed; transform: translate(0%, -2.7%); color: grey; background-color: #0e0b08; overflow-y: scroll;">
+        <div style="height: 756.4px; background-color: #0e0b08; display: none; float: left; transform: translate(-255.9%, -100.05%);" id="playlist_disp" class="pl_disp">
+            <button style="z-index: 100; position: relative; float: right; width: 10%; height: 10%; transform: translate(-10%, -20%);" class=button onclick="exit();"><img id="history" style="width: 100%" src="images/btn-close.png"/></button>
+            <font face="verdana" color="#55ba55"><h1 style="color: white; transform: translate(5%, 0%)" id="playlist_name">Playlist</h1></font>
+<!--            <table class="pl_disp" style="width: 100%; table-layout: fixed; transform: translate(0%, -2.7%); color: grey; background-color: #0e0b08; overflow-y: scroll;">-->
+            <table id="playlist">    
                 <tr id="row0">
                     <td id="pl_a0">artist0</td>
                     <td id="pl_t0">track0</td>
@@ -939,14 +993,265 @@
                     <td id="pl_t49">track49</td>
                     <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(49)">Temp</button></td>
                 </tr>
+                <tr id="row50">
+                    <td id="pl_a50">artist50</td>
+                    <td id="pl_t50">track50</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(50)">Temp</button></td>
+                </tr>
+                <tr id="row51">
+                    <td id="pl_a51">artist51</td>
+                    <td id="pl_t51">track51</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(51)">Temp</button></td>
+                </tr>
+                <tr id="row52">
+                    <td id="pl_a52">artist52</td>
+                    <td id="pl_t52">track52</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(52)">Temp</button></td>
+                </tr>
+                <tr id="row53">
+                    <td id="pl_a53">artist53</td>
+                    <td id="pl_t53">track53</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(53)">Temp</button></td>
+                </tr>
+                <tr id="row54">
+                    <td id="pl_a54">artist54</td>
+                    <td id="pl_t54">track54</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(54)">Temp</button></td>
+                </tr>
+                <tr id="row55">
+                    <td id="pl_a55">artist55</td>
+                    <td id="pl_t55">track55</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(55)">Temp</button></td>
+                </tr>
+                <tr id="row56">
+                    <td id="pl_a56">artist56</td>
+                    <td id="pl_t56">track56</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(56)">Temp</button></td>
+                </tr>
+                <tr id="row57">
+                    <td id="pl_a57">artist57</td>
+                    <td id="pl_t57">track57</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(57)">Temp</button></td>
+                </tr>
+                <tr id="row58">
+                    <td id="pl_a58">artist58</td>
+                    <td id="pl_t58">track58</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(58)">Temp</button></td>
+                </tr>
+                <tr id="row59">
+                    <td id="pl_a59">artist59</td>
+                    <td id="pl_t59">track59</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(59)">Temp</button></td>
+                </tr>
+                <tr id="row60">
+                    <td id="pl_a60">artist60</td>
+                    <td id="pl_t60">track60</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(60)">Temp</button></td>
+                </tr>
+                <tr id="row61">
+                    <td id="pl_a61">artist61</td>
+                    <td id="pl_t61">track61</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(61)">Temp</button></td>
+                </tr>
+                <tr id="row62">
+                    <td id="pl_a62">artist62</td>
+                    <td id="pl_t62">track62</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(62)">Temp</button></td>
+                </tr>
+                <tr id="row63">
+                    <td id="pl_a63">artist63</td>
+                    <td id="pl_t63">track63</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(63)">Temp</button></td>
+                </tr>
+                <tr id="row64">
+                    <td id="pl_a64">artist64</td>
+                    <td id="pl_t64">track64</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(64)">Temp</button></td>
+                </tr>
+                <tr id="row65">
+                    <td id="pl_a65">artist65</td>
+                    <td id="pl_t65">track65</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(65)">Temp</button></td>
+                </tr>
+                <tr id="row66">
+                    <td id="pl_a66">artist66</td>
+                    <td id="pl_t66">track66</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(66)">Temp</button></td>
+                </tr>
+                <tr id="row67">
+                    <td id="pl_a67">artist67</td>
+                    <td id="pl_t67">track67</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(67)">Temp</button></td>
+                </tr>
+                <tr id="row68">
+                    <td id="pl_a68">artist68</td>
+                    <td id="pl_t68">track68</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(68)">Temp</button></td>
+                </tr>
+                <tr id="row69">
+                    <td id="pl_a69">artist69</td>
+                    <td id="pl_t69">track69</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(69)">Temp</button></td>
+                </tr>
+                <tr id="row70">
+                    <td id="pl_a70">artist70</td>
+                    <td id="pl_t70">track70</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(70)">Temp</button></td>
+                </tr>
+                <tr id="row71">
+                    <td id="pl_a71">artist71</td>
+                    <td id="pl_t71">track71</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(71)">Temp</button></td>
+                </tr>
+                <tr id="row72">
+                    <td id="pl_a72">artist72</td>
+                    <td id="pl_t72">track72</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(72)">Temp</button></td>
+                </tr>
+                <tr id="row73">
+                    <td id="pl_a73">artist73</td>
+                    <td id="pl_t73">track73</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(73)">Temp</button></td>
+                </tr>
+                <tr id="row74">
+                    <td id="pl_a74">artist74</td>
+                    <td id="pl_t74">track74</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(74)">Temp</button></td>
+                </tr>
+                <tr id="row75">
+                    <td id="pl_a75">artist75</td>
+                    <td id="pl_t75">track75</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(75)">Temp</button></td>
+                </tr>
+                <tr id="row76">
+                    <td id="pl_a76">artist76</td>
+                    <td id="pl_t76">track76</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(76)">Temp</button></td>
+                </tr>
+                <tr id="row77">
+                    <td id="pl_a77">artist77</td>
+                    <td id="pl_t77">track77</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(77)">Temp</button></td>
+                </tr>
+                <tr id="row78">
+                    <td id="pl_a78">artist78</td>
+                    <td id="pl_t78">track78</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(78)">Temp</button></td>
+                </tr>
+                <tr id="row79">
+                    <td id="pl_a79">artist79</td>
+                    <td id="pl_t79">track79</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(79)">Temp</button></td>
+                </tr>
+                <tr id="row80">
+                    <td id="pl_a80">artist80</td>
+                    <td id="pl_t80">track80</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(80)">Temp</button></td>
+                </tr>
+                <tr id="row81">
+                    <td id="pl_a81">artist81</td>
+                    <td id="pl_t81">track81</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(81)">Temp</button></td>
+                </tr>
+                <tr id="row82">
+                    <td id="pl_a82">artist82</td>
+                    <td id="pl_t82">track82</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(82)">Temp</button></td>
+                </tr>
+                <tr id="row83">
+                    <td id="pl_a83">artist83</td>
+                    <td id="pl_t83">track83</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(83)">Temp</button></td>
+                </tr>
+                <tr id="row84">
+                    <td id="pl_a84">artist84</td>
+                    <td id="pl_t84">track84</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(84)">Temp</button></td>
+                </tr>
+                <tr id="row85">
+                    <td id="pl_a85">artist85</td>
+                    <td id="pl_t85">track85</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(85)">Temp</button></td>
+                </tr>
+                <tr id="row86">
+                    <td id="pl_a86">artist86</td>
+                    <td id="pl_t86">track86</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(86)">Temp</button></td>
+                </tr>
+                <tr id="row87">
+                    <td id="pl_a87">artist87</td>
+                    <td id="pl_t87">track87</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(87)">Temp</button></td>
+                </tr>
+                <tr id="row88">
+                    <td id="pl_a88">artist88</td>
+                    <td id="pl_t88">track88</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(88)">Temp</button></td>
+                </tr>
+                <tr id="row89">
+                    <td id="pl_a89">artist89</td>
+                    <td id="pl_t89">track89</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(89)">Temp</button></td>
+                </tr>
+                <tr id="row90">
+                    <td id="pl_a90">artist90</td>
+                    <td id="pl_t90">track90</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(90)">Temp</button></td>
+                </tr>
+                <tr id="row91">
+                    <td id="pl_a91">artist91</td>
+                    <td id="pl_t91">track91</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(91)">Temp</button></td>
+                </tr>
+                <tr id="row92">
+                    <td id="pl_a92">artist92</td>
+                    <td id="pl_t92">track92</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(92)">Temp</button></td>
+                </tr>
+                <tr id="row93">
+                    <td id="pl_a93">artist93</td>
+                    <td id="pl_t93">track93</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(93)">Temp</button></td>
+                </tr>
+                <tr id="row94">
+                    <td id="pl_a94">artist94</td>
+                    <td id="pl_t94">track94</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(94)">Temp</button></td>
+                </tr>
+                <tr id="row95">
+                    <td id="pl_a95">artist95</td>
+                    <td id="pl_t95">track95</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(95)">Temp</button></td>
+                </tr>
+                <tr id="row96">
+                    <td id="pl_a96">artist96</td>
+                    <td id="pl_t96">track96</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(96)">Temp</button></td>
+                </tr>
+                <tr id="row97">
+                    <td id="pl_a97">artist97</td>
+                    <td id="pl_t97">track97</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(97)">Temp</button></td>
+                </tr>
+                <tr id="row98">
+                    <td id="pl_a98">artist98</td>
+                    <td id="pl_t98">track98</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(98)">Temp</button></td>
+                </tr>
+                <tr id="row99">
+                    <td id="pl_a99">artist99</td>
+                    <td id="pl_t99">track99</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(99)">Temp</button></td>
+                </tr>
             </table>
+            
         </div>
-        
-        
 
+<!--
         <div>
             <button onclick="temp();">Test</button>
         </div> 
+-->
         
         <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
@@ -959,9 +1264,13 @@
                 }).done(function(data) {
 
                     if (num < data.playlists.length) {
+                        document.getElementById("playlist_disp").style.display = "inherit";
 //                        alert("Playlist name: " + data.playlists[num].genre_name + "\nPlaylist ID: " + data.playlists[num].genre_url + "\nNumber of songs: " + data.playlists[num].number_songs + "\nImage URL: " + data.playlists[num].img + "\nTracks: " + data.playlists[num].tlist); 
-                        offset = 0;
 //                        alert(data.playlists[num].genre_url);
+                        document.getElementById("player").style.marginBottom = "5%";
+                        var pl_name = document.getElementById("playlist_name");
+                        pl_name.textContent = data.playlists[num].genre_name;
+                        
                         temp(data.playlists[num].genre_url);
                         
                     } else if (num == data.playlists.length) {
@@ -1016,13 +1325,14 @@
                     
                 }).done(function(data) {
                     var songs = data.tracks;
-                    var most = 50;
+                    var most = 100;
+                    
                     
 
-                    if (songs.length < 50) most = songs.length;
+                    if (songs.length < 100) most = songs.length;
                     
 //                    alert(most);
-                    for (gk = 0; gk < 50; gk++) {
+                    for (gk = 0; gk < 100; gk++) {
                         if (gk < most) {
                             
                             var ida = "pl_a" + gk;
@@ -1036,12 +1346,13 @@
                             var rows = "row" + gk;
                             var testing = document.getElementById(rows);
                             testing.style.display = 'initial';
+
                             
                             var ida = "pl_a" + gk;
                             var idt = "pl_t" + gk;
 
                             var t0 = document.getElementById(idt);
-                            t0.innerHTML = songs[gk].name;
+                            t0.innerHTML = "" + songs[gk].name;
                             
                             var arts = "";
                             var fence = "";
@@ -1056,6 +1367,36 @@
                             var a0 = document.getElementById(ida);
                             a0.innerHTML = arts;
                             
+                            /*var ida = "pl_a" + gk;
+                            var idt = "pl_t" + gk;
+                            
+                            var t0 = document.getElementById(idt);
+                            t0.textContent = "track" + gk;
+                            var a0 = document.getElementById(ida);
+                            a0.textContent = "artist" + gk;
+                            
+                            var rows = "row" + gk;
+                            var testing = document.getElementById(rows);
+                            testing.style.display = 'initial';
+                            
+                            var ida = "pl_a" + gk;
+                            var idt = "pl_t" + gk;
+
+                            var t0 = document.getElementById(idt);
+                            t0.textContent = "" + songs[gk].name;
+                            
+                            var arts = "";
+                            var fence = "";
+                            for (i = 0; i < songs[gk].artists.length; i++) {
+                                arts += fence + songs[gk].artists[i].name;
+                                if (i == 0) {
+                                    fence = ", ";
+                                }
+                                
+                            }
+                            
+                            var a0 = document.getElementById(ida);
+                            a0.textContent = arts;*/
                             
                         } else {
                             
@@ -1071,6 +1412,18 @@
                             var testing = document.getElementById(rows);
                             testing.style.display = 'none';
                             
+                            /*var ida = "pl_a" + gk;
+                            var idt = "pl_t" + gk;
+                            
+                            var t0 = document.getElementById(idt);
+                            t0.textContent = "track" + gk;
+                            var a0 = document.getElementById(ida);
+                            a0.textContent = "artist" + gk;
+                            
+                            var rows = "row" + gk;
+                            var testing = document.getElementById(rows);
+                            testing.style.display = 'none';*/
+                            
                         }
                        
                         
@@ -1079,6 +1432,14 @@
                     
 //                    alert(most);
                 });
+            }
+            
+            function exit() {
+//                alert("hello");
+                var temp = document.getElementById("playlist_disp");
+                temp.style.display = "none";
+                
+                document.getElementById("player").style.marginBottom = "-50%";
             }
         
             function user_info() {
