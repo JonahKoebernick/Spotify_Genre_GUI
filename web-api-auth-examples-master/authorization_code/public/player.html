@@ -2,6 +2,10 @@
 <html>
     <script>
         var num_blocks = 41;
+        var offset = -50;
+        var selections = [];
+        var gen = 0;
+        var percent_shuffle = false;
         
     </script>
         
@@ -36,9 +40,15 @@
 /*            height: auto;*/
             position: relative;
             overflow-y: scroll;
-
         } 
-    
+        
+        .percent{
+            width: 25%;
+            height: 367.9px;
+            position: relative;
+            overflow-y: scroll;
+        } 
+
         .pl_disp tr {
             height: 25px;
         }
@@ -197,6 +207,7 @@
             text-overflow: ellipsis;
             background-color: #0e0b08;
             color: grey;
+            
 /*            display: table;*/
         }
 
@@ -212,14 +223,22 @@
         #playlist tr {
             display: block;
         }
-
-/*        #playlist tr:nth-child(even){background-color: gray;}*/
-
-/*        #playlist tr:hover {background-color: #ddd;}*/
         
         #playlist td:nth-child(1){width: 35%;}
         #playlist td:nth-child(2){width: 100%;}
         #playlist td:nth-child(3){width: 100%;}
+        
+        #percent td:nth-child(1){width: 100%;}
+        #percent td:nth-child(2){width: 100%;}
+        #percent td:nth-child(3){width: 100%;}
+        #percent td:nth-child(4){width: 100%;}
+        
+        .gens button {
+            background-color: transparent;
+            border: none;
+            position: relative;
+            outline: none;
+        }
         
     
         
@@ -370,6 +389,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_0" src="images/blank.png" />
                         <p class="ps" style="" id="block0">Block 0</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(0)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>
              </a>
@@ -379,6 +399,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_1" src="images/blank.png" />
                         <p class="ps" style="" id ="block1">Block 1</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(1)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>
              </a>
@@ -388,6 +409,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_2" src="images/blank.png" />
                         <p class="ps" style="" id ="block2">Block 2</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(2)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>
              </a>
@@ -397,6 +419,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_3" src="images/blank.png" />
                         <p class="ps" style="" id ="block3">Block 3</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(3)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>
              </a>
@@ -406,6 +429,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_4" src="images/blank.png" />
                         <p class="ps" style="" id ="block4">Block 4</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(4)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>
              </a>
@@ -415,6 +439,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_5" src="images/blank.png" />
                         <p class="ps" style="" id ="block5">Block 5</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(5)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>
              </a>
@@ -424,6 +449,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_6" src="images/blank.png" />
                         <p class="ps" style="" id ="block6">Block 6</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(6)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>
              </a>
@@ -433,6 +459,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_7" src="images/blank.png" />
                         <p class="ps" style="" id ="block7">Block 7</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(7)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>
              </a>
@@ -442,6 +469,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_8" src="images/blank.png" />
                         <p class="ps" style="" id="block8">Block 8</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(8)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>
              </a>
@@ -451,6 +479,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_9" src="images/blank.png" />
                         <p class="ps" style="" id="block9">Block 9</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(9)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>
              </a>
@@ -460,6 +489,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_10" src="images/blank.png" />
                         <p class="ps" style="" id="block10">Block 10</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(10)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>
              </a>
@@ -469,6 +499,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_11" src="images/blank.png" />
                         <p class="ps" style="" id="block11">Block 11</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(11)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>   
              </a>
@@ -478,6 +509,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_12" src="images/blank.png" />
                         <p class="ps" style="" id="block12">Block 12</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(12)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>  
              </a>
@@ -487,6 +519,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_13" src="images/blank.png" />
                         <p class="ps" style="" id="block13">Block 13</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(13)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>  
              </a>
@@ -496,6 +529,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_14" src="images/blank.png" />
                         <p class="ps" style="" id="block14">Block 14</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(14)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>  
              </a>
@@ -505,6 +539,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_15" src="images/blank.png" />
                         <p class="ps" style="" id="block15">Block 15</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(15)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>  
              </a>
@@ -514,6 +549,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_16" src="images/blank.png" />
                         <p class="ps" style="" id="block16">Block 16</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(16)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>  
              </a>
@@ -523,6 +559,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_17" src="images/blank.png" />
                         <p class="ps" style="" id="block17">Block 17</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(17)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>  
              </a>
@@ -532,6 +569,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_18" src="images/blank.png" />
                         <p class="ps" style="" id="block18">Block 18</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(18)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>  
              </a>
@@ -541,6 +579,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_19" src="images/blank.png" />
                         <p class="ps" style="" id="block19">Block 19</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(19)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>  
              </a>
@@ -550,6 +589,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_20" src="images/blank.png" />
                         <p class="ps" style="" id="block20">Block 20</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(20)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>
              </a>
@@ -559,6 +599,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_21" src="images/blank.png" />
                         <p class="ps" style="" id ="block21">Block 21</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(21)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>
              </a>
@@ -568,6 +609,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_22" src="images/blank.png" />
                         <p class="ps" style="" id ="block22">Block 22</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(22)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>
              </a>
@@ -577,6 +619,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_23" src="images/blank.png" />
                         <p class="ps" style="" id ="block23">Block 23</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(23)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>
              </a>
@@ -586,6 +629,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_24" src="images/blank.png" />
                         <p class="ps" style="" id ="block24">Block 24</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(24)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>
              </a>
@@ -595,6 +639,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_25" src="images/blank.png" />
                         <p class="ps" style="" id ="block25">Block 25</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(25)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>
              </a>
@@ -604,6 +649,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_26" src="images/blank.png" />
                         <p class="ps" style="" id ="block26">Block 26</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(26)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>
              </a>
@@ -613,6 +659,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_27" src="images/blank.png" />
                         <p class="ps" style="" id ="block27">Block 27</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(27)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>
              </a>
@@ -622,6 +669,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_28" src="images/blank.png" />
                         <p class="ps" style="" id="block28">Block 28</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(28)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>
              </a>
@@ -631,6 +679,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_29" src="images/blank.png" />
                         <p class="ps" style="" id="block29">Block 29</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(29)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>
              </a>
@@ -640,6 +689,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_30" src="images/blank.png" />
                         <p class="ps" style="" id="block30">Block 30</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(30)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>
              </a>
@@ -649,6 +699,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_31" src="images/blank.png" />
                         <p class="ps" style="" id="block31">Block 31</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(31)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>   
              </a>
@@ -658,6 +709,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_32" src="images/blank.png" />
                         <p class="ps" style="" id="block32">Block 32</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(32)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>  
              </a>
@@ -667,6 +719,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_33" src="images/blank.png" />
                         <p class="ps" style="" id="block33">Block 33</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(33)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>  
              </a>
@@ -676,6 +729,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_34" src="images/blank.png" />
                         <p class="ps" style="" id="block34">Block 34</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(34)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>  
              </a>
@@ -685,6 +739,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_35" src="images/blank.png" />
                         <p class="ps" style="" id="block35">Block 35</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(35)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>  
              </a>
@@ -694,6 +749,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_36" src="images/blank.png" />
                         <p class="ps" style="" id="block36">Block 36</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(36)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>  
              </a>
@@ -703,6 +759,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_37" src="images/blank.png" />
                         <p class="ps" style="" id="block37">Block 37</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(37)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>  
              </a>
@@ -712,6 +769,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_38" src="images/blank.png" />
                         <p class="ps" style="" id="block38">Block 38</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(38)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>  
              </a>
@@ -721,6 +779,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_39" src="images/blank.png" />
                         <p class="ps" style="" id="block39">Block 39</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(39)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>  
              </a>
@@ -730,6 +789,7 @@
                     <div class="heads_inner">
                         <img style="width: 100%; float: left;" id="pl_40" src="images/blank.png" />
                         <p class="ps" style="" id="block40">Block 40</p>
+                        <button style="z-index: 300; position: absolute; transform: translate(41%, -627%);" class=button onclick="add_imm(40)"><img style="width: 10%;" id="add" src="images/btn-add.png"/></button>
                     </div>
                 </div>
              </a>
@@ -738,10 +798,96 @@
                 
 <!--        <div style="height: 640px; background-color: #0e0b08; display: none; float: left; transform: translate(-159.55%, -133.15%);" id="playlist_disp" class="pl_disp">-->
         
+        <div style="background-color: #55ba55; display: none; float: left; transform: translate(-63.2%, -205.7%);" id="percent" class="percent">
+            <font face="verdana" color="#55ba55"><h1 style="color: white; transform: translate(5%, -20%)">Percent Shuffle</h1></font>
+            
+<!--            <button style="border: none; width: 80%; height: 6%; border-radius: 4px; background: #1F1C1C; color: white; transform: translate(10%, -80%);" onclick="update_options()">Update</button>-->
+            
+            <table style="width: 95%; color: grey; background-color: #0e0b08; text-overflow: ellipsis; transform: translate(2.5%, -1%);">
+                <tr id="per-row0">
+                    <td id="pl0">pl_name0</td>
+                    <td id="perc0">percent</td>
+                    <td><input type="number" name="quantity" id="sel0" min="1" max="100"></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="remove_pl(0)">Remove</button></td>
+                </tr>
+                <tr id="per-row1">
+                    <td id="pl1">pl_name1</td>
+                    <td id="perc1">percent</td>
+                    <td><input type="number" name="quantity" id="sel1" min="1" max="100"></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="remove_pl(1)">Remove</button></td>
+                </tr>
+                <tr id="per-row2">
+                    <td id="pl2">pl_name2</td>
+                    <td id="perc2">percent</td>
+                    <td><input type="number" name="quantity" id="sel2" min="1" max="100"></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="remove_pl(2)">Remove</button></td>
+                </tr>
+                <tr id="per-row3">
+                    <td id="pl3">pl_name3</td>
+                    <td id="perc3">percent</td>
+                    <td><input type="number" name="quantity" id="sel3" min="1" max="100"></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="remove_pl(3)">Remove</button></td>
+                </tr>
+                <tr id="per-row4">
+                    <td id="pl4">pl_name4</td>
+                    <td id="perc4">percent</td>
+                    <td><input type="number" name="quantity" id="sel4" min="1" max="100"></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="remove_pl(4)">Remove</button></td>
+                </tr>
+                <tr id="per-row5">
+                    <td id="pl5">pl_name5</td>
+                    <td id="perc5">percent</td>
+                    <td><input type="number" name="quantity" id="sel5" min="1" max="100"></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="remove_pl(5)">Remove</button></td>
+                </tr>
+                <tr id="per-row6">
+                    <td id="pl6">pl_name6</td>
+                    <td id="perc6">percent</td>
+                    <td><input type="number" name="quantity" id="sel6" min="1" max="100"></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="remove_pl(6)">Remove</button></td>
+                </tr>
+                <tr id="per-row7">
+                    <td id="pl7">pl_name7</td>
+                    <td id="perc7">percent</td>
+                    <td><input type="number" name="quantity" id="sel7" min="1" max="100"></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="remove_pl(7)">Remove</button></td>
+                </tr>
+                <tr id="per-row8">
+                    <td id="pl8">pl_name8</td>
+                    <td id="perc8">percent</td>
+                    <td><input type="number" name="quantity" id="sel8" min="1" max="100"></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="remove_pl(8)">Remove</button></td>
+                </tr>
+                <tr id="per-row9">
+                    <td id="pl9">pl_name9</td>
+                    <td id="perc9">percent</td>
+                    <td><input type="number" name="quantity" id="sel9" min="1" max="100"></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="remove_pl(9)">Remove</button></td>
+                </tr>
+                <tr id="per-row10">
+                    <td id="pl10">pl_name10</td>
+                    <td id="perc10">percent</td>
+                    <td><input type="number" name="quantity" id="sel10" min="1" max="100"></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="remove_pl(10)">Remove</button></td>
+                </tr>
+                <tr id="per-row11">
+                    <td id="pl11">pl_name11</td>
+                    <td id="perc11">percent</td>
+                    <td><input type="number" name="quantity" id="sel11" min="1" max="100"></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="remove_pl(11)">Remove</button></td>
+                </tr>
+            </table>
+        </div>
+                
         <div style="height: 756.4px; background-color: #0e0b08; display: none; float: left; transform: translate(-255.9%, -100.05%);" id="playlist_disp" class="pl_disp">
             <button style="z-index: 100; position: relative; float: right; width: 10%; height: 10%; transform: translate(-10%, -20%);" class=button onclick="exit();"><img id="history" style="width: 100%" src="images/btn-close.png"/></button>
             <font face="verdana" color="#55ba55"><h1 style="color: white; transform: translate(5%, 0%)" id="playlist_name">Playlist</h1></font>
 <!--            <table class="pl_disp" style="width: 100%; table-layout: fixed; transform: translate(0%, -2.7%); color: grey; background-color: #0e0b08; overflow-y: scroll;">-->
+            
+            <a  class="gens" onclick="add_pl()">
+                <font face="verdana"><div style="width: 90%; height: 30px; background-color: #55ba55; transform: translate(5%, 0%);"><p style="color: white; transform: translate(3%, 20%);">Add to Percent Shuffle</p></div></font>
+            </a>
+            
             <table id="playlist">    
                 <tr id="row0">
                     <td id="pl_a0">artist0</td>
@@ -1246,7 +1392,7 @@
             </table>
             
         </div>
-
+        
 <!--
         <div>
             <button onclick="temp();">Test</button>
@@ -1257,6 +1403,65 @@
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
         
         <script>
+            function add_pl() {
+                $.ajax({
+                    url: '/playlists',
+                    
+                }).done(function(data) {                    
+                    var temp = { 
+                        id: data.playlists[gen].genre_url,
+                        tracks_href: data.playlists[gen].tlist,
+                        name: data.playlists[gen].genre_name,
+                        percent: 0,
+                    };
+
+                    selections.push(temp);
+                    update_options();
+                    
+//                    alert(selections[0].name);
+                    
+                });
+            }
+            
+            function add_imm(num) {
+                $.ajax({
+                    url: '/playlists',
+                    
+                }).done(function(data) { 
+                    
+                    var temp = { 
+                        id: data.playlists[num].genre_url,
+                        tracks_href: data.playlists[num].tlist,
+                        name: data.playlists[num].genre_name,
+                        percent: 0,
+                    };
+                    selections.push(temp);
+                    update_options();
+                    
+//                    alert(selections[0].name);
+                    
+                });
+            }
+            
+            function remove_pl(position) {
+                selections.splice(position, 1);
+                update_options();
+            }
+            
+            function update_options() {
+                for (gk = 0; gk < 12; gk++) {
+                    if (gk < selections.length) {
+                        document.getElementById("per-row" + gk).style.display = "initial";
+                        document.getElementById("pl" + gk).innerHTML = selections[gk].name;
+                        document.getElementById("perc" + gk).innerHTML = selections[gk].percent + "%";
+                        
+                    } else {
+                        document.getElementById("sel" + gk).value = 0;
+                        document.getElementById("per-row" + gk).style.display = "none";
+                    }
+                }
+            }
+            
             function genre_click(num) {
                 $.ajax({
                     url: '/playlists',
@@ -1266,8 +1471,18 @@
                     if (num < data.playlists.length) {
                         document.getElementById("playlist_disp").style.display = "inherit";
 //                        alert("Playlist name: " + data.playlists[num].genre_name + "\nPlaylist ID: " + data.playlists[num].genre_url + "\nNumber of songs: " + data.playlists[num].number_songs + "\nImage URL: " + data.playlists[num].img + "\nTracks: " + data.playlists[num].tlist); 
-//                        alert(data.playlists[num].genre_url);
-                        document.getElementById("player").style.marginBottom = "5%";
+
+                        if (document.getElementById("percent").style.transform != "translate(-100%, -258.7%)") {
+                            document.getElementById("percent").style.transform = "translate(-100%, -258.7%)";
+                        }
+                        
+                        if (offset != 5) {
+                            offset += 55;
+                            document.getElementById("player").style.marginBottom = offset + "%";
+                        }
+                        
+                        gen = num;
+                        
                         var pl_name = document.getElementById("playlist_name");
                         pl_name.textContent = data.playlists[num].genre_name;
                         
@@ -1439,7 +1654,11 @@
                 var temp = document.getElementById("playlist_disp");
                 temp.style.display = "none";
                 
-                document.getElementById("player").style.marginBottom = "-50%";
+                document.getElementById("percent").style.transform = "translate(-63.2%, -205.7%)";
+                
+                offset -= 55;
+                document.getElementById("player").style.marginBottom = offset + "%";
+                
             }
         
             function user_info() {
@@ -1570,12 +1789,31 @@
                     if (shuff == 0) {
                         var img = document.getElementById("shuffle");
                         img.src="images/btn-shuffle-off.png";
+//                        document.getElementById("player").style.marginBottom = "-50%";
+                        percent_shuffle = false;
+                        
+                        document.getElementById("playlist_disp").style.transform = "translate(-255.9%, -100.05%)";
+                        
+                        offset -= 30;
+                        document.getElementById("player").style.marginBottom = offset + "%";
+                        
+                        document.getElementById("percent").style.display = "none";
                     } else if (shuff == 1) {
                         var img = document.getElementById("shuffle");
                         img.src="images/btn-shuffle-on.png";
                     } else if (shuff == 2) {
                         var img = document.getElementById("shuffle");
                         img.src="images/btn-percent.png";
+                        
+                        document.getElementById("playlist_disp").style.transform = "translate(-200%, -74.4%)"; //CHANGE
+                        
+                        percent_shuffle = true;
+
+                        offset += 30;
+                        document.getElementById("player").style.marginBottom = offset + "%";
+                        
+                        update_options();
+                        document.getElementById("percent").style.display = "inherit";
                     }
                 });
             }
@@ -2163,6 +2401,55 @@
                 
                 setTimeout(songScroll, 2500);
                 setTimeout(infoScroll, 2500);
+                
+                $(document.getElementById("sel0")).change(function(){
+                    selections[0].percent = document.getElementById("sel0").value;
+                    update_options();
+                });
+                $(document.getElementById("sel1")).change(function(){
+                    selections[1].percent = document.getElementById("sel1").value;
+                    update_options();
+                });
+                $(document.getElementById("sel2")).change(function(){
+                    selections[2].percent = document.getElementById("sel2").value;
+                    update_options();
+                });
+                $(document.getElementById("sel3")).change(function(){
+                    selections[3].percent = document.getElementById("sel3").value;
+                    update_options();
+                });
+                $(document.getElementById("sel4")).change(function(){
+                    selections[4].percent = document.getElementById("sel4").value;
+                    update_options();
+                });
+                $(document.getElementById("sel5")).change(function(){
+                    selections[5].percent = document.getElementById("sel5").value;
+                    update_options();
+                });
+                $(document.getElementById("sel6")).change(function(){
+                    selections[6].percent = document.getElementById("sel6").value;
+                    update_options();
+                });
+                $(document.getElementById("sel7")).change(function(){
+                    selections[7].percent = document.getElementById("sel7").value;
+                    update_options();
+                });
+                $(document.getElementById("sel8")).change(function(){
+                    selections[8].percent = document.getElementById("sel8").value;
+                    update_options();
+                });
+                $(document.getElementById("sel9")).change(function(){
+                    selections[9].percent = document.getElementById("sel9").value;
+                    update_options();
+                });
+                $(document.getElementById("sel10")).change(function(){
+                    selections[10].percent = document.getElementById("sel10").value;
+                    update_options();
+                });
+                $(document.getElementById("sel11")).change(function(){
+                    selections[11].percent = document.getElementById("sel11").value;
+                    update_options();
+                });
             </script>
         </div>
  
