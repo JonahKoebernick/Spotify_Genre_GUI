@@ -101,7 +101,7 @@
         #container {
             width: 73%;
             position: relative;
-            background: yellow;
+/*            background: yellow;*/
         }
         
         #song {
@@ -137,7 +137,7 @@
 /*            background: #1d1b16;*/
             background: #0e0b08;
 /*            background-color: blue;*/
-            z-index:50;
+            z-index:1;
         }
         
         #coverUp2 {
@@ -147,7 +147,7 @@
 /*            background: #0e0b08;*/
             background: #1F1C1C;
 /*            background-color: red;*/
-            z-index:100;
+            z-index:1;
         }
         
         .login {
@@ -240,9 +240,7 @@
             position: relative;
             outline: none;
         }
-        
-    
-        
+  
     </style>
     
     <body style="background-color:#1F1C1C;">
@@ -250,10 +248,10 @@
 
         <div style="float: left" id="player" class="player">
             
-            <img src="images/player_template.png"/>
+            <img src="images/player-temp-bg.png"/>
             
             <script id="curr-template" type="text/x-handlebars-template">
-                <div  id="title"><h2 style="text-align: center; position: relative; transform: translate(-5.5%,-3589%);"><font face="verdana" size="3.5" color="white"><dd class="text-overflow-player">{{artist}}</dd></font></h2></div>
+                <div  id="title"><h2 style="text-align: center; position: relative; transform: translate(-5.5%,-3589%);"><font face="verdana" size="3.5" color="white"><dd id="context" class="text-overflow-player">Context</dd></font></h2></div>
                 <img style="position: relative; width:74%; transform: translate(17.7%,-249%);" src="{{image_url}}"/>
 <!--                <img style="position: relative; width:74%; transform: translate(17.7%,-280.6%);" src="{{image_url}}"/>-->
 
@@ -274,32 +272,30 @@
                 <div id="coverUp3" style="height: 20px; width: 19%; transform: translate(397.2%,-3510%);"></div>
                 <div id="coverUp2" style="height: 20px; width: 100%; transform: translate(94.35%,-3510%);"></div>
 
-<!--                <h2 style="position: relative; transform: translate(7%,-3020%);"><font face="verdana" size="4.5" color="white"><div id="song">{{song_name}}</div></font></h2>-->
-<!--                <h1 style="position: relative; transform: translate(-3%,-3550%);"><font face="verdana" size="3.5" color="grey"><dd class="text-overflow-player">{{artist}}, {{album}}</dd></font></h1>-->
             </script>
 
-            <div style="transform: translate(8.9%,-3500%);" id="myProgress">
+            <div style="transform: translate(8.9%,-3550%);" id="myProgress">
                 <div style="position: relative; height: 100%;" id="myBar"></div>
             </div>
 
             <div style="position: inherit">
-                <button style="position:absolute; z-index: 100; left: 84.45%; width:10%; height: auto; transform: translate(-7%,-2250%);" class=button onclick="history()"><img id="history" src="images/btn-history-off.png"/></button>
-                <button style="position:absolute; z-index: 100; left: 84.45%; width:9.7%; height: auto; transform: translate(-5%,-950%);" class=button onclick="heart()"><img id="save" style="z-index:150;" src="images/btn-sav1.png"/></button>
-                <button style="position:relative; left: -1.9%; width:9%; transform: translate(96%,-419.5%);" class=button onclick="shuffle()"><img id="shuffle" src="images/btn-shuffle-off.png"/></button>
-                <button style="position:relative; left: 4.7%; width:12%; transform: translate(59.5%,-508.5%);" class=button onclick="prev_btn()"><img src="images/btn-prev1.png"/></button>
-                <button style="position:relative; left: 10.53%; width:21%; transform: translate(27.3%,-235%);" class=button onclick="pause()"><img id="play" src="images/btn-pause1.png"/></button>
-                <button style="position:relative; left: 16.6%; width:12%; transform: translate(34.5%,-508.5%);" class=button onclick="skip()"><img src="images/btn-next1.png"/></button>
-                <button style="position:relative; left: 23.2%; width:9%; transform: translate(30.5%,-434%);" class=button onclick="repeat()"><img id="repeat" src="images/btn-repeat-off.png"/></button>
-                <button style="position:relative; left: 23.2%; width:10%; transform: translate(-863.5%,-442.5%);" class=button onclick=""><img id="dev" src="images/devices.png"/></button>
-                <font face="verdana" size="2" color="#55ba55"><div id="device_inner" style="position: relative; transform: translate(15%,-875%);">device</div></font>
+                <button style="position:absolute; left: 84.45%; width:12%; height: auto; transform: translate(95%,-2115%);" class=button onclick="history()"><img id="history" src="images/btn-history-off.png"/></button>
+                <button style="position:absolute; z-index: 200; left: 84.45%; width:12%; height: auto; transform: translate(95%,-860%);" class=button onclick="heart()"><img id="save" style="z-index:200;" src="images/btn-sav1.png"/></button>
+                <button style="position:relative; left: -1.9%; width:10.2%; transform: translate(94.5%,-423.5%);" class=button onclick="shuffle()"><img id="shuffle" src="images/btn-shuffle-off.png"/></button>
+                <button style="position:relative; left: 4.7%; width:13.9%; transform: translate(64.4%,-497%);" class=button onclick="prev_btn()"><img src="images/btn-prev1.png"/></button>
+                <button style="position:relative; left: 10.53%; width:24%; transform: translate(34.4%,-235%);" class=button onclick="pause()"><img id="play" src="images/btn-pause1.png"/></button>
+                <button style="position:relative; left: 16.6%; width:13.9%; transform: translate(51.9%,-497%);" class=button onclick="skip()"><img src="images/btn-next1.png"/></button>
+                <button style="position:relative; left: 23.2%; width:10.4%; transform: translate(60.5%,-423.5%);" class=button onclick="repeat()"><img id="repeat" src="images/btn-repeat-off.png"/></button>
+                <button style="position:relative; left: 23.2%; width:11%; transform: translate(-866%,-464%);" class=button onclick=""><img id="dev" src="images/devices.png"/></button>
+                <font face="verdana" size="2" color="#55ba55"><div id="device_inner" style="position: relative; transform: translate(17%,-880%);">device</div></font>
                 
             </div>
             
-            <div style="position: relative; transform: translate(7%,-1655%);">
+            <div style="position: relative; transform: translate(7%,-1155%);">
                 <font face="verdana" size="2" color="#e3e4e8"><p id="length_in"></p></font>
             </div>
             
-            <div style="position: relative; transform: translate(83%,-1835%);">
+            <div style="position: relative; transform: translate(83%,-1335%);">
                 <font face="verdana" size="2" color="#e3e4e8"><p id="length"></p></font>
             </div>
             
@@ -806,6 +802,7 @@
                 
 <!--        <div style="height: 640px; background-color: #0e0b08; display: none; float: left; transform: translate(-159.55%, -133.15%);" id="playlist_disp" class="pl_disp">-->
         
+<!--
         <div style="background-color: #55ba55; display: none; float: left; transform: translate(-63.2%, -205.7%);" id="percent" class="percent">
             <font face="verdana" color="#55ba55"><h1 style="color: white; transform: translate(5%, -20%)">Percent Shuffle</h1></font>
             
@@ -886,6 +883,7 @@
                 </tr>
             </table>
         </div>
+-->
                 
 <!--
         <div style="height: 756.4px; background-color: #0e0b08; display: none; float: left; transform: translate(-255.9%, -100.05%);" id="playlist_disp" class="pl_disp">
@@ -1412,6 +1410,19 @@
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
         
         <script>
+            function context() {
+                $.ajax({
+                    url: '/context',
+                    
+                }).done(function(data) {                 
+                    var context = data.context;
+
+//                    alert(context.name);
+                    document.getElementById("context").innerHTML = context.name;
+                    
+                });
+            }
+            
             function add_pl() {
                 $.ajax({
                     url: '/playlists',
@@ -1697,7 +1708,7 @@
                         img.src="images/btn-saved1.png";
                     } else {
                         var heart = Document.getElementById("save");
-                        img.src="images/btn-sav1.png";
+                        heart.src="images/btn-sav1.png";
                     }
                 });
             }
@@ -1861,30 +1872,6 @@
             }
         
             function history() {
-                /*var img = document.getElementById("history");
-                img.src="images/btn-history-on.png";
-                
-                $.ajax({
-                url: '/recent',
-
-                }).done(function(data) {
-                    var recent_tracks = data.ten_recent;
-                    alert("Recently Played:\n" + 
-                                   recent_tracks[0].artists[0].name + " -- " + recent_tracks[0].name
-                          + "\n" + recent_tracks[1].artists[0].name + " -- " + recent_tracks[1].name
-                          + "\n" + recent_tracks[2].artists[0].name + " -- " + recent_tracks[2].name
-                          + "\n" + recent_tracks[3].artists[0].name + " -- " + recent_tracks[3].name
-                          + "\n" + recent_tracks[4].artists[0].name + " -- " + recent_tracks[4].name
-                          + "\n" + recent_tracks[5].artists[0].name + " -- " + recent_tracks[5].name
-                          + "\n" + recent_tracks[6].artists[0].name + " -- " + recent_tracks[6].name
-                          + "\n" + recent_tracks[7].artists[0].name + " -- " + recent_tracks[7].name
-                          + "\n" + recent_tracks[8].artists[0].name + " -- " + recent_tracks[8].name
-                          + "\n" + recent_tracks[9].artists[0].name + " -- " + recent_tracks[9].name);
-
-                    var img = document.getElementById("history");
-                    img.src="images/btn-history-off.png";
-                });*/
-                
                 var table = document.getElementById("table");
                 
                 if (table.style.display == "none") {
@@ -2202,6 +2189,8 @@
                     });
                 });   
             }
+            
+
         </script> 
                 
         <script>
@@ -2408,6 +2397,7 @@
                 history_update();
                 playlists();
                 
+                setTimeout(context, 1000);
                 setTimeout(songScroll, 2500);
                 setTimeout(infoScroll, 2500);
                 
