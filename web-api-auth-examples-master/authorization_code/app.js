@@ -120,6 +120,7 @@ app.get('/view_album', function(req, res) {
             var album_name = album.name;
             var album_type = album.album_type;
             var all_artists = album.artists;
+            
             var artists = "";
             
             for (i = 0; i < all_artists.length; i++) {
@@ -149,9 +150,13 @@ app.get('/view_album', function(req, res) {
                 if(!error && response.statusCode == 200){
 //                    console.log(body);
                     var album_tracks = body.tracks.items;
+                    var album_label = body.label;
+                    
+                    console.log('Album Label: ' + album_label);
                     console.log('Album Tracks: ' + album_tracks[0].name);
                     
                     res.send({
+                        'label': album_label,
                         'name': album_name,
                         'type': album_type,
                         'artists': artists,

@@ -1793,6 +1793,7 @@
             
         </div>
         
+<!--
         <div id="more_artist" style="float: left; width: 45.1%; height: 45.1%; z-index: 400; display: flex; position: fixed; text-align: center; justify-content: center; align-items: center; transform: translate(93%, 58.1%);">
             
             <img style="position: absolute; width: 100%;" src="images/album-bg.PNG"/>
@@ -1806,6 +1807,7 @@
             </div>
                         
         </div>
+-->
         
 <!--
         <div>
@@ -1869,7 +1871,7 @@
                         document.getElementById("album").innerHTML = "Album: " + data.name;
                         document.getElementById("album_type").innerHTML = "Type: " + data.type;
                         document.getElementById("album_artist").innerHTML = "Artists: " + data.artists;
-                        document.getElementById("album_release").innerHTML = "Released: " + data.release;
+                        document.getElementById("album_release").innerHTML = "Release: " + data.release.substring(0, 4) + " - " + data.label;
                         document.getElementById("album_num_tracks").innerHTML = "Tracks: " + data.tracks.length;
                         
 //                        alert(data.tracks[0].name);
