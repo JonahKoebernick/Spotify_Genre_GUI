@@ -1793,11 +1793,23 @@
             
         </div>
         
+        <div id="more_artist" style="float: left; width: 45.1%; height: 45.1%; z-index: 400; display: flex; position: fixed; text-align: center; justify-content: center; align-items: center; transform: translate(93%, 58.1%);">
+            
+            <img style="position: absolute; width: 100%;" src="images/album-bg.PNG"/>
+            
+            <img id="artist_art" style="position: absolute; width: 36.4%; transform: translate(-81%, -81%);" src="images/album-view.PNG"/>
         
+            <div style="width: 56.2%; height: 75.8%; position: absolute; transform: translate(34.4%, -81.3%);">  
+                <font style="text-align: left;" face="verdana" size="3" color="white">
+
+                </font>
+            </div>
+                        
+        </div>
         
 <!--
         <div>
-            <button onclick="help();">Test</button>
+            <button onclick="view_artist();">Test</button>
         </div> 
 -->
         
@@ -1805,6 +1817,14 @@
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
         
         <script>
+            function update_artist() {
+                $.ajax({
+                    url: '/view_artist',
+                    
+                }).done(function(data) {
+                    document.getElementById("artist_art").src = data.artist.images[0].url;
+                });
+            }
 
             function more() {
                 if (document.getElementById("more").style.display == "flex") {
@@ -2804,6 +2824,7 @@
                 history_update();
                 playlists();
                 update_more();
+                update_artist();
                 
                 setTimeout(songScroll, 2500);
                 setTimeout(infoScroll, 2500);

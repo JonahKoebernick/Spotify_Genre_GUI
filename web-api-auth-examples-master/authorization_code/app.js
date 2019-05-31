@@ -165,6 +165,41 @@ app.get('/view_album', function(req, res) {
     });
 });
 
+app.get('/view_artist', function(req, res) {
+    var options = {
+        url: 'https://api.spotify.com/v1/me/player/currently-playing',
+        headers: { 'Authorization': 'Bearer ' + access_token2 },
+        json: true
+    };
+    
+    request.get(options, function(error, response, body) {
+        if(!error && response.statusCode == 200){
+            console.log(body);
+            
+            var artist = body.item.album.artists;
+            
+//            console.log("VIEW " + artist[0].href);
+            
+            var options = {
+                url: artist[0].href,
+                headers: { 'Authorization': 'Bearer ' + access_token2 },
+                json: true
+            };
+
+            request.get(options, function(error, response, body) {
+                if(!error && response.statusCode == 200){
+                    console.log("VIEW\n" + body.name);
+                    
+                    
+                    res.send({
+                        'artist': body,
+                    });
+                }
+            });
+        }
+    });
+});
+
 app.get('/track_length', function(req, res) {
     console.log("NEW SONG!");
     console.log(access_token2);
