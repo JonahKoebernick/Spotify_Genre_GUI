@@ -105,6 +105,66 @@ app.get('/in_library', function(req, res) {
 
 });
 
+app.get('/view_album', function(req, res) {
+    var options = {
+        url: 'https://api.spotify.com/v1/me/player/currently-playing',
+        headers: { 'Authorization': 'Bearer ' + access_token2 },
+        json: true
+    };
+    
+    request.get(options, function(error, response, body) {
+        if(!error && response.statusCode == 200){
+            console.log(body);
+            
+            var album = body.item.album;
+            var album_name = album.name;
+            var album_type = album.album_type;
+            var all_artists = album.artists;
+            var artists = "";
+            
+            for (i = 0; i < all_artists.length; i++) {
+                if (i != 0) {
+                    artists += ", ";
+                }
+                artists += all_artists[i].name;
+            }
+            
+            var release_date = album.release_date;
+            var album_href = album.href;
+            
+            console.log('Album Name: ' + album_name);
+            console.log('Album Type: ' + album_type);
+            console.log('Album Artists: ' + artists);
+            console.log('Album Release: ' + release_date);
+            console.log('Album href: ' + album_href);
+            
+            
+            var options = {
+                url: album_href,
+                headers: { 'Authorization': 'Bearer ' + access_token2 },
+                json: true
+            };
+
+            request.get(options, function(error, response, body) {
+                if(!error && response.statusCode == 200){
+//                    console.log(body);
+                    var album_tracks = body.tracks.items;
+                    console.log('Album Tracks: ' + album_tracks[0].name);
+                    
+                    res.send({
+                        'name': album_name,
+                        'type': album_type,
+                        'artists': artists,
+                        'release': release_date,
+                        'href': album_href,
+                        'tracks': album_tracks,
+                    });
+                }
+            });
+        }
+    });
+});
+
 app.get('/track_length', function(req, res) {
     console.log("NEW SONG!");
     console.log(access_token2);
@@ -187,6 +247,7 @@ app.get('/info', function(req, res) {
         headers: { 'Authorization': 'Bearer ' + access_token2 },
         json: true
     };
+    
 
     request.get(options, function(error, response, body) {
         if(!error && response.statusCode == 200){

@@ -233,6 +233,12 @@
         #percent td:nth-child(3){width: 100%;}
         #percent td:nth-child(4){width: 100%;}
         
+        #album_display td:nth-child(1){ color: #55ba55; padding-right: 20px;}
+        #album_display td:nth-child(2){ width: 100%; color: white; }
+        
+/*        #album_display td:nth-child(3){ width: 100%; }*/
+        #album_display td:nth-child(4){ color: #55ba55; }
+        
         .gens button {
             background-color: transparent;
             border: none;
@@ -1464,8 +1470,327 @@
         </div>
         
         <div id="more_album" style="float: left; width: 45.1%; height: 45.1%; z-index: 400; display: none; position: fixed; text-align: center; justify-content: center; align-items: center; transform: translate(93%, 58.1%);">
-            <img style="position: absolute; width: 100%;" src="images/album-bg.PNG"/>
+            
+            <img style="position: absolute; width: 100%;" src="images/album-view.PNG"/>
+            
+            <img id="album_art" style="position: absolute; width: 36.4%; transform: translate(-81%, -81%);" src="images/album-view.PNG"/>
         
+            <div style="width: 56.2%; height: 75.8%; position: absolute; transform: translate(34.4%, -81.3%);">  
+                <font style="text-align: left;" face="verdana" size="3" color="white">
+                    <div id="album" style="position: relative; transform: translate(3%, 100%);">album</div>
+                    <div id="album_type" style="position: relative; transform: translate(3%, 225%);">album_type</div>
+                    <div id="album_artist" style="position: relative; transform: translate(3%, 350%);">album_artist</div>
+                    <div id="album_num_tracks" style="position: relative; transform: translate(3%, 470%);">Number of Tracks: </div>
+                    <div id="album_release" style="position: relative; transform: translate(3%, 600%);">date</div>
+                </font>
+            </div>
+            
+            <div style="width: 95%; height: 365px; position: absolute; transform: translate(-0.05%, 34.6%); overflow-y: auto;">
+                <table id="album_display" style="width: 100%; max-height: 365px; overflow-y: auto; text-align: left">
+                    <tr id="albumrow0">
+                        <td>0</td>
+                        <td id="tr_nm0">track</td>
+                        <td id="ft0"></td>
+                        <td id="tr_ms0">length</td>
+                    </tr>
+                    <tr id="albumrow1">
+                        <td>1</td>
+                        <td id="tr_nm1">track</td>
+                        <td id="ft1"></td>
+                        <td id="tr_ms1">length</td>
+                    </tr>
+                    <tr id="albumrow2">
+                        <td>2</td>
+                        <td id="tr_nm2">track</td>
+                        <td id="ft2"></td>
+                        <td id="tr_ms2">length</td>
+                    </tr>
+                    <tr id="albumrow3">
+                        <td>3</td>
+                        <td id="tr_nm3">track</td>
+                        <td id="ft3"></td>
+                        <td id="tr_ms3">length</td>
+                    </tr>
+                    <tr id="albumrow4">
+                        <td>4</td>
+                        <td id="tr_nm4">track</td>
+                        <td id="ft4"></td>
+                        <td id="tr_ms4">length</td>
+                    </tr>
+                    <tr id="albumrow5">
+                        <td>5</td>
+                        <td id="tr_nm5">track</td>
+                        <td id="ft5"></td>
+                        <td id="tr_ms5">length</td>
+                    </tr>
+                    <tr id="albumrow6">
+                        <td>6</td>
+                        <td id="tr_nm6">track</td>
+                        <td id="ft6"></td>
+                        <td id="tr_ms6">length</td>
+                    </tr>
+                    <tr id="albumrow7">
+                        <td>7</td>
+                        <td id="tr_nm7">track</td>
+                        <td id="ft7"></td>
+                        <td id="tr_ms7">length</td>
+                    </tr>
+                    <tr id="albumrow8">
+                        <td>8</td>
+                        <td id="tr_nm8">track</td>
+                        <td id="ft8"></td>
+                        <td id="tr_ms8">length</td>
+                    </tr>
+                    <tr id="albumrow9">
+                        <td>9</td>
+                        <td id="tr_nm9">track</td>
+                        <td id="ft9"></td>
+                        <td id="tr_ms9">length</td>
+                    </tr>
+                    <tr id="albumrow10">
+                        <td>10</td>
+                        <td id="tr_nm10">track</td>
+                        <td id="ft10"></td>
+                        <td id="tr_ms10">length</td>
+                    </tr>
+                    <tr id="albumrow11">
+                        <td>11</td>
+                        <td id="tr_nm11">track</td>
+                        <td id="ft11"></td>
+                        <td id="tr_ms11">length</td>
+                    </tr>
+                    <tr id="albumrow12">
+                        <td>12</td>
+                        <td id="tr_nm12">track</td>
+                        <td id="ft12"></td>
+                        <td id="tr_ms12">length</td>
+                    </tr>
+                    <tr id="albumrow13">
+                        <td>13</td>
+                        <td id="tr_nm13">track</td>
+                        <td id="ft13"></td>
+                        <td id="tr_ms13">length</td>
+                    </tr>
+                    <tr id="albumrow14">
+                        <td>14</td>
+                        <td id="tr_nm14">track</td>
+                        <td id="ft14"></td>
+                        <td id="tr_ms14">length</td>
+                    </tr>
+                    <tr id="albumrow15">
+                        <td>15</td>
+                        <td id="tr_nm15">track</td>
+                        <td id="ft15"></td>
+                        <td id="tr_ms15">length</td>
+                    </tr>
+                    <tr id="albumrow16">
+                        <td>16</td>
+                        <td id="tr_nm16">track</td>
+                        <td id="ft16"></td>
+                        <td id="tr_ms16">length</td>
+                    </tr>
+                    <tr id="albumrow17">
+                        <td>17</td>
+                        <td id="tr_nm17">track</td>
+                        <td id="ft17"></td>
+                        <td id="tr_ms17">length</td>
+                    </tr>
+                    <tr id="albumrow18">
+                        <td>18</td>
+                        <td id="tr_nm18">track</td>
+                        <td id="ft18"></td>
+                        <td id="tr_ms18">length</td>
+                    </tr>
+                    <tr id="albumrow19">
+                        <td>19</td>
+                        <td id="tr_nm19">track</td>
+                        <td id="ft19"></td>
+                        <td id="tr_ms19">length</td>
+                    </tr>
+                    <tr id="albumrow20">
+                        <td>20</td>
+                        <td id="tr_nm20">track</td>
+                        <td id="ft20"></td>
+                        <td id="tr_ms20">length</td>
+                    </tr>
+                    <tr id="albumrow21">
+                        <td>21</td>
+                        <td id="tr_nm21">track</td>
+                        <td id="ft21"></td>
+                        <td id="tr_ms21">length</td>
+                    </tr>
+                    <tr id="albumrow22">
+                        <td>22</td>
+                        <td id="tr_nm22">track</td>
+                        <td id="ft22"></td>
+                        <td id="tr_ms22">length</td>
+                    </tr>
+                    <tr id="albumrow23">
+                        <td>23</td>
+                        <td id="tr_nm23">track</td>
+                        <td id="ft23"></td>
+                        <td id="tr_ms23">length</td>
+                    </tr>
+                    <tr id="albumrow24">
+                        <td>24</td>
+                        <td id="tr_nm24">track</td>
+                        <td id="tr_ms24">length</td>
+                        <td id="ft24"></td>
+                    </tr>
+                    <tr id="albumrow25">
+                        <td>25</td>
+                        <td id="tr_nm25">track</td>
+                        <td id="ft25"></td>
+                        <td id="tr_ms25">length</td>
+                    </tr>
+                    <tr id="albumrow26">
+                        <td>26</td>
+                        <td id="tr_nm26">track</td>
+                        <td id="ft26"></td>
+                        <td id="tr_ms26">length</td>
+                    </tr>
+                    <tr id="albumrow27">
+                        <td>27</td>
+                        <td id="tr_nm27">track</td>
+                        <td id="ft27"></td>
+                        <td id="tr_ms27">length</td>
+                    </tr>
+                    <tr id="albumrow28">
+                        <td>28</td>
+                        <td id="tr_nm28">track</td>
+                        <td id="ft28"></td>
+                        <td id="tr_ms28">length</td>
+                    </tr>
+                    <tr id="albumrow29">
+                        <td>29</td>
+                        <td id="tr_nm29">track</td>
+                        <td id="ft29"></td>
+                        <td id="tr_ms29">length</td>
+                    </tr>
+                    <tr id="albumrow30">
+                        <td>30</td>
+                        <td id="tr_nm30">track</td>
+                        <td id="ft30"></td>
+                        <td id="tr_ms30">length</td>
+                    </tr>
+                    <tr id="albumrow31">
+                        <td>31</td>
+                        <td id="tr_nm31">track</td>
+                        <td id="ft31"></td>
+                        <td id="tr_ms31">length</td>
+                    </tr>
+                    <tr id="albumrow32">
+                        <td>32</td>
+                        <td id="tr_nm32">track</td>
+                        <td id="ft32"></td>
+                        <td id="tr_ms32">length</td>
+                    </tr>
+                    <tr id="albumrow33">
+                        <td>33</td>
+                        <td id="tr_nm33">track</td>
+                        <td id="ft33"></td>
+                        <td id="tr_ms33">length</td>
+                        
+                    </tr>
+                    <tr id="albumrow34">
+                        <td>34</td>
+                        <td id="tr_nm34">track</td>
+                        <td id="tr_ms34">length</td>
+                        <td id="ft34"></td>
+                    </tr>
+                    <tr id="albumrow35">
+                        <td>35</td>
+                        <td id="tr_nm35">track</td>
+                        <td id="ft35"></td>
+                        <td id="tr_ms35">length</td>
+                    </tr>
+                    <tr id="albumrow36">
+                        <td>36</td>
+                        <td id="tr_nm36">track</td>
+                        <td id="ft36"></td>
+                        <td id="tr_ms36">length</td>
+                    </tr>
+                    <tr id="albumrow37">
+                        <td>37</td>
+                        <td id="tr_nm37">track</td>
+                        <td id="ft37"></td>
+                        <td id="tr_ms37">length</td>
+                    </tr>
+                    <tr id="albumrow38">
+                        <td>38</td>
+                        <td id="tr_nm38">track</td>
+                        <td id="ft38"></td>
+                        <td id="tr_ms38">length</td>
+                    </tr>
+                    <tr id="albumrow39">
+                        <td>39</td>
+                        <td id="tr_nm39">track</td>
+                        <td id="ft39"></td>
+                        <td id="tr_ms39">length</td>
+                    </tr>
+                    <tr id="albumrow40">
+                        <td>40</td>
+                        <td id="tr_nm40">track</td>
+                        <td id="ft40"></td>
+                        <td id="tr_ms40">length</td>
+                    </tr>
+                    <tr id="albumrow41">
+                        <td>41</td>
+                        <td id="tr_nm41">track</td>
+                        <td id="ft41"></td>
+                        <td id="tr_ms41">length</td>
+                    </tr>
+                    <tr id="albumrow42">
+                        <td>42</td>
+                        <td id="tr_nm42">track</td>
+                        <td id="ft42"></td>
+                        <td id="tr_ms42">length</td>
+                    </tr>
+                    <tr id="albumrow43">
+                        <td>43</td>
+                        <td id="tr_nm43">track</td>
+                        <td id="tr_ms43">length</td>
+                        <td id="ft43"></td>
+                    </tr>
+                    <tr id="albumrow44">
+                        <td>44</td>
+                        <td id="tr_nm44">track</td>
+                        <td id="ft44"></td>
+                        <td id="tr_ms44">length</td>
+                    </tr>
+                    <tr id="albumrow45">
+                        <td>45</td>
+                        <td id="tr_nm45">track</td>
+                        <td id="ft45"></td>
+                        <td id="tr_ms45">length</td>
+                    </tr>
+                    <tr id="albumrow46">
+                        <td>46</td>
+                        <td id="tr_nm46">track</td>
+                        <td id="ft46"></td>
+                        <td id="tr_ms46">length</td>
+                    </tr>
+                    <tr id="albumrow47">
+                        <td>47</td>
+                        <td id="tr_nm47">track</td>
+                        <td id="ft47"></td>
+                        <td id="tr_ms47">length</td>
+                    </tr>
+                    <tr id="albumrow48">
+                        <td>48</td>
+                        <td id="tr_nm48">track</td>
+                        <td id="ft48"></td>
+                        <td id="tr_ms48">length</td>
+                    </tr>
+                    <tr id="albumrow49">
+                        <td>49</td>
+                        <td id="tr_nm49">track</td>
+                        <td id="ft49"></td>
+                        <td id="tr_ms49">length</td>
+                    </tr>
+                </table>
+            </div>
+            
         </div>
         
         
@@ -1511,8 +1836,59 @@
                     
                 }).done(function(data) {                 
                     document.getElementById("img_more").src = data.image;
+                    document.getElementById("album_art").src = data.image;
                     document.getElementById("track_more").innerHTML = data.name;
                     document.getElementById("artist_more").innerHTML = data.artist + " • " + data.album;
+//                    document.getElementById("album_artist").innerHTML = data.artist;
+//                    document.getElementById("album").innerHTML = data.album;
+                    
+                    $.ajax({
+                        url: '/view_album',
+
+                    }).done(function(data) {            
+                        document.getElementById("album").innerHTML = "Album: " + data.name;
+                        document.getElementById("album_type").innerHTML = "Type: " + data.type;
+                        document.getElementById("album_artist").innerHTML = "Artists: " + data.artists;
+                        document.getElementById("album_release").innerHTML = "Released: " + data.release;
+                        document.getElementById("album_num_tracks").innerHTML = "Tracks: " + data.tracks.length;
+                        
+//                        alert(data.tracks[0].name);
+                        
+//                        alert(ms_to_display(data.tracks[0].duration_ms));
+                        
+                        for (gk = 0; gk < 50; gk++) {
+                            if (gk < data.tracks.length) {
+                                document.getElementById("albumrow" + gk).style.display = "initial";
+                                document.getElementById("tr_nm" + gk).innerHTML = "   " + data.tracks[gk].name;
+                                document.getElementById("tr_ms" + gk).innerHTML = ms_to_display(data.tracks[gk].duration_ms);
+                                
+                                var track_artists = "";
+                                for (i = 0; i < data.tracks[gk].artists.length; i++) {
+                                    if (i != 0) {
+                                        track_artists += ", ";
+                                    }
+                                    track_artists += data.tracks[gk].artists[i].name;
+                                }
+                                
+                                if (track_artists != data.artists) {
+//                                    alert("Album: " + data.artists + "\nTrack: " + track_artists);
+                                     
+                                    var overlap = findOverlap(track_artists, data.artists);
+                                    
+                                    var fts = track_artists.substring(data.artists.length + 2);
+//                                    alert(fts);
+                                    
+//                                    document.getElementById("ft" + gk).innerHTML = "feat. " + fts;
+                                    document.getElementById("tr_nm" + gk).innerHTML += " (" + "feat. " + fts + ")";
+                                }
+                                
+                            } else {
+                                document.getElementById("albumrow" + gk).style.display = "none";
+                            }
+                        }
+                        
+                        
+                    });
                 });
             }
             
@@ -1606,7 +1982,7 @@
                         var pl_name = document.getElementById("playlist_name");
                         pl_name.textContent = data.playlists[num].genre_name;
                         
-                        temp(data.playlists[num].genre_url);
+                        playlist_show(data.playlists[num].genre_url);
                         
                     } else if (num == data.playlists.length) {
                         alert("add");
@@ -1649,7 +2025,7 @@
                 }
             }
             
-            function temp(id) {
+            function playlist_show(id) {
                 var tmp = '/tracks/' + id;
 //                alert(tmp);
                 
@@ -2190,6 +2566,35 @@
                         dataType: "json",
                     });
                 });   
+            }
+            
+            function ms_to_display(duration) {
+                var in_seconds = duration * 0.001;
+                
+                var minutes = Math.floor(in_seconds/60);
+                var seconds = Math.round(in_seconds - (minutes * 60));
+                
+                var fill = "";
+                if (seconds < 10) fill = "0";
+                
+                return minutes + ":" + fill + seconds;
+            } 
+            
+            
+            function findOverlap(a, b) {
+                if (b.length === 0) {
+                    return "";
+                }
+
+                if (a.endsWith(b)) {
+                    return b;
+                }
+
+                if (a.indexOf(b) >= 0) {
+                    return b;
+                }
+
+                return findOverlap(a, b.substring(0, b.length - 1));
             }
         </script> 
                 
