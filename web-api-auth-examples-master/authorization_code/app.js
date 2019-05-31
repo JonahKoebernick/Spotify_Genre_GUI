@@ -17,9 +17,11 @@ var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 
 var client_id = 'd695391f77b04e53bd13d418be938a7d'; // Your client id
-var client_secret = '2e8918fcc2e74c9ab3e6b875597cccb0'; // Your secret
+var client_secret = '6e25903f90884a0da9f33217ce07b5fd'; // Your secret
 var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
 var access_token2 = "BQApRK0reKS091K4BFxqpS8IzTb003yYgJiNwBwdenjyaCCf0V3g3cC8AkgZ4pExcMkK-GfwKdd9r9pvYxYeiYKe1SuPvPly3fLdYi3_QRxnsM3FXFZ2P97uMF3xQrTWGk4g3tpyeUAwxvP-AS5kAHBbJ84byls020NA32GfcBS-j52Vhw";
+
+//var access_token2 = "ZA7oJDUW79qBB2YsS6i5U_WVtlzLq1lJ_O2y_6niFLmeZTNL2Ep2KDy1EwLRHbJ6RceRM3qvoY8uVRvilpXgV1hMKIEfsFNaQahtsFdia1viQtO9y_8ssRukUOQpMj86OoMzot9OjxjOlPDV4dIm2TusrJpmcc6tGgsrcS_PPye5d-DQgXOCyXXzk7Q";
 
 var shuff = 0;
 var rep = 0;
@@ -53,7 +55,7 @@ app.get('/login', function(req, res) {
   res.cookie(stateKey, state);
 
   // your application requests authorization
-  var scope = 'user-read-private user-read-email user-modify-playback-state user-read-currently-playing user-read-playback-state user-read-recently-played playlist-read-private user-library-read playlist-modify-public playlist-modify-private user-modify-playback-state';
+  var scope = 'user-read-private user-read-email user-modify-playback-state user-read-currently-playing user-read-playback-state user-read-recently-played playlist-read-private user-library-read playlist-modify-public playlist-modify-private user-modify-playback-state user-read-currently-playing';
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
@@ -131,7 +133,88 @@ app.get('/track_length', function(req, res) {
             console.log("Image url : "+ body.item.album.images[0].url);
             console.log("Name : " + name);
             console.log("Artist :" + artist);
-            console.log('Context : ' + cont_href);
+            console.log('Context : ' + body.context.type + ' [' + cont_href + ']');
+            
+            if (body.context.type == "artist") {
+                
+            } else if (body.context.type == "playlist") {
+                
+            } else if (body.context.type == "albumx") {
+                
+            }
+            
+            var options = {
+                url: cont_href,
+                headers: { 'Authorization': 'Bearer ' + access_token2 },
+                json: true
+            };
+            
+            request.get(options, function(error, response, body) {
+                if(!error && response.statusCode == 200){
+                   
+                    console.log("success" + body.name);
+                    var cont = body.name;
+                    
+                    
+                    res.send({
+                        'context': cont,
+                        'duration_ms': totaltime,
+                        'progress_ms': time,
+                        'image': image,
+                        'name' : name,
+                        'artist' : artist,
+                        'album' : album
+                    });
+
+                } else {
+                    console.log("ERROR: " + response.statusCode);
+                }
+            });
+            
+//            res.send({
+//                
+//            });
+        }
+    });
+});
+
+app.get('/info', function(req, res) {
+    console.log("NEW SONG!");
+    console.log(access_token2);
+
+    var options = {
+        url: 'https://api.spotify.com/v1/me/player/currently-playing',
+        headers: { 'Authorization': 'Bearer ' + access_token2 },
+        json: true
+    };
+
+    request.get(options, function(error, response, body) {
+        if(!error && response.statusCode == 200){
+            console.log(body);
+            var time = body.progress_ms;
+            var totaltime = body.item.duration_ms;
+            var image = body.item.album.images[0].url;
+            var name = body.item.name;
+            var artist = body.item.album.artists[0].name;
+            var album = body.item.album.name;
+            var info = artist + " • " + album;
+            var cont_href = body.context.href;
+            
+            console.log('Progress : ' + time);
+            console.log(body.item.duration_ms);
+            console.log(totaltime);
+            console.log("Image url : "+ body.item.album.images[0].url);
+            console.log("Name : " + name);
+            console.log("Artist :" + artist);
+            console.log('Context : ' + body.context.type + ' [' + cont_href + ']');
+            
+            if (body.context.type == "artist") {
+                
+            } else if (body.context.type == "playlist") {
+                
+            } else if (body.context.type == "albumx") {
+                
+            }
             
             var options = {
                 url: cont_href,
@@ -679,7 +762,7 @@ app.get('/user_data', function(req, res) {
                 'email' : body.email,
             });
         } else {
-            console.log("Error " + response.statusCode);
+//            console.log("Error " + response.statusCode);
         }
     });
 });

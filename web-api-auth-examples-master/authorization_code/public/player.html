@@ -123,8 +123,8 @@
             position: absolute;
             height: 30px;
             width: 50%;
-/*              background: #0e0b08;*/
-            background: #332e23;
+/*            background: #332e23;*/
+            background: #0e0b08;
 /*            background-color: blue;*/
             z-index:50;
         }
@@ -133,8 +133,8 @@
             position: absolute;
             height: 30px;
             width: 50%;
-/*              background: #0e0b08;*/
-            background: #1d1b16;
+/*            background: #1d1b16;*/
+            background: #0e0b08;
 /*            background-color: blue;*/
             z-index:50;
         }
@@ -240,6 +240,24 @@
             outline: none;
         }
         
+        .more_btn {
+            position: absolute; 
+            width: 15%; 
+            height: auto; 
+            background-color: transparent;
+            border: none;
+            outline: none;
+        }
+        
+        .more_btn:hover {
+            position: absolute; 
+            width: 15%; 
+            height: auto; 
+            background-color: transparent;
+            border: none;
+            outline: none;
+        }
+        
     
         
     </style>
@@ -249,7 +267,7 @@
 
         <div style="float: left" id="player" class="player">
             
-            <img src="images/player_template.png"/>
+            <img src="images/player-temp-bg.png"/>
             
             <script id="curr-template" type="text/x-handlebars-template">
                 <div  id="title"><h2 style="text-align: center; position: relative; transform: translate(-5%,-4093%);"><font face="verdana" size="3.5" color="white"><dd id="context" class="text-overflow-player">{{context}}</dd></font></h2></div>
@@ -281,7 +299,7 @@
             </div>
 
             <div style="position: inherit">
-                <button style="position:absolute; z-index: 100; width:10%; transform: translate(834%, -2255%);" class=button onclick="history()"><img id="history" src="images/btn-history-off.png"/></button>
+                <button style="position:absolute; z-index: 100; width:9.6%; height: auto; transform: translate(872.5%, -3735%);" class=button onclick="more()"><img id="info" src="images/btn-info-off.png"/></button>
                 <button style="position:absolute; z-index: 100; width:9.8%; transform: translate(855%, -939%);" class=button onclick="heart()"><img id="save" style="z-index:150;" src="images/btn-sav1.png"/></button>
                 <button style="position:relative; width:9%; transform: translate(74%, -419.9%);" class=button onclick="shuffle()"><img id="shuffle" src="images/btn-shuffle-off.png"/></button>
                 <button style="position:relative; width:11.9%; transform: translate(97.7%, -514.7%);" class=button onclick="prev_btn()"><img src="images/btn-prev1.png"/></button>
@@ -290,15 +308,15 @@
                 <button style="position:relative; width:9%; transform: translate(286.3%, -427.4%);" class=button onclick="repeat()"><img id="repeat" src="images/btn-repeat-off.png"/></button>
                 <button style="position:relative; width:9.5%; transform: translate(-663.8%, -477%);" class=button onclick=""><img id="dev" src="images/devices.png"/></button>
                 <font face="verdana" size="2" color="#55ba55"><div id="device_inner" style="position: relative; transform: translate(14.5%, -880%);">device</div></font>
-                <button style="position:relative; width:8%; transform: translate(1050%, -800%);" class=button onclick=""><img id="dev" src="images/btn-queue-off.PNG"/></button>
+                <button style="position:relative; width:7.9%; transform: translate(1074.5%, -826.5%);" class=button onclick="history()"><img id="queue" src="images/btn-queue-off.PNG"/></button>
                 
             </div>
             
-            <div style="position: relative; transform: translate(7%,-1655%);">
+            <div style="position: relative; transform: translate(7%,-1780%);">
                 <font face="verdana" size="2" color="#e3e4e8"><p id="length_in"></p></font>
             </div>
             
-            <div style="position: relative; transform: translate(83%,-1835%);">
+            <div style="position: relative; transform: translate(83%,-1960%);">
                 <font face="verdana" size="2" color="#e3e4e8"><p id="length"></p></font>
             </div>
             
@@ -372,6 +390,7 @@
                             <div id="username" style="transform: translate(18.5%, 365%);">user_name</div>
                             <div id="email" style="transform: translate(18.5%, 390%);">email</div>
                             <div id="account" style="transform: translate(18.5%, 415%);">account_type</div>
+<!--                            <div id="access_token" style="transform: translate(18.5%, 415%);">{{access_token}}</div>-->
                         </font>
                     </div>
                 </div>
@@ -379,8 +398,7 @@
             
         </div>
         
-        <div style="float: left; height: 1%; width: 70%; background-color: yellow">
-        </div>
+        <div style="float: left; height: 1%; width: 70%; background-color: yellow"></div>
         
         <div style="transform: translate(-2500%, 100%); position: relative; float: left; height: 800px; width: 1%; background-color: #1F1C1C; margin-right: -25.1%; margin-bottom: 40%"><p></p></div>
         
@@ -1395,9 +1413,66 @@
             
         </div>
         
+        <div id="morebg" style="width: 100%; height: 100%; z-index: 200; display: none; position: fixed; text-align: center; justify-content: center; align-items: center; transform: translate(-0.5%, -1.2%); background-color: #0e0b08; opacity: .7;"></div>
+        
+        <div id="more" style="float: left; width: 100%; height: 100%; z-index: 400; display: none; position: fixed; text-align: center; justify-content: center; align-items: center; transform: translate(-25.5%, -1.2%);">
+            <img style="position: absolute; width: 25%;" src="images/more-options-background-color.PNG"/>
+            
+            <img style="position: absolute; transform: translate(0%, -101%); width: 12.57%;" id="img_more" src="{{image_url}}"/>
+            
+            <font face="verdana" size="3" color="white">
+                <div id="track_more" style="position: absolute; transform: translate(-50%, -355%);">Track</div>
+            </font>
+            
+            <font face="verdana" size="2" color="grey">
+                <div id="artist_more" style="position: absolute; transform: translate(-50%, -240%);">Artist • Album</div>
+            </font>
+            
+            <button style="transform: translate(-23.1%, 48%);" class="more_btn" onclick="alert()">
+                <img style="float: left; transform: translate(0%, 0%); width: 12%;" src="images/btn-add-to-pl-off.PNG"/>
+                <font style="float:left; absolute; white-space: nowrap; transform: translate(14.3%, 10%);" face="verdana" size="3" color="white">
+                    Add to playlist
+                </font>
+            </button>
+            
+            <button style="transform: translate(-23.1%, 327%);" class="more_btn" onclick="alert()">
+                <img style="float: left; transform: translate(0%, 0%); width: 11.3%;" src="images/btn-add-to-queue-off.PNG"/>
+                <font style="float:left; absolute; white-space: nowrap; transform: translate(16.5%, 10%);" face="verdana" size="3" color="white">
+                    Add to queue
+                </font>
+            </button>
+            
+            <button style="transform: translate(-23.5%, 555%);" class="more_btn" onclick="show_album()">
+                <img id="albs" style="float: left; transform: translate(0%, 0%); width: 12.5%;" src="images/btn-view-album-off.PNG"/>
+                <font style="float:left; absolute; white-space: nowrap; transform: translate(17.5%, 17.8%);" face="verdana" size="3" color="white">
+                    View album
+                </font>
+            </button>
+            
+            <button style="transform: translate(-22.3%, 895.5%);" class="more_btn" onclick="alert()">
+                <img style="float: left; transform: translate(0%, 0%); width: 11.5%;" src="images/btn-view-artist-off.PNG"/>
+                <font style="float:left; absolute; white-space: nowrap; transform: translate(18.5%, 2.5%);" face="verdana" size="3" color="white">
+                    View artist
+                </font>
+            </button>
+            
+            <button style="transform: translate(0%, 490%); width: 25%; height: 60px;" class="more_btn" onclick="more()">
+                <font style="position: absolute; white-space: nowrap; transform: translate(-50%, -70%);" face="verdana" size="4" color="white">
+                    Close
+                </font>
+            </button>
+        </div>
+        
+        <div id="more_album" style="float: left; width: 45.1%; height: 45.1%; z-index: 400; display: none; position: fixed; text-align: center; justify-content: center; align-items: center; transform: translate(93%, 58.1%);">
+            <img style="position: absolute; width: 100%;" src="images/album-bg.PNG"/>
+        
+        </div>
+        
+        
+        
 <!--
         <div>
-            <button onclick="context();">Test</button>
+            <button onclick="help();">Test</button>
         </div> 
 -->
         
@@ -1405,6 +1480,42 @@
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
         
         <script>
+
+            function more() {
+                if (document.getElementById("more").style.display == "flex") {
+                    document.getElementById("more").style.display = "none";
+                    document.getElementById("morebg").style.display = "none";
+                    document.getElementById("info").src = "images/btn-info-off.png";
+                    document.getElementById("more_album").style.display = "none";
+                    document.getElementById("albs").src = "images/btn-view-album-off.PNG";
+                } else {
+                    document.getElementById("more").style.display = "flex";
+                    document.getElementById("morebg").style.display = "flex";
+                    document.getElementById("info").src = "images/btn-info-on.png";
+                }
+            }
+            
+            function show_album() {
+                if (document.getElementById("more_album").style.display == "flex") {
+                    document.getElementById("more_album").style.display = "none";
+                    document.getElementById("albs").src = "images/btn-view-album-off.PNG";
+                } else {
+                    document.getElementById("more_album").style.display = "flex";
+                    document.getElementById("albs").src = "images/btn-view-album-on.PNG";
+                }
+            }
+            
+            function update_more() {
+                $.ajax({
+                    url: '/info',
+                    
+                }).done(function(data) {                 
+                    document.getElementById("img_more").src = data.image;
+                    document.getElementById("track_more").innerHTML = data.name;
+                    document.getElementById("artist_more").innerHTML = data.artist + " • " + data.album;
+                });
+            }
+            
             function context() {
                 $.ajax({
                     url: '/context',
@@ -1795,13 +1906,13 @@
                 var table = document.getElementById("table");
                 
                 if (table.style.display == "none") {
-                    var img = document.getElementById("history");
-                    img.src="images/btn-history-on.png";
+                    var img = document.getElementById("queue");
+                    img.src="images/btn-queue-on.png";
                     table.style.display = "block";
                 } else {
                     table.style.display = "none";
-                    var img = document.getElementById("history");
-                    img.src="images/btn-history-off.png";
+                    var img = document.getElementById("queue");
+                    img.src="images/btn-queue-off.png";
                 }
             }
         
@@ -2287,6 +2398,7 @@
                 dev_info();
                 history_update();
                 playlists();
+                update_more();
                 
                 setTimeout(songScroll, 2500);
                 setTimeout(infoScroll, 2500);

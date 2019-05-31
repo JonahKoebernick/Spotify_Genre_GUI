@@ -201,7 +201,7 @@
       <div class="gap"></div>
       <h2><font face="verdana" size="4" color="#e3e4e8">oAuth info</font></h2>
       <dl style="display: block; line-height: 22px;">
-          <dt><font style="float:left; padding-right: 16px;" face="verdana" size="3" color="#e3e4e8">Access token: </font></dt><dd class="text-overflow"><font face="verdana" size="2.5" color="#535456">{{access_token}}</font></dd>
+          <dt><font style="float:left; padding-right: 16px;" face="verdana" size="3" color="#e3e4e8">Access token: </font></dt><dd style="white-space: normal"><font face="verdana" size="2.5" color="#535456">{{access_token}}</font></dd>
           <dt><font style="float:left; padding-right: 10px;" face="verdana" size="3" color="#e3e4e8">Refresh token: </font></dt><dd class="text-overflow"><font face="verdana" size="2.5" color="#535456">{{refresh_token}}</font></dd>
       </dl>
     </script>    
@@ -517,6 +517,7 @@ $.ajax({
         if (error) {
           alert('There was an error during the authentication');
         } else {
+            
           if (access_token) {
             // render oauth info
             oauthPlaceholder.innerHTML = oauthTemplate({
