@@ -235,9 +235,14 @@
         
         #album_display td:nth-child(1){ color: #55ba55; padding-right: 20px;}
         #album_display td:nth-child(2){ width: 100%; color: white; }
-        
-/*        #album_display td:nth-child(3){ width: 100%; }*/
         #album_display td:nth-child(4){ color: #55ba55; }
+        
+        #artist_display td:nth-child(1){ color: #55ba55; padding-right: 20px;}
+        #artist_display td:nth-child(2){ color: #1e1b1b; }
+        #artist_display td:nth-child(3){ color: white;}
+        #artist_display td:nth-child(4){ color: #55ba55;}
+        #artist_display td:nth-child(5){ color: white;}
+        #artist_display tr { line-height: 60px; }
         
         .gens button {
             background-color: transparent;
@@ -264,8 +269,46 @@
             outline: none;
         }
         
-    
-        
+        input[type=range]{
+            -webkit-appearance: none;
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+/*
+            position: relative;
+            z-index: -2;
+*/
+            width: 100%;
+            height: 8px;
+/*            background: #e3e4e8;*/
+            border: none;
+            border-radius: 15px;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            border: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: grey;
+            margin-top: -4px;
+            z-index: 1000;
+            position: relative;
+        }
+
+        input[type=range]:focus {
+            outline: none;
+        }
+
+        input[type=range]:focus::-webkit-slider-runnable-track {
+/*
+            position: relative;
+            z-index: -2;
+            background: #e3e4e8;
+*/
+        }
+            
     </style>
     
     <body style="background-color:#1F1C1C;">
@@ -312,10 +355,9 @@
                 <button style="position:relative; width:21%; transform: translate(76.8%, -235%);" class=button onclick="pause()"><img id="play" src="images/btn-pause1.png"/></button>
                 <button style="position:relative; width:11.9%; transform: translate(173%, -514.7%);" class=button onclick="skip()"><img src="images/btn-next1.png"/></button>
                 <button style="position:relative; width:9%; transform: translate(286.3%, -427.4%);" class=button onclick="repeat()"><img id="repeat" src="images/btn-repeat-off.png"/></button>
-                <button style="position:relative; width:9.5%; transform: translate(-663.8%, -477%);" class=button onclick=""><img id="dev" src="images/devices.png"/></button>
+                <button style="position:relative; width:9.5%; transform: translate(-663.8%, -477%);" class=button onclick="volume()"><img id="dev" src="images/btn-devices-on.png"/></button>
                 <font face="verdana" size="2" color="#55ba55"><div id="device_inner" style="position: relative; transform: translate(14.5%, -880%);">device</div></font>
                 <button style="position:relative; width:7.9%; transform: translate(1074.5%, -826.5%);" class=button onclick="history()"><img id="queue" src="images/btn-queue-off.PNG"/></button>
-                
             </div>
             
             <div style="position: relative; transform: translate(7%,-1780%);">
@@ -407,6 +449,14 @@
         <div style="float: left; height: 1%; width: 70%; background-color: yellow"></div>
         
         <div style="transform: translate(-2500%, 100%); position: relative; float: left; height: 800px; width: 1%; background-color: #1F1C1C; margin-right: -25.1%; margin-bottom: 40%"><p></p></div>
+        
+        <div id="vol" style="display: none; position: absolute; width: 25%; transform: translate(0%, 0%);">
+            <div style="position: absolute; width: 60%; transform: translate(-372.8%, 1725%);">
+                <div style=""><input class="mySlide" style="background-color: transparent; width: 100%; transform: translate(-1%, 0%); z-index: 500;" id="myRange" type="range" min="1" max="100" value="50"></div>
+                <div id="slide" style="height: 5px; width: 50%; transform: translate(0%, -150%); border-radius: 15px; background-color: #55ba55; position: relative; z-index: -1;"></div>
+                <div id="slide1" style="height: 5px; width: 100%; transform: translate(0%, -250%); border-radius: 15px; background-color: #e3e4e8; position: relative; z-index: -2;"></div>
+            </div>
+        </div>
         
         <font face="verdana" size="3" color="#55ba55">
              
@@ -1455,8 +1505,8 @@
                 </font>
             </button>
             
-            <button style="transform: translate(-22.3%, 895.5%);" class="more_btn" onclick="alert()">
-                <img style="float: left; transform: translate(0%, 0%); width: 11.5%;" src="images/btn-view-artist-off.PNG"/>
+            <button style="transform: translate(-22.3%, 895.5%);" class="more_btn" onclick="show_artist()">
+                <img id="arts" style="float: left; transform: translate(0%, 0%); width: 11.5%;" src="images/btn-view-artist-off.PNG"/>
                 <font style="float:left; absolute; white-space: nowrap; transform: translate(18.5%, 2.5%);" face="verdana" size="3" color="white">
                     View artist
                 </font>
@@ -1793,25 +1843,381 @@
             
         </div>
         
-<!--
-        <div id="more_artist" style="float: left; width: 45.1%; height: 45.1%; z-index: 400; display: flex; position: fixed; text-align: center; justify-content: center; align-items: center; transform: translate(93%, 58.1%);">
+        <div id="more_artist" style="float: left; width: 45.1%; height: 45.1%; z-index: 400; display: none; position: fixed; text-align: center; justify-content: center; align-items: center; transform: translate(93%, 58.1%);">
             
-            <img style="position: absolute; width: 100%;" src="images/album-bg.PNG"/>
+            <img style="position: absolute; width: 100%;" src="images/artist-view.PNG"/>
             
-            <img id="artist_art" style="position: absolute; width: 36.4%; transform: translate(-81%, -81%);" src="images/album-view.PNG"/>
+            <img id="artist_art" style="position: absolute;" src="images/album-view.PNG"/>
         
-            <div style="width: 56.2%; height: 75.8%; position: absolute; transform: translate(34.4%, -81.3%);">  
+            <div style="width: 56.2%; height: 75.8%; position: absolute; transform: translate(52.4%, -81.3%);">  
                 <font style="text-align: left;" face="verdana" size="3" color="white">
-
+                    <div id="artist_name" style="position: relative; transform: translate(3%, 100%);">artist</div>
+                    <div id="artist_pop" style="position: relative; transform: translate(3%, 225%);">popularity</div>
+                    <div id="artist_genres" style="position: relative; transform: translate(3%, 350%);">genres</div>
                 </font>
+            </div>
+            
+            <div style="width: 95%; height: 358px; position: absolute; transform: translate(-0.05%, 36.2%); overflow-y: auto;">
+                <table id="artist_display" style="width: 100%; max-height: 365px; overflow-y: auto; text-align: left;">
+                    <tr id="artist_albumrow0">
+                        <td>0</td>
+                        <td id="alb_art0">track</td>
+                        <td id="alb_name0"></td>
+                        <td id="alb_release0">release</td>
+                        <td id="alb_tracks0">length</td>
+                    </tr>
+                    <tr id="artist_albumrow1">
+                        <td>1</td>
+                        <td id="alb_art1">track</td>
+                        <td id="alb_name1"></td>
+                        <td id="alb_release1">release</td>
+                        <td id="alb_tracks1">length</td>
+                    </tr>
+                    <tr id="artist_albumrow2">
+                        <td>2</td>
+                        <td id="alb_art2">track</td>
+                        <td id="alb_name2"></td>
+                        <td id="alb_release2">release</td>
+                        <td id="alb_tracks2">length</td>
+                    </tr>
+                    <tr id="artist_albumrow3">
+                        <td>3</td>
+                        <td id="alb_art3">track</td>
+                        <td id="alb_name3"></td>
+                        <td id="alb_release3">release</td>
+                        <td id="alb_tracks3">length</td>
+                    </tr>
+                    <tr id="artist_albumrow4">
+                        <td>4</td>
+                        <td id="alb_art4">track</td>
+                        <td id="alb_name4"></td>
+                        <td id="alb_release4">release</td>
+                        <td id="alb_tracks4">length</td>
+                    </tr>
+                    <tr id="artist_albumrow5">
+                        <td>5</td>
+                        <td id="alb_art5">track</td>
+                        <td id="alb_name5"></td>
+                        <td id="alb_release5">release</td>
+                        <td id="alb_tracks5">length</td>
+                    </tr>
+                    <tr id="artist_albumrow6">
+                        <td>6</td>
+                        <td id="alb_art6">track</td>
+                        <td id="alb_name6"></td>
+                        <td id="alb_release6">release</td>
+                        <td id="alb_tracks6">length</td>
+                    </tr>
+                    <tr id="artist_albumrow7">
+                        <td>7</td>
+                        <td id="alb_art7">track</td>
+                        <td id="alb_name7"></td>
+                        <td id="alb_release7">release</td>
+                        <td id="alb_tracks7">length</td>
+                    </tr>
+                    <tr id="artist_albumrow8">
+                        <td>8</td>
+                        <td id="alb_art8">track</td>
+                        <td id="alb_name8"></td>
+                        <td id="alb_release8">release</td>
+                        <td id="alb_tracks8">length</td>
+                    </tr>
+                    <tr id="artist_albumrow9">
+                        <td>9</td>
+                        <td id="alb_art9">track</td>
+                        <td id="alb_name9"></td>
+                        <td id="alb_release9">release</td>
+                        <td id="alb_tracks9">length</td>
+                    </tr>
+                    <tr id="artist_albumrow10">
+                        <td>10</td>
+                        <td id="alb_art10">track</td>
+                        <td id="alb_name10"></td>
+                        <td id="alb_release10">release</td>
+                        <td id="alb_tracks10">length</td>
+                    </tr>
+                    <tr id="artist_albumrow11">
+                        <td>11</td>
+                        <td id="alb_art11">track</td>
+                        <td id="alb_name11"></td>
+                        <td id="alb_release11">release</td>
+                        <td id="alb_tracks11">length</td>
+                    </tr>
+                    <tr id="artist_albumrow12">
+                        <td>12</td>
+                        <td id="alb_art12">track</td>
+                        <td id="alb_name12"></td>
+                        <td id="alb_release12">release</td>
+                        <td id="alb_tracks12">length</td>
+                    </tr>
+                    <tr id="artist_albumrow13">
+                        <td>13</td>
+                        <td id="alb_art13">track</td>
+                        <td id="alb_name13"></td>
+                        <td id="alb_release13">release</td>
+                        <td id="alb_tracks13">length</td>
+                    </tr>
+                    <tr id="artist_albumrow14">
+                        <td>14</td>
+                        <td id="alb_art14">track</td>
+                        <td id="alb_name14"></td>
+                        <td id="alb_release14">release</td>
+                        <td id="alb_tracks14">length</td>
+                    </tr>
+                    <tr id="artist_albumrow15">
+                        <td>15</td>
+                        <td id="alb_art15">track</td>
+                        <td id="alb_name15"></td>
+                        <td id="alb_release15">release</td>
+                        <td id="alb_tracks15">length</td>
+                    </tr>
+                    <tr id="artist_albumrow16">
+                        <td>16</td>
+                        <td id="alb_art16">track</td>
+                        <td id="alb_name16"></td>
+                        <td id="alb_release16">release</td>
+                        <td id="alb_tracks16">length</td>
+                    </tr>
+                    <tr id="artist_albumrow17">
+                        <td>17</td>
+                        <td id="alb_art17">track</td>
+                        <td id="alb_name17"></td>
+                        <td id="alb_release17">release</td>
+                        <td id="alb_tracks17">length</td>
+                    </tr>
+                    <tr id="artist_albumrow18">
+                        <td>18</td>
+                        <td id="alb_art18">track</td>
+                        <td id="alb_name18"></td>
+                        <td id="alb_release18">release</td>
+                        <td id="alb_tracks18">length</td>
+                    </tr>
+                    <tr id="artist_albumrow19">
+                        <td>19</td>
+                        <td id="alb_art19">track</td>
+                        <td id="alb_name19"></td>
+                        <td id="alb_release19">release</td>
+                        <td id="alb_tracks19">length</td>
+                    </tr>
+                    <tr id="artist_albumrow20">
+                        <td>20</td>
+                        <td id="alb_art20">track</td>
+                        <td id="alb_name20"></td>
+                        <td id="alb_release20">release</td>
+                        <td id="alb_tracks20">length</td>
+                    </tr>
+                    <tr id="artist_albumrow21">
+                        <td>21</td>
+                        <td id="alb_art21">track</td>
+                        <td id="alb_name21"></td>
+                        <td id="alb_release21">release</td>
+                        <td id="alb_tracks21">length</td>
+                    </tr>
+                    <tr id="artist_albumrow22">
+                        <td>22</td>
+                        <td id="alb_art22">track</td>
+                        <td id="alb_name22"></td>
+                        <td id="alb_release22">release</td>
+                        <td id="alb_tracks22">length</td>
+                    </tr>
+                    <tr id="artist_albumrow23">
+                        <td>23</td>
+                        <td id="alb_art23">track</td>
+                        <td id="alb_name23"></td>
+                        <td id="alb_release23">release</td>
+                        <td id="alb_tracks23">length</td>
+                    </tr>
+                    <tr id="artist_albumrow24">
+                        <td>24</td>
+                        <td id="alb_art24">track</td>
+                        <td id="alb_name24"></td>
+                        <td id="alb_release24">release</td>
+                        <td id="alb_tracks24">length</td>
+                    </tr>
+                    <tr id="artist_albumrow25">
+                        <td>25</td>
+                        <td id="alb_art25">track</td>
+                        <td id="alb_name25"></td>
+                        <td id="alb_release25">release</td>
+                        <td id="alb_tracks25">length</td>
+                    </tr>
+                    <tr id="artist_albumrow26">
+                        <td>26</td>
+                        <td id="alb_art26">track</td>
+                        <td id="alb_name26"></td>
+                        <td id="alb_release26">release</td>
+                        <td id="alb_tracks26">length</td>
+                    </tr>
+                    <tr id="artist_albumrow27">
+                        <td>27</td>
+                        <td id="alb_art27">track</td>
+                        <td id="alb_name27"></td>
+                        <td id="alb_release27">release</td>
+                        <td id="alb_tracks27">length</td>
+                    </tr>
+                    <tr id="artist_albumrow28">
+                        <td>28</td>
+                        <td id="alb_art28">track</td>
+                        <td id="alb_name28"></td>
+                        <td id="alb_release28">release</td>
+                        <td id="alb_tracks28">length</td>
+                    </tr>
+                    <tr id="artist_albumrow29">
+                        <td>29</td>
+                        <td id="alb_art29">track</td>
+                        <td id="alb_name29"></td>
+                        <td id="alb_release29">release</td>
+                        <td id="alb_tracks29">length</td>
+                    </tr>
+                    <tr id="artist_albumrow30">
+                        <td>30</td>
+                        <td id="alb_art30">track</td>
+                        <td id="alb_name30"></td>
+                        <td id="alb_release30">release</td>
+                        <td id="alb_tracks30">length</td>
+                    </tr>
+                    <tr id="artist_albumrow31">
+                        <td>31</td>
+                        <td id="alb_art31">track</td>
+                        <td id="alb_name31"></td>
+                        <td id="alb_release31">release</td>
+                        <td id="alb_tracks31">length</td>
+                    </tr>
+                    <tr id="artist_albumrow32">
+                        <td>32</td>
+                        <td id="alb_art32">track</td>
+                        <td id="alb_name32"></td>
+                        <td id="alb_release32">release</td>
+                        <td id="alb_tracks32">length</td>
+                    </tr>
+                    <tr id="artist_albumrow33">
+                        <td>33</td>
+                        <td id="alb_art33">track</td>
+                        <td id="alb_name33"></td>
+                        <td id="alb_release33">release</td>
+                        <td id="alb_tracks33">length</td>
+                        
+                    </tr>
+                    <tr id="artist_albumrow34">
+                        <td>34</td>
+                        <td id="alb_art34">track</td>
+                        <td id="alb_name34"></td>
+                        <td id="alb_release34">release</td>
+                        <td id="alb_tracks34">length</td>
+                    </tr>
+                    <tr id="artist_albumrow35">
+                        <td>35</td>
+                        <td id="alb_art35">track</td>
+                        <td id="alb_name35"></td>
+                        <td id="alb_release35">release</td>
+                        <td id="alb_tracks35">length</td>
+                    </tr>
+                    <tr id="artist_albumrow36">
+                        <td>36</td>
+                        <td id="alb_art36">track</td>
+                        <td id="alb_name36"></td>
+                        <td id="alb_release36">release</td>
+                        <td id="alb_tracks36">length</td>
+                    </tr>
+                    <tr id="artist_albumrow37">
+                        <td>37</td>
+                        <td id="alb_art37">track</td>
+                        <td id="alb_name37"></td>
+                        <td id="alb_release37">release</td>
+                        <td id="alb_tracks37">length</td>
+                    </tr>
+                    <tr id="artist_albumrow38">
+                        <td>38</td>
+                        <td id="alb_art38">track</td>
+                        <td id="alb_name38"></td>
+                        <td id="alb_release38">release</td>
+                        <td id="alb_tracks38">length</td>
+                    </tr>
+                    <tr id="artist_albumrow39">
+                        <td>39</td>
+                        <td id="alb_art39">track</td>
+                        <td id="alb_name39"></td>
+                        <td id="alb_release39">release</td>
+                        <td id="alb_tracks39">length</td>
+                    </tr>
+                    <tr id="artist_albumrow40">
+                        <td>40</td>
+                        <td id="alb_art40">track</td>
+                        <td id="alb_name40"></td>
+                        <td id="alb_release40">release</td>
+                        <td id="alb_tracks40">length</td>
+                    </tr>
+                    <tr id="artist_albumrow41">
+                        <td>41</td>
+                        <td id="alb_art41">track</td>
+                        <td id="alb_name41"></td>
+                        <td id="alb_release41">release</td>
+                        <td id="alb_tracks41">length</td>
+                    </tr>
+                    <tr id="artist_albumrow42">
+                        <td>42</td>
+                        <td id="alb_art42">track</td>
+                        <td id="alb_name42"></td>
+                        <td id="alb_release42">release</td>
+                        <td id="alb_tracks42">length</td>
+                    </tr>
+                    <tr id="artist_albumrow43">
+                        <td>43</td>
+                        <td id="alb_art43">track</td>
+                        <td id="alb_name43"></td>
+                        <td id="alb_release43">release</td>
+                        <td id="alb_tracks43">length</td>
+                    </tr>
+                    <tr id="artist_albumrow44">
+                        <td>44</td>
+                        <td id="alb_art44">track</td>
+                        <td id="alb_name44"></td>
+                        <td id="alb_release44">release</td>
+                        <td id="alb_tracks44">length</td>
+                    </tr>
+                    <tr id="artist_albumrow45">
+                        <td>45</td>
+                        <td id="alb_art45">track</td>
+                        <td id="alb_name45"></td>
+                        <td id="alb_release45">release</td>
+                        <td id="alb_tracks45">length</td>
+                    </tr>
+                    <tr id="artist_albumrow46">
+                        <td>46</td>
+                        <td id="alb_art46">track</td>
+                        <td id="alb_name46"></td>
+                        <td id="alb_release46">release</td>
+                        <td id="alb_tracks46">length</td>
+                    </tr>
+                    <tr id="artist_albumrow47">
+                        <td>47</td>
+                        <td id="alb_art47">track</td>
+                        <td id="alb_name47"></td>
+                        <td id="alb_release47">release</td>
+                        <td id="alb_tracks47">length</td>
+                    </tr>
+                    <tr id="artist_albumrow48">
+                        <td>48</td>
+                        <td id="alb_art48">track</td>
+                        <td id="alb_name48"></td>
+                        <td id="alb_release48">release</td>
+                        <td id="alb_tracks48">length</td>
+                    </tr>
+                    <tr id="artist_albumrow49">
+                        <td>49</td>
+                        <td id="alb_art49">track</td>
+                        <td id="alb_name49"></td>
+                        <td id="alb_release49">release</td>
+                        <td id="alb_tracks49">length</td>
+                    </tr>
+                </table>
             </div>
                         
         </div>
--->
         
 <!--
         <div>
-            <button onclick="view_artist();">Test</button>
+            <button onclick="volume_update();">Test</button>
         </div> 
 -->
         
@@ -1819,12 +2225,79 @@
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
         
         <script>
+            function volume() {
+                if (document.getElementById("vol").style.display == "none") {
+                    document.getElementById("vol").style.display = "initial";
+                    document.getElementById("device_inner").style.visibility = "hidden";
+                    document.getElementById("dev").src = "images/btn-devices-off.png";
+                } else {
+                    document.getElementById("vol").style.display = "none";
+                     document.getElementById("device_inner").style.visibility = "visible";
+                    document.getElementById("dev").src = "images/btn-devices-on.png";
+                }
+                
+            }
+            
+            function volume_update() {
+                $.ajax({
+                    url: '/get_volume',
+
+                }).done(function(data) {
+//                    alert(data.volume);
+                    
+                    document.getElementById("myRange").value = data.volume;
+                    document.getElementById("slide").style.width = data.volume + "%";
+                });
+            }
+            
             function update_artist() {
                 $.ajax({
                     url: '/view_artist',
                     
                 }).done(function(data) {
                     document.getElementById("artist_art").src = data.artist.images[0].url;
+                    
+                    if (data.artist.images[0].width > data.artist.images[0].height) {
+                        document.getElementById("artist_art").style.transform = "translate(-%, -258.7%)";
+                        document.getElementById("artist_art").style.width = "20%";
+                    } else if (data.artist.images[0].height > data.artist.images[0].width) {
+                        document.getElementById("artist_art").style.height = "79.5%";
+                        document.getElementById("artist_art").style.transform = "translate(-97%, -75.6%)";
+                    } else {
+                        document.getElementById("artist_art").style.height = "79.5%";
+                        document.getElementById("artist_art").style.transform = "translate(-65%, -75.5%)";
+                    }
+                    
+                    document.getElementById("artist_name").innerHTML = data.artist.name;
+                    document.getElementById("artist_pop").innerHTML = "Popularity: " + data.artist.popularity + "%";
+                    
+                    var artist_genres1 = "";
+                    for (i = 0; i < data.artist.genres.length; i++) {
+                        if (i != 0) {
+                            artist_genres1 += ", ";
+                        }
+                        artist_genres1 += data.artist.genres[i];
+                    }
+                    
+                    document.getElementById("artist_genres").innerHTML = "Genres: " + artist_genres1;
+                    
+                    for (gk = 0; gk < 50; gk++) {
+                        if (gk < data.artist_albums.length) {
+                            document.getElementById("artist_albumrow" + gk).style.display = "initial";
+                            document.getElementById("alb_art" + gk).innerHTML = '<img id="artist_art' + gk + '" style="position: absolute;" src=""/>' + "TEMP______";
+                            document.getElementById("artist_art" + gk).src = data.artist_albums[gk].images[0].url;
+                            document.getElementById("artist_art" + gk).style.width = "12%";
+                            document.getElementById("alb_name" + gk).innerHTML = data.artist_albums[gk].name;
+                            document.getElementById("alb_tracks" + gk).innerHTML = data.artist_albums[gk].total_tracks + " track";
+                            if (data.artist_albums[gk].total_tracks > 1) document.getElementById("alb_tracks" + gk).innerHTML += 's';
+                            document.getElementById("alb_release" + gk).innerHTML = "Released: " + data.artist_albums[gk].release_date;
+                        } else {
+                            document.getElementById("artist_albumrow" + gk).style.display = "none";
+                        }
+                    }
+                    
+//                    alert(data.artist_albums.length);
+                    
                 });
             }
 
@@ -1835,10 +2308,14 @@
                     document.getElementById("info").src = "images/btn-info-off.png";
                     document.getElementById("more_album").style.display = "none";
                     document.getElementById("albs").src = "images/btn-view-album-off.PNG";
+                    document.getElementById("more_artist").style.display = "none";
+                    document.getElementById("arts").src = "images/btn-view-artist-off.PNG";
                 } else {
                     document.getElementById("more").style.display = "flex";
                     document.getElementById("morebg").style.display = "flex";
                     document.getElementById("info").src = "images/btn-info-on.png";
+                    update_artist();
+                    update_more();
                 }
             }
             
@@ -1849,6 +2326,20 @@
                 } else {
                     document.getElementById("more_album").style.display = "flex";
                     document.getElementById("albs").src = "images/btn-view-album-on.PNG";
+                    document.getElementById("more_artist").style.display = "none";
+                    document.getElementById("arts").src = "images/btn-view-artist-off.PNG";
+                }
+            }
+            
+            function show_artist() {
+                if (document.getElementById("more_artist").style.display == "flex") {
+                    document.getElementById("more_artist").style.display = "none";
+                    document.getElementById("arts").src = "images/btn-view-artist-off.PNG";
+                } else {
+                    document.getElementById("more_artist").style.display = "flex";
+                    document.getElementById("arts").src = "images/btn-view-artist-on.PNG";
+                    document.getElementById("more_album").style.display = "none";
+                    document.getElementById("albs").src = "images/btn-view-album-off.PNG";
                 }
             }
             
@@ -2253,21 +2744,68 @@
                         
                         document.getElementById("percent").style.display = "none";
                     } else if (shuff == 1) {
-                        var img = document.getElementById("shuffle");
-                        img.src="images/btn-shuffle-on.png";
-                    } else if (shuff == 2) {
-                        var img = document.getElementById("shuffle");
-                        img.src="images/btn-percent.png";
                         
-                        document.getElementById("playlist_disp").style.transform = "translate(-200%, -74.4%)"; //CHANGE
-                        
-                        percent_shuffle = true;
+                        $.ajax({
+                            url: '/access_token',
 
-                        offset += 30;
-                        document.getElementById("player").style.marginBottom = offset + "%";
+                        }).done(function(data) {
+                            var at = data.access_token;
+
+                            $.ajax({
+                                url: 'https://api.spotify.com/v1/me/player/shuffle?state=true',
+                                type: 'PUT',
+                                headers: {
+                                    'Authorization': 'Bearer ' + at },
+                                dataType: "json",
+                            }).done(function(data) {
+                                var img = document.getElementById("shuffle");
+                                img.src="images/btn-shuffle-on.png";
+                            });
+                        });   
+                    
+//                        var img = document.getElementById("shuffle");
+//                        img.src="images/btn-shuffle-on.png";
                         
-                        update_options();
-                        document.getElementById("percent").style.display = "inherit";
+                    } else if (shuff == 2) {
+                        $.ajax({
+                            url: '/access_token',
+
+                        }).done(function(data) {
+                            var at = data.access_token;
+
+                            $.ajax({
+                                url: 'https://api.spotify.com/v1/me/player/shuffle?state=false',
+                                type: 'PUT',
+                                headers: {
+                                    'Authorization': 'Bearer ' + at },
+                                dataType: "json",
+                            }).done(function(data) {
+                                var img = document.getElementById("shuffle");
+                                img.src="images/btn-percent.png";
+
+                                document.getElementById("playlist_disp").style.transform = "translate(-200%, -74.4%)"; //CHANGE
+
+                                percent_shuffle = true;
+
+                                offset += 30;
+                                document.getElementById("player").style.marginBottom = offset + "%";
+
+                                update_options();
+                                document.getElementById("percent").style.display = "inherit";
+                            });
+                        }); 
+//                        var img = document.getElementById("shuffle");
+//                        img.src="images/btn-percent.png";
+//                        
+//                        document.getElementById("playlist_disp").style.transform = "translate(-200%, -74.4%)"; //CHANGE
+//                        
+//                        percent_shuffle = true;
+//
+//                        offset += 30;
+//                        document.getElementById("player").style.marginBottom = offset + "%";
+//                        
+//                        update_options();
+//                        document.getElementById("percent").style.display = "inherit";  
                     }
                 });
             }
@@ -2510,20 +3048,65 @@
                     var rep = data.test;
                     
                     if (rep == 0) {
-                        var img = document.getElementById("repeat");
-                        img.src="images/btn-repeat-off.png";
+                        $.ajax({
+                            url: '/access_token',
+
+                        }).done(function(data) {
+                            var at = data.access_token;
+
+                            $.ajax({
+                                url: 'https://api.spotify.com/v1/me/player/repeat?state=off',
+                                type: 'PUT',
+                                headers: {
+                                    'Authorization': 'Bearer ' + at },
+                                dataType: "json",
+                            }).done(function(data) {
+                                var img = document.getElementById("repeat");
+                                img.src="images/btn-repeat-off.png";
+                            });
+                        });   
                     } else if (rep == 1) {
-                        var img = document.getElementById("repeat");
-                        img.src="images/btn-repeat-on.png";
+                        $.ajax({
+                            url: '/access_token',
+
+                        }).done(function(data) {
+                            var at = data.access_token;
+
+                            $.ajax({
+                                url: 'https://api.spotify.com/v1/me/player/repeat?state=context',
+                                type: 'PUT',
+                                headers: {
+                                    'Authorization': 'Bearer ' + at },
+                                dataType: "json",
+                            }).done(function(data) {
+                                var img = document.getElementById("repeat");
+                                img.src="images/btn-repeat-on.png";
+                            });
+                        });
                     } else if (rep == 2) {
-                        var img = document.getElementById("repeat");
-                        img.src="images/btn-repeat-song.png";
+                        $.ajax({
+                            url: '/access_token',
+
+                        }).done(function(data) {
+                            var at = data.access_token;
+
+                            $.ajax({
+                                url: 'https://api.spotify.com/v1/me/player/repeat?state=track',
+                                type: 'PUT',
+                                headers: {
+                                    'Authorization': 'Bearer ' + at },
+                                dataType: "json",
+                            }).done(function(data) {
+                                var img = document.getElementById("repeat");
+                                img.src="images/btn-repeat-song.png";
+                            });
+                        });
                     }
                 });
                 
-                var img = document.getElementById("repeat");
-                img.src="images/btn-repeat-on.png";
-                return false;
+//                var img = document.getElementById("repeat");
+//                img.src="images/btn-repeat-on.png";
+//                return false;
             }
           
             function next_song() {
@@ -2586,6 +3169,8 @@
                         headers: {
                             'Authorization': 'Bearer ' + at },
                         dataType: "json",
+                    }).done(function(data) {
+                           
                     });
                 });   
             }
@@ -2600,8 +3185,7 @@
                 if (seconds < 10) fill = "0";
                 
                 return minutes + ":" + fill + seconds;
-            } 
-            
+            }       
             
             function findOverlap(a, b) {
                 if (b.length === 0) {
@@ -2618,6 +3202,7 @@
 
                 return findOverlap(a, b.substring(0, b.length - 1));
             }
+            
         </script> 
                 
         <script>
@@ -2827,9 +3412,15 @@
                 playlists();
                 update_more();
                 update_artist();
+                volume_update()
                 
                 setTimeout(songScroll, 2500);
                 setTimeout(infoScroll, 2500);
+                
+                var slider = document.getElementById("myRange");
+                slider.oninput = function() {
+                    document.getElementById("slide").style.width = this.value + "%";
+                }
                 
                 $(document.getElementById("sel0")).change(function(){
                     selections[0].percent = document.getElementById("sel0").value;
@@ -2879,6 +3470,7 @@
                     selections[11].percent = document.getElementById("sel11").value;
                     update_options();
                 });
+                
             </script>
         </div>
  

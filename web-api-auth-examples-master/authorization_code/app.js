@@ -179,7 +179,7 @@ app.get('/view_artist', function(req, res) {
     
     request.get(options, function(error, response, body) {
         if(!error && response.statusCode == 200){
-            console.log(body);
+//            console.log(body);
             
             var artist = body.item.album.artists;
             
@@ -193,11 +193,27 @@ app.get('/view_artist', function(req, res) {
 
             request.get(options, function(error, response, body) {
                 if(!error && response.statusCode == 200){
-                    console.log("VIEW\n" + body.name);
+//                    console.log("VIEW\n" + body.name);
+//                    console.log(body);
+                    var artist_send = body;
                     
-                    
-                    res.send({
-                        'artist': body,
+                    var options = {
+                        url: 'https://api.spotify.com/v1/artists/' + artist_send.id + '/albums',
+                        headers: { 'Authorization': 'Bearer ' + access_token2 },
+                        json: true
+                    };
+
+                    request.get(options, function(error, response, body) {
+                        if(!error && response.statusCode == 200){
+        //                    console.log("VIEW\n" + body.name);
+                            console.log(body);
+//                            var artist = body;
+
+                            res.send({
+                                'artist': artist_send,
+                                'artist_albums': body.items,
+                            });
+                        }
                     });
                 }
             });
@@ -807,25 +823,26 @@ app.get('/shuff', function(req, res) {
     shuff++;
     shuff = shuff % 3;
     
-    if (shuff == 1) {
-        var options = {
-            url: 'https://api.spotify.com/v1/me/player/shuffle?state=true',
-            headers: { 
-                'Authorization': 'Bearer ' + access_token2 
-            },
-        };
-
-        request.get(options, function(error, response, body) {
-            if(!error && response.statusCode == 200) {
-
-                console.log("Shuffle On");
-
-            } else {
-                console.log("ERROR: " + response.statusCode);
-            }
-        });
-
-    }
+//    if (shuff == 1) {
+//        var options = {
+//            
+//            url: 'https://api.spotify.com/v1/me/player/shuffle?state=true',
+//            headers: { 
+//                'Authorization': 'Bearer ' + access_token2 
+//            },
+//        };
+//
+//        request.get(options, function(error, response, body) {
+//            if(!error && response.statusCode == 200) {
+//
+//                console.log("Shuffle On");
+//
+//            } else {
+//                console.log("ERROR: " + response.statusCode + " ERROR: " + error + " REASON: " + response.type);
+//            }
+//        });
+//
+//    }
     
     res.send({
           'test' : shuff,
@@ -959,6 +976,37 @@ app.get('/tracks/:theValue', function(req, res) {
         }
     });
 
+});
+
+app.get('/get_volume', function(req, res) {
+    var options = {
+        url: 'https://api.spotify.com/v1/me/player/devices',
+        headers: { 'Authorization': 'Bearer ' + access_token2 },
+        json: true
+    };
+
+    request.get(options, function(error, response, body) {
+        if(!error && response.statusCode == 200 ){
+            var devs = body.devices;
+            var num = body.devices.length;
+            console.log("NUMBER OF DEVICES: " + num);
+            
+            
+            for (i = 0; i < num; i++) {
+                if (devs[i].is_active == true) {
+                    var current = devs[i];
+                    
+                    console.log(current);
+                } 
+            }
+            
+            
+            
+            res.send({
+                'volume' : current.volume_percent,
+            });
+        }
+    });
 });
 
 console.log('Listening on 8888');
