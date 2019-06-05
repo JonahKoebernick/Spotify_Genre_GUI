@@ -241,51 +241,67 @@ app.get('/track_length', function(req, res) {
             var artist = body.item.album.artists[0].name;
             var album = body.item.album.name;
             var info = artist + " • " + album;
-            var cont_href = body.context.href;
-            
-            console.log('Progress : ' + time);
-            console.log(body.item.duration_ms);
-            console.log(totaltime);
-            console.log("Image url : "+ body.item.album.images[0].url);
-            console.log("Name : " + name);
-            console.log("Artist :" + artist);
-            console.log('Context : ' + body.context.type + ' [' + cont_href + ']');
-            
-            if (body.context.type == "artist") {
+            if (body.context != null) {
+                var cont_href = body.context.href;
                 
-            } else if (body.context.type == "playlist") {
+                console.log('Progress : ' + time);
+                console.log(body.item.duration_ms);
+                console.log(totaltime);
+                console.log("Image url : "+ body.item.album.images[0].url);
+                console.log("Name : " + name);
+                console.log("Artist :" + artist);
+                console.log('Context : ' + body.context.type + ' [' + cont_href + ']');
                 
-            } else if (body.context.type == "albumx") {
+                var options = {
+                    url: cont_href,
+                    headers: { 'Authorization': 'Bearer ' + access_token2 },
+                    json: true
+                };
+
+                request.get(options, function(error, response, body) {
+                    if(!error && response.statusCode == 200){
+
+                        console.log("success" + body.name);
+                        var cont = body.name;
+
+
+                        res.send({
+                            'context': cont,
+                            'duration_ms': totaltime,
+                            'progress_ms': time,
+                            'image': image,
+                            'name' : name,
+                            'artist' : artist,
+                            'album' : album
+                        });
+
+                    } else {
+                        console.log("ERROR: " + response.statusCode);
+                    }
+                });
+            } else {
+                var cont_href = "Context";
                 
+                console.log('Progress : ' + time);
+                console.log(body.item.duration_ms);
+                console.log(totaltime);
+                console.log("Image url : "+ body.item.album.images[0].url);
+                console.log("Name : " + name);
+                console.log("Artist :" + artist);
+                console.log('Context : [NONE]');
+                
+                res.send({
+                    'context': artist,
+                    'duration_ms': totaltime,
+                    'progress_ms': time,
+                    'image': image,
+                    'name' : name,
+                    'artist' : artist,
+                    'album' : album
+                });
             }
             
-            var options = {
-                url: cont_href,
-                headers: { 'Authorization': 'Bearer ' + access_token2 },
-                json: true
-            };
-            
-            request.get(options, function(error, response, body) {
-                if(!error && response.statusCode == 200){
-                   
-                    console.log("success" + body.name);
-                    var cont = body.name;
-                    
-                    
-                    res.send({
-                        'context': cont,
-                        'duration_ms': totaltime,
-                        'progress_ms': time,
-                        'image': image,
-                        'name' : name,
-                        'artist' : artist,
-                        'album' : album
-                    });
 
-                } else {
-                    console.log("ERROR: " + response.statusCode);
-                }
-            });
             
 //            res.send({
 //                
@@ -315,51 +331,65 @@ app.get('/info', function(req, res) {
             var artist = body.item.album.artists[0].name;
             var album = body.item.album.name;
             var info = artist + " • " + album;
-            var cont_href = body.context.href;
-            
-            console.log('Progress : ' + time);
-            console.log(body.item.duration_ms);
-            console.log(totaltime);
-            console.log("Image url : "+ body.item.album.images[0].url);
-            console.log("Name : " + name);
-            console.log("Artist :" + artist);
-            console.log('Context : ' + body.context.type + ' [' + cont_href + ']');
-            
-            if (body.context.type == "artist") {
+            if (body.context != null) {
+                var cont_href = body.context.href;
                 
-            } else if (body.context.type == "playlist") {
+                console.log('Progress : ' + time);
+                console.log(body.item.duration_ms);
+                console.log(totaltime);
+                console.log("Image url : "+ body.item.album.images[0].url);
+                console.log("Name : " + name);
+                console.log("Artist :" + artist);
+                console.log('Context : ' + body.context.type + ' [' + cont_href + ']');
                 
-            } else if (body.context.type == "albumx") {
-                
-            }
-            
-            var options = {
-                url: cont_href,
-                headers: { 'Authorization': 'Bearer ' + access_token2 },
-                json: true
-            };
-            
-            request.get(options, function(error, response, body) {
-                if(!error && response.statusCode == 200){
-                   
-                    console.log("success" + body.name);
-                    var cont = body.name;
-                    
-                    
-                    res.send({
-                        'context': cont,
-                        'duration_ms': totaltime,
-                        'progress_ms': time,
-                        'image': image,
-                        'name' : name,
-                        'artist' : artist,
-                        'album' : album
-                    });
+                var options = {
+                    url: cont_href,
+                    headers: { 'Authorization': 'Bearer ' + access_token2 },
+                    json: true
+                };
 
-                } else {
-                    console.log("ERROR: " + response.statusCode);
-                }
-            });
+                request.get(options, function(error, response, body) {
+                    if(!error && response.statusCode == 200){
+
+                        console.log("success" + body.name);
+                        var cont = body.name;
+
+
+                        res.send({
+                            'context': cont,
+                            'duration_ms': totaltime,
+                            'progress_ms': time,
+                            'image': image,
+                            'name' : name,
+                            'artist' : artist,
+                            'album' : album
+                        });
+
+                    } else {
+                        console.log("ERROR: " + response.statusCode);
+                    }
+                });
+            } else {
+                var cont_href = "Context";
+                
+                console.log('Progress : ' + time);
+                console.log(body.item.duration_ms);
+                console.log(totaltime);
+                console.log("Image url : "+ body.item.album.images[0].url);
+                console.log("Name : " + name);
+                console.log("Artist :" + artist);
+                console.log('Context : ' + ' [NONE]');
+                
+                res.send({
+                    'context': artist,
+                    'duration_ms': totaltime,
+                    'progress_ms': time,
+                    'image': image,
+                    'name' : name,
+                    'artist' : artist,
+                    'album' : album
+                });
+            }
             
 //            res.send({
 //                
