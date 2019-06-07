@@ -6,6 +6,7 @@
         var selections = [];
         var gen = 0;
         var percent_shuffle = false;
+        var queue = [];
         
     </script>
         
@@ -123,7 +124,7 @@
             position: absolute;
             height: 30px;
             width: 50%;
-/*            background: #332e23;*/
+/*              background: #332e23;*/
             background: #0e0b08;
 /*            background-color: blue;*/
             z-index:50;
@@ -133,9 +134,10 @@
             position: absolute;
             height: 30px;
             width: 50%;
-/*            background: #1d1b16;*/
+/*              background: #1d1b16;*/
             background: #0e0b08;
 /*            background-color: blue;*/
+/*              background: transparent;*/
             z-index:50;
         }
         
@@ -224,8 +226,8 @@
             display: block;
         }
         
-        #playlist td:nth-child(1){width: 35%;}
-        #playlist td:nth-child(2){width: 100%;}
+        #playlist td:nth-child(1){width: 35%; text-align: left}
+        #playlist td:nth-child(2){width: 100%; text-align: left}
         #playlist td:nth-child(3){width: 100%;}
         
         #percent td:nth-child(1){width: 100%;}
@@ -233,15 +235,20 @@
         #percent td:nth-child(3){width: 100%;}
         #percent td:nth-child(4){width: 100%;}
         
+        #queue_table td:nth-child(1){width: 20%;}
+        #queue_table td:nth-child(2){ width: 100%;  text-align: left;}
+        #queue_table td:nth-child(3){ width: 100%; }
+        #queue_table tr { width: 100%;}
+        
         #album_display td:nth-child(1){ color: #55ba55; padding-right: 20px;}
         #album_display td:nth-child(2){ width: 100%; color: white; }
         #album_display td:nth-child(4){ color: #55ba55; }
         
-        #artist_display td:nth-child(1){ color: #55ba55; padding-right: 20px;}
-        #artist_display td:nth-child(2){ color: #1e1b1b; }
-        #artist_display td:nth-child(3){ color: white;}
-        #artist_display td:nth-child(4){ color: #55ba55;}
-        #artist_display td:nth-child(5){ color: white;}
+/*        #artist_display td:nth-child(1){ color: #55ba55; padding-right: 20px;}*/
+        #artist_display td:nth-child(1){ color: #1e1b1b; padding-left: 10px;}
+        #artist_display td:nth-child(2){ color: white;}
+        #artist_display td:nth-child(3){ color: #55ba55;}
+        #artist_display td:nth-child(4){ color: white;}
         #artist_display tr { line-height: 60px; }
         
         .gens button {
@@ -308,6 +315,15 @@
             background: #e3e4e8;
 */
         }
+        
+        .search {
+            position: absolute;
+            width: 20%;
+            background-color: #55ba55;
+            border-radius: 8px;
+            height: 40px;
+            transform: translate(388.5%, 53%);
+        }
             
     </style>
     
@@ -319,25 +335,25 @@
             <img src="images/player-temp-bg.png"/>
             
             <script id="curr-template" type="text/x-handlebars-template">
-                <div  id="title"><h2 style="text-align: center; position: relative; transform: translate(-5%,-4093%);"><font face="verdana" size="3.5" color="white"><dd id="context" class="text-overflow-player">{{context}}</dd></font></h2></div>
-                <img style="position: relative; width:72.5%; transform: translate(19%,-293.1%);" src="{{image_url}}"/>
+                <div  id="title"><h2 style="text-align: center; position: relative; transform: translate(39%,-4293%); width: 50%;"><font face="verdana" size="3.5" color="white"><dd id="context" class="text-overflow-player">{{context}}</dd></font></h2></div>
+                <img style="position: relative; width:72.5%; transform: translate(19%,-307.9%);" src="{{image_url}}"/>
 <!--                <img style="position: relative; width:74%; transform: translate(17.7%,-280.6%);" src="{{image_url}}"/>-->
 
-                <div id="coverUp2" style="width: 12%; transform: translate(-100%,-2463.5%);"></div>
-                <div id="coverUp" style="width: 6.9%; transform: translate(-0.2%,-2463.5%);"></div>
-                <div id="container" style="transform: translate(10%,-2530%);">
+                <div id="coverUp2" style="width: 12%; transform: translate(-100%,-2589%);"></div>
+                <div id="coverUp" style="width: 6.9%; transform: translate(-0.2%,-2589%);"></div>
+                <div id="container" style="transform: translate(10%,-2655.5%);">
                     <h2 style="position: relative;"><font face="verdana" size="5.5" color="white"><div id="song">{{song_name}}</div></font></h2>
                 </div>
-                <div id="coverUp3" style="width: 18.5%; transform: translate(409.7%,-2696.5%);"></div>
-                <div id="coverUp2" style="width: 100%; transform: translate(94.2%,-2696.5%);"></div>
+                <div id="coverUp3" style="width: 18.5%; transform: translate(409.7%,-2822.5%);"></div>
+                <div id="coverUp2" style="width: 100%; transform: translate(94.2%,-2822.5%);"></div>
                 
-                <div id="coverUp2" style="height: 20px; width: 12%; transform: translate(-100%,-3864%);"></div>
-                <div id="coverUp" style="height: 20px; width: 6.9%; transform: translate(-0.2%,-3864%);"></div>
-                <div id="container" style="transform: translate(10%,-3864%);">
+                <div id="coverUp2" style="height: 20px; width: 12%; transform: translate(-100%,-4054%);"></div>
+                <div id="coverUp" style="height: 20px; width: 6.9%; transform: translate(-0.2%,-4054%);"></div>
+                <div id="container" style="transform: translate(10%,-4053%);">
                     <font face="verdana" size="3.5" color="grey"><div id="info" style="position: relative;">{{artist}}, {{album}}</div></font>
                 </div>
-                <div id="coverUp3" style="height: 20px; width: 18.5%; transform: translate(409.7%,-3964%);"></div>
-                <div id="coverUp2" style="height: 20px; width: 100%; transform: translate(94.2%,-3964%);"></div>
+                <div id="coverUp3" style="height: 20px; width: 18.5%; transform: translate(409.7%,-4153%);"></div>
+                <div id="coverUp2" style="height: 20px; width: 100%; transform: translate(94.2%,-4153%);"></div>
 
 <!--                <h2 style="position: relative; transform: translate(7%,-3020%);"><font face="verdana" size="4.5" color="white"><div id="song">{{song_name}}</div></font></h2>-->
 <!--                <h1 style="position: relative; transform: translate(-3%,-3550%);"><font face="verdana" size="3.5" color="grey"><dd class="text-overflow-player">{{artist}}, {{album}}</dd></font></h1>-->
@@ -348,23 +364,24 @@
             </div>
 
             <div style="position: inherit">
-                <button style="position:absolute; z-index: 100; width:9.6%; height: auto; transform: translate(872.5%, -3735%);" class=button onclick="more()"><img id="info" src="images/btn-info-off.png"/></button>
-                <button style="position:absolute; z-index: 100; width:9.8%; transform: translate(855%, -939%);" class=button onclick="heart()"><img id="save" style="z-index:150;" src="images/btn-sav1.png"/></button>
-                <button style="position:relative; width:9%; transform: translate(74%, -419.9%);" class=button onclick="shuffle()"><img id="shuffle" src="images/btn-shuffle-off.png"/></button>
-                <button style="position:relative; width:11.9%; transform: translate(97.7%, -514.7%);" class=button onclick="prev_btn()"><img src="images/btn-prev1.png"/></button>
-                <button style="position:relative; width:21%; transform: translate(76.8%, -235%);" class=button onclick="pause()"><img id="play" src="images/btn-pause1.png"/></button>
-                <button style="position:relative; width:11.9%; transform: translate(173%, -514.7%);" class=button onclick="skip()"><img src="images/btn-next1.png"/></button>
-                <button style="position:relative; width:9%; transform: translate(286.3%, -427.4%);" class=button onclick="repeat()"><img id="repeat" src="images/btn-repeat-off.png"/></button>
-                <button style="position:relative; width:9.5%; transform: translate(-663.8%, -477%);" class=button onclick="volume()"><img id="dev" src="images/btn-devices-on.png"/></button>
-                <font face="verdana" size="2" color="#55ba55"><div id="device_inner" style="position: relative; transform: translate(14.5%, -880%);">device</div></font>
-                <button style="position:relative; width:7.9%; transform: translate(1074.5%, -826.5%);" class=button onclick="history()"><img id="queue" src="images/btn-queue-off.PNG"/></button>
+                <button style="position:relative; width:10.5%; transform: translate(52.5%, -2250%);" class=button onclick="history()"><img id="hist" src="images/btn-history-off.png"/></button>
+                <button style="position:relative; z-index: 100; width:9.6%; height: auto; transform: translate(751%, -4045%);" class=button onclick="more()"><img id="info" src="images/btn-info-off.png"/></button>
+                <button style="position:relative; z-index: 100; width:9.8%; transform: translate(625.5%, -1093%);" class=button onclick="heart()"><img id="save" style="z-index:150;" src="images/btn-sav1.png"/></button>
+                <button style="position:relative; width:9%; transform: translate(-297.5%, -419.9%);" class=button onclick="shuffle()"><img id="shuffle" src="images/btn-shuffle-off.png"/></button>
+                <button style="position:relative; width:11.9%; transform: translate(-182%, -514.7%);" class=button onclick="prev_btn()"><img src="images/btn-prev1.png"/></button>
+                <button style="position:relative; width:21%; transform: translate(-81.3%, -235%);" class=button onclick="pause()"><img id="play" src="images/btn-pause1.png"/></button>
+                <button style="position:relative; width:11.9%; transform: translate(-105.5%, -514.7%);" class=button onclick="skip()"><img src="images/btn-next1.png"/></button>
+                <button style="position:relative; width:9%; transform: translate(936%, -527.4%);" class=button onclick="repeat()"><img id="repeat" src="images/btn-repeat-off.png"/></button>
+                <button style="position:relative; width:9.5%; transform: translate(-48%, -630%);" class=button onclick="volume()"><img id="dev" src="images/btn-devices-on.png"/></button>
+                <font face="verdana" size="2" color="#55ba55"><div id="device_inner" style="position: relative; transform: translate(14.5%, -1118%);">device</div></font>
+                <button style="position:relative; width:7.9%; transform: translate(1074.5%, -1025%);" class=button onclick="view_queue()"><img id="queue" src="images/btn-queue-off.PNG"/></button>
             </div>
             
-            <div style="position: relative; transform: translate(7%,-1780%);">
+            <div style="position: relative; transform: translate(7%,-2015%);">
                 <font face="verdana" size="2" color="#e3e4e8"><p id="length_in"></p></font>
             </div>
             
-            <div style="position: relative; transform: translate(83%,-1960%);">
+            <div style="position: relative; transform: translate(82.5%,-2195%);">
                 <font face="verdana" size="2" color="#e3e4e8"><p id="length"></p></font>
             </div>
             
@@ -428,6 +445,61 @@
             </table>
         </div> 
         
+        <div  id="table_queue" style="height: 242px; overflow-y: scroll; max-width: 34.5%; z-index:150; font-family: verdana; display: none; position: relative; float: left; visibility: visible; padding-top: 1.5%; padding-left: 1.5%;">
+            <table id="queue_table" style="table-layout: fixed; overflow-y: scroll; color: grey; background-color: #0e0b08; text-overflow: ellipsis; width: 100%;">
+                <tr id ="q-0">
+                    <td id="qa0">artist0</td>
+                    <td id="qt0">track0</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="dequeue(0)">Remove</button></td>
+                </tr>
+                <tr id ="q-1">
+                    <td id="qa1">artist1</td>
+                    <td id="qt1">track1</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="dequeue(1)">Remove</button></td>
+                </tr>
+                <tr id ="q-2">
+                    <td id="qa2">artist2</td>
+                    <td id="qt2">track2</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="dequeue(2)">Remove</button></td>
+                </tr>
+                <tr id ="q-3">
+                    <td id="qa3">artist3</td>
+                    <td id="qt3">track3</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="dequeue(3)">Remove</button></td>
+                </tr>
+                <tr id ="q-4">
+                    <td id="qa4">artist4</td>
+                    <td id="qt4">track4</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="dequeue(4)">Remove</button></td>
+                </tr>
+                <tr id ="q-5">
+                    <td id="qa5">artist5</td>
+                    <td id="qt5">track5</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="dequeue(5)">Remove</button></td>
+                </tr>
+                <tr id ="q-6">
+                    <td id="qa6">artist6</td>
+                    <td id="qt6">track6</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="dequeue(6)">Remove</button></td>
+                </tr>
+                <tr id ="q-7">
+                    <td id="qa7">artist7</td>
+                    <td id="qt7">track7</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="dequeue(7)">Remove</button></td>
+                </tr>
+                <tr id ="q-8">
+                    <td id="qa8">artist8</td>
+                    <td id="qt8">track8</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="dequeue(8)">Remove</button></td>
+                </tr>
+                <tr id ="q-9">
+                    <td id="qa9">artist9</td>
+                    <td id="qt9">track9</td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="dequeue(9)">Remove</button></td>
+                </tr>
+            </table>
+        </div>
+        
         <div class="login">
             <div class="login_inner">
                 <div style="float: left;">
@@ -446,12 +518,17 @@
             
         </div>
         
+        <div class="search">
+            <input type="text" style="position: absolute; width: 80%; height: 55%; transform: translate(3.3%, 32%); border-radius: 5px; border: none;" id="search_in">
+            <button style="position:absolute; width: 15%; background-color: transparent; border: none; transform: translate(560%, 25%);"><img id="mag_glass" style="width: 80%" src="images/btn-search-off.png"></button>
+        </div>
+        
         <div style="float: left; height: 1%; width: 70%; background-color: yellow"></div>
         
         <div style="transform: translate(-2500%, 100%); position: relative; float: left; height: 800px; width: 1%; background-color: #1F1C1C; margin-right: -25.1%; margin-bottom: 40%"><p></p></div>
         
         <div id="vol" style="display: none; position: absolute; width: 25%; transform: translate(0%, 0%);">
-            <div style="position: absolute; width: 60%; transform: translate(-372.8%, 1725%);">
+            <div style="position: absolute; width: 60%; transform: translate(-372.8%, 2085%);">
                 <div style=""><input class="mySlide" style="background-color: transparent; width: 100%; transform: translate(-1%, 0%); z-index: 500;" id="myRange" type="range" min="1" max="100" value="50"></div>
                 <div id="slide" style="height: 5px; width: 50%; transform: translate(0%, -150%); border-radius: 15px; background-color: #55ba55; position: relative; z-index: -1;"></div>
                 <div id="slide1" style="height: 5px; width: 100%; transform: translate(0%, -250%); border-radius: 15px; background-color: #e3e4e8; position: relative; z-index: -2;"></div>
@@ -875,7 +952,7 @@
 <!--        <div style="height: 640px; background-color: #0e0b08; display: none; float: left; transform: translate(-159.55%, -133.15%);" id="playlist_disp" class="pl_disp">-->
         
         <div style="background-color: #55ba55; display: none; float: left; transform: translate(-63.2%, -205.7%);" id="percent" class="percent">
-            <font face="verdana" color="#55ba55"><h1 style="color: white; transform: translate(5%, -20%)">Percent Shuffle</h1></font>
+            <font face="verdana" color="#55ba55"><h1 style="color: white; transform: translate(5%, -20%); width: 90%;">Percent Shuffle</h1></font>
             
 <!--            <button style="border: none; width: 80%; height: 6%; border-radius: 4px; background: #1F1C1C; color: white; transform: translate(10%, -80%);" onclick="update_options()">Update</button>-->
             
@@ -957,7 +1034,7 @@
                 
         <div style="height: 756.4px; background-color: #0e0b08; display: none; float: left; transform: translate(-255.9%, -100.05%);" id="playlist_disp" class="pl_disp">
             <button style="z-index: 100; position: relative; float: right; width: 10%; height: 10%; transform: translate(-10%, -20%);" class=button onclick="exit();"><img id="history" style="width: 100%" src="images/btn-close.png"/></button>
-            <font face="verdana" color="#55ba55"><h1 style="color: white; transform: translate(5%, 0%)" id="playlist_name">Playlist</h1></font>
+            <font face="verdana" color="#55ba55"><h1 style="color: white; transform: translate(5%, 0%); width: 90%;" id="playlist_name">Playlist</h1></font>
 <!--            <table class="pl_disp" style="width: 100%; table-layout: fixed; transform: translate(0%, -2.7%); color: grey; background-color: #0e0b08; overflow-y: scroll;">-->
             
             <a  class="gens" onclick="add_pl()">
@@ -968,546 +1045,546 @@
                 <tr id="row0">
                     <td id="pl_a0">artist0</td>
                     <td id="pl_t0">track0</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(0)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="enqueue(0)">Queue</button></td>
                 </tr>
                 <tr id="row1">
                     <td id="pl_a1">artist1</td>
                     <td id="pl_t1">track1</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(1)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="enqueue(1)">Queue</button></td>
                 </tr>
                 <tr id="row2">
                     <td id="pl_a2">artist2</td>
                     <td id="pl_t2">track2</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(2)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(2)">Queue</button></td>
                 </tr>
                 <tr id="row3">
                     <td id="pl_a3">artist3</td>
                     <td id="pl_t3">track3</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(3)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(3)">Queue</button></td>
                 </tr>
                 <tr id="row4">
                     <td id="pl_a4">artist4</td>
                     <td id="pl_t4">track4</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(4)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(4)">Queue</button></td>
                 </tr>
                 <tr id="row5">
                     <td id="pl_a5">artist5</td>
                     <td id="pl_t5">track5</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(5)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(5)">Queue</button></td>
                 </tr>
                 <tr id="row6">
                     <td id="pl_a6">artist6</td>
                     <td id="pl_t6">track6</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(6)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(6)">Queue</button></td>
                 </tr>
                 <tr id="row7">
                     <td id="pl_a7">artist7</td>
                     <td id="pl_t7">track7</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(7)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(7)">Queue</button></td>
                 </tr>
                 <tr id="row8">
                     <td id="pl_a8">artist8</td>
                     <td id="pl_t8">track8</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(8)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(8)">Queue</button></td>
                 </tr>
                 <tr id="row9">
                     <td id="pl_a9">artist9</td>
                     <td id="pl_t9">track9</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(9)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(9)">Queue</button></td>
                 </tr>
                 <tr id="row10">
                     <td id="pl_a10">artist10</td>
                     <td id="pl_t10">track10</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(10)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="enqueue(10)">Queue</button></td>
                 </tr>
                 <tr id="row11">
                     <td id="pl_a11">artist11</td>
                     <td id="pl_t11">track11</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(11)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="enqueue(11)">Queue</button></td>
                 </tr>
                 <tr id="row12">
                     <td id="pl_a12">artist12</td>
                     <td id="pl_t12">track12</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(12)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(12)">Queue</button></td>
                 </tr>
                 <tr id="row13">
                     <td id="pl_a13">artist13</td>
                     <td id="pl_t13">track13</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(13)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(13)">Queue</button></td>
                 </tr>
                 <tr id="row14">
                     <td id="pl_a14">artist14</td>
                     <td id="pl_t14">track14</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(14)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(14)">Queue</button></td>
                 </tr>
                 <tr id="row15">
                     <td id="pl_a15">artist15</td>
                     <td id="pl_t15">track15</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(15)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(15)">Queue</button></td>
                 </tr>
                 <tr id="row16">
                     <td id="pl_a16">artist16</td>
                     <td id="pl_t16">track16</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(16)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(16)">Queue</button></td>
                 </tr>
                 <tr id="row17">
                     <td id="pl_a17">artist17</td>
                     <td id="pl_t17">track17</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(17)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(17)">Queue</button></td>
                 </tr>
                 <tr id="row18">
                     <td id="pl_a18">artist18</td>
                     <td id="pl_t18">track18</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(18)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(18)">Queue</button></td>
                 </tr>
                 <tr id="row19">
                     <td id="pl_a19">artist19</td>
                     <td id="pl_t19">track19</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(19)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(19)">Queue</button></td>
                 </tr>
                 <tr id="row20">
                     <td id="pl_a20">artist20</td>
                     <td id="pl_t20">track20</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(20)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="enqueue(20)">Queue</button></td>
                 </tr>
                 <tr id="row21">
                     <td id="pl_a21">artist21</td>
                     <td id="pl_t21">track21</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(21)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="enqueue(21)">Queue</button></td>
                 </tr>
                 <tr id="row22">
                     <td id="pl_a22">artist22</td>
                     <td id="pl_t22">track22</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(22)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(22)">Queue</button></td>
                 </tr>
                 <tr id="row23">
                     <td id="pl_a23">artist23</td>
                     <td id="pl_t23">track23</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(23)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(23)">Queue</button></td>
                 </tr>
                 <tr id="row24">
                     <td id="pl_a24">artist24</td>
                     <td id="pl_t24">track24</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(24)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(24)">Queue</button></td>
                 </tr>
                 <tr id="row25">
                     <td id="pl_a25">artist25</td>
                     <td id="pl_t25">track25</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(25)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(25)">Queue</button></td>
                 </tr>
                 <tr id="row26">
                     <td id="pl_a26">artist26</td>
                     <td id="pl_t26">track26</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(26)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(26)">Queue</button></td>
                 </tr>
                 <tr id="row27">
                     <td id="pl_a27">artist27</td>
                     <td id="pl_t27">track27</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(27)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(27)">Queue</button></td>
                 </tr>
                 <tr id="row28">
                     <td id="pl_a28">artist28</td>
                     <td id="pl_t28">track28</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(28)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(28)">Queue</button></td>
                 </tr>
                 <tr id="row29">
                     <td id="pl_a29">artist29</td>
                     <td id="pl_t29">track29</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(29)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(29)">Queue</button></td>
                 </tr>
                 <tr id="row30">
                     <td id="pl_a30">artist30</td>
                     <td id="pl_t30">track30</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(30)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="enqueue(30)">Queue</button></td>
                 </tr>
                 <tr id="row31">
                     <td id="pl_a31">artist31</td>
                     <td id="pl_t31">track31</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(31)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="enqueue(31)">Queue</button></td>
                 </tr>
                 <tr id="row32">
                     <td id="pl_a32">artist32</td>
                     <td id="pl_t32">track32</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(32)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(32)">Queue</button></td>
                 </tr>
                 <tr id="row33">
                     <td id="pl_a33">artist33</td>
                     <td id="pl_t33">track33</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(33)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(33)">Queue</button></td>
                 </tr>
                 <tr id="row34">
                     <td id="pl_a34">artist34</td>
                     <td id="pl_t34">track34</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(34)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(34)">Queue</button></td>
                 </tr>
                 <tr id="row35">
                     <td id="pl_a35">artist35</td>
                     <td id="pl_t35">track35</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(35)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(35)">Queue</button></td>
                 </tr>
                 <tr id="row36">
                     <td id="pl_a36">artist36</td>
                     <td id="pl_t36">track36</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(36)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(36)">Queue</button></td>
                 </tr>
                 <tr id="row37">
                     <td id="pl_a37">artist37</td>
                     <td id="pl_t37">track37</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(37)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(37)">Queue</button></td>
                 </tr>
                 <tr id="row38">
                     <td id="pl_a38">artist38</td>
                     <td id="pl_t38">track38</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(38)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(38)">Queue</button></td>
                 </tr>
                 <tr id="row39">
                     <td id="pl_a39">artist39</td>
                     <td id="pl_t39">track39</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(39)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(39)">Queue</button></td>
                 </tr>
                 <tr id="row40">
                     <td id="pl_a40">artist40</td>
                     <td id="pl_t40">track40</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(40)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="enqueue(40)">Queue</button></td>
                 </tr>
                 <tr id="row41">
                     <td id="pl_a41">artist41</td>
                     <td id="pl_t41">track41</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(41)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="enqueue(41)">Queue</button></td>
                 </tr>
                 <tr id="row42">
                     <td id="pl_a42">artist42</td>
                     <td id="pl_t42">track42</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(42)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(42)">Queue</button></td>
                 </tr>
                 <tr id="row43">
                     <td id="pl_a43">artist43</td>
                     <td id="pl_t43">track43</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(43)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(43)">Queue</button></td>
                 </tr>
                 <tr id="row44">
                     <td id="pl_a44">artist44</td>
                     <td id="pl_t44">track44</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(44)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(44)">Queue</button></td>
                 </tr>
                 <tr id="row45">
                     <td id="pl_a45">artist45</td>
                     <td id="pl_t45">track45</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(45)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(45)">Queue</button></td>
                 </tr>
                 <tr id="row46">
                     <td id="pl_a46">artist46</td>
                     <td id="pl_t46">track46</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(46)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(46)">Queue</button></td>
                 </tr>
                 <tr id="row47">
                     <td id="pl_a47">artist47</td>
                     <td id="pl_t47">track47</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(47)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(47)">Queue</button></td>
                 </tr>
                 <tr id="row48">
                     <td id="pl_a48">artist48</td>
                     <td id="pl_t48">track48</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(48)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(48)">Queue</button></td>
                 </tr>
                 <tr id="row49">
                     <td id="pl_a49">artist49</td>
                     <td id="pl_t49">track49</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(49)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(49)">Queue</button></td>
                 </tr>
                 <tr id="row50">
                     <td id="pl_a50">artist50</td>
                     <td id="pl_t50">track50</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(50)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="enqueue(50)">Queue</button></td>
                 </tr>
                 <tr id="row51">
                     <td id="pl_a51">artist51</td>
                     <td id="pl_t51">track51</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(51)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="enqueue(51)">Queue</button></td>
                 </tr>
                 <tr id="row52">
                     <td id="pl_a52">artist52</td>
                     <td id="pl_t52">track52</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(52)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(52)">Queue</button></td>
                 </tr>
                 <tr id="row53">
                     <td id="pl_a53">artist53</td>
                     <td id="pl_t53">track53</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(53)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(53)">Queue</button></td>
                 </tr>
                 <tr id="row54">
                     <td id="pl_a54">artist54</td>
                     <td id="pl_t54">track54</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(54)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(54)">Queue</button></td>
                 </tr>
                 <tr id="row55">
                     <td id="pl_a55">artist55</td>
                     <td id="pl_t55">track55</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(55)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(55)">Queue</button></td>
                 </tr>
                 <tr id="row56">
                     <td id="pl_a56">artist56</td>
                     <td id="pl_t56">track56</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(56)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(56)">Queue</button></td>
                 </tr>
                 <tr id="row57">
                     <td id="pl_a57">artist57</td>
                     <td id="pl_t57">track57</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(57)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(57)">Queue</button></td>
                 </tr>
                 <tr id="row58">
                     <td id="pl_a58">artist58</td>
                     <td id="pl_t58">track58</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(58)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(58)">Queue</button></td>
                 </tr>
                 <tr id="row59">
                     <td id="pl_a59">artist59</td>
                     <td id="pl_t59">track59</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(59)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(59)">Queue</button></td>
                 </tr>
                 <tr id="row60">
                     <td id="pl_a60">artist60</td>
                     <td id="pl_t60">track60</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(60)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="enqueue(60)">Queue</button></td>
                 </tr>
                 <tr id="row61">
                     <td id="pl_a61">artist61</td>
                     <td id="pl_t61">track61</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(61)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="enqueue(61)">Queue</button></td>
                 </tr>
                 <tr id="row62">
                     <td id="pl_a62">artist62</td>
                     <td id="pl_t62">track62</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(62)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(62)">Queue</button></td>
                 </tr>
                 <tr id="row63">
                     <td id="pl_a63">artist63</td>
                     <td id="pl_t63">track63</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(63)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(63)">Queue</button></td>
                 </tr>
                 <tr id="row64">
                     <td id="pl_a64">artist64</td>
                     <td id="pl_t64">track64</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(64)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(64)">Queue</button></td>
                 </tr>
                 <tr id="row65">
                     <td id="pl_a65">artist65</td>
                     <td id="pl_t65">track65</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(65)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(65)">Queue</button></td>
                 </tr>
                 <tr id="row66">
                     <td id="pl_a66">artist66</td>
                     <td id="pl_t66">track66</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(66)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(66)">Queue</button></td>
                 </tr>
                 <tr id="row67">
                     <td id="pl_a67">artist67</td>
                     <td id="pl_t67">track67</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(67)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(67)">Queue</button></td>
                 </tr>
                 <tr id="row68">
                     <td id="pl_a68">artist68</td>
                     <td id="pl_t68">track68</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(68)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(68)">Queue</button></td>
                 </tr>
                 <tr id="row69">
                     <td id="pl_a69">artist69</td>
                     <td id="pl_t69">track69</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(69)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(69)">Queue</button></td>
                 </tr>
                 <tr id="row70">
                     <td id="pl_a70">artist70</td>
                     <td id="pl_t70">track70</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(70)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="enqueue(70)">Queue</button></td>
                 </tr>
                 <tr id="row71">
                     <td id="pl_a71">artist71</td>
                     <td id="pl_t71">track71</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(71)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="enqueue(71)">Queue</button></td>
                 </tr>
                 <tr id="row72">
                     <td id="pl_a72">artist72</td>
                     <td id="pl_t72">track72</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(72)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(72)">Queue</button></td>
                 </tr>
                 <tr id="row73">
                     <td id="pl_a73">artist73</td>
                     <td id="pl_t73">track73</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(73)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(73)">Queue</button></td>
                 </tr>
                 <tr id="row74">
                     <td id="pl_a74">artist74</td>
                     <td id="pl_t74">track74</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(74)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(74)">Queue</button></td>
                 </tr>
                 <tr id="row75">
                     <td id="pl_a75">artist75</td>
                     <td id="pl_t75">track75</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(75)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(75)">Queue</button></td>
                 </tr>
                 <tr id="row76">
                     <td id="pl_a76">artist76</td>
                     <td id="pl_t76">track76</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(76)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(76)">Queue</button></td>
                 </tr>
                 <tr id="row77">
                     <td id="pl_a77">artist77</td>
                     <td id="pl_t77">track77</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(77)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(77)">Queue</button></td>
                 </tr>
                 <tr id="row78">
                     <td id="pl_a78">artist78</td>
                     <td id="pl_t78">track78</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(78)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(78)">Queue</button></td>
                 </tr>
                 <tr id="row79">
                     <td id="pl_a79">artist79</td>
                     <td id="pl_t79">track79</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(79)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(79)">Queue</button></td>
                 </tr>
                 <tr id="row80">
                     <td id="pl_a80">artist80</td>
                     <td id="pl_t80">track80</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(80)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="enqueue(80)">Queue</button></td>
                 </tr>
                 <tr id="row81">
                     <td id="pl_a81">artist81</td>
                     <td id="pl_t81">track81</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(81)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="enqueue(81)">Queue</button></td>
                 </tr>
                 <tr id="row82">
                     <td id="pl_a82">artist82</td>
                     <td id="pl_t82">track82</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(82)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(82)">Queue</button></td>
                 </tr>
                 <tr id="row83">
                     <td id="pl_a83">artist83</td>
                     <td id="pl_t83">track83</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(83)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(83)">Queue</button></td>
                 </tr>
                 <tr id="row84">
                     <td id="pl_a84">artist84</td>
                     <td id="pl_t84">track84</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(84)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(84)">Queue</button></td>
                 </tr>
                 <tr id="row85">
                     <td id="pl_a85">artist85</td>
                     <td id="pl_t85">track85</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(85)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(85)">Queue</button></td>
                 </tr>
                 <tr id="row86">
                     <td id="pl_a86">artist86</td>
                     <td id="pl_t86">track86</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(86)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(86)">Queue</button></td>
                 </tr>
                 <tr id="row87">
                     <td id="pl_a87">artist87</td>
                     <td id="pl_t87">track87</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(87)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(87)">Queue</button></td>
                 </tr>
                 <tr id="row88">
                     <td id="pl_a88">artist88</td>
                     <td id="pl_t88">track88</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(88)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(88)">Queue</button></td>
                 </tr>
                 <tr id="row89">
                     <td id="pl_a89">artist89</td>
                     <td id="pl_t89">track89</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(89)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(89)">Queue</button></td>
                 </tr>
                 <tr id="row90">
                     <td id="pl_a90">artist90</td>
                     <td id="pl_t90">track90</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(90)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="enqueue(90)">Queue</button></td>
                 </tr>
                 <tr id="row91">
                     <td id="pl_a91">artist91</td>
                     <td id="pl_t91">track91</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="(91)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="enqueue(91)">Queue</button></td>
                 </tr>
                 <tr id="row92">
                     <td id="pl_a92">artist92</td>
                     <td id="pl_t92">track92</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(92)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(92)">Queue</button></td>
                 </tr>
                 <tr id="row93">
                     <td id="pl_a93">artist93</td>
                     <td id="pl_t93">track93</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(93)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(93)">Queue</button></td>
                 </tr>
                 <tr id="row94">
                     <td id="pl_a94">artist94</td>
                     <td id="pl_t94">track94</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(94)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(94)">Queue</button></td>
                 </tr>
                 <tr id="row95">
                     <td id="pl_a95">artist95</td>
                     <td id="pl_t95">track95</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(95)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(95)">Queue</button></td>
                 </tr>
                 <tr id="row96">
                     <td id="pl_a96">artist96</td>
                     <td id="pl_t96">track96</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(96)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(96)">Queue</button></td>
                 </tr>
                 <tr id="row97">
                     <td id="pl_a97">artist97</td>
                     <td id="pl_t97">track97</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(97)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(97)">Queue</button></td>
                 </tr>
                 <tr id="row98">
                     <td id="pl_a98">artist98</td>
                     <td id="pl_t98">track98</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(98)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(98)">Queue</button></td>
                 </tr>
                 <tr id="row99">
                     <td id="pl_a99">artist99</td>
                     <td id="pl_t99">track99</td>
-                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="(99)">Temp</button></td>
+                    <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="enqueue(99)">Queue</button></td>
                 </tr>
             </table>
             
         </div>
         
-        <div id="morebg" style="width: 100%; height: 100%; z-index: 200; display: none; position: fixed; text-align: center; justify-content: center; align-items: center; transform: translate(-0.5%, -1.2%); background-color: #0e0b08; opacity: .7;"></div>
+        <a onclick="more();"><div id="morebg" style="width: 100%; height: 100%; z-index: 200; display: none; position: fixed; text-align: center; justify-content: center; align-items: center; transform: translate(-0.5%, -1.2%); background-color: #0e0b08; opacity: .7;"></div></a>
         
-        <div id="more" style="float: left; width: 100%; height: 100%; z-index: 400; display: none; position: fixed; text-align: center; justify-content: center; align-items: center; transform: translate(-25.5%, -1.2%);">
-            <img style="position: absolute; width: 25%;" src="images/more-options-background-color.PNG"/>
+        <div id="more" style="float: left; width: 25%; height: 100%; z-index: 400; display: none; position: fixed; text-align: center; justify-content: center; align-items: center; transform: translate(50%, -1.2%);">
+            <img style="position: absolute; width: 100%;" src="images/more-options-background-color.PNG"/>
             
-            <img style="position: absolute; transform: translate(0%, -101%); width: 12.57%;" id="img_more" src="{{image_url}}"/>
+            <img style="position: absolute; transform: translate(0%, -101.8%); width: 50%;" id="img_more" src="{{image_url}}"/>
             
             <font face="verdana" size="3" color="white">
-                <div id="track_more" style="position: absolute; transform: translate(-50%, -355%);">Track</div>
+                <div id="track_more" style="width: 100%; position: absolute; transform: translate(-50%, -355%);">Track</div>
             </font>
             
             <font face="verdana" size="2" color="grey">
-                <div id="artist_more" style="position: absolute; transform: translate(-50%, -240%);">Artist • Album</div>
+                <div id="artist_more" style="width: 100%; position: absolute; transform: translate(-50%, -240%);">Artist • Album</div>
             </font>
             
-            <button style="transform: translate(-23.1%, 48%);" class="more_btn" onclick="alert()">
-                <img style="float: left; transform: translate(0%, 0%); width: 12%;" src="images/btn-add-to-pl-off.PNG"/>
-                <font style="float:left; absolute; white-space: nowrap; transform: translate(14.3%, 10%);" face="verdana" size="3" color="white">
+            <button style="transform: translate(-242.3%, 49%);" class="more_btn" onclick="alert()">
+                <img style="float: left; transform: translate(0%, 0%); width: 60%;" src="images/btn-add-to-pl-off.PNG"/>
+                <font style="float:left; absolute; white-space: nowrap; transform: translate(35%, -115%);" face="verdana" size="3" color="white">
                     Add to playlist
                 </font>
             </button>
             
-            <button style="transform: translate(-23.1%, 327%);" class="more_btn" onclick="alert()">
-                <img style="float: left; transform: translate(0%, 0%); width: 11.3%;" src="images/btn-add-to-queue-off.PNG"/>
-                <font style="float:left; absolute; white-space: nowrap; transform: translate(16.5%, 10%);" face="verdana" size="3" color="white">
+            <button style="transform: translate(-242%, 212%);" class="more_btn" onclick="alert()">
+                <img style="float: left; transform: translate(0%, 0%); width: 56%;" src="images/btn-add-to-queue-off.PNG"/>
+                <font style="float:left; absolute; white-space: nowrap; transform: translate(37%, -105%);" face="verdana" size="3" color="white">
                     Add to queue
                 </font>
             </button>
             
-            <button style="transform: translate(-23.5%, 555%);" class="more_btn" onclick="show_album()">
-                <img id="albs" style="float: left; transform: translate(0%, 0%); width: 12.5%;" src="images/btn-view-album-off.PNG"/>
-                <font style="float:left; absolute; white-space: nowrap; transform: translate(17.5%, 17.8%);" face="verdana" size="3" color="white">
+            <button style="transform: translate(-244%, 353%);" class="more_btn" onclick="show_album()">
+                <img id="albs" style="float: left; transform: translate(0%, 0%); width: 63%;" src="images/btn-view-album-off.PNG"/>
+                <font style="float:left; absolute; white-space: nowrap; transform: translate(44%, -118%);" face="verdana" size="3" color="white">
                     View album
                 </font>
             </button>
             
-            <button style="transform: translate(-22.3%, 895.5%);" class="more_btn" onclick="show_artist()">
-                <img id="arts" style="float: left; transform: translate(0%, 0%); width: 11.5%;" src="images/btn-view-artist-off.PNG"/>
-                <font style="float:left; absolute; white-space: nowrap; transform: translate(18.5%, 2.5%);" face="verdana" size="3" color="white">
+            <button style="transform: translate(-240%, 532.9%);" class="more_btn" onclick="show_artist()">
+                <img id="arts" style="float: left; transform: translate(0%, 0%); width: 58.9%;" src="images/btn-view-artist-off.PNG"/>
+                <font style="float:left; absolute; white-space: nowrap; transform: translate(45.5%, -114%);" face="verdana" size="3" color="white">
                     View artist
                 </font>
             </button>
@@ -1860,238 +1937,238 @@
             <div style="width: 95%; height: 358px; position: absolute; transform: translate(-0.05%, 36.2%); overflow-y: auto;">
                 <table id="artist_display" style="width: 100%; max-height: 365px; overflow-y: auto; text-align: left;">
                     <tr id="artist_albumrow0">
-                        <td>0</td>
+<!--                        <td>0</td>-->
                         <td id="alb_art0">track</td>
                         <td id="alb_name0"></td>
                         <td id="alb_release0">release</td>
                         <td id="alb_tracks0">length</td>
                     </tr>
                     <tr id="artist_albumrow1">
-                        <td>1</td>
+<!--                        <td>1</td>-->
                         <td id="alb_art1">track</td>
                         <td id="alb_name1"></td>
                         <td id="alb_release1">release</td>
                         <td id="alb_tracks1">length</td>
                     </tr>
                     <tr id="artist_albumrow2">
-                        <td>2</td>
+<!--                        <td>2</td>-->
                         <td id="alb_art2">track</td>
                         <td id="alb_name2"></td>
                         <td id="alb_release2">release</td>
                         <td id="alb_tracks2">length</td>
                     </tr>
                     <tr id="artist_albumrow3">
-                        <td>3</td>
+<!--                        <td>3</td>-->
                         <td id="alb_art3">track</td>
                         <td id="alb_name3"></td>
                         <td id="alb_release3">release</td>
                         <td id="alb_tracks3">length</td>
                     </tr>
                     <tr id="artist_albumrow4">
-                        <td>4</td>
+<!--                        <td>4</td>-->
                         <td id="alb_art4">track</td>
                         <td id="alb_name4"></td>
                         <td id="alb_release4">release</td>
                         <td id="alb_tracks4">length</td>
                     </tr>
                     <tr id="artist_albumrow5">
-                        <td>5</td>
+<!--                        <td>5</td>-->
                         <td id="alb_art5">track</td>
                         <td id="alb_name5"></td>
                         <td id="alb_release5">release</td>
                         <td id="alb_tracks5">length</td>
                     </tr>
                     <tr id="artist_albumrow6">
-                        <td>6</td>
+<!--                        <td>6</td>-->
                         <td id="alb_art6">track</td>
                         <td id="alb_name6"></td>
                         <td id="alb_release6">release</td>
                         <td id="alb_tracks6">length</td>
                     </tr>
                     <tr id="artist_albumrow7">
-                        <td>7</td>
+<!--                        <td>7</td>-->
                         <td id="alb_art7">track</td>
                         <td id="alb_name7"></td>
                         <td id="alb_release7">release</td>
                         <td id="alb_tracks7">length</td>
                     </tr>
                     <tr id="artist_albumrow8">
-                        <td>8</td>
+<!--                        <td>8</td>-->
                         <td id="alb_art8">track</td>
                         <td id="alb_name8"></td>
                         <td id="alb_release8">release</td>
                         <td id="alb_tracks8">length</td>
                     </tr>
                     <tr id="artist_albumrow9">
-                        <td>9</td>
+<!--                        <td>9</td>-->
                         <td id="alb_art9">track</td>
                         <td id="alb_name9"></td>
                         <td id="alb_release9">release</td>
                         <td id="alb_tracks9">length</td>
                     </tr>
                     <tr id="artist_albumrow10">
-                        <td>10</td>
+<!--                        <td>10</td>-->
                         <td id="alb_art10">track</td>
                         <td id="alb_name10"></td>
                         <td id="alb_release10">release</td>
                         <td id="alb_tracks10">length</td>
                     </tr>
                     <tr id="artist_albumrow11">
-                        <td>11</td>
+<!--                        <td>11</td>-->
                         <td id="alb_art11">track</td>
                         <td id="alb_name11"></td>
                         <td id="alb_release11">release</td>
                         <td id="alb_tracks11">length</td>
                     </tr>
                     <tr id="artist_albumrow12">
-                        <td>12</td>
+<!--                        <td>12</td>-->
                         <td id="alb_art12">track</td>
                         <td id="alb_name12"></td>
                         <td id="alb_release12">release</td>
                         <td id="alb_tracks12">length</td>
                     </tr>
                     <tr id="artist_albumrow13">
-                        <td>13</td>
+<!--                        <td>13</td>-->
                         <td id="alb_art13">track</td>
                         <td id="alb_name13"></td>
                         <td id="alb_release13">release</td>
                         <td id="alb_tracks13">length</td>
                     </tr>
                     <tr id="artist_albumrow14">
-                        <td>14</td>
+<!--                        <td>14</td>-->
                         <td id="alb_art14">track</td>
                         <td id="alb_name14"></td>
                         <td id="alb_release14">release</td>
                         <td id="alb_tracks14">length</td>
                     </tr>
                     <tr id="artist_albumrow15">
-                        <td>15</td>
+<!--                        <td>15</td>-->
                         <td id="alb_art15">track</td>
                         <td id="alb_name15"></td>
                         <td id="alb_release15">release</td>
                         <td id="alb_tracks15">length</td>
                     </tr>
                     <tr id="artist_albumrow16">
-                        <td>16</td>
+<!--                        <td>16</td>-->
                         <td id="alb_art16">track</td>
                         <td id="alb_name16"></td>
                         <td id="alb_release16">release</td>
                         <td id="alb_tracks16">length</td>
                     </tr>
                     <tr id="artist_albumrow17">
-                        <td>17</td>
+<!--                        <td>17</td>-->
                         <td id="alb_art17">track</td>
                         <td id="alb_name17"></td>
                         <td id="alb_release17">release</td>
                         <td id="alb_tracks17">length</td>
                     </tr>
                     <tr id="artist_albumrow18">
-                        <td>18</td>
+<!--                        <td>18</td>-->
                         <td id="alb_art18">track</td>
                         <td id="alb_name18"></td>
                         <td id="alb_release18">release</td>
                         <td id="alb_tracks18">length</td>
                     </tr>
                     <tr id="artist_albumrow19">
-                        <td>19</td>
+<!--                        <td>19</td>-->
                         <td id="alb_art19">track</td>
                         <td id="alb_name19"></td>
                         <td id="alb_release19">release</td>
                         <td id="alb_tracks19">length</td>
                     </tr>
                     <tr id="artist_albumrow20">
-                        <td>20</td>
+<!--                        <td>20</td>-->
                         <td id="alb_art20">track</td>
                         <td id="alb_name20"></td>
                         <td id="alb_release20">release</td>
                         <td id="alb_tracks20">length</td>
                     </tr>
                     <tr id="artist_albumrow21">
-                        <td>21</td>
+<!--                        <td>21</td>-->
                         <td id="alb_art21">track</td>
                         <td id="alb_name21"></td>
                         <td id="alb_release21">release</td>
                         <td id="alb_tracks21">length</td>
                     </tr>
                     <tr id="artist_albumrow22">
-                        <td>22</td>
+<!--                        <td>22</td>-->
                         <td id="alb_art22">track</td>
                         <td id="alb_name22"></td>
                         <td id="alb_release22">release</td>
                         <td id="alb_tracks22">length</td>
                     </tr>
                     <tr id="artist_albumrow23">
-                        <td>23</td>
+<!--                        <td>23</td>-->
                         <td id="alb_art23">track</td>
                         <td id="alb_name23"></td>
                         <td id="alb_release23">release</td>
                         <td id="alb_tracks23">length</td>
                     </tr>
                     <tr id="artist_albumrow24">
-                        <td>24</td>
+<!--                        <td>24</td>-->
                         <td id="alb_art24">track</td>
                         <td id="alb_name24"></td>
                         <td id="alb_release24">release</td>
                         <td id="alb_tracks24">length</td>
                     </tr>
                     <tr id="artist_albumrow25">
-                        <td>25</td>
+<!--                        <td>25</td>-->
                         <td id="alb_art25">track</td>
                         <td id="alb_name25"></td>
                         <td id="alb_release25">release</td>
                         <td id="alb_tracks25">length</td>
                     </tr>
                     <tr id="artist_albumrow26">
-                        <td>26</td>
+<!--                        <td>26</td>-->
                         <td id="alb_art26">track</td>
                         <td id="alb_name26"></td>
                         <td id="alb_release26">release</td>
                         <td id="alb_tracks26">length</td>
                     </tr>
                     <tr id="artist_albumrow27">
-                        <td>27</td>
+<!--                        <td>27</td>-->
                         <td id="alb_art27">track</td>
                         <td id="alb_name27"></td>
                         <td id="alb_release27">release</td>
                         <td id="alb_tracks27">length</td>
                     </tr>
                     <tr id="artist_albumrow28">
-                        <td>28</td>
+<!--                        <td>28</td>-->
                         <td id="alb_art28">track</td>
                         <td id="alb_name28"></td>
                         <td id="alb_release28">release</td>
                         <td id="alb_tracks28">length</td>
                     </tr>
                     <tr id="artist_albumrow29">
-                        <td>29</td>
+<!--                        <td>29</td>-->
                         <td id="alb_art29">track</td>
                         <td id="alb_name29"></td>
                         <td id="alb_release29">release</td>
                         <td id="alb_tracks29">length</td>
                     </tr>
                     <tr id="artist_albumrow30">
-                        <td>30</td>
+<!--                        <td>30</td>-->
                         <td id="alb_art30">track</td>
                         <td id="alb_name30"></td>
                         <td id="alb_release30">release</td>
                         <td id="alb_tracks30">length</td>
                     </tr>
                     <tr id="artist_albumrow31">
-                        <td>31</td>
+<!--                        <td>31</td>-->
                         <td id="alb_art31">track</td>
                         <td id="alb_name31"></td>
                         <td id="alb_release31">release</td>
                         <td id="alb_tracks31">length</td>
                     </tr>
                     <tr id="artist_albumrow32">
-                        <td>32</td>
+<!--                        <td>32</td>-->
                         <td id="alb_art32">track</td>
                         <td id="alb_name32"></td>
                         <td id="alb_release32">release</td>
                         <td id="alb_tracks32">length</td>
                     </tr>
                     <tr id="artist_albumrow33">
-                        <td>33</td>
+<!--                        <td>33</td>-->
                         <td id="alb_art33">track</td>
                         <td id="alb_name33"></td>
                         <td id="alb_release33">release</td>
@@ -2099,112 +2176,112 @@
                         
                     </tr>
                     <tr id="artist_albumrow34">
-                        <td>34</td>
+<!--                        <td>34</td>-->
                         <td id="alb_art34">track</td>
                         <td id="alb_name34"></td>
                         <td id="alb_release34">release</td>
                         <td id="alb_tracks34">length</td>
                     </tr>
                     <tr id="artist_albumrow35">
-                        <td>35</td>
+<!--                        <td>35</td>-->
                         <td id="alb_art35">track</td>
                         <td id="alb_name35"></td>
                         <td id="alb_release35">release</td>
                         <td id="alb_tracks35">length</td>
                     </tr>
                     <tr id="artist_albumrow36">
-                        <td>36</td>
+<!--                        <td>36</td>-->
                         <td id="alb_art36">track</td>
                         <td id="alb_name36"></td>
                         <td id="alb_release36">release</td>
                         <td id="alb_tracks36">length</td>
                     </tr>
                     <tr id="artist_albumrow37">
-                        <td>37</td>
+<!--                        <td>37</td>-->
                         <td id="alb_art37">track</td>
                         <td id="alb_name37"></td>
                         <td id="alb_release37">release</td>
                         <td id="alb_tracks37">length</td>
                     </tr>
                     <tr id="artist_albumrow38">
-                        <td>38</td>
+<!--                        <td>38</td>-->
                         <td id="alb_art38">track</td>
                         <td id="alb_name38"></td>
                         <td id="alb_release38">release</td>
                         <td id="alb_tracks38">length</td>
                     </tr>
                     <tr id="artist_albumrow39">
-                        <td>39</td>
+<!--                        <td>39</td>-->
                         <td id="alb_art39">track</td>
                         <td id="alb_name39"></td>
                         <td id="alb_release39">release</td>
                         <td id="alb_tracks39">length</td>
                     </tr>
                     <tr id="artist_albumrow40">
-                        <td>40</td>
+<!--                        <td>40</td>-->
                         <td id="alb_art40">track</td>
                         <td id="alb_name40"></td>
                         <td id="alb_release40">release</td>
                         <td id="alb_tracks40">length</td>
                     </tr>
                     <tr id="artist_albumrow41">
-                        <td>41</td>
+<!--                        <td>41</td>-->
                         <td id="alb_art41">track</td>
                         <td id="alb_name41"></td>
                         <td id="alb_release41">release</td>
                         <td id="alb_tracks41">length</td>
                     </tr>
                     <tr id="artist_albumrow42">
-                        <td>42</td>
+<!--                        <td>42</td>-->
                         <td id="alb_art42">track</td>
                         <td id="alb_name42"></td>
                         <td id="alb_release42">release</td>
                         <td id="alb_tracks42">length</td>
                     </tr>
                     <tr id="artist_albumrow43">
-                        <td>43</td>
+<!--                        <td>43</td>-->
                         <td id="alb_art43">track</td>
                         <td id="alb_name43"></td>
                         <td id="alb_release43">release</td>
                         <td id="alb_tracks43">length</td>
                     </tr>
                     <tr id="artist_albumrow44">
-                        <td>44</td>
+<!--                        <td>44</td>-->
                         <td id="alb_art44">track</td>
                         <td id="alb_name44"></td>
                         <td id="alb_release44">release</td>
                         <td id="alb_tracks44">length</td>
                     </tr>
                     <tr id="artist_albumrow45">
-                        <td>45</td>
+<!--                        <td>45</td>-->
                         <td id="alb_art45">track</td>
                         <td id="alb_name45"></td>
                         <td id="alb_release45">release</td>
                         <td id="alb_tracks45">length</td>
                     </tr>
                     <tr id="artist_albumrow46">
-                        <td>46</td>
+<!--                        <td>46</td>-->
                         <td id="alb_art46">track</td>
                         <td id="alb_name46"></td>
                         <td id="alb_release46">release</td>
                         <td id="alb_tracks46">length</td>
                     </tr>
                     <tr id="artist_albumrow47">
-                        <td>47</td>
+<!--                        <td>47</td>-->
                         <td id="alb_art47">track</td>
                         <td id="alb_name47"></td>
                         <td id="alb_release47">release</td>
                         <td id="alb_tracks47">length</td>
                     </tr>
                     <tr id="artist_albumrow48">
-                        <td>48</td>
+<!--                        <td>48</td>-->
                         <td id="alb_art48">track</td>
                         <td id="alb_name48"></td>
                         <td id="alb_release48">release</td>
                         <td id="alb_tracks48">length</td>
                     </tr>
                     <tr id="artist_albumrow49">
-                        <td>49</td>
+<!--                        <td>49</td>-->
                         <td id="alb_art49">track</td>
                         <td id="alb_name49"></td>
                         <td id="alb_release49">release</td>
@@ -2217,7 +2294,7 @@
         
 <!--
         <div>
-            <button onclick="volume_update();">Test</button>
+            <button onclick="alert(queue[0].name);">Test</button>
         </div> 
 -->
         
@@ -2225,6 +2302,59 @@
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
         
         <script>
+            function enqueue(num) {
+                $.ajax({
+                    url: '/playlists',
+                    
+                }).done(function(data) {
+//                    alert(data.playlists[gen].genre_name.genre_url);
+                    
+                    var tmp = '/tracks/' + data.playlists[gen].genre_url;
+                
+                    $.ajax({
+                        url: tmp,
+
+                    }).done(function(data) {
+                        var songs = data.tracks;
+                        
+//                        alert(songs[num].name);
+                        queue.push(songs[num]);
+                        queue_update();
+                    });
+                });
+            }
+            
+            function dequeue(num) {
+                queue.splice(num, 1);
+                queue_update();
+            }
+            
+            function queue_update() {
+                for (gk = 0; gk < 10; gk++) {
+                    if (queue[gk] != null) {
+                        document.getElementById("q-" + gk).style.display = "initial";
+                        
+                        document.getElementById("qa" + gk).innerHTML = queue[gk].artists[0].name;
+                        document.getElementById("qt" + gk).innerHTML = queue[gk].name;
+                    } else {
+                        document.getElementById("q-" + gk).style.display = "none";
+                    }
+                }
+            }
+            
+            function view_queue() {
+                if (document.getElementById("queue").src == "http://localhost:8888/images/btn-queue-off.PNG") {
+                    document.getElementById("table").style.display = "none";
+                    document.getElementById("hist").src="images/btn-history-off.png";
+                    
+                    document.getElementById("queue").src = "/images/btn-queue-on.PNG";
+                    document.getElementById("table_queue").style.display = "block";
+                } else {
+                    document.getElementById("queue").src = "/images/btn-queue-off.PNG";
+                    document.getElementById("table_queue").style.display = "none";
+                }
+            }
+            
             function volume() {
                 if (document.getElementById("vol").style.display == "none") {
                     document.getElementById("vol").style.display = "initial";
@@ -2284,13 +2414,13 @@
                     for (gk = 0; gk < 50; gk++) {
                         if (gk < data.artist_albums.length) {
                             document.getElementById("artist_albumrow" + gk).style.display = "initial";
-                            document.getElementById("alb_art" + gk).innerHTML = '<img id="artist_art' + gk + '" style="position: absolute;" src=""/>' + "TEMP______";
+                            document.getElementById("alb_art" + gk).innerHTML = '<img id="artist_art' + gk + '" style="position: absolute;" src=""/>' + "TEMP_____";
                             document.getElementById("artist_art" + gk).src = data.artist_albums[gk].images[0].url;
                             document.getElementById("artist_art" + gk).style.width = "12%";
                             document.getElementById("alb_name" + gk).innerHTML = data.artist_albums[gk].name;
                             document.getElementById("alb_tracks" + gk).innerHTML = data.artist_albums[gk].total_tracks + " track";
                             if (data.artist_albums[gk].total_tracks > 1) document.getElementById("alb_tracks" + gk).innerHTML += 's';
-                            document.getElementById("alb_release" + gk).innerHTML = "Released: " + data.artist_albums[gk].release_date;
+                            document.getElementById("alb_release" + gk).innerHTML = "Released: " + data.artist_albums[gk].release_date.substring(0, 4);
                         } else {
                             document.getElementById("artist_albumrow" + gk).style.display = "none";
                         }
@@ -2842,20 +2972,23 @@
                 var table = document.getElementById("table");
                 
                 if (table.style.display == "none") {
-                    var img = document.getElementById("queue");
-                    img.src="images/btn-queue-on.png";
+                    document.getElementById("queue").src = "/images/btn-queue-off.PNG";
+                    document.getElementById("table_queue").style.display = "none";
+                    
+                    var img = document.getElementById("hist");
+                    img.src="images/btn-history-on.png";
                     table.style.display = "block";
                 } else {
                     table.style.display = "none";
-                    var img = document.getElementById("queue");
-                    img.src="images/btn-queue-off.png";
+                    var img = document.getElementById("hist");
+                    img.src="images/btn-history-off.png";
                 }
             }
         
             function history_update() {
 
                 $.ajax({
-                url: '/recent',
+                    url: '/recent',
 
                 }).done(function(data) {
                     var recent_tracks = data.ten_recent;
