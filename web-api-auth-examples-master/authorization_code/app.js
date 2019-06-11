@@ -965,7 +965,7 @@ app.get('/playlists', function(req, res) {
                 'playlists' : user_playlists,
             });
         } else {
-            console.log("Error " + response.statusCode);
+//            console.log("Error " + response.statusCode);
         }
         
         
@@ -1020,23 +1020,67 @@ app.get('/get_volume', function(req, res) {
             var devs = body.devices;
             var num = body.devices.length;
             console.log("NUMBER OF DEVICES: " + num);
-            
+            var vol;
             
             for (i = 0; i < num; i++) {
                 if (devs[i].is_active == true) {
                     var current = devs[i];
                     
-                    console.log(current);
+                    console.log("current " + current);
+                    vol = current.volume_percent;
                 } 
             }
             
-            
+            if (current == null) {
+                vol = 0;
+            }
             
             res.send({
-                'volume' : current.volume_percent,
+                'volume' : vol,
             });
         }
     });
+});
+
+app.get('/search/:keywords', function(req, res) {
+//    res.send(req.params.theValue.toUpperCase());
+    
+    console.log("GETTING KEYW0RDS");
+    
+    var keys = "";
+                    
+    for (gk = 0; gk < req.params.keywords.length; gk++) {
+        if (req.params.keywords[gk] != " ") {
+            keys += req.params.keywords[gk];
+        } else {
+            keys += "%20";
+        }
+    } 
+    
+    var url = "https://api.spotify.com/v1/search?q=" + keys + "&type=album,track,artist,playlist&limit=10";
+
+    console.log(keys);
+    console.log(url);
+    
+    var options = {
+        url: url,
+        headers: { 'Authorization': 'Bearer ' + access_token2 },
+        json: true
+    };
+
+    request.get(options, function(error, response, body) {
+        if(!error && response.statusCode == 200 ){
+            console.log("SUCCESS");
+            console.log(body);
+            
+            res.send({
+                'results': body,
+            });
+        } else {
+            console.log("FAIL: " + response.statusCode);
+        }
+    });
+
 });
 
 console.log('Listening on 8888');

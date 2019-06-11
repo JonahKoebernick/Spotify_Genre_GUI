@@ -332,6 +332,33 @@
             height: 40px;
             transform: translate(388.5%, 53%);
         }
+        
+        .search_res {
+            background-color: #1e1b1b;
+            font-family: verdana;
+            font-size: 5;
+            color: white;
+        }
+        
+        #srch_artist tr {
+            height: 100px;
+        }
+        
+        .search_res tr:nth-child(1){ 
+            height: 55px;
+            color: #55ba55;
+        }
+        
+        #srch_artist td:nth-child(1) {
+            padding-right: 100px;
+        }
+        
+        #srch_track td:nth-child(1) {
+            padding-right: 5px;
+        }
+        #srch_track td:nth-child(2) {
+            color: #55ba55;
+        }
             
     </style>
     
@@ -2300,8 +2327,143 @@
                         
         </div>
         
-        <div id="search_display" style="display: none; width: 46.67%; height: 632px; z-index: 1000; background-color: aqua; position: relative; transform: translate(54.9%, -223.1%); border-radius: 10px;">
-            <img style="border-radius: 10px; width:100%" src="images/search-bg.png">
+        <div id="search_display" style="display: none; width: 46.67%; height: 632px; z-index: 1000; background-color: aqua; position: absolute; transform: translate(0%, 0%); border-radius: 10px;">
+            <img style="border-radius: 10px; width:100%" src="images/search-bg-2.png">
+            
+            <div style="width: 46.3%; height: 46.3%; position: absolute; transform: translate(5.23%, 5.19%); overflow-y: auto;">
+                <table id="srch_artist" class="search_res" style="width: 100%; height: 100%; overflow-y: auto; text-align: left; vertical-align: text-bottom;">
+                    <tr id="" style="height: 45px; font-size: 15;">
+                        <td id="">Artists</td>
+                    </tr>
+                    <tr id="">
+                        <td id ="srch_art-img_0"></td>
+                        <td id ="srch_art-nm_0"></td>
+                    </tr>
+                    <tr id="">
+                        <td id ="srch_art-img_1"></td>
+                        <td id ="srch_art-nm_1"></td>
+                    </tr>
+                    <tr id="">
+                        <td id ="srch_art-img_2"></td>
+                        <td id ="srch_art-nm_2"></td>
+                    </tr>
+                    <tr id="">
+                        <td id ="srch_art-img_3"></td>
+                        <td id ="srch_art-nm_3"></td>
+                    </tr>
+                    <tr id="">
+                        <td id ="srch_art-img_4"></td>
+                        <td id ="srch_art-nm_4"></td>
+                    </tr>
+                    <tr id="">
+                        <td id ="srch_art-img_5"></td>
+                        <td id ="srch_art-nm_5"></td>
+                    </tr>
+                    <tr id="">
+                        <td id ="srch_art-img_6"></td>
+                        <td id ="srch_art-nm_6"></td>
+                    </tr>
+                    <tr id="">
+                        <td id ="srch_art-img_7"></td>
+                        <td id ="srch_art-nm_7"></td>
+                    </tr>
+                    <tr id="">
+                        <td id ="srch_art-img_8"></td>
+                        <td id ="srch_art-nm_8"></td>
+                    </tr>
+                    <tr id="">
+                        <td id ="srch_art-img_9"></td>
+                        <td id ="srch_art-nm_9"></td>
+                    </tr>
+                        
+                </table>
+            </div>
+            
+            <div style="width: 46.3%; height: 46.3%; position: absolute; transform: translate(110.6%, 5.18%); overflow-y: auto;">
+                <table id="srch_track" class="search_res" style="width: 100%; height: 100%; overflow-y: auto; text-align: left;">
+                    <tr id="">
+                        <td id="">Songs</td>
+                    </tr>
+                    <tr id="">
+                        <td id="srch_song-nm_0"></td>
+                        <td id="srch_song-artist_0"></td>
+                    </tr>
+                    <tr id="">
+                        <td id="srch_song-nm_1"></td>
+                        <td id="srch_song-artist_1"></td>
+                    </tr>
+                    <tr id="">
+                        <td id="srch_song-nm_2"></td>
+                        <td id="srch_song-artist_2"></td>
+                    </tr>
+                    <tr id="">
+                        <td id="srch_song-nm_3"></td>
+                        <td id="srch_song-artist_3"></td>
+                    </tr>
+                    <tr id="">
+                        <td id="srch_song-nm_4"></td>
+                        <td id="srch_song-artist_4"></td>
+                    </tr>
+                    <tr id="">
+                        <td id="srch_song-nm_5"></td>
+                        <td id="srch_song-artist_5"></td>
+                    </tr>
+                    <tr id="">
+                        <td id="srch_song-nm_6"></td>
+                        <td id="srch_song-artist_6"></td>
+                    </tr>
+                    <tr id="">
+                        <td id="srch_song-nm_7"></td>
+                        <td id="srch_song-artist_7"></td>
+                    </tr>
+                    <tr id="">
+                        <td id="srch_song-nm_8"></td>
+                        <td id="srch_song-artist_8"></td>
+                    </tr>
+                    <tr id="">
+                        <td id="srch_song-nm_9"></td>
+                        <td id="srch_song-artist_9"></td>
+                    </tr>
+                    
+                </table>
+            </div>
+            
+            <div style="width: 46.3%; height: 46.3%; position: absolute; transform: translate(5.24%, 110.48%); overflow-y: auto;">
+                <table id="srch_playlist" class="search_res" style="width: 100%; height: 100%; overflow-y: auto; text-align: left;">
+                    <tr id="">
+                        <td id="">Playlists</td>
+                    </tr>
+                    <tr id="srch_pl_0"></tr>
+                    <tr id="srch_pl_1"></tr>
+                    <tr id="srch_pl_2"></tr>
+                    <tr id="srch_pl_3"></tr>
+                    <tr id="srch_pl_4"></tr>
+                    <tr id="srch_pl_5"></tr>
+                    <tr id="srch_pl_6"></tr>
+                    <tr id="srch_pl_7"></tr>
+                    <tr id="srch_pl_8"></tr>
+                    <tr id="srch_pl_9"></tr>
+                </table>
+            </div>
+            
+            <div style="width: 46.3%; height: 46.3%; position: absolute; transform: translate(110.6%, 110.475%); overflow-y: auto;">
+                <table id="srch_album" class="search_res" style="width: 100%; height: 100%; overflow-y: auto; text-align: left;">
+                    <tr id="">
+                        <td id="">Albums</td>
+                    </tr>
+                    <tr id="srch_alb_0"></tr>
+                    <tr id="srch_alb_1"></tr>
+                    <tr id="srch_alb_2"></tr>
+                    <tr id="srch_alb_3"></tr>
+                    <tr id="srch_alb_4"></tr>
+                    <tr id="srch_alb_5"></tr>
+                    <tr id="srch_alb_6"></tr>
+                    <tr id="srch_alb_7"></tr>
+                    <tr id="srch_alb_8"></tr>
+                    <tr id="srch_alb_9"></tr>
+                </table>
+            </div>
+            
         </div>
         
 <!--
@@ -2319,8 +2481,51 @@
                     document.getElementById("mag_glass").src = "http://localhost:8888/images/btn-search-on.PNG";
                     document.getElementById("search_display").style.display = "flex";
                     var terms = document.getElementById("search_in").value;
-                    
+
 //                    alert(terms);
+                    
+                    var tmp = '/search/' + terms;
+
+                    $.ajax({
+                        url: tmp,
+
+                    }).done(function(data) {
+//                        alert("Albums: " + data.results.albums + "\nArtists: " + data.results.artists + "\nTracks: " + data.results.tracks + "\nPlaylists: " + data.results.playlists);
+                        
+                        var res_artists = data.results.artists.items;
+                        var res_tracks = data.results.tracks.items;
+                        var res_playlists = data.results.playlists.items;
+                        var res_albums = data.results.albums.items;
+                        
+                        for (gk = 0; gk < 10; gk++) {
+                            if (gk < res_artists.length) {
+                                document.getElementById("srch_art-nm_" + gk).style.display = "initial";
+                                document.getElementById("srch_art-img_" + gk).style.display = "initial";
+                                document.getElementById("srch_art-nm_" + gk).innerHTML = res_artists[gk].name;
+                                document.getElementById("srch_art-img_" + gk).innerHTML = '<img id="srch_art_img_' + gk + '" style="position: absolute; height: 30%;" src=""/>';
+                                document.getElementById("srch_art_img_" + gk).src = res_artists[gk].images[0].url;
+                                
+                            } else {
+                                document.getElementById("srch_art-nm_" + gk).style.display = "none";
+                                document.getElementById("srch_art-img_" + gk).style.display = "none";
+                            }
+                            
+                            if (gk < res_tracks.length) {
+                                document.getElementById("srch_song-nm_" + gk).style.display = "initial";
+                                document.getElementById("srch_song-artist_" + gk).style.display = "initial";
+                                
+                                document.getElementById("srch_song-nm_" + gk).innerHTML = res_tracks[gk].name;
+                                document.getElementById("srch_song-artist_" + gk).innerHTML = "by " + res_tracks[gk].artists[0].name;
+                            } else {
+                                document.getElementById("srch_song-nm_" + gk).style.display = "none";
+                                document.getElementById("srch_song-artist_" + gk).style.display = "none";
+                            }
+                        }
+                        
+//                        for (gk = 0; gk < res_albums.length; gk++) alert(res_albums[gk].artists[0].name + " - " + res_albums[gk].name);
+                        
+                        
+                    });
                 } else {
                     document.getElementById("mag_glass").src = "http://localhost:8888/images/btn-search-off.PNG";
                     document.getElementById("search_display").style.display = "none";
@@ -3570,7 +3775,7 @@
                 playlists();
                 update_more();
                 update_artist();
-                volume_update()
+//                volume_update()
                 
                 setTimeout(songScroll, 2500);
                 setTimeout(infoScroll, 2500);
