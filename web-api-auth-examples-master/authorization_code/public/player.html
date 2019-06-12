@@ -1125,8 +1125,12 @@
             <font face="verdana" color="#55ba55"><h1 style="color: white; transform: translate(5%, 0%); width: 90%;" id="playlist_name">Playlist</h1></font>
 <!--            <table class="pl_disp" style="width: 100%; table-layout: fixed; transform: translate(0%, -2.7%); color: grey; background-color: #0e0b08; overflow-y: scroll;">-->
             
-            <a  style="position: relative; transform: translate(0%, -150%);" class="gens" onclick="add_pl()">
-                <font face="verdana"><div style="position: relative; width: 90%; height: 30px; background-color: #55ba55; transform: translate(5%, 0%); border-radius: 8px;"><p style="color: white; transform: translate(3%, 20%);">Add to Percent Shuffle</p></div></font>
+            <a  style="position: relative; transform: translate(0%, -150%);" class="gens" onclick="shuffle_play_playlist(gen)">
+                <font face="verdana"><div style="position: relative; width: 35%; height: 30px; background-color: #55ba55; transform: translate(10%, -45%); border-radius: 8px; text-align: center;"><p style="color: white; transform: translate(0%, 20%);">Shuffle Play</p></div></font>
+            </a>
+            
+            <a  style="position: absolute; transform: translate(75%, -100%);width: 55%;" class="gens" onclick="add_pl()">
+                <font face="verdana"><div style="position: relative; width: 100%; height: 30px; background-color: #55ba55; transform: translate(1%, -45%); border-radius: 8px; white-space: nowrap; text-align: center;"><p style="color: white; transform: translate(0%, 20%);">Add to Percent Shuffle</p></div></font>
             </a>
             
             <table id="playlist">    
@@ -2006,6 +2010,8 @@
                 </table>
             </div>
             
+            <button style="background-color: #55ba55; display: flex; position: absolute; border-radius: 8px; border: none; color: white; height: 8%; transform: translate(-175%, -375%);" onclick="shuffle_play_album()"><font face="verdana" size="3" color="white">Shuffle Play</font></button>
+            
         </div>
         
         <div id="more_artist" style="float: left; width: 45.1%; height: 45.1%; z-index: 400; display: none; position: fixed; text-align: center; justify-content: center; align-items: center; transform: translate(93%, 58.1%);">
@@ -2785,6 +2791,56 @@
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
         
         <script>
+            function shuffle_play(s_uri) {
+                $.ajax({
+                    url: '/access_token',
+
+                }).done(function(data) {
+                    var at = data.access_token;
+
+                    $.ajax({
+                        url: 'https://api.spotify.com/v1/me/player/play',
+                        type: 'PUT',
+                        headers: {
+                            'Authorization': 'Bearer ' + at
+                        },
+                        dataType: "json",
+                        contentType: "application/json",
+                        data : JSON.stringify({
+                            "context_uri": s_uri,
+                        })
+                    }).done(function(data) {
+                        in_library();
+                        history_update();
+                        update_more();
+                        update_artist();
+                        more_pl_update();
+                    });
+                });
+            }
+            
+            function shuffle_play_playlist(num) {
+                $.ajax({
+                    url: '/playlists',
+                    
+                }).done(function(data) {
+                    var playlists_fs = data.playlists;
+                    
+                    shuffle_play(playlists_fs[num].playlist_uri);
+                });
+            }
+            
+            function shuffle_play_album() {
+                $.ajax({
+                    url: '/view_album',
+                    
+                }).done(function(data) {
+//                    alert(data.uri);
+                    
+                    shuffle_play(data.uri);
+                });
+            }
+            
             function queue_on() {
                 $.ajax({
                     url: '/store_context',
@@ -4295,7 +4351,7 @@
                 update_more();
                 update_artist();
                 more_pl_update();
-                volume_update()
+                volume_update();
                 
                 setTimeout(songScroll, 2500);
                 setTimeout(infoScroll, 2500);

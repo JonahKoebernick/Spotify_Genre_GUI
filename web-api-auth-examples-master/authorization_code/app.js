@@ -56,7 +56,8 @@ app.get('/login', function(req, res) {
   res.cookie(stateKey, state);
 
   // your application requests authorization
-  var scope = 'user-read-private user-read-email user-modify-playback-state user-read-currently-playing user-read-playback-state user-read-recently-played playlist-read-private user-library-read playlist-modify-public playlist-modify-private user-modify-playback-state user-read-currently-playing user-top-read';
+  var scope = 'user-read-private user-read-email user-read-currently-playing user-read-playback-state user-read-recently-played user-read-birthdate user-modify-playback-state user-top-read user-library-read user-library-modify user-follow-modify user-follow-read playlist-modify-public playlist-modify-private playlist-read-private playlist-read-collaborative streaming app-remote-control ';
+
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
@@ -157,6 +158,7 @@ app.get('/view_album', function(req, res) {
                     console.log('Album Tracks: ' + album_tracks[0].name);
                     
                     res.send({
+                        'uri': body.uri,
                         'label': album_label,
                         'name': album_name,
                         'type': album_type,
@@ -960,6 +962,7 @@ app.get('/playlists', function(req, res) {
             
             for (i = 0; i < body.items.length; i++) {
                 var pl = {
+                    playlist_uri: body.items[i].uri,
                     genre_url: body.items[i].id,
                     number_songs: body.items[i].tracks.total,
                     genre_name: body.items[i].name,
