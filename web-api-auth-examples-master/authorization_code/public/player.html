@@ -7,6 +7,7 @@
         var gen = 0;
         var percent_shuffle = false;
         var queue = [];
+        var queue_active = false;
         
     </script>
         
@@ -22,12 +23,10 @@
 /*            margin-bottom: 50%;*/
 
         }  
-        
         .player img {
             height: 100%;
             width: 100%;
         }
-        
         .player button {
             background-color: transparent;
             border: none;
@@ -35,6 +34,13 @@
             position: relative;
             outline: none;
         }
+
+        .percent{
+            width: 25%;
+            height: 367.9px;
+            position: relative;
+            overflow-y: scroll;
+        } 
         
         .pl_disp{
             width: 25%;
@@ -42,18 +48,9 @@
             position: relative;
             overflow-y: scroll;
         } 
-        
-        .percent{
-            width: 25%;
-            height: 367.9px;
-            position: relative;
-            overflow-y: scroll;
-        } 
-
         .pl_disp tr {
             height: 25px;
         }
-        
         .pl_disp button {
             background-color: transparent;
             border: none;
@@ -62,7 +59,6 @@
 /*            outline: none;*/
             
         }
-        
         .pl_disp button:hover {
             background-color: transparent;
             border: none;
@@ -129,7 +125,6 @@
 /*            background-color: blue;*/
             z-index:50;
         }
-        
         #coverUp3 {
             position: absolute;
             height: 30px;
@@ -140,7 +135,6 @@
 /*              background: transparent;*/
             z-index:50;
         }
-        
         #coverUp2 {
             position: absolute;
             height: 30px;
@@ -161,7 +155,6 @@
             position: relative;
             z-index: 200;
         }
-        
         .login_inner {
             float: left;
             width: 100%;
@@ -183,7 +176,6 @@
             display: inherit;
             border-radius: 8px;
         }  
-        
         .heads_inner{
             float: left;
             width: 100%;
@@ -215,7 +207,6 @@
             
 /*            display: table;*/
         }
-
         #playlist td, #playlist th {
 /*            border: 1px solid #ddd;*/
             text-overflow: ellipsis;
@@ -224,11 +215,9 @@
 /*            display: table;*/
 /*            padding: .5%;*/
         }
-        
         #playlist tr {
             display: block;
         }
-        
         #playlist td:nth-child(1){width: 35%; text-align: left}
         #playlist td:nth-child(2){width: 100%; text-align: left}
         #playlist td:nth-child(3){width: 100%;}
@@ -269,7 +258,6 @@
             border: none;
             outline: none;
         }
-        
         .more_btn:hover {
             position: absolute; 
             width: 15%; 
@@ -282,7 +270,6 @@
         input[type=range]{
             -webkit-appearance: none;
         }
-
         input[type=range]::-webkit-slider-runnable-track {
 /*
             position: relative;
@@ -294,7 +281,6 @@
             border: none;
             border-radius: 15px;
         }
-
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
             border: none;
@@ -306,11 +292,9 @@
             z-index: 1000;
             position: relative;
         }
-
         input[type=range]:focus {
             outline: none;
         }
-
         input[type=range]:focus::-webkit-slider-runnable-track {
 /*
             position: relative;
@@ -318,7 +302,6 @@
             background: #e3e4e8;
 */
         }
-        
         input[type="text"] {
             font-family: verdana;
             font-size: 5;
@@ -331,6 +314,7 @@
             border-radius: 8px;
             height: 40px;
             transform: translate(388.5%, 53%);
+            z-index: 300;
         }
         
         .search_res {
@@ -339,27 +323,94 @@
             font-size: 5;
             color: white;
         }
-        
-        #srch_artist tr {
-            height: 100px;
-        }
-        
         .search_res tr:nth-child(1){ 
             height: 55px;
             color: #55ba55;
         }
-        
+
         #srch_artist td:nth-child(1) {
             padding-right: 100px;
         }
-        
-        #srch_track td:nth-child(1) {
-            padding-right: 5px;
+        #srch_artist td:nth-child(2) {
+            padding-right: 200px;
         }
+        #srch_artist tr {
+            line-height: 90px;   
+            vertical-align: text-top;
+        } 
+        #srch_artist tr:nth-child(1) {
+            line-height: 50px;
+        } 
+        
         #srch_track td:nth-child(2) {
             color: #55ba55;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100px;
+            padding-right: 250px;
+        } 
+        #srch_track td:nth-child(1) {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100px;
+        } 
+        
+        #srch_album td:nth-child(1) {
+            padding-right: 100px;
         }
-            
+        #srch_album tr {
+            line-height: 90px;   
+            vertical-align: text-top;
+        }
+        #srch_album tr:nth-child(1) {
+            line-height: 50px;
+        }
+        #srch_album td:nth-child(3) {
+            color: #55ba55;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100px;
+        }
+        #srch_album td:nth-child(2) {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100px;
+        }
+        
+        #srch_playlist td:nth-child(1) {
+            padding-right: 100px;
+        }
+        #srch_playlist tr {
+            line-height: 90px;   
+            vertical-align: text-top;
+            max-width: 200%;
+        }
+        #srch_playlist tr:nth-child(1) {
+            line-height: 50px;
+        }
+        #srch_playlist td:nth-child(3) {
+            color: #55ba55;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+            padding-right: 200px;
+        }
+        #srch_playlist td:nth-child(2) {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+        }
+        
+        #addpl td:nth-child(1) {
+            width: 100%;
+        }
+        
     </style>
     
     <body style="background-color:#1F1C1C;">
@@ -481,53 +532,55 @@
         </div> 
         
         <div  id="table_queue" style="height: 242px; overflow-y: scroll; max-width: 34.5%; z-index:150; font-family: verdana; display: none; position: relative; float: left; visibility: visible; padding-right: 1.3%; transform: translate(4.5%, 8.7%); border-radius: 10px;">
+            <div id="empty_queue" style="display: none;"><font face="verdana" size="3" color="#55ba55">Add it up Buddy!</font></div>
+            
             <table id="queue_table" style="table-layout: fixed; overflow-y: scroll; color: grey; background-color: #0e0b08; text-overflow: ellipsis; width: 100%; border-radius: 10px;">
-                <tr id ="q-0">
+                <tr id ="q-0" style="display: none;">
                     <td id="qa0">artist0</td>
                     <td id="qt0">track0</td>
                     <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="dequeue(0)">Remove</button></td>
                 </tr>
-                <tr id ="q-1">
+                <tr id ="q-1" style="display: none;">
                     <td id="qa1">artist1</td>
                     <td id="qt1">track1</td>
                     <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="dequeue(1)">Remove</button></td>
                 </tr>
-                <tr id ="q-2">
+                <tr id ="q-2" style="display: none;">
                     <td id="qa2">artist2</td>
                     <td id="qt2">track2</td>
                     <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="dequeue(2)">Remove</button></td>
                 </tr>
-                <tr id ="q-3">
+                <tr id ="q-3" style="display: none;">
                     <td id="qa3">artist3</td>
                     <td id="qt3">track3</td>
                     <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="dequeue(3)">Remove</button></td>
                 </tr>
-                <tr id ="q-4">
+                <tr id ="q-4" style="display: none;">
                     <td id="qa4">artist4</td>
                     <td id="qt4">track4</td>
                     <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="dequeue(4)">Remove</button></td>
                 </tr>
-                <tr id ="q-5">
+                <tr id ="q-5" style="display: none;">
                     <td id="qa5">artist5</td>
                     <td id="qt5">track5</td>
                     <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="dequeue(5)">Remove</button></td>
                 </tr>
-                <tr id ="q-6">
+                <tr id ="q-6" style="display: none;">
                     <td id="qa6">artist6</td>
                     <td id="qt6">track6</td>
                     <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="dequeue(6)">Remove</button></td>
                 </tr>
-                <tr id ="q-7">
+                <tr id ="q-7" style="display: none;">
                     <td id="qa7">artist7</td>
                     <td id="qt7">track7</td>
                     <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="dequeue(7)">Remove</button></td>
                 </tr>
-                <tr id ="q-8">
+                <tr id ="q-8" style="display: none;">
                     <td id="qa8">artist8</td>
                     <td id="qt8">track8</td>
                     <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="dequeue(8)">Remove</button></td>
                 </tr>
-                <tr id ="q-9">
+                <tr id ="q-9" style="display: none;">
                     <td id="qa9">artist9</td>
                     <td id="qt9">track9</td>
                     <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white"onclick="dequeue(9)">Remove</button></td>
@@ -553,7 +606,7 @@
             
         </div>
         
-        <div class="search">
+        <div class="search" id="search_bar">
             <input type="text" style="position: absolute; width: 80%; height: 55%; transform: translate(3.3%, 32%); border-radius: 5px; border: none;" placeholder=" Search" id="search_in">
             <button style="position:absolute; width: 15%; background-color: transparent; border: none; transform: translate(560%, 25%);" onclick="search();"><img id="mag_glass" style="width: 80%" src="images/btn-search-off.png"></button>
         </div>
@@ -1596,14 +1649,14 @@
                 <div id="artist_more" style="width: 100%; position: absolute; transform: translate(-50%, -240%);">Artist • Album</div>
             </font>
             
-            <button style="transform: translate(-242.3%, 49%);" class="more_btn" onclick="alert()">
-                <img style="float: left; transform: translate(0%, 0%); width: 60%;" src="images/btn-add-to-pl-off.PNG"/>
+            <button style="transform: translate(-242.3%, 49%);" class="more_btn" onclick="more_pl()">
+                <img id="add_to_pl_btn" style="float: left; transform: translate(0%, 0%); width: 60%;" src="images/btn-add-to-pl-off.PNG"/>
                 <font style="float:left; absolute; white-space: nowrap; transform: translate(35%, -115%);" face="verdana" size="3" color="white">
                     Add to playlist
                 </font>
             </button>
             
-            <button style="transform: translate(-242%, 212%);" class="more_btn" onclick="alert()">
+            <button style="transform: translate(-242%, 212%);" class="more_btn" onclick="enqueue_more()">
                 <img style="float: left; transform: translate(0%, 0%); width: 56%;" src="images/btn-add-to-queue-off.PNG"/>
                 <font style="float:left; absolute; white-space: nowrap; transform: translate(37%, -105%);" face="verdana" size="3" color="white">
                     Add to queue
@@ -2327,100 +2380,276 @@
                         
         </div>
         
-        <div id="search_display" style="display: none; width: 46.67%; height: 632px; z-index: 1000; background-color: aqua; position: absolute; transform: translate(0%, 0%); border-radius: 10px;">
-            <img style="border-radius: 10px; width:100%" src="images/search-bg-2.png">
+        <div id="add_to_pl" style="float: left; z-index: 400; width: 25%; display: none; position: fixed; text-align: center; justify-content: center; align-items: center;">
+            <img style="position: absolute; width: 100%; border-radius: 15px; transform: translate(167.6%, 51.6%);" src="images/add-to-pl-bg.PNG"/>
+        
+            <div style="height: 624px; width: 93%;  transform: translate(180.1%, 53.67%); position: absolute; overflow-y: scroll;">
+                <table id="addpl" style="position: absolute; width: 100%; height: 100%; overflow-y: scroll; text-align: left; background-color: #000000; color: white">
+                    <tr id="add_pl_r0">
+                        <td id="add_pl0"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(0)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r1">
+                        <td id="add_pl1"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(1)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r2">
+                        <td id="add_pl2"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(2)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r3">
+                        <td id="add_pl3"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(3)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r4">
+                        <td id="add_pl4"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(4)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r5">
+                        <td id="add_pl5"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(5)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r6">
+                        <td id="add_pl6"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(6)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r7">
+                        <td id="add_pl7"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(7)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r8">
+                        <td id="add_pl8"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(8)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r9">
+                        <td id="add_pl9"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(9)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r10">
+                        <td id="add_pl10"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(10)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r11">
+                        <td id="add_pl11"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(11)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r12">
+                        <td id="add_pl12"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(12)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r13">
+                        <td id="add_pl13"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(13)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r14">
+                        <td id="add_pl14"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(14)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r15">
+                        <td id="add_pl15"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(15)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r16">
+                        <td id="add_pl16"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(16)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r17">
+                        <td id="add_pl17"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(17)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r18">
+                        <td id="add_pl18"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(18)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r19">
+                        <td id="add_pl19"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(19)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r20">
+                        <td id="add_pl20"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(20)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r21">
+                        <td id="add_pl21"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(21)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r22">
+                        <td id="add_pl22"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(22)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r23">
+                        <td id="add_pl23"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(23)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r24">
+                        <td id="add_pl24"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(24)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r25">
+                        <td id="add_pl25"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(25)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r26">
+                        <td id="add_pl26"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(26)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r27">
+                        <td id="add_pl27"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(27)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r28">
+                        <td id="add_pl28"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(28)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r29">
+                        <td id="add_pl29"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(29)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r30">
+                        <td id="add_pl30"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(30)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r31">
+                        <td id="add_pl31"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(31)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r32">
+                        <td id="add_pl32"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(32)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r33">
+                        <td id="add_pl33"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(33)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r34">
+                        <td id="add_pl34"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(34)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r35">
+                        <td id="add_pl35"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(35)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r36">
+                        <td id="add_pl36"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(36)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r37">
+                        <td id="add_pl37"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(37)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r38">
+                        <td id="add_pl38"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(38)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r39">
+                        <td id="add_pl39"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(39)">Add</button></td>
+                    </tr>
+                    <tr id="add_pl_r40">
+                        <td id="add_pl40"></td>
+                        <td><button style="border: none; border-radius: 4px; background: #55ba55; color: white" onclick="add_to_pl(40)">Add</button></td>
+                    </tr>
+                </table>
+            </div>
             
-            <div style="width: 46.3%; height: 46.3%; position: absolute; transform: translate(5.23%, 5.19%); overflow-y: auto;">
-                <table id="srch_artist" class="search_res" style="width: 100%; height: 100%; overflow-y: auto; text-align: left; vertical-align: text-bottom;">
-                    <tr id="" style="height: 45px; font-size: 15;">
-                        <td id="">Artists</td>
+            
+        </div>
+
+        <a onclick="search_close();"><div id="searchbg" style="width: 100%; height: 100%; z-index: 200; display: none; position: fixed; text-align: center; justify-content: center; align-items: center; transform: translate(-0.5%, -1.2%); background-color: #0e0b08; opacity: .7;"></div></a>
+        <div id="search_display" style="display: none; width: 72.4%; height: 631.5px; z-index: 1000; background-color: aqua; position: fixed; transform: translate(2.04%, 3.35%); border-radius: 10px;">
+            <img style="width: 100%; border-radius: 8px;" src="images/search-bg-3-tmp.png">
+            
+            <div style="width: 47.1%; height: 45.6%; position: absolute; transform: translate(4.13%, 6.4%); overflow-y: auto;">
+                <table id="srch_artist" class="search_res" style="width: 100%; height: 100%; overflow-y: auto; table-layout: fixed; max-width: 150%;">
+                    <tr id="sa">
+                        <td id=""><font size="5.5">Artists</font></td>
                     </tr>
-                    <tr id="">
-                        <td id ="srch_art-img_0"></td>
-                        <td id ="srch_art-nm_0"></td>
+                    <tr id="sa0">
+                        <td id="srch_art-img_0"></td>
+                        <td id="srch_art-nm_0"></td>
                     </tr>
-                    <tr id="">
-                        <td id ="srch_art-img_1"></td>
-                        <td id ="srch_art-nm_1"></td>
+                    <tr id="sa1">
+                        <td id="srch_art-img_1"></td>
+                        <td id="srch_art-nm_1"></td>
                     </tr>
-                    <tr id="">
-                        <td id ="srch_art-img_2"></td>
-                        <td id ="srch_art-nm_2"></td>
+                    <tr id="sa2">
+                        <td id="srch_art-img_2"></td>
+                        <td id="srch_art-nm_2"></td>
                     </tr>
-                    <tr id="">
-                        <td id ="srch_art-img_3"></td>
-                        <td id ="srch_art-nm_3"></td>
+                    <tr id="sa3">
+                        <td id="srch_art-img_3"></td>
+                        <td id="srch_art-nm_3"></td>
                     </tr>
-                    <tr id="">
-                        <td id ="srch_art-img_4"></td>
-                        <td id ="srch_art-nm_4"></td>
+                    <tr id="sa4">
+                        <td id="srch_art-img_4"></td>
+                        <td id="srch_art-nm_4"></td>
                     </tr>
-                    <tr id="">
-                        <td id ="srch_art-img_5"></td>
-                        <td id ="srch_art-nm_5"></td>
+                    <tr id="sa5">
+                        <td id="srch_art-img_5"></td>
+                        <td id="srch_art-nm_5"></td>
                     </tr>
-                    <tr id="">
-                        <td id ="srch_art-img_6"></td>
-                        <td id ="srch_art-nm_6"></td>
+                    <tr id="sa6">
+                        <td id="srch_art-img_6"></td>
+                        <td id="srch_art-nm_6"></td>
                     </tr>
-                    <tr id="">
-                        <td id ="srch_art-img_7"></td>
-                        <td id ="srch_art-nm_7"></td>
+                    <tr id="sa7">
+                        <td id="srch_art-img_7"></td>
+                        <td id="srch_art-nm_7"></td>
                     </tr>
-                    <tr id="">
-                        <td id ="srch_art-img_8"></td>
-                        <td id ="srch_art-nm_8"></td>
+                    <tr id="sa8">
+                        <td id="srch_art-img_8"></td>
+                        <td id="srch_art-nm_8"></td>
                     </tr>
-                    <tr id="">
-                        <td id ="srch_art-img_9"></td>
-                        <td id ="srch_art-nm_9"></td>
+                    <tr id="sa9">
+                        <td id="srch_art-img_9"></td>
+                        <td id="srch_art-nm_9"></td>
                     </tr>
                         
                 </table>
             </div>
             
-            <div style="width: 46.3%; height: 46.3%; position: absolute; transform: translate(110.6%, 5.18%); overflow-y: auto;">
-                <table id="srch_track" class="search_res" style="width: 100%; height: 100%; overflow-y: auto; text-align: left;">
-                    <tr id="">
-                        <td id="">Songs</td>
+            <div style="width: 47.1%; height: 45.65%; position: absolute; transform: translate(108.2%, 6.4%); overflow-y: auto;">
+                <table id="srch_track" class="search_res" style="width: 100%; height: 100%; overflow-y: auto; text-align: left; max-width: 100%;">
+                    <tr id="ss">
+                        <td id=""><font size="5.5">Songs</font></td>
                     </tr>
-                    <tr id="">
+                    <tr id="ss0">
                         <td id="srch_song-nm_0"></td>
                         <td id="srch_song-artist_0"></td>
                     </tr>
-                    <tr id="">
+                    <tr id="ss1">
                         <td id="srch_song-nm_1"></td>
                         <td id="srch_song-artist_1"></td>
                     </tr>
-                    <tr id="">
+                    <tr id="ss2">
                         <td id="srch_song-nm_2"></td>
                         <td id="srch_song-artist_2"></td>
                     </tr>
-                    <tr id="">
+                    <tr id="ss3">
                         <td id="srch_song-nm_3"></td>
                         <td id="srch_song-artist_3"></td>
                     </tr>
-                    <tr id="">
+                    <tr id="ss4">
                         <td id="srch_song-nm_4"></td>
                         <td id="srch_song-artist_4"></td>
                     </tr>
-                    <tr id="">
+                    <tr id="ss5">
                         <td id="srch_song-nm_5"></td>
                         <td id="srch_song-artist_5"></td>
                     </tr>
-                    <tr id="">
+                    <tr id="ss6">
                         <td id="srch_song-nm_6"></td>
                         <td id="srch_song-artist_6"></td>
                     </tr>
-                    <tr id="">
+                    <tr id="ss7">
                         <td id="srch_song-nm_7"></td>
                         <td id="srch_song-artist_7"></td>
                     </tr>
-                    <tr id="">
+                    <tr id="ss8">
                         <td id="srch_song-nm_8"></td>
                         <td id="srch_song-artist_8"></td>
                     </tr>
-                    <tr id="">
+                    <tr id="ss9">
                         <td id="srch_song-nm_9"></td>
                         <td id="srch_song-artist_9"></td>
                     </tr>
@@ -2428,39 +2657,119 @@
                 </table>
             </div>
             
-            <div style="width: 46.3%; height: 46.3%; position: absolute; transform: translate(5.24%, 110.48%); overflow-y: auto;">
-                <table id="srch_playlist" class="search_res" style="width: 100%; height: 100%; overflow-y: auto; text-align: left;">
-                    <tr id="">
-                        <td id="">Playlists</td>
+            <div style="width: 47.1%; height: 45.7%; position: absolute; transform: translate(4.13%, 112.6%); overflow-y: auto;">
+                <table id="srch_playlist" class="search_res" style="min-width: 100%; height: 100%; overflow-y: auto; text-align: left; table-layout: fixed;">
+                    <tr id="sp">
+                        <td id=""><font size="5.5">Playlists</font></td>
                     </tr>
-                    <tr id="srch_pl_0"></tr>
-                    <tr id="srch_pl_1"></tr>
-                    <tr id="srch_pl_2"></tr>
-                    <tr id="srch_pl_3"></tr>
-                    <tr id="srch_pl_4"></tr>
-                    <tr id="srch_pl_5"></tr>
-                    <tr id="srch_pl_6"></tr>
-                    <tr id="srch_pl_7"></tr>
-                    <tr id="srch_pl_8"></tr>
-                    <tr id="srch_pl_9"></tr>
+                    <tr id="sp0">
+                        <td id="srch_pl-img_0"></td>
+                        <td id="srch_pl-nm_0"></td>
+                        <td id="srch-pl-crt_0"></td>
+                    </tr>
+                    <tr id="sp1">
+                        <td id="srch_pl-img_1"></td>
+                        <td id="srch_pl-nm_1"></td>
+                        <td id="srch-pl-crt_1"></td>
+                    </tr>
+                    <tr id="sp2">
+                        <td id="srch_pl-img_2"></td>
+                        <td id="srch_pl-nm_2"></td>
+                        <td id="srch-pl-crt_2"></td>
+                    </tr>
+                    <tr id="sp3">
+                        <td id="srch_pl-img_3"></td>
+                        <td id="srch_pl-nm_3"></td>
+                        <td id="srch-pl-crt_3"></td>
+                    </tr>
+                    <tr id="sp4">
+                        <td id="srch_pl-img_4"></td>
+                        <td id="srch_pl-nm_4"></td>
+                        <td id="srch-pl-crt_4"></td>
+                    </tr>
+                    <tr id="sp5">
+                        <td id="srch_pl-img_5"></td>
+                        <td id="srch_pl-nm_5"></td>
+                        <td id="srch-pl-crt_5"></td>
+                    </tr>
+                    <tr id="sp6">
+                        <td id="srch_pl-img_6"></td>
+                        <td id="srch_pl-nm_6"></td>
+                        <td id="srch-pl-crt_6"></td>
+                    </tr>
+                    <tr id="sp7">
+                        <td id="srch_pl-img_7"></td>
+                        <td id="srch_pl-nm_7"></td>
+                        <td id="srch-pl-crt_7"></td>
+                    </tr>
+                    <tr id="sp8">
+                        <td id="srch_pl-img_8"></td>
+                        <td id="srch_pl-nm_8"></td>
+                        <td id="srch-pl-crt_8"></td>
+                    </tr>
+                    <tr id="sp9">
+                        <td id="srch_pl-img_9"></td>
+                        <td id="srch_pl-nm_9"></td>
+                        <td id="srch-pl-crt_9"></td>
+                    </tr>
                 </table>
             </div>
             
-            <div style="width: 46.3%; height: 46.3%; position: absolute; transform: translate(110.6%, 110.475%); overflow-y: auto;">
+            <div style="width: 47.1%; height: 45.6%; position: absolute; transform: translate(108.2%, 112.85%); overflow-y: auto;">
                 <table id="srch_album" class="search_res" style="width: 100%; height: 100%; overflow-y: auto; text-align: left;">
-                    <tr id="">
-                        <td id="">Albums</td>
+                    <tr id="salb">
+                        <td id=""><font size="5.5">Albums</font></td>
                     </tr>
-                    <tr id="srch_alb_0"></tr>
-                    <tr id="srch_alb_1"></tr>
-                    <tr id="srch_alb_2"></tr>
-                    <tr id="srch_alb_3"></tr>
-                    <tr id="srch_alb_4"></tr>
-                    <tr id="srch_alb_5"></tr>
-                    <tr id="srch_alb_6"></tr>
-                    <tr id="srch_alb_7"></tr>
-                    <tr id="srch_alb_8"></tr>
-                    <tr id="srch_alb_9"></tr>
+                    <tr id="salb0">
+                        <td id="srch_alb-img_0"></td>
+                        <td id="srch_alb-nm_0"></td>
+                        <td id="srch-alb-art_0"></td>
+                    </tr>
+                    <tr id="salb1">
+                        <td id="srch_alb-img_1"></td>
+                        <td id="srch_alb-nm_1"></td>
+                        <td id="srch-alb-art_1"></td>
+                    </tr>
+                    <tr id="salb2">
+                        <td id="srch_alb-img_2"></td>
+                        <td id="srch_alb-nm_2"></td>
+                        <td id="srch-alb-art_2"></td>
+                    </tr>
+                    <tr id="salb3">
+                        <td id="srch_alb-img_3"></td>
+                        <td id="srch_alb-nm_3"></td>
+                        <td id="srch-alb-art_3"></td>
+                    </tr>
+                    <tr id="salb4">
+                        <td id="srch_alb-img_4"></td>
+                        <td id="srch_alb-nm_4"></td>
+                        <td id="srch-alb-art_4"></td>
+                    </tr>
+                    <tr id="salb5">
+                        <td id="srch_alb-img_5"></td>
+                        <td id="srch_alb-nm_5"></td>
+                        <td id="srch-alb-art_5"></td>
+                    </tr>
+                    <tr id="salb6">
+                        <td id="srch_alb-img_6"></td>
+                        <td id="srch_alb-nm_6"></td>
+                        <td id="srch-alb-art_6"></td>
+                    </tr>
+                    <tr id="salb7">
+                        <td id="srch_alb-img_7"></td>
+                        <td id="srch_alb-nm_7"></td>
+                        <td id="srch-alb-art_7"></td>
+                    </tr>
+                    <tr id="salb8">
+                        <td id="srch_alb-img_8"></td>
+                        <td id="srch_alb-nm_8"></td>
+                        <td id="srch-alb-art_8"></td>
+                    </tr>
+                    <tr id="salb9">
+                        <td id="srch_alb-img_9"></td>
+                        <td id="srch_alb-nm_9"></td>
+                        <td id="srch-alb-art_9"></td>
+                    </tr>
                 </table>
             </div>
             
@@ -2468,7 +2777,7 @@
         
 <!--
         <div>
-            <button onclick="alert(queue[0].name);">Test</button>
+            <button onclick="queued();">Test</button>
         </div> 
 -->
         
@@ -2476,13 +2785,163 @@
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
         
         <script>
+            function queue_on() {
+                $.ajax({
+                    url: '/store_context',
+                    
+                }).done(function(data) {
+//                    alert(data.context.uri);
+                });
+            }
+            
+            function queued() {
+                if (queue.length == 0) {
+                    queue_active = false;
+                    
+                    $.ajax({
+                        url: '/restore_context',
+
+                    }).done(function(data) {
+                        var restore_uri = data.context.uri;
+//                        alert(restore_uri);
+                        
+                        $.ajax({
+                            url: '/access_token',
+
+                        }).done(function(data) {
+                            var at = data.access_token;
+
+                            $.ajax({
+                                url: 'https://api.spotify.com/v1/me/player/play',
+                                type: 'PUT',
+                                headers: {
+                                    'Authorization': 'Bearer ' + at
+                                },
+                                dataType: "json",
+                                contentType: "application/json",
+                                data : JSON.stringify({
+                                    "context_uri": restore_uri,
+                                })
+                            });
+                        });
+                    });
+                } else {
+                    var track = queue[0];
+                    queue.splice(0, 1);
+                    queue_update();
+
+    //                var uri_temp = track.uri;
+    //                alert(uri_temp);
+                    $.ajax({
+                        url: '/access_token',
+
+                    }).done(function(data) {
+                        var at = data.access_token;
+
+                        $.ajax({
+                            url: 'https://api.spotify.com/v1/me/player/play',
+                            type: 'PUT',
+                            headers: {
+                                'Authorization': 'Bearer ' + at
+                            },
+                            dataType: "json",
+                            contentType: "application/json",
+                            data : JSON.stringify({
+                                "uris": [track.uri],
+                            })
+                        });
+                    });
+                } 
+            }
+            
+            function add_to_pl(num) {
+                $.ajax({
+                    url: '/curr_track',
+                    
+                }).done(function(data) {
+                    var track = "spotify:track:" + data.track.id;
+                    
+                    $.ajax({
+                        url: '/playlists',
+                         
+                    }).done(function(data) {
+                         var playlist = data.playlists[num].genre_url;
+                         var temp_url = "https://api.spotify.com/v1/playlists/" + playlist + "/tracks?uris=" + track;
+                         
+                        $.ajax({
+                            url: '/access_token',
+
+                        }).done(function(data) {
+                            var at = data.access_token;
+
+                            $.ajax({
+                                url: temp_url,
+                                type: 'POST',
+                                headers: {
+                                    'Authorization': 'Bearer ' + at },
+                                dataType: "json",
+                            }).done(function(data) {
+
+                            });
+                        });
+                    });
+                    
+                });
+            }
+            
+            function more_pl_update() {
+                $.ajax({
+                    url: '/playlists',
+                    
+                }).done(function(data) {
+                    for (gk = 0; gk < 41; gk++) {
+                        if (gk >= data.playlists.length) {
+                            document.getElementById("add_pl_r" + gk).style.display = "none";
+                        } else {
+                            document.getElementById("add_pl_r" + gk).style.display = "initial";
+                            document.getElementById("add_pl" + gk).innerHTML = data.playlists[gk].genre_name;
+                        }
+                    }
+                });
+            }
+            
+            function more_pl() {
+                if (document.getElementById("add_to_pl").style.display == "none") {
+                    document.getElementById("more_artist").style.display = "none";
+                    document.getElementById("arts").src = "images/btn-view-artist-off.PNG";
+                    document.getElementById("more_album").style.display = "none";
+                    document.getElementById("albs").src = "images/btn-view-album-off.PNG";
+                    document.getElementById("add_to_pl").style.display = "flex";
+                    document.getElementById("add_to_pl_btn").src = "images/btn-add-to-pl-on.PNG";
+                } else {
+                    document.getElementById("add_to_pl").style.display = "none";
+                    document.getElementById("add_to_pl_btn").src = "images/btn-add-to-pl-off.PNG";
+                }
+            }
+            
+            function search_close() {
+                document.getElementById("mag_glass").src = "http://localhost:8888/images/btn-search-off.PNG";
+                document.getElementById("search_display").style.display = "none";
+                document.getElementById("searchbg").style.display = "none";
+                document.getElementById("search_bar").style.position = "absolute";
+                
+                for (gk = 0; gk < 10; gk++) {
+                    document.getElementById("sa" + gk).style.display = "none";
+                    document.getElementById("ss" + gk).style.display = "none";
+                    document.getElementById("salb" + gk).style.display = "none";
+                    document.getElementById("sp" + gk).style.display = "none";
+                }
+            }
+            
             function search() {
                 if (document.getElementById("mag_glass").src == "http://localhost:8888/images/btn-search-off.PNG") {
                     document.getElementById("mag_glass").src = "http://localhost:8888/images/btn-search-on.PNG";
                     document.getElementById("search_display").style.display = "flex";
+                    document.getElementById("searchbg").style.display = "flex";
+                    document.getElementById("search_bar").style.position = "fixed";
+                    
                     var terms = document.getElementById("search_in").value;
 
-//                    alert(terms);
                     
                     var tmp = '/search/' + terms;
 
@@ -2490,7 +2949,6 @@
                         url: tmp,
 
                     }).done(function(data) {
-//                        alert("Albums: " + data.results.albums + "\nArtists: " + data.results.artists + "\nTracks: " + data.results.tracks + "\nPlaylists: " + data.results.playlists);
                         
                         var res_artists = data.results.artists.items;
                         var res_tracks = data.results.tracks.items;
@@ -2499,46 +2957,61 @@
                         
                         for (gk = 0; gk < 10; gk++) {
                             if (gk < res_artists.length) {
-                                document.getElementById("srch_art-nm_" + gk).style.display = "initial";
-                                document.getElementById("srch_art-img_" + gk).style.display = "initial";
+                                document.getElementById("sa" + gk).style.display = "initial";
                                 document.getElementById("srch_art-nm_" + gk).innerHTML = res_artists[gk].name;
-                                document.getElementById("srch_art-img_" + gk).innerHTML = '<img id="srch_art_img_' + gk + '" style="position: absolute; height: 30%;" src=""/>';
+                                document.getElementById("srch_art-img_" + gk).innerHTML = '<img id="srch_art_img_' + gk + '" style="position: absolute; height: auto; width: 17%;" src=""/>';
                                 document.getElementById("srch_art_img_" + gk).src = res_artists[gk].images[0].url;
-                                
                             } else {
-                                document.getElementById("srch_art-nm_" + gk).style.display = "none";
-                                document.getElementById("srch_art-img_" + gk).style.display = "none";
+                                document.getElementById("sa" + gk).style.display = "none";
                             }
                             
                             if (gk < res_tracks.length) {
-                                document.getElementById("srch_song-nm_" + gk).style.display = "initial";
-                                document.getElementById("srch_song-artist_" + gk).style.display = "initial";
-                                
+                                document.getElementById("ss" + gk).style.display = "initial";
                                 document.getElementById("srch_song-nm_" + gk).innerHTML = res_tracks[gk].name;
                                 document.getElementById("srch_song-artist_" + gk).innerHTML = "by " + res_tracks[gk].artists[0].name;
                             } else {
-                                document.getElementById("srch_song-nm_" + gk).style.display = "none";
-                                document.getElementById("srch_song-artist_" + gk).style.display = "none";
+                                document.getElementById("ss" + gk).style.display = "none";
+                            }
+                            
+                            if (gk < res_albums.length) {
+                                document.getElementById("salb" + gk).style.display = "initial";
+                                document.getElementById("srch_alb-img_" + gk).innerHTML = '<img id="srch_alb_img_' + gk + '" style="position: absolute; height: 30%;" src=""/>';
+                                document.getElementById("srch_alb_img_" + gk).src = res_albums[gk].images[0].url;
+                                document.getElementById("srch_alb-nm_" + gk).innerHTML = res_albums[gk].name;
+                                document.getElementById("srch-alb-art_" + gk).innerHTML = "by " + res_albums[gk].artists[0].name;
+                            } else {
+                                document.getElementById("salb" + gk).style.display = "none";
+                            }
+                            
+                            if (gk < res_playlists.length) {
+                                document.getElementById("sp" + gk).style.width = "100px";
+                                document.getElementById("sp" + gk).style.display = "initial";
+                                document.getElementById("srch_pl-img_" + gk).innerHTML = '<img id="srch_pl_img_' + gk + '" style="position: absolute; height: auto; width: 17%;" src=""/>';
+                                document.getElementById("srch_pl_img_" + gk).src = res_playlists[gk].images[0].url;
+                                document.getElementById("srch_pl-nm_" + gk).innerHTML = res_playlists[gk].name;
+                                document.getElementById("srch-pl-crt_" + gk).innerHTML = "by " + res_playlists[gk].owner.display_name;
+                            } else {
+                                document.getElementById("sp" + gk).style.display = "none";
                             }
                         }
                         
-//                        for (gk = 0; gk < res_albums.length; gk++) alert(res_albums[gk].artists[0].name + " - " + res_albums[gk].name);
-                        
-                        
                     });
                 } else {
-                    document.getElementById("mag_glass").src = "http://localhost:8888/images/btn-search-off.PNG";
-                    document.getElementById("search_display").style.display = "none";
+                    search_close();
                 }
             }
             
             function enqueue(num) {
+                if (queue.length == 0) {
+                    queue_active = true;
+                    queue_on();
+                }
+                    
                 $.ajax({
                     url: '/playlists',
                     
                 }).done(function(data) {
 //                    alert(data.playlists[gen].genre_name.genre_url);
-                    
                     var tmp = '/tracks/' + data.playlists[gen].genre_url;
                 
                     $.ajax({
@@ -2551,6 +3024,21 @@
                         queue.push(songs[num]);
                         queue_update();
                     });
+                });
+            }
+            
+            function enqueue_more() {
+                if (queue.length == 0) {
+                    queue_active = true;
+                    queue_on();
+                }
+                
+                $.ajax({
+                    url: '/curr_track',
+                    
+                }).done(function(data) {
+                    queue.push(data.track);
+                    queue_update();
                 });
             }
             
@@ -2579,9 +3067,14 @@
                     
                     document.getElementById("queue").src = "/images/btn-queue-on.PNG";
                     document.getElementById("table_queue").style.display = "block";
+                    
+                    if (queue.length == 0) {
+                        document.getElementById("empty_queue").style.display = "flex";
+                    }
                 } else {
                     document.getElementById("queue").src = "/images/btn-queue-off.PNG";
                     document.getElementById("table_queue").style.display = "none";
+                    document.getElementById("empty_queue").style.display = "none";
                 }
             }
             
@@ -2607,6 +3100,16 @@
                     
                     document.getElementById("myRange").value = data.volume;
                     document.getElementById("slide").style.width = data.volume + "%";
+                });
+            }
+            
+            function change_volume(vol) {
+//                alert(vol);
+                $.ajax({
+                    url: '/set_volume/' + vol,
+
+                }).done(function(data) {
+                    
                 });
             }
             
@@ -2670,6 +3173,8 @@
                     document.getElementById("albs").src = "images/btn-view-album-off.PNG";
                     document.getElementById("more_artist").style.display = "none";
                     document.getElementById("arts").src = "images/btn-view-artist-off.PNG";
+                    document.getElementById("add_to_pl").style.display = "none";
+                    document.getElementById("add_to_pl_btn").src = "images/btn-add-to-pl-off.PNG";
                 } else {
                     document.getElementById("more").style.display = "flex";
                     document.getElementById("morebg").style.display = "flex";
@@ -2688,6 +3193,8 @@
                     document.getElementById("albs").src = "images/btn-view-album-on.PNG";
                     document.getElementById("more_artist").style.display = "none";
                     document.getElementById("arts").src = "images/btn-view-artist-off.PNG";
+                    document.getElementById("add_to_pl").style.display = "none";
+                    document.getElementById("add_to_pl_btn").src = "images/btn-add-to-pl-off.PNG";
                 }
             }
             
@@ -2700,6 +3207,8 @@
                     document.getElementById("arts").src = "images/btn-view-artist-on.PNG";
                     document.getElementById("more_album").style.display = "none";
                     document.getElementById("albs").src = "images/btn-view-album-off.PNG";
+                    document.getElementById("add_to_pl").style.display = "none";
+                    document.getElementById("add_to_pl_btn").src = "images/btn-add-to-pl-off.PNG";
                 }
             }
             
@@ -3520,22 +4029,27 @@
             }
         
             function skip() {
-                $.ajax({
-                    url: '/access_token',
-
-                }).done(function(data) {
-                    var at = data.access_token;
-                    
+                if (queue_active) {
+                    queued();
+                } else {
                     $.ajax({
-                        url: 'https://api.spotify.com/v1/me/player/next',
-                        type: 'POST',
-                        headers: {
-                            'Authorization': 'Bearer ' + at },
-                        dataType: "json",
+                        url: '/access_token',
+
                     }).done(function(data) {
-                           
-                    });
-                });   
+                        var at = data.access_token;
+
+                        $.ajax({
+                            url: 'https://api.spotify.com/v1/me/player/next',
+                            type: 'POST',
+                            headers: {
+                                'Authorization': 'Bearer ' + at },
+                            dataType: "json",
+                        }).done(function(data) {
+
+                        });
+                    });  
+                }
+                 
             }
             
             function ms_to_display(duration) {
@@ -3659,7 +4173,8 @@
                 if (timeleft < 3 && flag >1) {
                     counter =15;
                     flag =0;    
-                    next_song();
+//                    next_song();
+                    if (queue_active) queued();
                 }
                 
                 flag = flag+1;
@@ -3764,6 +4279,10 @@
             })();
         </script>
         
+        <script>
+            
+        </script>
+        
         <div>
             <script>
                 user_info();
@@ -3775,7 +4294,8 @@
                 playlists();
                 update_more();
                 update_artist();
-//                volume_update()
+                more_pl_update();
+                volume_update()
                 
                 setTimeout(songScroll, 2500);
                 setTimeout(infoScroll, 2500);
@@ -3783,6 +4303,9 @@
                 var slider = document.getElementById("myRange");
                 slider.oninput = function() {
                     document.getElementById("slide").style.width = this.value + "%";
+                }
+                slider.onchange = function() {
+                    change_volume(this.value);
                 }
                 
                 $(document.getElementById("sel0")).change(function(){

@@ -25,6 +25,7 @@ var access_token2 = "BQApRK0reKS091K4BFxqpS8IzTb003yYgJiNwBwdenjyaCCf0V3g3cC8Akg
 
 var shuff = 0;
 var rep = 0;
+var context_save;
 
 /**
  * Generates a random string containing numbers and letters
@@ -55,7 +56,7 @@ app.get('/login', function(req, res) {
   res.cookie(stateKey, state);
 
   // your application requests authorization
-  var scope = 'user-read-private user-read-email user-modify-playback-state user-read-currently-playing user-read-playback-state user-read-recently-played playlist-read-private user-library-read playlist-modify-public playlist-modify-private user-modify-playback-state user-read-currently-playing';
+  var scope = 'user-read-private user-read-email user-modify-playback-state user-read-currently-playing user-read-playback-state user-read-recently-played playlist-read-private user-library-read playlist-modify-public playlist-modify-private user-modify-playback-state user-read-currently-playing user-top-read';
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
@@ -328,7 +329,7 @@ app.get('/info', function(req, res) {
             var totaltime = body.item.duration_ms;
             var image = body.item.album.images[0].url;
             var name = body.item.name;
-            var artist = body.item.album.artists[0].name;
+            var artist = body.item.artists[0].name;
             var album = body.item.album.name;
             var info = artist + " • " + album;
             if (body.context != null) {
@@ -394,6 +395,30 @@ app.get('/info', function(req, res) {
 //            res.send({
 //                
 //            });
+        }
+    });
+});
+
+app.get('/curr_track', function(req, res) {
+    console.log("NEW SONG!");
+    console.log(access_token2);
+
+    var options = {
+        url: 'https://api.spotify.com/v1/me/player/currently-playing',
+        headers: { 'Authorization': 'Bearer ' + access_token2 },
+        json: true
+    };
+    
+
+    request.get(options, function(error, response, body) {
+        if(!error && response.statusCode == 200){
+            console.log(body);
+            
+            res.send({
+                'track': body.item,
+            });
+        } else {
+            console.log("ERROR: " + response.statusCode);
         }
     });
 });
@@ -1042,6 +1067,33 @@ app.get('/get_volume', function(req, res) {
     });
 });
 
+app.get('/set_volume/:vol', function(req, res) {
+//    res.send(req.params.theValue.toUpperCase());
+
+    var temp_url = "https://api.spotify.com/v1/me/player/volume?volume_percent=" + req.params.vol;
+    
+    var options = {
+        url: temp_url,
+        type: 'PUT',
+        headers: { 'Authorization': 'Bearer ' + access_token2 },
+        json: true
+    };
+
+    request.get(options, function(error, response, body) {
+        if(!error && response.statusCode == 200 ){
+            console.log("SUCCESS");
+            console.log(body);
+            
+//            res.send({
+//                'results': body,
+//            });
+        } else {
+            console.log("FAIL: " + response.statusCode);
+        }
+    });
+
+});
+
 app.get('/search/:keywords', function(req, res) {
 //    res.send(req.params.theValue.toUpperCase());
     
@@ -1081,6 +1133,63 @@ app.get('/search/:keywords', function(req, res) {
         }
     });
 
+});
+
+app.get('/store_context', function(req, res) {
+    var options = {
+        url: 'https://api.spotify.com/v1/me/player/',
+        headers: { 'Authorization': 'Bearer ' + access_token2 },
+        json: true
+    };
+    
+    request.get(options, function(error, response, body) {
+        if(!error && response.statusCode == 200){
+            if (body.context != null) {
+                context_save = {
+                    'uri': body.context.uri,
+                    'rep': body.repeat_state,
+                    'shuff': body.shuffle_state,
+                };
+                
+                console.log("CONTEXT" + context_save);
+            
+                res.send({
+                    'context' : context_save,
+                });
+            } else {
+                context_save = {
+                    'rep': body.repeat_state,
+                    'shuff': body.shuffle_state,
+                };
+                
+                var options = {
+                    url: 'https://api.spotify.com/v1/me/top/artists?limit=1&time_range=short_term',
+                    headers: { 'Authorization': 'Bearer ' + access_token2 },
+                    json: true
+                };
+
+                request.get(options, function(error, response, body) {
+                    if(!error && response.statusCode == 200) {
+                        console.log("NO CONTEXT: " + body.items[0].uri);
+                        context_save.uri = body.items[0].uri;
+                        
+                        res.send({
+                            'context' : context_save,
+                        });
+                    } else {
+                        console.log("SHIT: " + response.statusCode);
+                    }
+                });
+            }
+        }
+    });
+});
+
+app.get('/restore_context', function(req, res) {
+    console.log("OLD CONTEXT: " + context_save);
+    res.send({
+        'context' : context_save,
+    });
 });
 
 console.log('Listening on 8888');
