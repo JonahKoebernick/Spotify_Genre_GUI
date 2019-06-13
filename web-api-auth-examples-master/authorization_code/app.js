@@ -118,7 +118,7 @@ app.get('/view_album', function(req, res) {
         if(!error && response.statusCode == 200){
             console.log(body);
             
-            var album = body.item.album;
+            if (body.item != null) var album = body.item.album;
             var album_name = album.name;
             var album_type = album.album_type;
             var all_artists = album.artists;
