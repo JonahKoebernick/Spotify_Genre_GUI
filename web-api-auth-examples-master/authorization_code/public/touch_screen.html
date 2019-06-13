@@ -19,7 +19,7 @@
             position: relative;
             padding-top: 1.5%;
             padding-left: 1.5%;
-            margin-bottom: -50%;
+            margin-bottom: -20%;
 /*            margin-bottom: 50%;*/
 
         }  
@@ -418,45 +418,44 @@
 
         <div style="float: left" id="player" class="player">
             
-            <img style="border-radius: 20px;" src="images/player-temp-bg.png"/>
+            <img style="border-radius: 20px;" src="images/player_template.png"/>
             
             <script id="curr-template" type="text/x-handlebars-template">
-                <div  id="title"><h2 style="text-align: center; position: relative; transform: translate(39%,-4293%); width: 50%;"><font face="verdana" size="3.5" color="white"><dd id="context" class="text-overflow-player">{{context}}</dd></font></h2></div>
-                <img style="position: relative; width:72.5%; transform: translate(19%,-307.9%);" src="{{image_url}}"/>
-<!--                <img style="position: relative; width:74%; transform: translate(17.7%,-280.6%);" src="{{image_url}}"/>-->
+                <div  id="title"><h2 style="text-align: center; position: relative; transform: translate(42%,-5475%); width: 50%;"><font face="verdana" size="3.5" color="white"><dd id="context" class="text-overflow-player">{{context}}</dd></font></h2></div>
+                <img style="position: relative; width:72.5%; transform: translate(19%,-293.6%);" src="{{image_url}}"/>
 
-                <div id="coverUp2" style="width: 12%; transform: translate(-100%,-2589%);"></div>
-                <div id="coverUp" style="width: 6.9%; transform: translate(-0.2%,-2589%);"></div>
-                <div id="container" style="transform: translate(10%,-2655.5%);">
+                <div id="coverUp2" style="width: 12%; transform: translate(-100%,-3245%);"></div>
+                <div id="coverUp" style="width: 6.9%; transform: translate(-0.2%,-3245%);"></div>
+                <div id="container" style="transform: translate(10%,-3310.5%);">
                     <h2 style="position: relative;"><font face="verdana" size="5.5" color="white"><div id="song">{{song_name}}</div></font></h2>
                 </div>
-                <div id="coverUp3" style="width: 18.5%; transform: translate(409.7%,-2822.5%);"></div>
-                <div id="coverUp2" style="width: 100%; transform: translate(94.2%,-2822.5%);"></div>
+                <div id="coverUp3" style="width: 18.5%; transform: translate(409.7%,-3473.5%);"></div>
+                <div id="coverUp2" style="width: 100%; transform: translate(94.2%,-3473.5%);"></div>
                 
-                <div id="coverUp2" style="height: 20px; width: 12%; transform: translate(-100%,-4054%);"></div>
-                <div id="coverUp" style="height: 20px; width: 6.9%; transform: translate(-0.2%,-4054%);"></div>
-                <div id="container" style="transform: translate(10%,-4053%);">
+                <div id="coverUp2" style="height: 20px; width: 12%; transform: translate(-100%,-4980%);"></div>
+                <div id="coverUp" style="height: 20px; width: 6.9%; transform: translate(-0.2%,-4980%);"></div>
+                <div id="container" style="transform: translate(10%,-4980%);">
                     <font face="verdana" size="3.5" color="grey"><div id="info" style="position: relative;">{{artist}}, {{album}}</div></font>
                 </div>
-                <div id="coverUp3" style="height: 20px; width: 18.5%; transform: translate(409.7%,-4153%);"></div>
-                <div id="coverUp2" style="height: 20px; width: 100%; transform: translate(94.2%,-4153%);"></div>
+                <div id="coverUp3" style="height: 20px; width: 18.5%; transform: translate(409.7%,-5080%);"></div>
+                <div id="coverUp2" style="height: 20px; width: 100%; transform: translate(94.2%,-5080%);"></div>
 
 <!--                <h2 style="position: relative; transform: translate(7%,-3020%);"><font face="verdana" size="4.5" color="white"><div id="song">{{song_name}}</div></font></h2>-->
 <!--                <h1 style="position: relative; transform: translate(-3%,-3550%);"><font face="verdana" size="3.5" color="grey"><dd class="text-overflow-player">{{artist}}, {{album}}</dd></font></h1>-->
             </script>
 
-            <div style="transform: translate(8.9%,-3500%);" id="myProgress">
+            <div style="transform: translate(8.9%,-4600%);" id="myProgress">
                 <div style="position: relative; height: 100%;" id="myBar"></div>
             </div>
 
             <div style="position: inherit">
-                <button style="position:relative; width:10.5%; transform: translate(52.5%, -2250%);" class=button onclick="history()"><img id="hist" src="images/btn-history-off.png"/></button>
-                <button style="position:relative; z-index: 100; width:9.6%; height: auto; transform: translate(751%, -4045%);" class=button onclick="more()"><img id="info" src="images/btn-info-off.png"/></button>
-                <button style="position:relative; z-index: 100; width:9.8%; transform: translate(625.5%, -1093%);" class=button onclick="heart()"><img id="save" style="z-index:150;" src="images/btn-sav1.png"/></button>
-                <button style="position:relative; width:9%; transform: translate(-297.5%, -419.9%);" class=button onclick="shuffle()"><img id="shuffle" src="images/btn-shuffle-off.png"/></button>
-                <button style="position:relative; width:11.9%; transform: translate(-182%, -514.7%);" class=button onclick="prev_btn()"><img src="images/btn-prev1.png"/></button>
-                <button style="position:relative; width:21%; transform: translate(-81.3%, -235%);" class=button onclick="pause()"><img id="play" src="images/btn-pause1.png"/></button>
-                <button style="position:relative; width:11.9%; transform: translate(-105.5%, -514.7%);" class=button onclick="skip()"><img src="images/btn-next1.png"/></button>
+                <button style="position:relative; width:10.5%; transform: translate(52.5%, -1990%);" class=button onclick="history()"><img id="hist" src="images/btn-history-off.png"/></button>
+                <button style="position:relative; z-index: 100; width:9.6%; height: auto; transform: translate(755%, -5060%);" class=button onclick="more()"><img id="info" src="images/btn-info-off.png"/></button>
+                <button style="position:relative; z-index: 100; width:9.8%; transform: translate(632.5%, -955%);" class=button onclick="heart()"><img id="save" style="z-index:150;" src="images/btn-sav1.png"/></button>
+                <button style="position:relative; width:9%; transform: translate(-287.5%, -338%);" class=button onclick="shuffle()"><img id="shuffle" src="images/btn-shuffle-off.png"/></button>
+                <button style="position:relative; width:11.9%; transform: translate(-172%, -464.7%);" class=button onclick="prev_btn()"><img src="images/btn-prev1.png"/></button>
+                <button style="position:relative; width:21%; transform: translate(-74.3%, -222%);" class=button onclick="pause()"><img id="play" src="images/btn-pause1.png"/></button>
+                <button style="position:relative; width:11.9%; transform: translate(-91.5%, -464.7%);" class=button onclick="skip()"><img src="images/btn-next1.png"/></button>
                 <button style="position:relative; width:9%; transform: translate(936%, -527.4%);" class=button onclick="repeat()"><img id="repeat" src="images/btn-repeat-off.png"/></button>
                 <button style="position:relative; width:9.5%; transform: translate(-48%, -630%);" class=button onclick="volume()"><img id="dev" src="images/btn-devices-on.png"/></button>
                 <font face="verdana" size="2" color="#55ba55"><div id="device_inner" style="position: relative; transform: translate(14.5%, -1118%);">device</div></font>
