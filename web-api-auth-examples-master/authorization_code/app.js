@@ -78,11 +78,11 @@ app.get('/in_library', function(req, res) {
     request.get(options, function(error, response, body) {
         if(!error && response.statusCode == 200){
             var song_id = body.item.id;
-            
+
             console.log("Song ID: " + song_id);
-            
+
             var temp = 'https://api.spotify.com/v1/me/tracks/contains?ids=' + song_id;
-            
+
             var options = {
                 url: temp,
                 headers: { 'Authorization': 'Bearer ' + access_token2 },
@@ -101,7 +101,7 @@ app.get('/in_library', function(req, res) {
                     console.log("ERROR: " + response.statusCode);
                 }
             });
-            
+
         }
     });
 
@@ -113,35 +113,35 @@ app.get('/view_album', function(req, res) {
         headers: { 'Authorization': 'Bearer ' + access_token2 },
         json: true
     };
-    
+
     request.get(options, function(error, response, body) {
         if(!error && response.statusCode == 200){
             console.log(body);
-            
+
             if (body.item != null) var album = body.item.album;
             var album_name = album.name;
             var album_type = album.album_type;
             var all_artists = album.artists;
-            
+
             var artists = "";
-            
+
             for (i = 0; i < all_artists.length; i++) {
                 if (i != 0) {
                     artists += ", ";
                 }
                 artists += all_artists[i].name;
             }
-            
+
             var release_date = album.release_date;
             var album_href = album.href;
-            
+
             console.log('Album Name: ' + album_name);
             console.log('Album Type: ' + album_type);
             console.log('Album Artists: ' + artists);
             console.log('Album Release: ' + release_date);
             console.log('Album href: ' + album_href);
-            
-            
+
+
             var options = {
                 url: album_href,
                 headers: { 'Authorization': 'Bearer ' + access_token2 },
@@ -153,10 +153,10 @@ app.get('/view_album', function(req, res) {
 //                    console.log(body);
                     var album_tracks = body.tracks.items;
                     var album_label = body.label;
-                    
+
                     console.log('Album Label: ' + album_label);
                     console.log('Album Tracks: ' + album_tracks[0].name);
-                    
+
                     res.send({
                         'uri': body.uri,
                         'label': album_label,
@@ -179,15 +179,15 @@ app.get('/view_artist', function(req, res) {
         headers: { 'Authorization': 'Bearer ' + access_token2 },
         json: true
     };
-    
+
     request.get(options, function(error, response, body) {
         if(!error && response.statusCode == 200){
 //            console.log(body);
-            
-            var artist = body.item.album.artists;
-            
+
+            var artist = body.item.artists;
+            var art_uri = body.item.album.artists[0].uri;
 //            console.log("VIEW " + artist[0].href);
-            
+
             var options = {
                 url: artist[0].href,
                 headers: { 'Authorization': 'Bearer ' + access_token2 },
@@ -199,7 +199,7 @@ app.get('/view_artist', function(req, res) {
 //                    console.log("VIEW\n" + body.name);
 //                    console.log(body);
                     var artist_send = body;
-                    
+
                     var options = {
                         url: 'https://api.spotify.com/v1/artists/' + artist_send.id + '/albums',
                         headers: { 'Authorization': 'Bearer ' + access_token2 },
@@ -213,6 +213,7 @@ app.get('/view_artist', function(req, res) {
 //                            var artist = body;
 
                             res.send({
+                                'uri': art_uri,
                                 'artist': artist_send,
                                 'artist_albums': body.items,
                             });
@@ -220,6 +221,24 @@ app.get('/view_artist', function(req, res) {
                     });
                 }
             });
+        }
+    });
+});
+
+app.get('/artist_uri', function(req, res) {
+    var options = {
+        url: 'https://api.spotify.com/v1/me/player/currently-playing',
+        headers: { 'Authorization': 'Bearer ' + access_token2 },
+        json: true
+    };
+
+    request.get(options, function(error, response, body) {
+        if(!error && response.statusCode == 200){
+//            console.log(body);
+
+            res.send({
+                'uri': body.item.artists[0].uri,
+            });   
         }
     });
 });
@@ -246,7 +265,7 @@ app.get('/track_length', function(req, res) {
             var info = artist + " • " + album;
             if (body.context != null) {
                 var cont_href = body.context.href;
-                
+
                 console.log('Progress : ' + time);
                 console.log(body.item.duration_ms);
                 console.log(totaltime);
@@ -254,7 +273,7 @@ app.get('/track_length', function(req, res) {
                 console.log("Name : " + name);
                 console.log("Artist :" + artist);
                 console.log('Context : ' + body.context.type + ' [' + cont_href + ']');
-                
+
                 var options = {
                     url: cont_href,
                     headers: { 'Authorization': 'Bearer ' + access_token2 },
@@ -284,7 +303,7 @@ app.get('/track_length', function(req, res) {
                 });
             } else {
                 var cont_href = "Context";
-                
+
                 console.log('Progress : ' + time);
                 console.log(body.item.duration_ms);
                 console.log(totaltime);
@@ -292,7 +311,7 @@ app.get('/track_length', function(req, res) {
                 console.log("Name : " + name);
                 console.log("Artist :" + artist);
                 console.log('Context : [NONE]');
-                
+
                 res.send({
                     'context': artist,
                     'duration_ms': totaltime,
@@ -303,11 +322,11 @@ app.get('/track_length', function(req, res) {
                     'album' : album
                 });
             }
-            
 
-            
+
+
 //            res.send({
-//                
+//
 //            });
         }
     });
@@ -322,11 +341,12 @@ app.get('/info', function(req, res) {
         headers: { 'Authorization': 'Bearer ' + access_token2 },
         json: true
     };
-    
+
 
     request.get(options, function(error, response, body) {
         if(!error && response.statusCode == 200){
             console.log(body);
+            
             var time = body.progress_ms;
             var totaltime = body.item.duration_ms;
             var image = body.item.album.images[0].url;
@@ -336,7 +356,7 @@ app.get('/info', function(req, res) {
             var info = artist + " • " + album;
             if (body.context != null) {
                 var cont_href = body.context.href;
-                
+
                 console.log('Progress : ' + time);
                 console.log(body.item.duration_ms);
                 console.log(totaltime);
@@ -344,7 +364,7 @@ app.get('/info', function(req, res) {
                 console.log("Name : " + name);
                 console.log("Artist :" + artist);
                 console.log('Context : ' + body.context.type + ' [' + cont_href + ']');
-                
+
                 var options = {
                     url: cont_href,
                     headers: { 'Authorization': 'Bearer ' + access_token2 },
@@ -374,7 +394,7 @@ app.get('/info', function(req, res) {
                 });
             } else {
                 var cont_href = "Context";
-                
+
                 console.log('Progress : ' + time);
                 console.log(body.item.duration_ms);
                 console.log(totaltime);
@@ -382,7 +402,7 @@ app.get('/info', function(req, res) {
                 console.log("Name : " + name);
                 console.log("Artist :" + artist);
                 console.log('Context : ' + ' [NONE]');
-                
+
                 res.send({
                     'context': artist,
                     'duration_ms': totaltime,
@@ -393,9 +413,9 @@ app.get('/info', function(req, res) {
                     'album' : album
                 });
             }
-            
+
 //            res.send({
-//                
+//
 //            });
         }
     });
@@ -410,12 +430,12 @@ app.get('/curr_track', function(req, res) {
         headers: { 'Authorization': 'Bearer ' + access_token2 },
         json: true
     };
-    
+
 
     request.get(options, function(error, response, body) {
         if(!error && response.statusCode == 200){
             console.log(body);
-            
+
             res.send({
                 'track': body.item,
             });
@@ -440,16 +460,16 @@ app.get('/devices', function(req, res) {
             var devs = body.devices;
             var num = body.devices.length;
             console.log("NUMBER OF DEVICES: " + num);
-            
-            
+
+
             for (i = 0; i < num; i++) {
                 if (devs[i].is_active == true) {
                     var current = devs[i];
-                    
+
                     console.log(current);
-                } 
+                }
             }
-            
+
             res.send({
                 'num' : num,
                 'current' : current,
@@ -472,11 +492,11 @@ app.get('/check_playlist', function(req, res) {
     request.get(options, function(error, response, body) {
         var has_gui = false;
         var id;
-        
+
         if(!error && response.statusCode == 200 ){
-            
+
             console.log("SUCCESS")
-            
+
             for (i = 0; i < body.items.length; i++) {
 //                 console.log(body.items[i].name);
                 if (body.items[i].name == "GUI") {
@@ -486,7 +506,7 @@ app.get('/check_playlist', function(req, res) {
                 }
             }
             console.log(has_gui + " id: " + id);
-            
+
             if (has_gui) {
                 res.send({
                 'has_gui' : has_gui,
@@ -497,7 +517,7 @@ app.get('/check_playlist', function(req, res) {
                 'has_gui' : has_gui,
                 });
             }
-            
+
         }
     });
 });
@@ -516,13 +536,13 @@ app.get('/recent', function(req, res) {
         if(!error && response.statusCode == 200 ) {
             console.log("Worked");
             var tracks = body.items;
-            
+
             var recent_tracks = [tracks[0].track, tracks[1].track, tracks[2].track, tracks[3].track, tracks[4].track, tracks[5].track, tracks[6].track, tracks[7].track, tracks[8].track, tracks[9].track];
-            
+
 //            for (i = 0; i < 10; i++) {
 //                console.log(i + recent_tracks[i].name);
 //            }
-            
+
             res.send({
                 'ten_recent' : recent_tracks,
             });
@@ -535,73 +555,74 @@ app.get('/recent', function(req, res) {
 app.get('/access_token', function(req, res) {
   res.send({
   'access_token' : access_token2
-  
+
   });
   console.log("SENNNNNNTTTTTTTTTTTTTTTT");
 });
 
 app.get('/is_playing', function(req, res) {
-  
+
 var options = {
       url: 'https://api.spotify.com/v1/me/player/currently-playing',
       headers: { 'Authorization': 'Bearer ' + access_token2 },
       json: true
       };
-    
+
       request.get(options, function(error, response, body) {
           if(!error && response.statusCode == 200){
           console.log(body);
           var is_playing = body.is_playing;
-         
+
           res.send({
           'is_playing' : is_playing,
           'access_token' : access_token2
-         
+
         });
         }
       });
 });
 
 app.get('/context', function(req, res) {
-  
+
     var options = {
         url: 'https://api.spotify.com/v1/me/player/',
         headers: { 'Authorization': 'Bearer ' + access_token2 },
         json: true
     };
-    
+
     request.get(options, function(error, response, body) {
         if(!error && response.statusCode == 200){
             var context = body.context;
-            var href = context.href;
-            
-            var options = {
-                url: href,
-                headers: { 'Authorization': 'Bearer ' + access_token2 },
-                json: true
-            };
-            
-            request.get(options, function(error, response, body) {
-                if(!error && response.statusCode == 200){
-                   
-                    console.log("success" + body.name);
+            if (context != null) {
+                var href = context.href;
 
-                    res.send({
-                        'context': body,
-                    });
+                var options = {
+                    url: href,
+                    headers: { 'Authorization': 'Bearer ' + access_token2 },
+                    json: true
+                };
 
-                } else {
-                    console.log("ERROR: " + response.statusCode);
-                }
-            });
+                request.get(options, function(error, response, body) {
+                    if(!error && response.statusCode == 200){
 
+                        console.log("success" + body.name);
+
+                        res.send({
+                            'context': body,
+                        });
+
+                    } else {
+                        console.log("ERROR: " + response.statusCode);
+                    }
+                });
+            }
         }
     });
 });
 
 app.get('/next_song', function(req, res) {
   console.log("NEXT SONG");
-  
+
   var pop_value     ={cat: "pop_value",     weight: Number(req.query.pop_value)};
   var queen_value   ={cat: "queen_value",   weight: Number(req.query.queen_value)};
   var tb_value      ={cat: "tb_value",      weight: Number(req.query.tb_value)};
@@ -610,9 +631,9 @@ app.get('/next_song', function(req, res) {
   var rock_value    ={cat: "rock_value",    weight: Number(req.query.rock_value)};
   var edm_value     ={cat: "edm_value",     weight: Number(req.query.edm_value)};
   var tophits_value ={cat: "tophits_value", weight: Number(req.query.tophits_value)};
-  
+
   var reqarr = [pop_value, queen_value, tb_value, country_value, hiphop_value, rock_value, edm_value, tophits_value];
-  
+
   var ulr = new Object();
   ulr["pop_value"]    = "37i9dQZF1DXarRysLJmuju";
   ulr["queen_value"]  = "1IDH2YNH6z6b7d5lz0ze9b";
@@ -622,7 +643,7 @@ app.get('/next_song', function(req, res) {
   ulr["rock_value"]   = "37i9dQZF1DX3YMp9n8fkNx";
   ulr["edm_value"]    = "1sP40g8PJLC8GbxJgmeEAg";
   ulr["tophits_value"]= "37i9dQZF1DXcBWIGoYBM5M";
-  
+
   var amt = new Object();
   amt["pop_value"]    = 113;
   amt["queen_value"]  = 50;
@@ -632,28 +653,28 @@ app.get('/next_song', function(req, res) {
   amt["rock_value"]   = 101;
   amt["edm_value"]    = 448;
   amt["tophits_value"]=  53;
-  
+
   var totnum = 0;
   var c =0;
   for(c; c<reqarr.length; c++){
     totnum = totnum +reqarr[c].weight;
   }
 
-  
+
   if(totnum >0){
     var randarr = new Array(totnum);
     var i =0;
     var j =0;
     var less =0;
     var rad = Math.floor(Math.random() * (totnum-1));
-    
+
     for(i; i<reqarr.length; i++){
       j=less;
       less = less + reqarr[i].weight;
       for(j; j<less;j++){
         randarr[j] = reqarr[i].cat;
       }
-      
+
     }
     var key = randarr[rad];
       console.log(key);
@@ -664,7 +685,7 @@ app.get('/next_song', function(req, res) {
       'amt': amt[key],
       'access_token' : access_token2
        });
-     
+
   }else{
     var arr2 = ["pop_value", "queen_value", "tb_value"];
     var rad2 = Math.floor(Math.random() * 2);
@@ -679,17 +700,17 @@ app.get('/next_song', function(req, res) {
       'amt': amt2,
       'access_token' : access_token2
        });
-    
+
 
   }
-  
-  
-  
-  
 
-  
- 
-  
+
+
+
+
+
+
+
 });
 
 app.get('/time', function(req, res) {
@@ -700,19 +721,19 @@ app.get('/time', function(req, res) {
         headers: { 'Authorization': 'Bearer ' + access_token2 },
         json: true
       };
-    
+
       request.get(options, function(error, response, body) {
           if(!error && response.statusCode == 200){
                 var time = body.progress_ms;
                 console.log('Progress : ' + time);
 
-                res.send({ 
+                res.send({
                     'progress_ms': time
                 });
           }
       });
 
-   
+
 });
 
 app.get('/progress_ms', function(req, res) {
@@ -720,30 +741,30 @@ app.get('/progress_ms', function(req, res) {
 
      console.log("Progress_ms!");
 
-  
+
       var options = {
       url: 'https://api.spotify.com/v1/me/player/currently-playing',
       headers: { 'Authorization': 'Bearer ' + access_token2 },
       json: true
       };
-    
+
       request.get(options, function(error, response, body) {
           if(!error && response.statusCode == 200){
           console.log(body);
           var time = body.progress_ms;
           var totaltime = body.item.duration_ms;
           console.log('Progress : ' + time);
-          
+
           console.log(body.item.duration_ms);
           console.log(totaltime);
           console.log("Image url : "+ body.item.images[0]);
-          res.send({ 
+          res.send({
          'progress_ms': time
         });
         }
       });
 
-   
+
 });
 
 app.get('/callback', function(req, res) {
@@ -792,9 +813,9 @@ app.get('/callback', function(req, res) {
         request.get(options, function(error, response, body) {
           console.log(body);
         });
-        
-        
-        
+
+
+
 
         // we can also pass the token to the browser to make requests from there
         res.redirect('/#' +
@@ -839,26 +860,26 @@ app.get('/refresh_token', function(req, res) {
 });
 
 app.get('/is_shuffled', function(req, res) {
-  
+
     var options = {
         url: 'https://api.spotify.com/v1/me/player',
         headers: { 'Authorization': 'Bearer ' + access_token2 },
         json: true
     };
-    
+
     request.get(options, function(error, response, body) {
         if(!error && response.statusCode == 200){
-            
+
             var is_shuffled = body.shuffle_state;
             var is_looped = body.repeat_state;
             console.log("Shuffle: " + is_shuffled + " Looped: " + is_looped);
-            
+
             if (is_shuffled) {
                 shuff = 1;
             } else {
                 shuff = 0;
             }
-            
+
             if (is_looped == "off") {
                 rep = 0;
             } else if (is_looped == "track") {
@@ -866,7 +887,7 @@ app.get('/is_shuffled', function(req, res) {
             } else if (is_looped == "context") {
                 rep = 3;
             }
-            
+
             res.send({
                 'shuffled' : is_shuffled,
                 'looped' : is_looped
@@ -879,13 +900,13 @@ app.get('/is_shuffled', function(req, res) {
 app.get('/shuff', function(req, res) {
     shuff++;
     shuff = shuff % 3;
-    
+
 //    if (shuff == 1) {
 //        var options = {
-//            
+//
 //            url: 'https://api.spotify.com/v1/me/player/shuffle?state=true',
-//            headers: { 
-//                'Authorization': 'Bearer ' + access_token2 
+//            headers: {
+//                'Authorization': 'Bearer ' + access_token2
 //            },
 //        };
 //
@@ -900,7 +921,7 @@ app.get('/shuff', function(req, res) {
 //        });
 //
 //    }
-    
+
     res.send({
           'test' : shuff,
     });
@@ -909,7 +930,7 @@ app.get('/shuff', function(req, res) {
 app.get('/repeat', function(req, res) {
     rep++;
     rep = rep % 3;
-    
+
     res.send({
           'test' : rep,
     });
@@ -928,7 +949,7 @@ app.get('/user_data', function(req, res) {
     request.get(options, function(error, response, body) {
         if(!error && response.statusCode == 200 ){
             console.log("Success");
-            
+
             res.send({
                 'img' : body.images[0],
                 'user' : body.id,
@@ -948,18 +969,18 @@ app.get('/playlists', function(req, res) {
 
     var user_playlists = [];
     var tracks = [];
-    
+
     var options = {
         url: "https://api.spotify.com/v1/me/playlists",
         headers: { 'Authorization': 'Bearer ' + access_token2 },
         json: true
     };
-    
+
     request.get(options, function(error, response, body) {
         if(!error && response.statusCode == 200 ){
 
             console.log("Success: " + body + " Number: " + body.items.length);
-            
+
             for (i = 0; i < body.items.length; i++) {
                 var pl = {
                     playlist_uri: body.items[i].uri,
@@ -973,40 +994,40 @@ app.get('/playlists', function(req, res) {
                 if (body.items[i].images.length > 0) {
                     pl.img = body.items[i].images[0].url;
                 }
-                
+
                 track_hrefs[i] = pl.tlist;
-                
+
                 user_playlists[i] = pl;
             }
-            
+
             console.log(user_playlists);
-            
+
             for(y=0; y < track_hrefs.length; y++) {
                 console.log("href[" + y + "]: " + track_hrefs[y]);
             }
-            
+
             num_lists = track_hrefs.length;
-            
+
             console.log("NUMBER OF PLAYLISTS: " + num_lists);
-            
+
             res.send({
                 'playlists' : user_playlists,
             });
         } else {
 //            console.log("Error " + response.statusCode);
         }
-        
-        
-    }); 
+
+
+    });
 });
 
 app.get('/tracks/:theValue', function(req, res) {
 //    res.send(req.params.theValue.toUpperCase());
-    
+
     console.log("GETTING TRACKS");
     var tmp = 'https://api.spotify.com/v1/playlists/' + req.params.theValue + '/tracks';
     console.log(tmp);
-    
+
     var options = {
         url: tmp,
         headers: { 'Authorization': 'Bearer ' + access_token2 },
@@ -1017,15 +1038,15 @@ app.get('/tracks/:theValue', function(req, res) {
         if(!error && response.statusCode == 200 ){
             console.log("SUCCESS");
             var curr = new Array();
-            
+
             for (gk = 0; gk < body.items.length; gk++) {
                 curr[gk] = body.items[gk].track;
             }
-            
+
             for (gk = 0; gk < body.items.length; gk++) {
                 console.log(curr[gk]);
             }
-            
+
             res.send({
                 'tracks': curr,
             });
@@ -1049,20 +1070,20 @@ app.get('/get_volume', function(req, res) {
             var num = body.devices.length;
             console.log("NUMBER OF DEVICES: " + num);
             var vol;
-            
+
             for (i = 0; i < num; i++) {
                 if (devs[i].is_active == true) {
                     var current = devs[i];
-                    
+
                     console.log("current " + current);
                     vol = current.volume_percent;
-                } 
+                }
             }
-            
+
             if (current == null) {
                 vol = 0;
             }
-            
+
             res.send({
                 'volume' : vol,
             });
@@ -1074,7 +1095,7 @@ app.get('/set_volume/:vol', function(req, res) {
 //    res.send(req.params.theValue.toUpperCase());
 
     var temp_url = "https://api.spotify.com/v1/me/player/volume?volume_percent=" + req.params.vol;
-    
+
     var options = {
         url: temp_url,
         type: 'PUT',
@@ -1086,7 +1107,7 @@ app.get('/set_volume/:vol', function(req, res) {
         if(!error && response.statusCode == 200 ){
             console.log("SUCCESS");
             console.log(body);
-            
+
 //            res.send({
 //                'results': body,
 //            });
@@ -1099,24 +1120,24 @@ app.get('/set_volume/:vol', function(req, res) {
 
 app.get('/search/:keywords', function(req, res) {
 //    res.send(req.params.theValue.toUpperCase());
-    
+
     console.log("GETTING KEYW0RDS");
-    
+
     var keys = "";
-                    
+
     for (gk = 0; gk < req.params.keywords.length; gk++) {
         if (req.params.keywords[gk] != " ") {
             keys += req.params.keywords[gk];
         } else {
             keys += "%20";
         }
-    } 
-    
+    }
+
     var url = "https://api.spotify.com/v1/search?q=" + keys + "&type=album,track,artist,playlist&limit=10";
 
     console.log(keys);
     console.log(url);
-    
+
     var options = {
         url: url,
         headers: { 'Authorization': 'Bearer ' + access_token2 },
@@ -1127,7 +1148,7 @@ app.get('/search/:keywords', function(req, res) {
         if(!error && response.statusCode == 200 ){
             console.log("SUCCESS");
             console.log(body);
-            
+
             res.send({
                 'results': body,
             });
@@ -1144,7 +1165,7 @@ app.get('/store_context', function(req, res) {
         headers: { 'Authorization': 'Bearer ' + access_token2 },
         json: true
     };
-    
+
     request.get(options, function(error, response, body) {
         if(!error && response.statusCode == 200){
             if (body.context != null) {
@@ -1153,9 +1174,9 @@ app.get('/store_context', function(req, res) {
                     'rep': body.repeat_state,
                     'shuff': body.shuffle_state,
                 };
-                
+
                 console.log("CONTEXT" + context_save);
-            
+
                 res.send({
                     'context' : context_save,
                 });
@@ -1164,7 +1185,7 @@ app.get('/store_context', function(req, res) {
                     'rep': body.repeat_state,
                     'shuff': body.shuffle_state,
                 };
-                
+
                 var options = {
                     url: 'https://api.spotify.com/v1/me/top/artists?limit=1&time_range=short_term',
                     headers: { 'Authorization': 'Bearer ' + access_token2 },
@@ -1175,7 +1196,7 @@ app.get('/store_context', function(req, res) {
                     if(!error && response.statusCode == 200) {
                         console.log("NO CONTEXT: " + body.items[0].uri);
                         context_save.uri = body.items[0].uri;
-                        
+
                         res.send({
                             'context' : context_save,
                         });
