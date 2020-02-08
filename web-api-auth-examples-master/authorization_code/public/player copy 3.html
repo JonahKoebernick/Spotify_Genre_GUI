@@ -9,7 +9,6 @@
         var queue = [];
         var queue_active = false;
         var search_res;        
-        var weights = [];
     </script>
 
     <style type="text/css">
@@ -289,7 +288,7 @@
             text-align: center; 
             justify-content: center; 
             align-items: center; 
-            transform: translate(50%, -35.65%);
+            transform: translate(50%, -22%);
         }
         .more_content_disp {
             float: left; 
@@ -301,7 +300,7 @@
             text-align: center; 
             justify-content: center; 
             align-items: center; 
-            transform: translate(93%, -18.25%);
+            transform: translate(93%, 12%);
         }
         .more_button {
             background-color: #55ba55; 
@@ -371,14 +370,7 @@
             border: none; 
             border-radius: 4px; 
             background: #55ba55; 
-            color: white;
-        }
-        .percent_button_collapse {
-            background-color: transparent;
-            border: none; 
-            outline: none;
-            transform: translate(690%, -190%);
-            position: absolute;
+            color: white
         }
         
         #percent td:nth-child(1) {
@@ -425,7 +417,6 @@
             width: 10%; 
             height: 10%; 
             transform: translate(-10%, -20%);
-            outline: none;
         }
         .pl_disp h1 {
             color: white; 
@@ -508,6 +499,11 @@
 /*            font-weight: bold;*/
 /*            background-color: aqua;*/
         }
+        /*.ps {
+            transform: translate(5%, -93%);
+            width: 300px;
+            font-weight: bold;
+        }*/
         
         .queue_div {
             height: 242px; 
@@ -624,8 +620,7 @@
             height: 250px; 
             width: 25px; 
             background-color: #1F1C1C; 
-/*            background-color: aqua;*/
-            transform: translate(0%, 900%);
+            transform: translate(0%, 500%);
         }
         
         #srch_artist td:nth-child(1) {
@@ -766,20 +761,21 @@
             z-index: -2;
         }
 
-    </style>    <!--    Contains css classes.    -->
+    </style>   <!--    Contains css classes.    -->
 
     <div class="main_container">
         <body style="background-color:#1F1C1C;">
+
             <div class="spacer_div"></div>                                    <!--    Spacer to keep bottom of page below heads.    -->
 
             <div id="player" style="float: left;" class="player">
 
                 <img style="border-radius: 20px;" src="images/player-temp-bg.png"/>
-<!--                <img style="border-radius: 20px;" src="images/player_template.png"/>-->
+    <!--            <img style="border-radius: 20px;" src="images/player_template.png"/>-->
 
                 <script id="curr-template" type="text/x-handlebars-template">
                     <div id="title" style="position: relative;">
-                        <h2 id="context_div" style="height: 37.8px; text-align: center; position: relative;  width: 70%; transform: translate(21%,-2180%);">
+                        <h2 id="context_div" style="height: 37.8px; text-align: center; position: relative;  width: 70%; transform: translate(21%,-2175%);">
                             <font face="verdana" size="3.5" color="white">
                                 <dd id="context" class="text-overflow-player" style="transform: translate(-10%, 0%);">
                                     {{context}}
@@ -788,7 +784,7 @@
                         </h2>
                     </div>
 
-                    <img style="position: relative; width:72.5%; transform: translate(19%,-318.8%);" src="{{image_url}}"/>
+                    <img style="position: relative; width:72.5%; transform: translate(19%,-316.8%);" src="{{image_url}}"/>
 
                     <div id="coverUp2" style="width: 12%; transform: translate(-97%,-2650%);"></div>
                     <div id="coverUp" style="width: 6.9%; transform: translate(-0.2%,-2650%);"></div>
@@ -815,7 +811,7 @@
                     <button style="width:10.5%; transform: translate(52.5%, -2250%);" class=button onclick="history()">
                         <img id="hist" src="images/btn-history-off.png"/>
                     </button>
-                    <button style="z-index: 100; width:9.6%; height: auto; transform: translate(751%, -4095%);" class=button onclick="more()">
+                    <button style="z-index: 100; width:9.6%; height: auto; transform: translate(751%, -4045%);" class=button onclick="more()">
                         <img id="info" src="images/btn-info-off.png"/>
                     </button>
                     <button style="z-index: 100; width:9.8%; transform: translate(625.5%, -1093%);" class=button onclick="heart()">
@@ -841,7 +837,7 @@
                     </button>
 
                     <font face="verdana" size="2" color="#55ba55">
-                        <div id="device_inner" style="position: relative; transform: translate(15%, -1138%);">
+                        <div id="device_inner" style="position: relative; transform: translate(14.5%, -1118%);">
                             device
                         </div>
                     </font>
@@ -1524,10 +1520,6 @@
                         Percent Shuffle
                     </h1>
                 </font>
-                
-                <button class="percent_button_collapse" onclick="">
-                    <img style="width: 30px;" id="expand" src="images/btn-collapse.png"/>
-                </button>
 
                 <table id="perc_table" class="percent_table">
                     <tr id="per-row0">
@@ -2226,11 +2218,12 @@
             </div>               <!--    Playlist Display: Div that contains table for playlist display, initially hidden.    -->
 
             <a onclick="more();">
-                <div id="morebg" class="more_background" style="z-index: 300"></div>
+                <div id="morebg" class="more_background">
+                </div>
             </a>                                    <!--    Background for more display, closes on click.    -->
 
             <div id="more" class="more_disp">
-                <img style="position: absolute; width: 100%;  border-radius: 15px;" src="images/more-options-background-color_green.png"/>
+                <img style="position: absolute; width: 100%;  border-radius: 15px;" src="images/more-options-background-color.png"/>
 
                 <img style="position: absolute; transform: translate(0%, -101.8%); width: 50%;" id="img_more" src="{{image_url}}"/>
 
@@ -2274,8 +2267,8 @@
                     </font>
                 </button>
 
-                <button style="transform: translate(0%, 1150%); width: 25%; height: 25px;" class="more_button" onclick="more()">
-                    <font style="position: absolute; white-space: nowrap; transform: translate(25%, -52%);" face="verdana" size="4" color="white">
+                <button style="transform: translate(0%, 490%); width: 25%; height: 60px;" class="more_btn" onclick="more()">
+                    <font style="position: absolute; white-space: nowrap; transform: translate(-50%, -70%);" face="verdana" size="4" color="white">
                         Close
                     </font>
                 </button>
@@ -2283,9 +2276,9 @@
 
             <div id="more_album" class="more_content_disp">
 
-                <img style="position: absolute; width: 100%; border-radius: 15px;" src="images/album-view_green.png"/>
+                <img style="position: absolute; width: 100%; border-radius: 15px;" src="images/album-view.png"/>
 
-                <img id="album_art" style="position: absolute; width: 36.4%; transform: translate(-81%, -81.45%);" src="images/album-view.png"/>
+                <img id="album_art" style="position: absolute; width: 36.4%; transform: translate(-81%, -81%);" src="images/album-view.png"/>
 
                 <div style="width: 365px; height: 235px; position: absolute; transform: translate(34.4%, -81.4%);">
                     <font style="text-align: left;" face="verdana" size="3" color="white">
@@ -2619,11 +2612,11 @@
                     </font>
                 </button>
 
-            </div>        <!--    Album More: Div that displays album data from more menu, initially hidden.    -->
+            </div>        <!--    Album Data: Div that displays album data from more menu, initially hidden.    -->
 
             <div id="more_artist" class="more_content_disp">
 
-                <img style="position: absolute; width: 100%; border-radius: 15px;" src="images/artist-view_green.png"/>
+                <img style="position: absolute; width: 100%; border-radius: 15px;" src="images/artist-view.png"/>
 
                 <img id="artist_art" style="position: absolute;" src="images/album-view.png"/>
 
@@ -2953,12 +2946,12 @@
                     </font>
                 </button>
 
-            </div>       <!--    Artist More: Div that displays artist data from more menu, initially hidden.    -->
+            </div>       <!--    Artist Data: Div that displays artist data from more menu, initially hidden.    -->
 
             <div id="add_to_pl" class="more_add">
-                <img style="position: absolute; width: 100%; border-radius: 15px; transform: translate(167.6%, 53.1%);" src="images/add-to-pl-bg.png"/>
+                <img style="position: absolute; width: 100%; border-radius: 15px; transform: translate(167.6%, 63.6%);" src="images/add-to-pl-bg.png"/>
 
-                <div style="height: 624px; width: 93%;  transform: translate(180.1%, 55.3%); position: absolute; overflow-y: scroll;">
+                <div style="height: 624px; width: 93%;  transform: translate(180.1%, 66.1%); position: absolute; overflow-y: scroll;">
                     <table id="addpl" class="more_add_table">
                         <tr id="add_pl_r0">
                             <td id="add_pl0"></td>
@@ -3128,7 +3121,7 @@
                 </div>
 
 
-            </div>                  <!--    Playlist More: Div that displays playlists for add to playlist from more menu, initially hidden.    -->
+            </div>                  <!--    Playlists Data: Div that displays playlists for add to playlist from more menu, initially hidden.    -->
 
             <a onclick="search_close();">
                 <div id="searchbg" class="more_background"></div>
@@ -3578,138 +3571,19 @@
             </div><!--    Div that contains additional content from selected search result, initially hidden.    -->
 
             <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
             <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-
+            
 <!--
             <div>
-                <button onclick="alert(weighted_selection([50, 25, 25]))">Test</button>
+                <button onclick="percent_shuffle()">Test</button>
             </div>
 -->
             
         </body>
-    </div> <!--    Contains all html code.    -->
+    </div><!--    Contains all html code.    -->
              
     <script>
-
-    //In progress
-        function display_search(uri, id) {
-            if (document.getElementById("search_display_more").style.display == "none") {
-                document.getElementById("search_display_more").style.display = "flex";
-
-                /*if (type == "album") {
-                    var results = search_res.albums.items[num];
-                    document.getElementById("search_more_img").src = results.images[0].url;
-
-                    document.getElementById("search_more_info").innerHTML = '<div style="transform: translate(5%, 100%);"><font face="verdana" size="3" color="white">' + results.name + '</font></div>';
-                    document.getElementById("search_more_info").innerHTML += '<div style="transform: translate(5%, 150%);"><font face="verdana" size="3" color="white">By ' + results.artists[0].name + '</font></div>';
-                    document.getElementById("search_more_info").innerHTML += '<div style="transform: translate(5%, 200%);"><font face="verdana" size="3" color="white">Released ' + results.release_date.substring(0, 4) + '</font></div>';
-                    document.getElementById("search_more_info").innerHTML += '<div style="transform: translate(5%, 250%);">Tracks ' + results.tracks.items.length + '</div>';
-
-                    document.getElementById("search_show_more").innerHTML += '<button style="background-color: #55ba55; display: flex; position: absolute; border-radius: 8px; border: none; color: white; height: 5%; width: 12%; transform: translate(85%, 1800%); text-align: center;" onclick="shuffle_play(' + results.uri + ')"><font face="verdana" size="3" color="white" style="text-align: center; transform: translate(5%, 0%);">Shuffle Play</font></button>';
-
-                } else if (type == "playlist") {
-                    var results = search_res.playlists.items[num];
-                    document.getElementById("search_more_img").src = results.images[0].url;
-
-                    document.getElementById("search_more_info").innerHTML = '<div style="transform: translate(5%, 100%);"><font face="verdana" size="3" color="white">' + results.name + '</font></div>';
-
-                    document.getElementById("search_show_more").innerHTML += '<button style="background-color: #55ba55; display: flex; position: absolute; border-radius: 8px; border: none; color: white; height: 5%; width: 12%; transform: translate(85%, 1800%); text-align: center;" onclick="shuffle_play(' + results.uri + ')"><font face="verdana" size="3" color="white" style="text-align: center; transform: translate(5%, 0%);">Shuffle Play</font></button>';
-
-                }  else if (type == "artist") {
-                    var results = search_res.artists.items[num];
-                    document.getElementById("search_more_img").src = results.images[0].url;
-
-                    document.getElementById("search_more_info").innerHTML = '<div style="transform: translate(5%, 100%);"><font face="verdana" size="3" color="white">' + results.name + '</font></div>';
-
-                    document.getElementById("search_show_more").innerHTML += '<button style="background-color: #55ba55; display: flex; position: absolute; border-radius: 8px; border: none; color: white; height: 5%; width: 12%; transform: translate(85%, 1800%); text-align: center;" onclick="shuffle_play(' + results.uri + ')"><font face="verdana" size="3" color="white" style="text-align: center; transform: translate(5%, 0%);">Shuffle Play</font></button>';
-
-                }*/
-
-                //https://api.spotify.com/v1/albums/{id}
-                //https://api.spotify.com/v1/artists/{id}
-                //https://api.spotify.com/v1/playlists/{playlist_id}
-                //https://api.spotify.com/v1/tracks/{id}
-
-                var URL1 = "https://api.spotify.com/v1/";
-                if (uri.substring(0, 15) == "spotify:artist:") {
-                    alert("artist");
-                    URL1 += "artists/" + id
-
-                } else if (uri.substring(0, 17) == "spotify:playlist:") {
-                    alert("playlist");
-                    URL1 += "playlists/" + id
-                }  else if (uri.substring(0, 14) == "spotify:album:") {
-                    alert("album");
-                    URL1 += "albums/" + id
-                } 
-
-//                    alert(URL1);
-
-                if (URL != "https://api.spotify.com/v1/") {
-                    get_info(URL1);
-//                        alert();
-//                        $.ajax({
-//                            url: '/getData/' + URL1,
-//
-//                        }).done(function(data) {
-//
-//                            alert("done");
-//
-//                        });
-                }
-
-            } else {
-                document.getElementById("search_display_more").style.display = "none";
-            }
-        }        //    Initial work for view more from search results.
-        
-        function percent_shuffle() {
-            /*$.ajax({
-            url: '/return_weights',
-
-            }).done(function(data) {
-                var info = data.test;
-                alert(info);
-            });*/
-            
-            alert(selections.length);
-                        
-            for (gk = 0; gk < selections.length; gk++) {
-                var name = "sel" + gk;
-                weights[gk] = document.getElementById(name).value;
-                alert(weights[gk]);
-            }
-        }              //    Attempts to execute percent shuffle on playlists.
-        
-        function store_weight(num, val) {
-//            alert(num + " " + val);
-            $.ajax({
-                url: '/store_weights/' + val + ":" + num,
-
-            }).done(function(data) {
-
-            });
-        }         //    Sends weights to app.js.
-        
-        function weighted_selection(weights) {
-            var totalWeight = 0;
-
-            for (gk = 0; gk < weights.length; gk++) {
-                totalWeight += weights[gk];
-            }
-
-            var random = Math.floor(Math.random() * totalWeight);
-
-            for (gk = 0; gk < weights.length; gk++) {
-                random -= weights[gk];
-
-                if (random < 0) {
-                    return gk;
-                }
-            }
-        }    //    Returns weighted random selection's position in input array.
-        
-    //In Use
         function add_imm(num) {
             $.ajax({
                 url: '/playlists',
@@ -3817,8 +3691,6 @@
             }).done(function(data) {
 
             });
-            
-            
         }             //    Sends volume change to js for put request.
 
         function context() {
@@ -3860,6 +3732,77 @@
                 device_inner.innerHTML = dev_name;
               });
         }                     //    Updates playback device data.
+
+        function display_search(uri, id) {
+            if (document.getElementById("search_display_more").style.display == "none") {
+                document.getElementById("search_display_more").style.display = "flex";
+
+                /*if (type == "album") {
+                    var results = search_res.albums.items[num];
+                    document.getElementById("search_more_img").src = results.images[0].url;
+
+                    document.getElementById("search_more_info").innerHTML = '<div style="transform: translate(5%, 100%);"><font face="verdana" size="3" color="white">' + results.name + '</font></div>';
+                    document.getElementById("search_more_info").innerHTML += '<div style="transform: translate(5%, 150%);"><font face="verdana" size="3" color="white">By ' + results.artists[0].name + '</font></div>';
+                    document.getElementById("search_more_info").innerHTML += '<div style="transform: translate(5%, 200%);"><font face="verdana" size="3" color="white">Released ' + results.release_date.substring(0, 4) + '</font></div>';
+                    document.getElementById("search_more_info").innerHTML += '<div style="transform: translate(5%, 250%);">Tracks ' + results.tracks.items.length + '</div>';
+
+                    document.getElementById("search_show_more").innerHTML += '<button style="background-color: #55ba55; display: flex; position: absolute; border-radius: 8px; border: none; color: white; height: 5%; width: 12%; transform: translate(85%, 1800%); text-align: center;" onclick="shuffle_play(' + results.uri + ')"><font face="verdana" size="3" color="white" style="text-align: center; transform: translate(5%, 0%);">Shuffle Play</font></button>';
+
+                } else if (type == "playlist") {
+                    var results = search_res.playlists.items[num];
+                    document.getElementById("search_more_img").src = results.images[0].url;
+
+                    document.getElementById("search_more_info").innerHTML = '<div style="transform: translate(5%, 100%);"><font face="verdana" size="3" color="white">' + results.name + '</font></div>';
+
+                    document.getElementById("search_show_more").innerHTML += '<button style="background-color: #55ba55; display: flex; position: absolute; border-radius: 8px; border: none; color: white; height: 5%; width: 12%; transform: translate(85%, 1800%); text-align: center;" onclick="shuffle_play(' + results.uri + ')"><font face="verdana" size="3" color="white" style="text-align: center; transform: translate(5%, 0%);">Shuffle Play</font></button>';
+
+                }  else if (type == "artist") {
+                    var results = search_res.artists.items[num];
+                    document.getElementById("search_more_img").src = results.images[0].url;
+
+                    document.getElementById("search_more_info").innerHTML = '<div style="transform: translate(5%, 100%);"><font face="verdana" size="3" color="white">' + results.name + '</font></div>';
+
+                    document.getElementById("search_show_more").innerHTML += '<button style="background-color: #55ba55; display: flex; position: absolute; border-radius: 8px; border: none; color: white; height: 5%; width: 12%; transform: translate(85%, 1800%); text-align: center;" onclick="shuffle_play(' + results.uri + ')"><font face="verdana" size="3" color="white" style="text-align: center; transform: translate(5%, 0%);">Shuffle Play</font></button>';
+
+                }*/
+
+                //https://api.spotify.com/v1/albums/{id}
+                //https://api.spotify.com/v1/artists/{id}
+                //https://api.spotify.com/v1/playlists/{playlist_id}
+                //https://api.spotify.com/v1/tracks/{id}
+
+                var URL1 = "https://api.spotify.com/v1/";
+                if (uri.substring(0, 15) == "spotify:artist:") {
+                    alert("artist");
+                    URL1 += "artists/" + id
+
+                } else if (uri.substring(0, 17) == "spotify:playlist:") {
+                    alert("playlist");
+                    URL1 += "playlists/" + id
+                }  else if (uri.substring(0, 14) == "spotify:album:") {
+                    alert("album");
+                    URL1 += "albums/" + id
+                } 
+
+//                    alert(URL1);
+
+                if (URL != "https://api.spotify.com/v1/") {
+                    get_info(URL1);
+//                        alert();
+//                        $.ajax({
+//                            url: '/getData/' + URL1,
+//
+//                        }).done(function(data) {
+//
+//                            alert("done");
+//
+//                        });
+                }
+
+            } else {
+                document.getElementById("search_display_more").style.display = "none";
+            }
+        }        //    Initial work for view more from search results.
 
         function enqueue(num) {
             if (queue.length == 0) {
@@ -3961,7 +3904,7 @@
                     if (arr[i].img != null) {
                         document.getElementById(pl).src = arr[i].img;
                     } else {
-                        document.getElementById(pl).src = "images/no_img.jpg";
+                        document.getElementById(pl).src = "images/temp-album.jpeg";
                     }
                 }/* else if (i == arr.length) {
                     document.getElementById(pl).src = "images/btn-add.png";
@@ -4096,7 +4039,7 @@
         }                   //    Initializes scroll on playback info.
 
         function more() {
-            if (document.getElementById("more").style.display == "flex") {                      //    Close
+            if (document.getElementById("more").style.display == "flex") {
                 document.getElementById("more").style.display = "none";
                 document.getElementById("morebg").style.display = "none";
                 document.getElementById("info").src = "images/btn-info-off.png";
@@ -4106,11 +4049,7 @@
                 document.getElementById("arts").src = "images/btn-view-artist-off.png";
                 document.getElementById("add_to_pl").style.display = "none";
                 document.getElementById("add_to_pl_btn").src = "images/btn-add-to-pl-off.png";
-            } else {                                                                            //    Open
-                document.getElementById("playlist_disp").style.display = "none";
-                document.getElementById("percent").style.display = "none";
-                set_widths();
-                
+            } else {
                 document.getElementById("more").style.display = "flex";
                 document.getElementById("morebg").style.display = "flex";
                 document.getElementById("info").src = "images/btn-info-on.png";
@@ -4260,6 +4199,16 @@
                 }
             });
         }                  //    Toggles pause button display.
+
+        /*function percent_shuffle() {
+            $.ajax({
+            url: '/return_weights',
+
+            }).done(function(data) {
+                var info = data.test;
+                alert(info);
+            });
+        }*/
         
         function playlists() {
             $.ajax({
@@ -4698,20 +4647,19 @@
 
             if (playlist == "inherit" && shuffle == "inherit") {
                 
-                document.getElementById("percent").style.transform = "translate(6.2%, -524%)";
-                document.getElementById("playlist_disp").style.transform = "translate(-93.5%, -203.3%)";
+                document.getElementById("percent").style.transform = "translate(-292.7%, -205.7%)";
+                document.getElementById("playlist_disp").style.transform = "translate(-100%, -97.3%)";
                 
                 document.getElementById("player").style.marginBottom = "35%";
                 
                 for (gk = 6; gk < 41; gk++) {
-                    if (gk < 24)
                     document.getElementById("BLOCK" + gk).style.transform = "translate(0%, 0%)";
                 }
                 
             } else if (playlist == "inherit" && shuffle == "none") {
                 
-                document.getElementById("percent").style.transform = "translate(6.2%, -205.7%)"; //STILL
-                document.getElementById("playlist_disp").style.transform = "translate(-186.5%, -229.05%)";
+                document.getElementById("percent").style.transform = "translate(6.2%, -205.7%)";
+                document.getElementById("playlist_disp").style.transform = "translate(-186.5%, -100.05%)";
                 
                 document.getElementById("player").style.marginBottom = "5%";
                 
@@ -4725,7 +4673,7 @@
                 
             } else if (playlist == "none" && shuffle == "inherit") {
                 
-                document.getElementById("percent").style.transform = "translate(6.2%, -471%)";
+                document.getElementById("percent").style.transform = "translate(6.2%, -205.7%)";
                 document.getElementById("playlist_disp").style.transform = "translate(-186.5%, -100.05%)";
                 
                 document.getElementById("player").style.marginBottom = "-20%";
@@ -4751,8 +4699,8 @@
                 
             } else if (playlist == "inherit") {
                 
-                document.getElementById("percent").style.transform = "translate(6.2%, -471%)";
-                document.getElementById("playlist_disp").style.transform = "translate(-186.5%, -229.05%)";
+                document.getElementById("percent").style.transform = "translate(6.2%, -205.7%)";
+                document.getElementById("playlist_disp").style.transform = "translate(-186.5%, -100.05%)";
                 
                 document.getElementById("player").style.marginBottom = "5%";
                 
@@ -4768,8 +4716,8 @@
                 
             } else if (shuffle == "inherit") {
                 
-                document.getElementById("percent").style.transform = "translate(6.2%, -471%)";
-                document.getElementById("playlist_disp").style.transform = "translate(-186.5%, -229.05%)";
+                document.getElementById("percent").style.transform = "translate(6.2%, -205.7%)";
+                document.getElementById("playlist_disp").style.transform = "translate(-186.5%, -100.05%)";
                 
                 document.getElementById("player").style.marginBottom = "-20%";
                 
@@ -4785,8 +4733,8 @@
                 
             } else {
                 
-                document.getElementById("percent").style.transform = "translate(6.2%, -471%)";
-                document.getElementById("playlist_disp").style.transform = "translate(-186.5%, -229.05%)";
+                document.getElementById("percent").style.transform = "translate(6.2%, -205.7%)";
+                document.getElementById("playlist_disp").style.transform = "translate(-186.5%, -100.05%)";
                 
                 document.getElementById("player").style.marginBottom = "-50%";
                 
@@ -5013,6 +4961,16 @@
             }
         }                   //    Initializes song title scroll.
         
+        /*function store_weight(num, val) {
+//            alert(num + " " + val);
+            $.ajax({
+                url: '/store_weights/' + val + ":" + num,
+
+            }).done(function(data) {
+
+            });
+        }*/
+        
         function update_artist() {
             $.ajax({
                 url: '/view_artist',
@@ -5029,9 +4987,9 @@
                      document.getElementById("artist_art").style.width = "auto";
                     document.getElementById("artist_art").style.transform = "translate(-97%, -75.6%)";
                 } else {
-                    document.getElementById("artist_art").style.height = "246px";
+                    document.getElementById("artist_art").style.height = "36.5%";
                      document.getElementById("artist_art").style.width = "auto";
-                    document.getElementById("artist_art").style.transform = "translate(-65%, -75.5%)";
+                    document.getElementById("artist_art").style.transform = "translate(-65%, -77%)";
                 }
 
                 document.getElementById("artist_name").innerHTML = data.artist.name;
@@ -5142,6 +5100,13 @@
             }
         }               //    Updates percent shuffle options.
         
+        function update_percent(nValue, num) {
+            selections[num].percent = document.getElementById("sel" + num).value;
+            store_weight(nValue, num);
+            update_options();
+        
+        }    //    Updates percent shuffle weights on display.
+        
         function user_info() {
             $.ajax({
             url: '/user_data',
@@ -5198,7 +5163,7 @@
             });
         }                //    Updates volume based on device seettings.
         
-    </script>                  <!--    Contains all js functions.    -->
+    </script>                 <!--    Contains all functions.    -->
 
     <script>
         var timeleft = 1000;
@@ -5312,7 +5277,7 @@
                 });
             });
         }, 1000);
-    </script>                      <!--    Initializes and maintains refresh token and timer.    -->
+    </script>                 <!--    Initializes and maintains refresh token and timer.    -->
 
     <script>
         (function() {
@@ -5393,7 +5358,7 @@
                 }, false);
             }
         })();
-    </script>                      <!--    Maintains autorization and authentication token.    -->
+    </script>                 <!--    Maintains autorization and authentication token.    -->
 
     <script>
         user_info();
@@ -5420,57 +5385,82 @@
             change_volume(this.value);
         }
         
-        $(document.getElementById("sel0")).change(function(){
-            selections[0].percent = document.getElementById("sel0").value;
-            update_options();
+        d3.select("#sel0").on("input", function() {
+            update_percent(+this.value, 0);
         });
-        $(document.getElementById("sel1")).change(function(){
-            selections[1].percent = document.getElementById("sel1").value;
-            update_options();
-        });
-        $(document.getElementById("sel2")).change(function(){
-            selections[2].percent = document.getElementById("sel2").value;
-            update_options();
-        });
-        $(document.getElementById("sel3")).change(function(){
-            selections[3].percent = document.getElementById("sel3").value;
-            update_options();
-        });
-        $(document.getElementById("sel4")).change(function(){
-            selections[4].percent = document.getElementById("sel4").value;
-            update_options();
-        });
-        $(document.getElementById("sel5")).change(function(){
-            selections[5].percent = document.getElementById("sel5").value;
-            update_options();
-        });
-        $(document.getElementById("sel6")).change(function(){
-            selections[6].percent = document.getElementById("sel6").value;
-            update_options();
-        });
-        $(document.getElementById("sel7")).change(function(){
-            selections[7].percent = document.getElementById("sel7").value;
-            update_options();
-        });
-        $(document.getElementById("sel8")).change(function(){
-            selections[8].percent = document.getElementById("sel8").value;
-            update_options();
-        });
-        $(document.getElementById("sel9")).change(function(){
-            selections[9].percent = document.getElementById("sel9").value;
-            update_options();
-        });
-        $(document.getElementById("sel10")).change(function(){
-            selections[10].percent = document.getElementById("sel10").value;
-            update_options();
-        });
-        $(document.getElementById("sel11")).change(function(){
-            selections[11].percent = document.getElementById("sel11").value;
-            update_options();
+        d3.select("#sel1").on("input", function() {
+            update_percent(+this.value, 1);
         });
         
-    </script>                      <!--    "main()" of the page, calls all updates based on current playback.    -->
+        d3.select("#sel2").on("input", function() {
+            update_percent(+this.value, 2);
+        });
+        
+        d3.select("#sel3").on("input", function() {
+            update_percent(+this.value, 3);
+        });
+        
+        d3.select("#sel4").on("input", function() {
+            update_percent(+this.value, 4);
+        });
+        
+        d3.select("#sel5").on("input", function() {
+            update_percent(+this.value, 5);
+        });
+        
+        d3.select("#sel6").on("input", function() {
+            update_percent(+this.value, 6);
+        });
+        
+        d3.select("#sel7").on("input", function() {
+            update_percent(+this.value, 7);
+        });
+        
+        d3.select("#sel8").on("input", function() {
+            update_percent(+this.value, 8);
+        });
+        
+        d3.select("#sel9").on("input", function() {
+            update_percent(+this.value, 9);
+        });
+        
+        d3.select("#sel10").on("input", function() {
+            update_percent(+this.value, 10);
+        });
+        
+        d3.select("#sel11").on("input", function() {
+            update_percent(+this.value, 11);
+        });
+        
+    </script>                 <!--    "main()" of the page, calls all updates based on current playback.    -->
 
 </html>
 
-//jasmine jest 
+
+<!--
+//if album
+//if playlist
+//if etc
+
+            <div>
+                <button onclick="percent_shuffle()">Test</button>
+            </div>
+
+        function store_weights(pl, val) {            
+            $.ajax({
+                
+                url: '/store_weights/' + pl + ":" + val,
+
+            }).done(function(data) {
+
+            });
+        }         //    Stores percent shuffle playlist weights to app.js.
+
+        function update_percent (pl_number, num) {
+//            alert(num);
+            in0 = document.getElementById("sel" + num).value;
+            update_options();
+            
+        }//    Updates weights on percent shuffle input.
+
+-->
