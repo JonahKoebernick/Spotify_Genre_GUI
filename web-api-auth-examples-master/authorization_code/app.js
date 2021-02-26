@@ -250,8 +250,8 @@ app.use(express.static(__dirname + '/public'))
     });                  //    Retrieves artist URI.
 
     app.get('/track_length', function(req, res) {
-        console.log("NEW SONG!");
-        console.log(access_token2);
+//        console.log("NEW SONG!");
+//        console.log(access_token2);
 
         var options = {
             url: 'https://api.spotify.com/v1/me/player/currently-playing',
@@ -273,13 +273,13 @@ app.use(express.static(__dirname + '/public'))
                 if (body.context != null) {
                     var cont_href = body.context.href;
 
-                    console.log('Progress : ' + time);
-                    console.log(body.item.duration_ms);
-                    console.log(totaltime);
-                    console.log("Image url : "+ body.item.album.images[0].url);
-                    console.log("Name : " + name);
-                    console.log("Artist :" + artist);
-                    console.log('Context : ' + body.context.type + ' [' + cont_href + ']');
+//                    console.log('Progress : ' + time);
+//                    console.log(body.item.duration_ms);
+//                    console.log(totaltime);
+//                    console.log("Image url : "+ body.item.album.images[0].url);
+//                    console.log("Name : " + name);
+//                    console.log("Artist :" + artist);
+//                    console.log('Context : ' + body.context.type + ' [' + cont_href + ']');
 
                     var options = {
                         url: cont_href,
@@ -290,7 +290,7 @@ app.use(express.static(__dirname + '/public'))
                     request.get(options, function(error, response, body) {
                         if(!error && response.statusCode == 200){
 
-                            console.log("success" + body.name);
+                            console.log("success " + body.name);
                             var cont = body.name;
 
 
@@ -1540,7 +1540,7 @@ app.use(express.static(__dirname + '/public'))
     });          //    Retrieves users created playlists.
 
     app.get('/getData/:search_url', function(req, res) {
-    //    res.send(req.params.theValue.toUpperCase());
+//        res.send(req.params.theValue.toUpperCase());
         console.log("HERE");
         var tmp = req.params.search_url;
         console.log(tmp);
@@ -1553,7 +1553,7 @@ app.use(express.static(__dirname + '/public'))
 
         request.get(options, function(error, response, body) {
             if(!error && response.statusCode == 200 ){
-                console.log("SUCCESS");
+                console.log("SEARCH TEST");
 
                 console.log(body);
 

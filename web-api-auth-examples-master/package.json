@@ -10,5 +10,8 @@
     "querystring": "~0.2.0",
     "request": "~2.83.0",
     "spotify-web-api-node": "^4.0.0"
+  },
+  "engines": {
+    "node": "v13.10.1"
   }
 }

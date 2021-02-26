@@ -5,7 +5,7 @@
         var offset = -50;
         var selections = [];
         var gen = 0;
-        var percent_shuffle = false;
+        var percent_shuffle_bool = false;
         var queue = [];
         var queue_active = false;
         var search_res;        
@@ -787,7 +787,13 @@
                             </font>
                         </h2>
                     </div>
-
+                    
+<!--
+                    <div style="position: relative; width:72.5%; transform: translate(19%,-317.5%); background-color: red">
+                        <img src="{{image_url}}"/>
+                    </div>
+-->
+                    
                     <img style="position: relative; width:72.5%; transform: translate(19%,-317.5%);" src="{{image_url}}"/>
 
                     <div id="coverUp2" style="width: 12%; transform: translate(-97%,-2695%);"></div>
@@ -3583,7 +3589,7 @@
                     </div>
                 </div>
 
-                <button style="background-color: #55ba55; display: flex; position: absolute; border-radius: 8px; border: none; color: white; height: 4%; width: 6%; transform: translate(50%, 110%); text-align: center;" onclick="search_view_more()"><font face="verdana" size="3" color="white" style="text-align: center; transform: translate(15%, 0%);">Back</font></button>
+                <button style="background-color: #55ba55; display: flex; position: absolute; border-radius: 8px; border: none; color: white; height: 4%; width: 6%; transform: translate(50%, 110%); text-align: center;" onclick="search_view_more('back', 0)"><font face="verdana" size="3" color="white" style="text-align: center; transform: translate(15%, 0%);">Back</font></button>
             </div><!--    Div that contains additional content from selected search result, initially hidden.    -->
 
             <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
@@ -3656,7 +3662,7 @@
 
                 if (URL != "https://api.spotify.com/v1/") {
                     get_info(URL1);
-//                        alert();
+//                        alert("LETS GO");
 //                        $.ajax({
 //                            url: '/getData/' + URL1,
 //
@@ -3671,6 +3677,54 @@
                 document.getElementById("search_display_more").style.display = "none";
             }
         }        //    Initial work for view more from search results.
+        
+        function next_song() {
+//            alert("next song");
+//            percent_shuffle();
+            var pop_value = document.getElementById("pop_value").value;
+            var queen_value = document.getElementById("queen_value").value;
+            var tb_value = document.getElementById("tb_value").value;
+            var country_value = document.getElementById("country_value").value;
+            var hiphop_value = document.getElementById("hiphop_value").value;
+            var rock_value = document.getElementById("rock_value").value;
+            var edm_value = document.getElementById("edm_value").value;
+            var tophits_value = document.getElementById("tophits_value").value;
+            /* Treat this information as suspicious and check the values for 1-100, if <1 x=1, if x>100 x=100 */
+
+            $.ajax({
+                url: '/next_song',
+                data : {
+                    'pop_value' : pop_value,
+                    'queen_value' : queen_value,
+                    'tb_value' : tb_value,
+                    'country_value' :  country_value,
+                    'hiphop_value' : hiphop_value,
+                    'rock_value'  : rock_value,
+                    'edm_value' : edm_value,
+                    'tophits_value' : tophits_value
+                }
+            }).done(function(data) {
+                var ulr = data.ulr;
+                var amt = data.amt;
+                var access_token = data.access_token;
+                var rand5 = Math.floor(Math.random() * amt);
+                $.ajax({
+                    url: 'https://api.spotify.com/v1/me/player/play',
+                    type: 'PUT',
+                    headers: {
+                        'Authorization': 'Bearer ' + access_token
+                    },
+                    dataType: "json",
+                    contentType: "application/json",
+                    data : JSON.stringify({
+                        "context_uri": "spotify:playlist:"+ulr,
+                        "offset": {
+                            "position": rand5
+                        }
+                    })
+                });
+            });
+        }                    //    Selects next song for percent shuffle.
         
         function percent_shuffle() {
             /*$.ajax({
@@ -3691,9 +3745,9 @@
         }              //    Attempts to execute percent shuffle on playlists.
         
         function store_weight(num, val) {
-//            alert(num + " " + val);
+            alert(num + " " + val);
             $.ajax({
-                url: '/store_weights/' + val + ":" + num,
+                url: '/store_weights/' + num + ":" + val,
 
             }).done(function(data) {
 
@@ -4170,51 +4224,7 @@
             return minutes + ":" + fill + seconds;
         }        //    Takes ms progress and returns in format #:##.
 
-        function next_song() {
-            var pop_value = document.getElementById("pop_value").value;
-            var queen_value = document.getElementById("queen_value").value;
-            var tb_value = document.getElementById("tb_value").value;
-            var country_value = document.getElementById("country_value").value;
-            var hiphop_value = document.getElementById("hiphop_value").value;
-            var rock_value = document.getElementById("rock_value").value;
-            var edm_value = document.getElementById("edm_value").value;
-            var tophits_value = document.getElementById("tophits_value").value;
-            /* Treat this information as suspicious and check the values for 1-100, if <1 x=1, if x>100 x=100 */
-
-            $.ajax({
-                url: '/next_song',
-                data : {
-                    'pop_value' : pop_value,
-                    'queen_value' : queen_value,
-                    'tb_value' : tb_value,
-                    'country_value' :  country_value,
-                    'hiphop_value' : hiphop_value,
-                    'rock_value'  : rock_value,
-                    'edm_value' : edm_value,
-                    'tophits_value' : tophits_value
-                }
-            }).done(function(data) {
-                var ulr = data.ulr;
-                var amt = data.amt;
-                var access_token = data.access_token;
-                var rand5 = Math.floor(Math.random() * amt);
-                $.ajax({
-                    url: 'https://api.spotify.com/v1/me/player/play',
-                    type: 'PUT',
-                    headers: {
-                        'Authorization': 'Bearer ' + access_token
-                    },
-                    dataType: "json",
-                    contentType: "application/json",
-                    data : JSON.stringify({
-                        "context_uri": "spotify:playlist:"+ulr,
-                        "offset": {
-                            "position": rand5
-                        }
-                    })
-                });
-            });
-        }                    //    Selects next song for percent shuffle.
+        
 
         function pause() {
             $.ajax({
@@ -4696,6 +4706,8 @@
                 display_search(search_res.artists.items[num].uri, search_res.artists.items[num].id);
             } else if (type == "track") {
                 display_search(search_res.tracks.items[num].uri, search_res.tracks.items[num].id);
+            } else if (type == "back") {
+                
             }
         }    //    Open display for more info on search selection.
 
@@ -4845,7 +4857,7 @@
                     var img = document.getElementById("shuffle");
                     img.src="images/btn-shuffle-off.png";
 //                        document.getElementById("player").style.marginBottom = "-50%";
-                    percent_shuffle = false;
+                    percent_shuffle_bool = false;
 
                     document.getElementById("percent").style.display = "none";
                     set_widths();
@@ -4889,7 +4901,7 @@
                             var img = document.getElementById("shuffle");
                             img.src="images/btn-percent.png";
 
-                            percent_shuffle = true;
+                            percent_shuffle_bool = true;
 
                             update_options();
                             document.getElementById("percent").style.display = "inherit";
@@ -4969,8 +4981,11 @@
         }     //    Shuffles playlist from playlist display.        
 
         function skip() {
+//            alert(percent_shuffle_bool);
             if (queue_active) {
                 queued();
+            } else if (percent_shuffle_bool) {
+                next_song();
             } else {
                 $.ajax({
                     url: '/access_token',
@@ -5207,7 +5222,7 @@
             });
         }                //    Updates volume based on device settings.
         
-    </script>                  <!--    Contains all js functions.    -->
+    </script>                      <!--    Contains all js functions.    -->
 
     <script>
         var timeleft = 1000;
@@ -5302,6 +5317,7 @@
                 flag = 0;
 //                    next_song();
                 if (queue_active) queued();
+//                if (percent_shuffle_bool) percent_shuffle();
             }
 
             flag = flag+1;
@@ -5432,14 +5448,17 @@
         $(document.getElementById("sel0")).change(function(){
             selections[0].percent = document.getElementById("sel0").value;
             update_options();
+            store_weight(0,selections[0].percent);
         });
         $(document.getElementById("sel1")).change(function(){
             selections[1].percent = document.getElementById("sel1").value;
             update_options();
+            store_weight(1,selections[1].percent);
         });
         $(document.getElementById("sel2")).change(function(){
             selections[2].percent = document.getElementById("sel2").value;
             update_options();
+            store_weight(2,selections[2].percent);
         });
         $(document.getElementById("sel3")).change(function(){
             selections[3].percent = document.getElementById("sel3").value;
